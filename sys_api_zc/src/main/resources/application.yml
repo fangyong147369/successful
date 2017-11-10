@@ -1,0 +1,9 @@
+web:
+  config:
+    webTitle: "欢迎使用SpringBoot"
+    authorName: "网金客"
+    authorBlogUrl: "http://www.zcwk99.com"
+
+security:
+  AES256:
+    key: "0123456789123456"
