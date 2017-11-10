@@ -1,0 +1,92 @@
+package com.zc.sys.core.sys.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.zc.sys.common.entity.LongPKNoneEntity;
+import com.zc.sys.core.common.constant.BaseConstant;
+
+/**
+ * 数据字典（自定义主键）
+ * 主键规则：按照标识分类，id区间例如：[100,199),[200,299)，以此类推
+ * @author zp
+ * @version 2.0.0.0
+ * @since 2017年11月6日
+ */
+@Entity
+@Table(name = BaseConstant.DB_PREFIX + BaseConstant.DB_MODEL_S + "_dict")
+public class Dict extends LongPKNoneEntity {
+	/** 序列号 **/
+	private static final long serialVersionUID = 1L;
+	/** 状态，0：禁用，1：启用 **/
+	private Integer state;
+	/** 排序 **/
+	private Integer sort;
+	/** 标识 **/
+	private String nid;
+	/** 标识名 **/
+	private String nidName;
+	/** 名称 **/
+	private String name;
+	/** 值 **/
+	private String value;
+	/** 备注 **/
+	private String remark;
+	
+	/** 获取【状态，0：禁用，1：启用】 **/
+	public Integer getState() {
+		return state;
+	}
+	/** 设置【状态，0：禁用，1：启用】 **/
+	public void setState(Integer state) {
+		this.state = state;
+	}
+	/** 获取【排序】 **/
+	public Integer getSort() {
+		return sort;
+	}
+	/** 设置【排序】 **/
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+	/** 获取【标识】 **/
+	public String getNid() {
+		return nid;
+	}
+	/** 设置【标识】 **/
+	public void setNid(String nid) {
+		this.nid = nid;
+	}
+	/** 获取【标识名】 **/
+	public String getNidName() {
+		return nidName;
+	}
+	/** 设置【标识名】 **/
+	public void setNidName(String nidName) {
+		this.nidName = nidName;
+	}
+	/** 获取【名称】 **/
+	public String getName() {
+		return name;
+	}
+	/** 设置【名称】 **/
+	public void setName(String name) {
+		this.name = name;
+	}
+	/** 获取【值】 **/
+	public String getValue() {
+		return value;
+	}
+	/** 设置【值】 **/
+	public void setValue(String value) {
+		this.value = value;
+	}
+	/** 获取【备注】 **/
+	public String getRemark() {
+		return remark;
+	}
+	/** 设置【备注】 **/
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+}
