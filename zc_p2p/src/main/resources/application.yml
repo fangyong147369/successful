@@ -1,5 +1,0 @@
-web:
-  config:
-    webTitle: "欢迎使用SpringBoot"
-    authorName: "网金客"
-    authorBlogUrl: "http://www.zcwk99.com"
