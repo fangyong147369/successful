@@ -1,7 +1,11 @@
 package com.zc.sys.core.user.model;
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.UserIdentify;
 /**
  * 用户认证
@@ -19,6 +23,16 @@ public class UserIdentifyModel extends UserIdentify {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	
+	/** 姓名 **/
+	private String realName;
+	/** 证件号码 **/
+	private String cardNo;
+	/** 证件类型 **/
+	private Integer cardType;
+	
+	/** 订单号 **/
+	private String orderNo;
 
 	/**
 	 * 实体转换model
@@ -38,6 +52,70 @@ public class UserIdentifyModel extends UserIdentify {
 		return userIdentify;
 	}
 
+	/**
+	 * 初始化注册用户认证信息
+	 * @param model
+	 */
+	public void initReg(UserModel model) {
+		this.setRealNameState(0);
+		this.setEmailState(0);
+		if(model.getMobileState() == null){
+			model.setMobileState(0);
+		}
+		this.setMobileState(model.getMobileState());
+		this.setBindCardNum(0);
+		this.setRealNameCount(0);
+		this.setCardImgState(0);
+		this.setOctopusState(0);
+		this.setState(1);//启用状态
+		this.setLoginFailCount(0);
+		this.seteSignState(0);
+	}
+	
+	/**
+	 * 实名信息校验
+	 */
+	public void checkRealName() {
+		if(this.getId() <= 0){
+			throw new BussinessException("参数有误");
+		}
+		if(StringUtil.isBlank(this.realName)){
+			throw new BussinessException("实名信息不能为空");
+		}
+		this.checkCard(this.cardType,this.cardNo);//证件格式校验
+		this.checkCardNoExist(this.cardNo);//判断证件号是否存在
+		
+	}
+	
+	/**
+	 * 判断证件号是否存在
+	 * @param cardNo
+	 * @return
+	 */
+	public boolean checkCardNoExist(String cardNo){
+		UserDao userDao = BeanUtil.getBean(UserDao.class);
+		UserModel userModel = new UserModel();
+		userModel.setCardNo(cardNo);
+		userModel.setRealNameState(1);
+		int count = userDao.countByModel(userModel);
+		return count > 0 ? true : false;
+	}
+	
+	/**
+	 * 证件格式校验
+	 */
+	public void checkCard(int cardType,String cardNo){
+		switch (this.cardType) {
+		case 1://二代身份证
+			if(!StringUtil.isCard(cardNo)){
+				throw new BussinessException("证件格式错误");
+			};
+			break;
+		default:
+			throw new BussinessException("参数有误");
+		}
+	}
+	
 	/** 获取【当前页码】 **/
 	public int getPageNo() {
 		return pageNo;
@@ -66,6 +144,46 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	/** 获取【姓名】 **/
+	public String getRealName() {
+		return realName;
+	}
+
+	/** 设置【姓名】 **/
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	/** 获取【证件号码】 **/
+	public String getCardNo() {
+		return cardNo;
+	}
+
+	/** 设置【证件号码】 **/
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
+
+	/** 获取【证件类型】 **/
+	public Integer getCardType() {
+		return cardType;
+	}
+
+	/** 设置【证件类型】 **/
+	public void setCardType(Integer cardType) {
+		this.cardType = cardType;
+	}
+
+	/** 获取【订单号】 **/
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	/** 设置【订单号】 **/
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 
 }

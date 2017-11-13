@@ -1,7 +1,13 @@
 package com.zc.sys.core.user.model;
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.http.RequestUtil;
+import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserInfo;
 /**
  * 用户信息
@@ -36,6 +42,40 @@ public class UserInfoModel extends UserInfo {
 		UserInfo userInfo = new UserInfo();
 		BeanUtils.copyProperties(this, userInfo);
 		return userInfo;
+	}
+	
+	/**
+	 * 初始化注册用户基本信息
+	 * @param model
+	 */
+	public void initReg(UserModel model) {
+		UserDao userDao = BeanUtil.getBean(UserDao.class);
+		//邀请用户
+		if(!StringUtil.isBlank(model.getInviteCode())){
+			User inviteUser = (User) userDao.findByProperty("inviteCode", model.getInviteCode());
+			if(inviteUser == null){
+				throw new BussinessException("邀请码不存在");
+			}
+			this.setInviteUser(inviteUser);
+		}
+		if(model.getType() == null){
+			model.setType(1);//普通用户
+		}
+		if(model.getUserNature() == null){
+			model.setUserNature(1);//个人用户
+		}
+		if(model.getRoute() == null){
+			model.setRoute(0);//PC渠道
+		}
+		if(model.getChannel() == null){
+			model.setChannel("0");//推广途径
+		}
+		
+		this.setType(model.getType());
+		this.setUserNature(model.getUserNature());
+		this.setRoute(model.getRoute());
+		this.setChannel(model.getChannel());
+		this.setAddIp(RequestUtil.getClientIp());//获取ip
 	}
 
 	/** 获取【当前页码】 **/

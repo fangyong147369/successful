@@ -37,4 +37,18 @@ public interface UserService{
  	 */
 	public Result getById(UserModel model);
 
+	/**
+	 * 注册
+	 * @param model
+	 * @return
+	 */
+	public Object reg(UserModel model);
+	
+	/**
+	 * 登录
+	 * @param model
+	 * @return
+	 */
+	public Object login(UserModel model);
+	
 }

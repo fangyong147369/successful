@@ -66,4 +66,15 @@ public class UserController extends BaseController<UserModel> {
 	public Object getById(UserModel model) throws BussinessException {
 		return userService.getById(model);
 	}
+	
+	/**
+ 	 * 注册
+ 	 * @param model
+ 	 * @return
+ 	 */
+	@RequestMapping(value = "/reg", method = RequestMethod.POST)
+	@ResponseBody
+	public Object reg(UserModel model) throws BussinessException {
+		return userService.reg(model);
+	}
 }

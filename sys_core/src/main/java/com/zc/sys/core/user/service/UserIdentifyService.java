@@ -1,6 +1,6 @@
 package com.zc.sys.core.user.service;
-import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.common.form.Result;
+import com.zc.sys.core.user.model.UserIdentifyModel;
 /**
  * 用户认证
  * @author zp
@@ -37,4 +37,18 @@ public interface UserIdentifyService{
  	 */
 	public Result getById(UserIdentifyModel model);
 
+
+	/**
+	 * 实名请求
+	 * @param model
+	 * @return
+	 */
+	public Object realNameRequest(UserIdentifyModel model);
+	
+	/**
+	 * 实名处理
+	 * @param model
+	 * @return
+	 */
+	public Object realNameDeal(UserIdentifyModel model);
 }

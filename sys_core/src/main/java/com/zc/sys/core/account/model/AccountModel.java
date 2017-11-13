@@ -2,7 +2,9 @@ package com.zc.sys.core.account.model;
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.core.account.entity.Account;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 资金账户
  * @author zp
@@ -36,6 +38,18 @@ public class AccountModel extends Account {
 		Account account = new Account();
 		BeanUtils.copyProperties(this, account);
 		return account;
+	}
+	
+	/**
+	 * 初始化注册用户账户信息
+	 * @param model
+	 */
+	public void initReg(UserModel model) {
+		double doubleZero = BigDecimalUtil.round(0);
+		this.setTotal(doubleZero);
+		this.setBalance(doubleZero);
+		this.setFreezeAmount(doubleZero);
+		this.setVersion(0);
 	}
 
 	/** 获取【当前页码】 **/
