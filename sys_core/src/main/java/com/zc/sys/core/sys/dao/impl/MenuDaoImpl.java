@@ -1,7 +1,15 @@
 package com.zc.sys.core.sys.dao.impl;
 import org.springframework.stereotype.Repository;
+
 import com.zc.sys.common.dao.jpa.BaseDaoImpl;
+import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.common.model.jpa.QueryParam;
+import com.zc.sys.common.model.jpa.SearchFilter;
+import com.zc.sys.common.model.jpa.OrderFilter.OrderType;
+import com.zc.sys.common.model.jpa.SearchFilter.Operators;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.sys.entity.Menu;
+import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.sys.dao.MenuDao;
 /**
  * 菜单
@@ -11,5 +19,29 @@ import com.zc.sys.core.sys.dao.MenuDao;
  */
 @Repository
 public class MenuDaoImpl extends BaseDaoImpl<Menu> implements MenuDao {
+
+	/**
+	 * 列表
+	 * @param model
+	 * @return
+	 */
+	@Override
+	public PageDataList<Menu> list(MenuModel model) {
+		QueryParam param = QueryParam.getInstance();
+		if(StringUtil.isNotBlank(model.getSearchName())){
+			SearchFilter orFilter2 = new SearchFilter("name", Operators.LIKE, model.getSearchName().trim());
+			param.addOrFilter(orFilter2);
+		}else {
+			if (StringUtil.isNotBlank(model.getName())) {
+				param.addParam("name", Operators.LIKE, model.getName().trim());
+			}
+			if (model.getState() != null) {
+				param.addParam("state", model.getState());
+			}
+		}
+		param.addOrder(OrderType.ASC, "id");
+		param.addPage(model.getPageNo(), model.getPageSize());
+		return super.findPageList(param);
+	}
 
 }

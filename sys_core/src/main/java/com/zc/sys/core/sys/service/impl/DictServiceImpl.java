@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
@@ -43,6 +44,7 @@ public class DictServiceImpl implements DictService {
 	}
 
 	@Override
+	@Transactional
 	public Result add(DictModel model) {
 		model.validParam();//参数校验
 		Dict dict = dictDao.find(model.getId());
@@ -54,6 +56,7 @@ public class DictServiceImpl implements DictService {
 	}
 
 	@Override
+	@Transactional
 	public Result update(DictModel model) {
 		if(model.getId() == null || model.getId().longValue() <= 0){
 			return Result.error("参数错误！");

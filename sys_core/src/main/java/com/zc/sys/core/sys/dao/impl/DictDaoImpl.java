@@ -22,6 +22,11 @@ import com.zc.sys.core.sys.model.DictModel;
 @Repository
 public class DictDaoImpl extends BaseDaoImpl<Dict> implements DictDao{
 
+	/**
+	 * 列表
+	 * @param model
+	 * @return
+	 */
 	@Override
 	public PageDataList<Dict> list(DictModel model) {
 		QueryParam param = QueryParam.getInstance();
@@ -36,9 +41,9 @@ public class DictDaoImpl extends BaseDaoImpl<Dict> implements DictDao{
 			if (StringUtil.isNotBlank(model.getName())) {
 				param.addParam("name", Operators.LIKE, model.getName().trim());
 			}
-//			if (model.getStatus() != 99) {
-//				param.addParam("status", model.getStatus());
-//			}
+			if (model.getState() != null) {
+				param.addParam("state", model.getState());
+			}
 		}
 		param.addOrder(OrderType.ASC, "id");
 		param.addPage(model.getPageNo(), model.getPageSize());

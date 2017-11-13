@@ -37,6 +37,20 @@ public class MenuModel extends Menu {
 		BeanUtils.copyProperties(this, menu);
 		return menu;
 	}
+	
+	/**
+	 * 设置修改基本参数
+	 * @param menu
+	 */
+	public void setUpdateParam(Menu menu) {
+		menu.setName(this.getName());
+		menu.setParentId(this.getParentId());
+		menu.setHref(this.getHref());
+		menu.setSort(this.getSort());
+		menu.setRemark(this.getRemark());
+		menu.setState(this.getState());
+		menu.setType(this.getType());
+	}
 
 	/** 获取【当前页码】 **/
 	public int getPageNo() {

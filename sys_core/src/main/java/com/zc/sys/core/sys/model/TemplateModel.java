@@ -1,7 +1,9 @@
 package com.zc.sys.core.sys.model;
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.sys.entity.Template;
 /**
  * 模版配置
@@ -36,6 +38,43 @@ public class TemplateModel extends Template {
 		Template template = new Template();
 		BeanUtils.copyProperties(this, template);
 		return template;
+	}
+	
+	/**
+	 * 参数校验
+	 */
+	public void validParam() {
+		if (StringUtil.isBlank(this.getName())) {
+			throw new BussinessException("名称不能为空！");
+		}
+		if (StringUtil.isBlank(this.getNid())) {
+			throw new BussinessException("标识不能为空！");
+		}
+		if (this.getType() == null || this.getType().longValue() <= 0) {
+			throw new BussinessException("请选择类型！");
+		}
+		if (StringUtil.isBlank(this.getTempletTitle())) {
+			throw new BussinessException("模版标题不能为空！");
+		}
+		if (StringUtil.isBlank(this.getTempletContent())) {
+			throw new BussinessException("模版内容不能为空！");
+		}
+	}
+	
+	/**
+	 * 设置修改参数
+	 * @param systemConfig
+	 */
+	public void setUpdateParam(Template template) {
+		template.setName(this.getName());
+		template.setNid(this.getNid());
+		template.setRemark(this.getRemark());
+		template.setRouteNid(this.getRouteNid());
+		template.setState(this.getState() == null ? 0 : this.getState());
+		template.setTempletContent(this.getTempletContent());
+		template.setTempletTitle(this.getTempletTitle());
+		template.setType(this.getType());
+		template.setTypeSub(this.getTypeSub());
 	}
 
 	/** 获取【当前页码】 **/

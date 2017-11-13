@@ -8,5 +8,12 @@ import com.zc.sys.core.manage.entity.RoleMenu;
  * @since 2017年11月09日
  */
 public interface RoleMenuDao extends BaseDao<RoleMenu> {
+
+	/**
+	 * 删除角色菜单关联表信息（物理删除）
+	 * 
+	 * @param roleId 角色ID
+	 */
+	void deleteByRoleId(long roleId);
 	
 }

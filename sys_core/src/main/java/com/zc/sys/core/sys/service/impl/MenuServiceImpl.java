@@ -1,8 +1,16 @@
 package com.zc.sys.core.sys.service.impl;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.sys.dao.MenuDao;
+import com.zc.sys.core.sys.entity.Menu;
 import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.sys.service.MenuService;
 /**
@@ -23,8 +31,18 @@ public class MenuServiceImpl implements MenuService {
  	 */
 	@Override
 	public Result list(MenuModel model){
-
-		return null;
+		PageDataList<Menu> pageDataList = menuDao.list(model);
+		PageDataList<MenuModel> pageDataList_ = new PageDataList<MenuModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List<MenuModel> list = new ArrayList<MenuModel>();
+		if(pageDataList != null && pageDataList.getList().size() > 0){
+			for (Menu menu : pageDataList.getList()) {
+				MenuModel model_ = MenuModel.instance(menu);
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -33,9 +51,11 @@ public class MenuServiceImpl implements MenuService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(MenuModel model){
-
-		return null;
+		Menu menu = model.prototype();
+		menuDao.save(menu);
+		return Result.success();
 	}
 
 	/**
@@ -44,9 +64,12 @@ public class MenuServiceImpl implements MenuService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(MenuModel model){
-
-		return null;
+		Menu menu = menuDao.find(model.getId());
+		model.setUpdateParam(menu);//设置修改基本参数
+		menuDao.update(menu);
+		return Result.success();
 	}
 
 	/**
@@ -56,8 +79,11 @@ public class MenuServiceImpl implements MenuService {
  	 */
 	@Override
 	public Result getById(MenuModel model){
-
-		return null;
+		if(model.getId() == null || model.getId().longValue() <= 0){
+			return Result.error("参数错误！");
+		}
+		Menu menu = menuDao.find(model.getId());
+		return Result.success().setData(menu);
 	}
 
 }

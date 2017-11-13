@@ -31,7 +31,7 @@ public class Template extends LongPKEntity {
 	/** 使用渠道-例：短信渠道，邮件渠道 **/
 	private String routeNid;
 	/** 状态：0未启用，1启用 **/
-	private Integer status;
+	private Integer state;
 	/** 备注 **/
 	private String remark;
 	
@@ -91,14 +91,6 @@ public class Template extends LongPKEntity {
 	public void setRouteNid(String routeNid) {
 		this.routeNid = routeNid;
 	}
-	/** 获取【状态：0未启用，1启用】 **/
-	public Integer getStatus() {
-		return status;
-	}
-	/** 设置【状态：0未启用，1启用】 **/
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 	/** 获取【备注】 **/
 	public String getRemark() {
 		return remark;
@@ -106,6 +98,14 @@ public class Template extends LongPKEntity {
 	/** 设置【备注】 **/
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	/** 获取【状态：0未启用，1启用】 **/
+	public Integer getState() {
+		return state;
+	}
+	/** 设置【状态：0未启用，1启用】 **/
+	public void setState(Integer state) {
+		this.state = state;
 	}
 	
 }

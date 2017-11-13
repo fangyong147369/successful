@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
@@ -51,6 +52,7 @@ public class ConfigServiceImpl implements ConfigService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(ConfigModel model){
 		model.validParam();//参数校验
 		Config nidEntity = configDao.findObjByProperty("nid", model.getNid());
@@ -67,6 +69,7 @@ public class ConfigServiceImpl implements ConfigService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(ConfigModel model){
 		if(model.getId() == null || model.getId().longValue() <= 0){
 			return Result.error("参数错误！");

@@ -35,6 +35,23 @@ public class Menu extends LongPKEntity {
 	/** 备注 **/
 	private String remark;
 	
+	/**
+	 * 构造方法
+	 */
+	public Menu() {
+		super();
+	}
+	
+	/**
+	 * 构造方法
+	 * 
+	 * @param id 主键
+	 */
+	public Menu(Long id) {
+		super();
+		this.setId(id);
+	}
+	
 	/** 获取【菜单名称】 **/
 	public String getName() {
 		return name;

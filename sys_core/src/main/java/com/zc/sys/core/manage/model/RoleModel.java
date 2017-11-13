@@ -19,6 +19,9 @@ public class RoleModel extends Role {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	
+	/** 角色菜单 **/
+	private String menuIdStr;
 
 	/**
 	 * 实体转换model
@@ -36,6 +39,16 @@ public class RoleModel extends Role {
 		Role role = new Role();
 		BeanUtils.copyProperties(this, role);
 		return role;
+	}
+	
+	/**
+	 * 设置管理员角色修改基本参数
+	 * @param role
+	 */
+	public void setUpdateParam(Role role) {
+		role.setName(this.getName());
+		role.setRemark(this.getRemark());
+		role.setState(role.getState());
 	}
 
 	/** 获取【当前页码】 **/
@@ -68,4 +81,13 @@ public class RoleModel extends Role {
 		this.searchName = searchName;
 	}
 
+	/** 获取【角色菜单】 **/
+	public String getMenuIdStr() {
+		return menuIdStr;
+	}
+
+	/** 设置【角色菜单】 **/
+	public void setMenuIdStr(String menuIdStr) {
+		this.menuIdStr = menuIdStr;
+	}
 }
