@@ -1,4 +1,6 @@
 package com.zc.sys.promotion.entity;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,4 +18,84 @@ public class Promotion extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
 
+	/** 标题 **/
+	private String name;
+	/** 推广方式 **/
+	private Integer way;
+	/** 摘要 **/
+	private String summary;
+	/** 状态 **/
+	private Integer stae;
+	/** 开始时间 **/
+	private Date startTime;
+	/** 结束时间 **/
+	private Date endTime;
+	/** 备注 **/
+	private String remark;
+	/** 添加时间 **/
+	private Date addTime;
+	/** 获取【标题】 **/
+	public String getName() {
+		return name;
+	}
+	/** 设置【标题】 **/
+	public void setName(String name) {
+		this.name = name;
+	}
+	/** 获取【推广方式】 **/
+	public Integer getWay() {
+		return way;
+	}
+	/** 设置【推广方式】 **/
+	public void setWay(Integer way) {
+		this.way = way;
+	}
+	/** 获取【摘要】 **/
+	public String getSummary() {
+		return summary;
+	}
+	/** 设置【摘要】 **/
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+	/** 获取【状态】 **/
+	public Integer getStae() {
+		return stae;
+	}
+	/** 设置【状态】 **/
+	public void setStae(Integer stae) {
+		this.stae = stae;
+	}
+	/** 获取【开始时间】 **/
+	public Date getStartTime() {
+		return startTime;
+	}
+	/** 设置【开始时间】 **/
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	/** 获取【结束时间】 **/
+	public Date getEndTime() {
+		return endTime;
+	}
+	/** 设置【结束时间】 **/
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	/** 获取【备注】 **/
+	public String getRemark() {
+		return remark;
+	}
+	/** 设置【备注】 **/
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	/** 获取【添加时间】 **/
+	public Date getAddTime() {
+		return addTime;
+	}
+	/** 设置【添加时间】 **/
+	public void setAddTime(Date addTime) {
+		this.addTime = addTime;
+	}
 }

@@ -37,4 +37,19 @@ public interface BankCardService{
  	 */
 	public Result getById(BankCardModel model);
 
+	/**
+ 	 * 绑卡请求
+ 	 * @param model
+ 	 * @return
+ 	 */
+	public Result bindBCRequest(BankCardModel model);
+	
+	/**
+ 	 * 绑卡处理
+ 	 * @param model
+ 	 * @return
+ 	 */
+	public Result bindBCDeal(BankCardModel model);
+	
+
 }

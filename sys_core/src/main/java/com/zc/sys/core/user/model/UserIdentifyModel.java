@@ -33,6 +33,8 @@ public class UserIdentifyModel extends UserIdentify {
 	
 	/** 订单号 **/
 	private String orderNo;
+	/** 用户id **/
+	private Integer userId;
 
 	/**
 	 * 实体转换model
@@ -184,6 +186,16 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 设置【订单号】 **/
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
+	}
+
+	/** 获取【用户id】 **/
+	public Integer getUserId() {
+		return userId.intValue();
+	}
+
+	/** 设置【用户id】 **/
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }

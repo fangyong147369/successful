@@ -89,7 +89,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	public Object realNameRequest(UserIdentifyModel model) {
 		model.checkRealName();//实名校验
 		model.setRealNameState(2);//认证中
-		UserIdentify userIdentify = userIdentifyDao.find(model.getId());
+		UserIdentify userIdentify = (UserIdentify) userIdentifyDao.findByProperty("user.id", model.getUserId());
 		/*if(userIdentify.getRealNameCount() > Global.getInt("realNameCount")){
 			return Result.error("已达到实名认证次数上限，请联系平台处理");
 		}*/
@@ -110,9 +110,10 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		
 		//发送队列处理实名
 		QueueService queueService = BeanUtil.getBean(QueueService.class);
-		OrderTask orderTask = new OrderTask(user, "user", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		OrderTask orderTask = new OrderTask(user, "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
-		queueService.send(new QueueModel("realName", orderTask.getOrderNo(), model));
+		model.setOrderNo(orderTask.getOrderNo());
+		queueService.send(new QueueModel("user", orderTask.getOrderNo(), model));
 		return Result.success("实名处理中...请稍后！");
 	}
 
@@ -133,6 +134,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		userIdentify.setRealNameState(1);
 		userIdentifyDao.update(userIdentify);
 		
+		//订单处理
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("实名成功");
 		orderTask.setState(1);

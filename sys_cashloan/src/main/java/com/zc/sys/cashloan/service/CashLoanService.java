@@ -37,4 +37,18 @@ public interface CashLoanService{
  	 */
 	public Result getById(CashLoanModel model);
 
+
+	/**
+ 	 * 现金贷款请求
+ 	 * @param model
+ 	 * @return
+ 	 */
+	public Result cashLoanRequest(CashLoanModel model);
+	
+	/**
+ 	 * 现金贷款处理
+ 	 * @param model
+ 	 * @return
+ 	 */
+	public Result cashLoanDeal(CashLoanModel model);
 }

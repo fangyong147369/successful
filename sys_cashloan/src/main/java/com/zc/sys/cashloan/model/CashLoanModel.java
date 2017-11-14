@@ -37,6 +37,20 @@ public class CashLoanModel extends CashLoan {
 		BeanUtils.copyProperties(this, cashLoan);
 		return cashLoan;
 	}
+	
+	/**
+	 * 贷款校验
+	 */
+	public void checkCashLoan() {
+		
+	}
+	
+	/**
+	 * 初始化贷款
+	 */
+	public void initCashLoan() {
+		
+	}
 
 	/** 获取【当前页码】 **/
 	public int getPageNo() {

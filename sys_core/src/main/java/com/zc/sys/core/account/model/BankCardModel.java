@@ -2,7 +2,13 @@ package com.zc.sys.core.account.model;
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.calculate.BigDecimalUtil;
+import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.http.RequestUtil;
 import com.zc.sys.core.account.entity.BankCard;
+import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.entity.User;
 /**
  * 银行卡
  * @author zp
@@ -19,6 +25,11 @@ public class BankCardModel extends BankCard {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	
+	/** 用户id **/
+	private Integer userId;
+	/** 订单号 **/
+	private String orderNo;
 
 	/**
 	 * 实体转换model
@@ -38,6 +49,27 @@ public class BankCardModel extends BankCard {
 		return bankCard;
 	}
 
+	/**
+	 * 绑卡校验
+	 */
+	public void checkBindBC() {
+		
+	}
+	
+	/**
+	 * 初始化
+	 */
+	public void initBind() {
+		UserDao userDao = (UserDao)BeanUtil.getBean(UserDao.class);
+		this.setState(2);//绑卡处理中
+		User user = (User) userDao.findByProperty("id",this.getUserId());
+		this.setUser(user);
+		this.setAddIp(RequestUtil.getClientIp());
+		this.setAddTime(DateUtil.getNow());
+		this.setAmount(BigDecimalUtil.round(0));
+		this.setAutoDeduct(0);
+	}
+	
 	/** 获取【当前页码】 **/
 	public int getPageNo() {
 		return pageNo;
@@ -66,6 +98,26 @@ public class BankCardModel extends BankCard {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	/** 获取【用户id】 **/
+	public Integer getUserId() {
+		return userId.intValue();
+	}
+
+	/** 设置【用户id】 **/
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	/** 获取【订单号】 **/
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	/** 设置【订单号】 **/
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
 	}
 
 }
