@@ -51,4 +51,19 @@ public interface UserIdentifyService{
 	 * @return
 	 */
 	public Object realNameDeal(UserIdentifyModel model);
+	
+	/**
+	 * 数据魔盒-运营商-数据认证请求
+	 * @param model
+	 * @return
+	 */
+	public Object octopusRequest(UserIdentifyModel model);
+	
+	/**
+	 * 数据魔盒-运营商-数据认证处理
+	 * @param model
+	 * @return
+	 */
+	public Object octopusDeal(UserIdentifyModel model);
+	
 }

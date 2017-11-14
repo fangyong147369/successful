@@ -110,7 +110,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		
 		//发送队列处理实名
 		QueueService queueService = BeanUtil.getBean(QueueService.class);
-		OrderTask orderTask = new OrderTask(user, "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		OrderTask orderTask = new OrderTask(user, "user", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		queueService.send(new QueueModel("realName", orderTask.getOrderNo(), model));
 		return Result.success("实名处理中...请稍后！");
@@ -142,6 +142,29 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		Executer realNameExecuter = BeanUtil.getBean(UserRealNameExecuter.class);
 		realNameExecuter.execute(model);
 		return Result.success();
+	}
+
+	/**
+	 * 数据魔盒-运营商-数据认证请求
+	 * @param model
+	 * @return
+	 */
+	@Override
+	public Object octopusRequest(UserIdentifyModel model) {
+		
+		return null;
+	}
+
+	/**
+	 * 数据魔盒-运营商-数据认证处理
+	 * @param model
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Object octopusDeal(UserIdentifyModel model) {
+		
+		return null;
 	}
 	
 }
