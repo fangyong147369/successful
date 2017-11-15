@@ -21,4 +21,5 @@
 	<import resource="spring/spring-datasource.xml"/>
 	<import resource="spring/spring-redis.xml"/>
 	<import resource="spring/spring-AMQ.xml"/>
+	<import resource="spring/spring-mvc.xml"/>
 </beans>

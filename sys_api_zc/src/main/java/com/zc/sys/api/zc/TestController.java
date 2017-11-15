@@ -31,8 +31,9 @@ public class TestController  extends BaseController<OperatorModel> {
  	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public Object list(OperatorModel model) throws BussinessException {
-//		queueService.send(new QueueModel("invest", "1111111111111", ""));
-//		queueService.send(new QueueModel("loan", "2222222222222", ""));
+//		queueService.send(new QueueModel("appPushMessage", "1111111111111", ""));
+//		queueService.send(new QueueModel("cashLoan", "2222222222222", ""));
+//		queueService.send(new QueueModel("realNameIdentify", "3333333333333", ""));
 		model.setName("222222222");
 		return new Result(true).setData(model);
 	}

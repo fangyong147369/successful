@@ -115,7 +115,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoan",
 				model.getCno(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
-		queueService.send(new QueueModel("user", orderTask.getOrderNo(), model));
+		queueService.send(new QueueModel("cashLoan", orderTask, model));
 		return Result.success("贷款处理中...请稍后！");
 	}
 

@@ -113,7 +113,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		OrderTask orderTask = new OrderTask(user, "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderNo(orderTask.getOrderNo());
-		queueService.send(new QueueModel("user", orderTask.getOrderNo(), model));
+		queueService.send(new QueueModel("user",orderTask, model));
 		return Result.success("实名处理中...请稍后！");
 	}
 

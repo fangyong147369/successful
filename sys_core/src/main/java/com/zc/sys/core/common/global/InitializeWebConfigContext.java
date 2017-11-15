@@ -50,7 +50,7 @@ public class InitializeWebConfigContext {
 	 * 初始化系统模版
 	 */
 	public static Map<String, Object> initSysTempalte(){
-		List<Template> list = templateDao.findByProperty("status", 1);
+		List<Template> list = templateDao.findByProperty("state", 1);
 		Map<String, Object> sysTemplateMap = new HashMap<String, Object>();
 		for (Template template : list) {
 			sysTemplateMap.put(template.getNid() + "_" + template.getType() + "_" + template.getTypeSub(), template);

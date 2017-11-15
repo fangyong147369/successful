@@ -2,15 +2,17 @@ package com.zc.sys.core.common.queue.pojo;
 
 import java.io.Serializable;
 
+import com.zc.sys.core.manage.entity.OrderTask;
+
 public class QueueModel implements Serializable{
 	/** 序列化 **/
 	private static final long serialVersionUID = 1L;
-
-	/** 业务代码 **/
+	
+	/** 监听代码 **/
 	private String code;
 	
-	/** 订单号 **/
-	private String orderNo;
+	/** 订单信息 **/
+	private OrderTask orderTask;
 	
 	/** 处理实体 **/
 	private Object obj;
@@ -18,17 +20,14 @@ public class QueueModel implements Serializable{
 	public QueueModel() {
 		super();
 	}
-	
-	public QueueModel(String code, String orderNo, Object obj) {
+
+	public QueueModel(String code, OrderTask orderTask, Object obj) {
 		super();
 		this.code = code;
-		this.orderNo = orderNo;
+		this.orderTask = orderTask;
 		this.obj = obj;
 	}
 
-	public QueueModel(Object obj) {
-		this.obj = obj;
-	}
 
 	/** 获取【处理实体】 **/
 	public Object getObj() {
@@ -40,24 +39,24 @@ public class QueueModel implements Serializable{
 		this.obj = obj;
 	}
 
-	/** 获取【业务代码】 **/
+	/** 获取【订单信息】 **/
+	public OrderTask getOrderTask() {
+		return orderTask;
+	}
+
+	/** 设置【订单信息】 **/
+	public void setOrderTask(OrderTask orderTask) {
+		this.orderTask = orderTask;
+	}
+
+	/** 获取【监听代码】 **/
 	public String getCode() {
 		return code;
 	}
 
-	/** 设置【业务代码】 **/
+	/** 设置【监听代码】 **/
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	/** 获取【订单号】 **/
-	public String getOrderNo() {
-		return orderNo;
-	}
-
-	/** 设置【订单号】 **/
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
 	}
 	
 }

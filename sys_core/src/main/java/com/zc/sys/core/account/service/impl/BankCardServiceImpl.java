@@ -107,7 +107,7 @@ public class BankCardServiceImpl implements BankCardService {
 		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderNo(orderTask.getOrderNo());
-		queueService.send(new QueueModel("account", orderTask.getOrderNo(), model));
+		queueService.send(new QueueModel("user", orderTask, model));
 		return Result.success("实名处理中...请稍后！");
 	}
 

@@ -10,19 +10,19 @@ import com.zc.sys.core.common.queue.pojo.QueueModel;
 
 /**
  * 处理队列消息监听
- * 
+ * 通知消息处理
  * @author zp
  * @version 0.0.1
  * @since 2017年7月26日
  */
-public class ConsumerMessageListener1 implements MessageListener{
+public class NoticeConsumerMessageListener implements MessageListener{
 
 	public void onMessage(Message message) {
         try {
         	ObjectMessage objectMessage = (ObjectMessage) message;
         	QueueModel model = (QueueModel)objectMessage.getObject();
+        	LogUtil.info("===============【通知消息监听队列处理】接收消息：" + model.getOrderTask().toString());
         	
-            LogUtil.info("===============消费者111111111接收消息：" + model.getCode() + "================" + model.getOrderNo());
             
         } catch (JMSException e) {
             e.printStackTrace();

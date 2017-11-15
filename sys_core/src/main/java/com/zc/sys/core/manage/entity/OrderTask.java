@@ -44,7 +44,6 @@ public class OrderTask extends LongPKEntity {
 	
 	public OrderTask() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public OrderTask(User user, String type, String orderNo, Integer state,
 			String remark, Date addTime) {
@@ -119,5 +118,14 @@ public class OrderTask extends LongPKEntity {
 	/** 设置【处理时间】 **/
 	public void setDoTime(Date doTime) {
 		this.doTime = doTime;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "OrderTask [orderNo=" + orderNo + ", type=" + type + ", state="
+				+ state + ", remark=" + remark + ", doResult=" + doResult
+				+ ", doTime=" + doTime + ", addTime=" + addTime + "]";
 	}
 }

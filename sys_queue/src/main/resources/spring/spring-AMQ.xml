@@ -52,24 +52,34 @@
 	
 	<!-- 消息监听器 -->
 	<bean id="consumerMessageListener" class="com.zc.sys.queue.listener.ConsumerMessageListener" />
-	<bean id="consumerMessageListener1" class="com.zc.sys.queue.listener.ConsumerMessageListener1" />
+	<bean id="noticeConsumerMessageListener" class="com.zc.sys.queue.listener.NoticeConsumerMessageListener" />
+	<bean id="cashLoanConsumerMessageListener" class="com.zc.sys.queue.listener.CashLoanConsumerMessageListener" />
 	
 	<!-- 消息监听容器 -->
 	<bean id="jmsContainer"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="messageSelector" value="code='invest'" />
+		<property name="messageSelector" value="${messageSelector.other}" />
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="queueDestination" />
 		<property name="messageListener" ref="consumerMessageListener" />
 	</bean>
 	
 	<!-- 消息监听容器 -->
-	<bean id="jmsContainer1"
+	<bean id="jmsContainerNotice"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="messageSelector" value="code='loan'" />
+		<property name="messageSelector" value="${messageSelector.notice}" />
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="queueDestination" />
-		<property name="messageListener" ref="consumerMessageListener1" />
+		<property name="messageListener" ref="noticeConsumerMessageListener" />
+	</bean>
+	
+	<!-- 消息监听容器 -->
+	<bean id="jmsContainerCashLoan"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="messageSelector" value="${messageSelector.cashLoan}" />
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="queueDestination" />
+		<property name="messageListener" ref="cashLoanConsumerMessageListener" />
 	</bean>
 	
 </beans>
