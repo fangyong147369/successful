@@ -19,7 +19,7 @@ import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
-import com.zc.sys.core.common.queue.service.QueueService;
+import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 
@@ -111,7 +111,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		cashLoanDao.save(cashLoan);
 
 		//发送队列处理实名
-		QueueService queueService = BeanUtil.getBean(QueueService.class);
+		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoan",
 				model.getCno(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);

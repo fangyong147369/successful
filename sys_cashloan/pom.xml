@@ -10,7 +10,7 @@
 
 	<artifactId>sys_cashloan</artifactId>
 	<name>sys_cashloan</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	
 	<dependencies>
 		<dependency>

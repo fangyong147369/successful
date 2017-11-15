@@ -11,7 +11,7 @@ import com.zc.sys.common.util.log.LogUtil;
  * 序列化
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年8月10日
  */
 public class SerializeUtil {

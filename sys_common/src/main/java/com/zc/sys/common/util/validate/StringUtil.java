@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  * 工具类-字符串处理
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年3月16日
  *
  */

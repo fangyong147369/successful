@@ -12,7 +12,7 @@ import com.zc.sys.core.common.queue.pojo.QueueModel;
  * 处理队列消息监听
  * 通知消息处理
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年7月26日
  */
 public class NoticeConsumerMessageListener implements MessageListener{

@@ -8,7 +8,7 @@ import com.zc.sys.common.util.json.JsonUtil;
  * 请求返回结果
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年6月29日
  */
 public class Result {

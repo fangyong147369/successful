@@ -3,7 +3,7 @@ package com.zc.sys.common.exception;
  * 异常处理
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年6月28日
  */
 public class BussinessException extends RuntimeException {

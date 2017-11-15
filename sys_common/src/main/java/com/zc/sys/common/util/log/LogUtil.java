@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * log4j工具类
  * @author pc
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年6月29日
  */
 public class LogUtil {

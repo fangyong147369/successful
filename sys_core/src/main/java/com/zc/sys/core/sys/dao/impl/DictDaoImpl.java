@@ -16,7 +16,7 @@ import com.zc.sys.core.sys.model.DictModel;
 /**
  * 字典
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年7月29日
  */
 @Repository

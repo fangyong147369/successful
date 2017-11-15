@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  * 工具类-日期处理
  * 
  * @author zp 
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年6月28日
  */
 public class DateUtil {

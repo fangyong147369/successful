@@ -11,7 +11,7 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
-import com.zc.sys.core.common.queue.service.QueueService;
+import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
@@ -109,11 +109,11 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		userIdentifyDao.update(userIdentify);
 		
 		//发送队列处理实名
-		QueueService queueService = BeanUtil.getBean(QueueService.class);
+		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(user, "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
-		model.setOrderNo(orderTask.getOrderNo());
-		queueService.send(new QueueModel("user",orderTask, model));
+		model.setOrderTask(orderTask);
+		queueService.send(new QueueModel("user",model.getOrderTask(), model));
 		return Result.success("实名处理中...请稍后！");
 	}
 
@@ -125,16 +125,12 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	@Override
 	@Transactional
 	public Object realNameDeal(UserIdentifyModel model) {
-		OrderTask orderTask = (OrderTask) orderTaskDao.findByProperty("orderNo", model.getOrderNo());
-		if(orderTask == null || orderTask.getState() != 2){
-			LogUtil.info("订单号+" + model.getOrderNo() + "不存在，或者处理状态有误");
-			return Result.error("订单号+" + model.getOrderNo() + "不存在，或者处理状态有误");
-		}
 		UserIdentify userIdentify = userIdentifyDao.find(model.getId());
 		userIdentify.setRealNameState(1);
 		userIdentifyDao.update(userIdentify);
 		
 		//订单处理
+		OrderTask orderTask = model.getOrderTask();
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("实名成功");
 		orderTask.setState(1);

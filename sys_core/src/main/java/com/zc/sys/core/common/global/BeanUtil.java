@@ -13,7 +13,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * 工具类-spring bean
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年7月21日
  */
 @Component

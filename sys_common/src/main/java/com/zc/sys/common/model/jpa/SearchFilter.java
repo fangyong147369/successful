@@ -6,7 +6,7 @@ import java.util.List;
  * 查询
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年6月28日
  */
 public class SearchFilter {

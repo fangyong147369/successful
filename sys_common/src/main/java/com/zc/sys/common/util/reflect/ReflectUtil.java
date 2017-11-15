@@ -17,7 +17,7 @@ import com.zc.sys.common.util.validate.StringUtil;
  * 反射帮助类
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年6月28日
  */
 public class ReflectUtil {

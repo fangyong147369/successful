@@ -13,17 +13,17 @@ import org.springframework.stereotype.Service;
 
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
-import com.zc.sys.core.common.queue.service.QueueService;
+import com.zc.sys.core.common.queue.service.QueueProducerService;
 
 /**
  * 生产者
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年7月26日
  */
 @Service
-public class QueueServiceImpl implements QueueService{
+public class QueueProducerServiceImpl implements QueueProducerService{
 
 	@Autowired
 	private JmsTemplate jmsTemplate;
@@ -34,10 +34,18 @@ public class QueueServiceImpl implements QueueService{
 //	@Qualifier("topicDestination")
 //	private Destination destinationTopic;//topic
 	
+	/**
+	 * 发送消息
+	 */
+	@Override
 	public void send(final QueueModel model) {
 		send(destinationQueue, model);
     }
 	
+	/**
+	 * 发送消息
+	 */
+	@Override
 	public void send(Destination destination, final QueueModel model) {
         LogUtil.info("==============生产者发送消息：" + model.getOrderTask().toString());
         jmsTemplate.send(destination, new MessageCreator() {

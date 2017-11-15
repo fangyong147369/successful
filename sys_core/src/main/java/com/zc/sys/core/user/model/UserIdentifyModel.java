@@ -5,6 +5,7 @@ import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.UserIdentify;
 /**
@@ -31,8 +32,8 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 证件类型 **/
 	private Integer cardType;
 	
-	/** 订单号 **/
-	private String orderNo;
+	/** 订单 **/
+	private OrderTask orderTask;
 	/** 用户id **/
 	private Integer userId;
 
@@ -118,6 +119,10 @@ public class UserIdentifyModel extends UserIdentify {
 		}
 	}
 	
+	public void doQueue(){
+		
+	}
+	
 	/** 获取【当前页码】 **/
 	public int getPageNo() {
 		return pageNo;
@@ -178,16 +183,6 @@ public class UserIdentifyModel extends UserIdentify {
 		this.cardType = cardType;
 	}
 
-	/** 获取【订单号】 **/
-	public String getOrderNo() {
-		return orderNo;
-	}
-
-	/** 设置【订单号】 **/
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
-	}
-
 	/** 获取【用户id】 **/
 	public Integer getUserId() {
 		return userId.intValue();
@@ -196,6 +191,16 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 设置【用户id】 **/
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	/** 获取【订单】 **/
+	public OrderTask getOrderTask() {
+		return orderTask;
+	}
+
+	/** 设置【订单】 **/
+	public void setOrderTask(OrderTask orderTask) {
+		this.orderTask = orderTask;
 	}
 
 }

@@ -11,7 +11,7 @@ import com.zc.sys.core.sys.entity.Dict;
  * 字典
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年11月7日
  */
 public class DictModel extends Dict {

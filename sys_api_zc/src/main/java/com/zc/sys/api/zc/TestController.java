@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
-import com.zc.sys.core.common.queue.service.QueueService;
+import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.manage.model.OperatorModel;
 
@@ -22,7 +22,7 @@ import com.zc.sys.core.manage.model.OperatorModel;
 public class TestController  extends BaseController<OperatorModel> {
 
 	@Resource
-	private QueueService queueService;
+	private QueueProducerService queueService;
 	
 	/**
  	 * 列表

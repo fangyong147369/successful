@@ -19,7 +19,7 @@ import com.zc.sys.core.account.service.BankCardService;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
-import com.zc.sys.core.common.queue.service.QueueService;
+import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 /**
@@ -103,7 +103,7 @@ public class BankCardServiceImpl implements BankCardService {
 		model.setId(bankCard.getId());
 		
 		//发送队列处理绑卡
-		QueueService queueService = BeanUtil.getBean(QueueService.class);
+		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderNo(orderTask.getOrderNo());

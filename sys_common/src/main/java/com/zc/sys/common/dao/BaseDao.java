@@ -12,7 +12,7 @@ import com.zc.sys.common.model.jpa.QueryParam;
  * 基类Dao
  * 
  * @author zp
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年6月28日
  */
 public interface BaseDao<T> {

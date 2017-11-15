@@ -10,7 +10,7 @@ import com.zc.sys.common.util.serialize.SerializeUtil;
 /**
  * redis-client
  * @author zp 
- * @version 0.0.1
+ * @version 2.0.0.0
  * @since 2017年7月6日
  */
 @Component
