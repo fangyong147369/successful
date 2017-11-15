@@ -226,7 +226,7 @@ public class CodeTemplate {
 		sb.append("import org.springframework.web.bind.annotation.RequestMethod;\n");
 		sb.append("\n");
 		sb.append("import com.zc.sys.common.exception.BussinessException;\n");
-		sb.append("import com.zc.sys.common.web.BaseController;\n");
+		sb.append("import com.zc.sys.core.common.web.BaseController;\n");
 		sb.append("import ").append(modelPackage).append(".").append(modelName).append(";\n");
 		sb.append("import ").append(servicePackage).append(".").append(serviceName).append(";\n");
 		sb.append("/**\n * "+moduleName+"\n * @author "+author+"\n * @version "+version+"\n * @since "+since+"\n */\n");
