@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.zc.sys.common.cache.RedisCacheUtil;
 import com.zc.sys.common.util.log.LogUtil;
+import com.zc.sys.core.common.util.BeanUtil;
 import com.zc.sys.core.sys.dao.ConfigDao;
 import com.zc.sys.core.sys.dao.TemplateDao;
 import com.zc.sys.core.sys.entity.Template;

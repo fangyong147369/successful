@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.zc.sys.common.cache.RedisCacheUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.util.BeanUtil;
 import com.zc.sys.core.sys.entity.Template;
 import com.zc.sys.core.sys.model.ConfigModel;
 

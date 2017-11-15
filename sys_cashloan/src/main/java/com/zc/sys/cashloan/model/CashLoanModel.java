@@ -51,6 +51,13 @@ public class CashLoanModel extends CashLoan {
 	public void initCashLoan() {
 		
 	}
+	
+	/**
+	 * 放款处理
+	 */
+	public void doQueue() {
+		
+	}
 
 	/** 获取【当前页码】 **/
 	public int getPageNo() {

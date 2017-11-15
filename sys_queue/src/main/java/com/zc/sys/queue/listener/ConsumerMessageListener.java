@@ -7,7 +7,6 @@ import javax.jms.ObjectMessage;
 
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
-import com.zc.sys.core.user.entity.UserIdentify;
 
 /**
  * 处理队列消息监听

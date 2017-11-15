@@ -6,7 +6,7 @@ import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.http.RequestUtil;
 import com.zc.sys.core.account.entity.BankCard;
-import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.util.BeanUtil;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.User;
 /**

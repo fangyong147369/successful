@@ -37,6 +37,14 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 		BeanUtils.copyProperties(this, cashLoanRepayment);
 		return cashLoanRepayment;
 	}
+	
+
+	/**
+	 * 现金贷还款处理
+	 */
+	public void doQueue() {
+		
+	}
 
 	/** 获取【当前页码】 **/
 	public int getPageNo() {
