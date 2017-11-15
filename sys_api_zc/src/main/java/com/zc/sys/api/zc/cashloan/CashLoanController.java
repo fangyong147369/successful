@@ -1,4 +1,4 @@
-package com.zc.sys.cashloan.controller;
+package com.zc.sys.api.zc.cashloan;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.core.common.web.BaseController;
-import com.zc.sys.cashloan.model.CashLoanRepaymentModel;
-import com.zc.sys.cashloan.service.CashLoanRepaymentService;
+import com.zc.sys.cashloan.model.CashLoanModel;
+import com.zc.sys.cashloan.service.CashLoanService;
 /**
- * 现金贷还款计划
+ * 现金贷借款
  * @author zp
  * @version 2.0.0.0
  * @since 2017年11月09日
  */
 @RestController
-@RequestMapping("/cl/cashloanrepayment")
-public class CashLoanRepaymentController extends BaseController<CashLoanRepaymentModel> {
+@RequestMapping("/cl/cashloan")
+public class CashLoanController extends BaseController<CashLoanModel> {
 
 	@Resource
-	CashLoanRepaymentService cashLoanRepaymentService;
+	CashLoanService cashLoanService;
 
 	/**
  	 * 列表
@@ -30,8 +30,8 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(CashLoanRepaymentModel model) throws BussinessException {
-		return cashLoanRepaymentService.list(model);
+	public Object list(CashLoanModel model) throws BussinessException {
+		return cashLoanService.list(model);
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(CashLoanRepaymentModel model) throws BussinessException {
-		return cashLoanRepaymentService.add(model);
+	public Object add(CashLoanModel model) throws BussinessException {
+		return cashLoanService.add(model);
 	}
 
 	/**
@@ -52,8 +52,8 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(CashLoanRepaymentModel model) throws BussinessException {
-		return cashLoanRepaymentService.update(model);
+	public Object update(CashLoanModel model) throws BussinessException {
+		return cashLoanService.update(model);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(CashLoanRepaymentModel model) throws BussinessException {
-		return cashLoanRepaymentService.getById(model);
+	public Object getById(CashLoanModel model) throws BussinessException {
+		return cashLoanService.getById(model);
 	}
 }
