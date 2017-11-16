@@ -22,7 +22,7 @@
 //		//实体名称(生成之前需要修改)
 //		String entityName = "InterestFreeNoteRecord";
 //		
-//		//实体对应的数据库表名称(生成之前需要修改)
+//		//实体对应的数据库表名称(生成之前需要修改) 
 //		String tableName = "interest_free_note_record";
 //		
 //		//包名称(并非完整包名，只是包含Entiy、model、Convert等的父包名)(为空时自动取实体名称的小写)
