@@ -1,0 +1,26 @@
+web:
+  config:
+    webTitle: "欢迎使用SpringBoot"
+    authorName: "网金客"
+    authorBlogUrl: "http://www.zcwk99.com"
+
+#加密配置
+security:
+  AES256:
+    key: "0123456789123456"
+
+#AMQ消费者选择器
+messageSelector:
+  notice: "code in ('sendSMS','sendEmail','sendMessage','sendAppPushMessage')"
+  cashLoan: "code in ('cashLoan','cashLoanRepayment')"
+  other: "code in ('user')"
+
+#运行端口
+server:
+  port: "8081"
+
+
+
+
+
+
