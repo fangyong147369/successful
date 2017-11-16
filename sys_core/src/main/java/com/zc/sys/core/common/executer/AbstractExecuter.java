@@ -46,16 +46,7 @@ public abstract class AbstractExecuter implements Executer {
 	public abstract void handleAccount();
 
 	@Override
-	public void handleNotice(){
-		//短信
-		sendSMS();
-		//邮件
-		sendEmail();
-		//站内信
-		sendMessage();
-		//推送
-		sendAppPush();
-	}
+	public abstract void handleNotice();
 
 	@Override
 	public abstract void sendAppPush();

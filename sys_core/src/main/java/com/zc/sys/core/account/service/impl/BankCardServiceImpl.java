@@ -107,7 +107,7 @@ public class BankCardServiceImpl implements BankCardService {
 		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderNo(orderTask.getOrderNo());
-		queueService.send(new QueueModel("user", orderTask, model));
+//		queueService.send(new QueueModel("user", orderTask, model));
 		return Result.success("实名处理中...请稍后！");
 	}
 
@@ -118,7 +118,7 @@ public class BankCardServiceImpl implements BankCardService {
  	 */
 	@Override
 	public Result bindBCDeal(BankCardModel model) {
-		OrderTask orderTask = (OrderTask) orderTaskDao.findByProperty("orderNo", model.getOrderNo());
+		OrderTask orderTask = (OrderTask) orderTaskDao.findObjByProperty("orderNo", model.getOrderNo());
 		if(orderTask == null || orderTask.getState() != 2){
 			LogUtil.info("订单号+" + model.getOrderNo() + "不存在，或者处理状态有误");
 			return Result.error("订单号+" + model.getOrderNo() + "不存在，或者处理状态有误");

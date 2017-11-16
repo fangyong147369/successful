@@ -52,7 +52,7 @@ public class TemplateDaoImpl extends BaseDaoImpl<Template> implements TemplateDa
 	 */
 	@Override
 	public Template findByNid(String nid) {
-		Template template = (Template) this.findByProperty("nid", nid);
+		Template template = (Template) this.findObjByProperty("nid", nid);
 		if(template != null && template.getState() == 1){
 			return template;
 		}

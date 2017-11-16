@@ -23,7 +23,7 @@ public class NoticeConsumerMessageListener implements MessageListener{
         try {
         	ObjectMessage objectMessage = (ObjectMessage) message;
         	QueueModel model = (QueueModel)objectMessage.getObject();
-        	LogUtil.info("===============【通知消息监听队列处理】接收消息：" + model.getOrderTask().toString());
+        	LogUtil.info("===============【通知消息监听队列处理】接收消息：" + model.getOrderTaskModel().toString());
         	QueueConsumerService queueConsumerService = (QueueConsumerService)BeanUtil.getBean(QueueConsumerService.class);
             queueConsumerService.receive(model);
         } catch (JMSException e) {

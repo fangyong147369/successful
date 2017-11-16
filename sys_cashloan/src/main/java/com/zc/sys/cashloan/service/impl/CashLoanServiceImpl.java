@@ -115,7 +115,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoan",
 				model.getCno(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
-		queueService.send(new QueueModel("cashLoan", orderTask, model));
+//		queueService.send(new QueueModel("cashLoan", orderTask, model));
 		return Result.success("贷款处理中...请稍后！");
 	}
 
@@ -128,7 +128,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 	@Override
 	@Transactional
 	public Result cashLoanDeal(CashLoanModel model) {
-		OrderTask orderTask = (OrderTask) orderTaskDao.findByProperty("orderNo", model.getCno());
+		OrderTask orderTask = (OrderTask) orderTaskDao.findObjByProperty("orderNo", model.getCno());
 		if(orderTask == null || orderTask.getState() != 2){
 			LogUtil.info("订单号+" + model.getCno() + "不存在，或者处理状态有误");
 			return Result.error("订单号+" + model.getCno() + "不存在，或者处理状态有误");

@@ -9,7 +9,9 @@ import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.common.web.BaseController;
+import com.zc.sys.core.manage.model.NoticeMessageModel;
 import com.zc.sys.core.manage.model.OperatorModel;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 
 /**
  * 测试
@@ -29,7 +31,7 @@ public class TestController  extends BaseController<OperatorModel> {
  	 */
 	@RequestMapping(value = "/")
 	public Object list() throws BussinessException {
-//		queueService.send(new QueueModel("appPushMessage", "1111111111111", ""));
+		queueService.send(new QueueModel("sendMessage", new OrderTaskModel(), new NoticeMessageModel()));
 //		queueService.send(new QueueModel("cashLoan", "2222222222222", ""));
 //		queueService.send(new QueueModel("realNameIdentify", "3333333333333", ""));
 		return "测试";

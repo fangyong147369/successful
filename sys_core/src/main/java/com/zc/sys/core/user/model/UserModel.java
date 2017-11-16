@@ -5,6 +5,7 @@ import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.User;
 /**
@@ -76,6 +77,7 @@ public class UserModel extends User {
 	 * 注册信息校验
 	 */
 	public void checkReg(){
+		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
 		String mobile = this.getMobile();
 		if(!StringUtil.isPhone(mobile)){
 			throw new BussinessException("请输入正确手机号");
@@ -84,8 +86,7 @@ public class UserModel extends User {
 			throw new BussinessException("该手机号已存在");
 		}
 		//短信验证码校验
-		System.err.println("短信验证码校验");
-		
+		commonService.checkSMSCode(mobile, this.getCode());
 		
 	}
 	

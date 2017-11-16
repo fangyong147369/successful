@@ -89,7 +89,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	public Object realNameRequest(UserIdentifyModel model) {
 		model.checkRealName();//实名校验
 		model.setRealNameState(2);//认证中
-		UserIdentify userIdentify = (UserIdentify) userIdentifyDao.findByProperty("user.id", model.getUserId());
+		UserIdentify userIdentify = (UserIdentify) userIdentifyDao.findObjByProperty("user.id", model.getUserId());
 		/*if(userIdentify.getRealNameCount() > Global.getInt("realNameCount")){
 			return Result.error("已达到实名认证次数上限，请联系平台处理");
 		}*/
@@ -113,7 +113,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		OrderTask orderTask = new OrderTask(user, "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
-		queueProducerService.send(new QueueModel("user",model.getOrderTask(), model));
+//		queueProducerService.send(new QueueModel("user",model.getOrderTask(), model));
 		return Result.success("实名处理中...请稍后！");
 	}
 

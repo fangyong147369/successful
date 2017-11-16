@@ -20,6 +20,9 @@ public class OrderTaskModel extends OrderTask {
 	/** 条件查询 **/
 	private String searchName;
 
+	/** queue类型 **/
+	private String queueType;
+	
 	/**
 	 * 实体转换model
 	 */
@@ -66,6 +69,16 @@ public class OrderTaskModel extends OrderTask {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	/** 获取【queue类型】 **/
+	public String getQueueType() {
+		return queueType;
+	}
+
+	/** 设置【queue类型】 **/
+	public void setQueueType(String queueType) {
+		this.queueType = queueType;
 	}
 
 }

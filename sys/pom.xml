@@ -12,7 +12,7 @@
 
 	<modules>
 		<module>../sys_common</module>
-		<module>../sys_api</module>
+		<module>../sys_api_zc</module>
 		<module>../sys_common</module>
 		<module>../sys_core</module>
 		<module>../sys_quartz</module>

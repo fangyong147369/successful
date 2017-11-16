@@ -47,11 +47,11 @@ public class QueueProducerServiceImpl implements QueueProducerService{
 	 */
 	@Override
 	public void send(Destination destination, final QueueModel model) {
-        LogUtil.info("==============生产者发送消息：" + model.getOrderTask().toString());
+        LogUtil.info("==============生产者发送消息：" + model.getOrderTaskModel().toString());
         jmsTemplate.send(destination, new MessageCreator() {
             public Message createMessage(Session session) throws JMSException {
             	Message message = session.createObjectMessage(model);
-            	message.setStringProperty("code",model.getOrderTask().getOrderNo());
+            	message.setStringProperty("code",model.getCode());
                 return message;
             }
         });

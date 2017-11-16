@@ -62,7 +62,7 @@ public class BankCardModel extends BankCard {
 	public void initBind() {
 		UserDao userDao = (UserDao)BeanUtil.getBean(UserDao.class);
 		this.setState(2);//绑卡处理中
-		User user = (User) userDao.findByProperty("id",this.getUserId());
+		User user = (User) userDao.findObjByProperty("id",this.getUserId());
 		this.setUser(user);
 		this.setAddIp(RequestUtil.getClientIp());
 		this.setAddTime(DateUtil.getNow());

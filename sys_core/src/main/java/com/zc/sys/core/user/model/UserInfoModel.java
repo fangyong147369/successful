@@ -52,7 +52,7 @@ public class UserInfoModel extends UserInfo {
 		UserDao userDao = BeanUtil.getBean(UserDao.class);
 		//邀请用户
 		if(!StringUtil.isBlank(model.getInviteCode())){
-			User inviteUser = (User) userDao.findByProperty("inviteCode", model.getInviteCode());
+			User inviteUser = (User) userDao.findObjByProperty("inviteCode", model.getInviteCode());
 			if(inviteUser == null){
 				throw new BussinessException("邀请码不存在");
 			}

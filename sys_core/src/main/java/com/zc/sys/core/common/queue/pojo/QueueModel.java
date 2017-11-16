@@ -3,6 +3,7 @@ package com.zc.sys.core.common.queue.pojo;
 import java.io.Serializable;
 
 import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 
 public class QueueModel implements Serializable{
 	/** 序列化 **/
@@ -12,7 +13,7 @@ public class QueueModel implements Serializable{
 	private String code;
 	
 	/** 订单信息 **/
-	private OrderTask orderTask;
+	private OrderTaskModel orderTaskModel;
 	
 	/** 处理实体 **/
 	private Object obj;
@@ -21,10 +22,10 @@ public class QueueModel implements Serializable{
 		super();
 	}
 
-	public QueueModel(String code, OrderTask orderTask, Object obj) {
+	public QueueModel(String code, OrderTaskModel orderTaskModel, Object obj) {
 		super();
 		this.code = code;
-		this.orderTask = orderTask;
+		this.orderTaskModel = orderTaskModel;
 		this.obj = obj;
 	}
 
@@ -40,13 +41,13 @@ public class QueueModel implements Serializable{
 	}
 
 	/** 获取【订单信息】 **/
-	public OrderTask getOrderTask() {
-		return orderTask;
+	public OrderTaskModel getOrderTaskModel() {
+		return orderTaskModel;
 	}
 
 	/** 设置【订单信息】 **/
-	public void setOrderTask(OrderTask orderTask) {
-		this.orderTask = orderTask;
+	public void setOrderTaskModel(OrderTaskModel orderTaskModel) {
+		this.orderTaskModel = orderTaskModel;
 	}
 
 	/** 获取【监听代码】 **/
