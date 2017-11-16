@@ -19,6 +19,7 @@
 		<module>../sys_queue</module>
 		<module>../sys_promotion</module>
 	</modules>
+	
 
 	<repositories>
 		<repository>
