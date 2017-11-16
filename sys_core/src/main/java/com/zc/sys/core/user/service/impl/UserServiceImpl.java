@@ -17,7 +17,7 @@ import com.zc.sys.core.account.dao.AccountDao;
 import com.zc.sys.core.account.entity.Account;
 import com.zc.sys.core.account.model.AccountModel;
 import com.zc.sys.core.common.executer.Executer;
-import com.zc.sys.core.common.util.BeanUtil;
+import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.dao.UserInfoDao;
@@ -146,10 +146,7 @@ public class UserServiceImpl implements UserService {
  	 */
 	@Override
 	public Object login(UserModel model) {
-		//验证码校验
-		
 		model.checkLogin();//登录信息校验
-		
 		String loginName = StringUtil.isNull(model.getLoginName());
 		String pwd = StringUtil.isNull(model.getPwd());
 		QueryParam param = QueryParam.getInstance();

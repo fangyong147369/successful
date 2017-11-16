@@ -77,4 +77,15 @@ public class UserController extends BaseController<UserModel> {
 	public Object reg(UserModel model) throws BussinessException {
 		return userService.reg(model);
 	}
+	
+	/**
+	 * 登录
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@ResponseBody
+	public Object login(UserModel model) throws BussinessException {
+		return userService.login(model);
+	}
 }

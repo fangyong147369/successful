@@ -47,4 +47,24 @@ public interface Executer {
 	 * 更新账户
 	 */
 	void handleAccount();
+
+	/**
+	 * 推送
+	 */
+	void sendAppPush();
+	
+	/**
+	 * 站内信
+	 */
+	void sendMessage();
+
+	/**
+	 * 邮件
+	 */
+	void sendEmail();
+
+	/**
+	 * 短信
+	 */
+	void sendSMS();
 }

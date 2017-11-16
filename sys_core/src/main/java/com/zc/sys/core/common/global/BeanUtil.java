@@ -1,4 +1,4 @@
-package com.zc.sys.core.common.util;
+package com.zc.sys.core.common.global;
 
 import javax.servlet.http.HttpServletRequest;
 

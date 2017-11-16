@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.zc.sys.common.cache.RedisCacheUtil;
 import com.zc.sys.common.util.validate.StringUtil;
-import com.zc.sys.core.common.util.BeanUtil;
 import com.zc.sys.core.sys.entity.Template;
 import com.zc.sys.core.sys.model.ConfigModel;
 
@@ -68,6 +67,14 @@ public class Global {
 	
 	public static double getDouble(String key) {
 		return Double.parseDouble(getValue(key));
+	}
+	
+	//系统状态false-测试环境;true-生产环境
+	public static boolean sysState(){
+		if(StringUtil.isNull(Global.getValue("sys_state")).equals("prod")){
+			return true;
+		}
+		return false;
 	}
 	
 }

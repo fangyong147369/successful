@@ -18,7 +18,7 @@ public class Template extends LongPKEntity {
 
 	/** 名称 **/
 	private String name;
-	/** 标识-规则：模块_类型_名称，例：notice_reg **/
+	/** 标识-规则：模块_类型_名称，例：notice_SMS_reg **/
 	private String nid;
 	/** 类型：1-资金模版，2-通知信息模版，3-操作日志模版，4-积分日志模版，5-协议模版 **/
 	private Integer type;

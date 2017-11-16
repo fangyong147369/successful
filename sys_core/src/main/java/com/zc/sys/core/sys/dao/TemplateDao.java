@@ -18,4 +18,11 @@ public interface TemplateDao extends BaseDao<Template> {
 	 */
 	PageDataList<Template> list(TemplateModel model);
 	
+	/**
+	 * 根据nid查找使用中的模版
+	 * @param model
+	 * @return
+	 */
+	Template findByNid(String nid);
+	
 }

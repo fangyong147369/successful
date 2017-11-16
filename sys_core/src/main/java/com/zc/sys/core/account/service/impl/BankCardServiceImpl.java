@@ -17,9 +17,9 @@ import com.zc.sys.core.account.executer.UserBindBCExecuter;
 import com.zc.sys.core.account.model.BankCardModel;
 import com.zc.sys.core.account.service.BankCardService;
 import com.zc.sys.core.common.executer.Executer;
+import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
-import com.zc.sys.core.common.util.BeanUtil;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 /**

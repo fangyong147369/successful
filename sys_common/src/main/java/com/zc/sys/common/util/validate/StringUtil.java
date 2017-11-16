@@ -3,11 +3,14 @@ package com.zc.sys.common.util.validate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.zc.sys.common.util.FreemarkerUtil;
 
 /**
  * 工具类-字符串处理
@@ -528,6 +531,23 @@ public class StringUtil extends StringUtils {
 		}
 		return sdf.format(new Date()).substring(2, 8)
 				+ String.format("%010d", hashCode);
+	}
+	
+	/**
+	 * 
+	 * @param template
+	 * @param sendData
+	 * @return
+	 */
+	public static String fillTemplet(String template, Object sendData) {
+		// 模板中的'是非法字符，会导致无法提交，所以页面上用`代替
+		template = template.replace('`', '\'');
+		try {
+			return FreemarkerUtil.renderTemplate(template, sendData);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }

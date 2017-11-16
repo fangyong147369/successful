@@ -8,6 +8,15 @@ public class RandomUtil {
 	public static final String NUMBERCHAR = "0123456789";
 
 	/**
+	 * 短信验证码
+	 * 返回一个定长的随机字符串(只包含数字)
+	 * @return
+	 */
+	public static String code() {
+		return generateNumber(6);
+	}
+	
+	/**
 	 * 返回一个定长的随机字符串(只包含数字)
 	 * 
 	 * @param length

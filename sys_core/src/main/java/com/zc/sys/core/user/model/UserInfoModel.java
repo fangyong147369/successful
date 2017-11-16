@@ -5,7 +5,7 @@ import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.http.RequestUtil;
 import com.zc.sys.common.util.validate.StringUtil;
-import com.zc.sys.core.common.util.BeanUtil;
+import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserInfo;

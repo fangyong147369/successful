@@ -17,9 +17,9 @@ import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
-import com.zc.sys.core.common.util.BeanUtil;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 

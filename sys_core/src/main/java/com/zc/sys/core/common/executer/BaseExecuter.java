@@ -43,4 +43,24 @@ public class BaseExecuter extends AbstractExecuter{
 		
 	}
 
+	@Override
+	public void sendMessage() {
+		
+	}
+
+	@Override
+	public void sendEmail() {
+		
+	}
+
+	@Override
+	public void sendSMS() {
+		
+	}
+
+	@Override
+	public void sendAppPush() {
+		
+	}
+
 }

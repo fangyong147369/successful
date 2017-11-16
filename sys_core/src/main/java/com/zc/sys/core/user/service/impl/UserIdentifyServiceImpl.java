@@ -9,9 +9,9 @@ import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.executer.Executer;
+import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
-import com.zc.sys.core.common.util.BeanUtil;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
@@ -109,11 +109,11 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		userIdentifyDao.update(userIdentify);
 		
 		//发送队列处理实名
-		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
+		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(user, "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
-		queueService.send(new QueueModel("user",model.getOrderTask(), model));
+		queueProducerService.send(new QueueModel("user",model.getOrderTask(), model));
 		return Result.success("实名处理中...请稍后！");
 	}
 

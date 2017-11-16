@@ -45,4 +45,18 @@ public class TemplateDaoImpl extends BaseDaoImpl<Template> implements TemplateDa
 		return super.findPageList(param);
 	}
 
+	/**
+	 * 根据nid查找使用中的模版
+	 * @param model
+	 * @return
+	 */
+	@Override
+	public Template findByNid(String nid) {
+		Template template = (Template) this.findByProperty("nid", nid);
+		if(template != null && template.getState() == 1){
+			return template;
+		}
+		return null;
+	}
+
 }

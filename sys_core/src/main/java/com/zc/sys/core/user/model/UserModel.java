@@ -4,7 +4,7 @@ import org.springframework.beans.BeanUtils;
 import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
-import com.zc.sys.core.common.util.BeanUtil;
+import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.User;
 /**
@@ -43,6 +43,8 @@ public class UserModel extends User {
 	private Integer mobileState;
 	/** 认证状态 **/
 	private Integer realNameState;
+	/** 短信验证码 **/
+	private String code;
 
 	public UserModel() {
 		super();
@@ -225,6 +227,16 @@ public class UserModel extends User {
 	/** 设置【认证状态】 **/
 	public void setRealNameState(Integer realNameState) {
 		this.realNameState = realNameState;
+	}
+
+	/** 获取【短信验证码】 **/
+	public String getCode() {
+		return code;
+	}
+
+	/** 设置【短信验证码】 **/
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }
