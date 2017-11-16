@@ -1,4 +1,4 @@
-package com.zc.sys.api.zc;
+/*package com.zc.sys.api.zc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,4 +25,4 @@ public class TestService{
 		
 //		System.err.println(StringUtil.isPhone(null));
 	}
-}
+}*/
