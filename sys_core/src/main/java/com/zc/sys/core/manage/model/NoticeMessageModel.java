@@ -75,8 +75,8 @@ public class NoticeMessageModel extends NoticeMessage {
 	public void initMessage(TemplateModel templateModel) {
 		this.setAddTime(DateUtil.getNow());
 		this.setState(2);
-		this.setContent(StringUtil.fillTemplet(templateModel.getTempletContent(), this));
-		this.setTitle(StringUtil.fillTemplet(templateModel.getTempletTitle(), this));
+		this.setContent(StringUtil.fillTemplet(templateModel.getContent(), this));
+		this.setTitle(StringUtil.fillTemplet(templateModel.getTitle(), this));
 	}
 
 	/** 获取【当前页码】 **/

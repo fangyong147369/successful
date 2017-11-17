@@ -78,7 +78,7 @@ public class CommonServiceImpl implements CommonService {
 		model.checkSMS();//短信发送校验
 		
 		String code = RandomUtil.code();
-		redisCacheUtil.setCode("SMS_" + model.getMobile(), code, 60*2);
+		redisCacheUtil.setCode("SMS_" + model.getMobile(), "123456", 60*3);
 		if(!Global.sysState()){
 			//测试环境不发送短信
 			return Result.success("本次测试短信为：" + code);

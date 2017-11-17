@@ -53,10 +53,10 @@ public class TemplateModel extends Template {
 		if (this.getType() == null || this.getType().longValue() <= 0) {
 			throw new BussinessException("请选择类型！");
 		}
-		if (StringUtil.isBlank(this.getTempletTitle())) {
+		if (StringUtil.isBlank(this.getTitle())) {
 			throw new BussinessException("模版标题不能为空！");
 		}
-		if (StringUtil.isBlank(this.getTempletContent())) {
+		if (StringUtil.isBlank(this.getContent())) {
 			throw new BussinessException("模版内容不能为空！");
 		}
 	}
@@ -69,10 +69,10 @@ public class TemplateModel extends Template {
 		template.setName(this.getName());
 		template.setNid(this.getNid());
 		template.setRemark(this.getRemark());
-		template.setRouteNid(this.getRouteNid());
+		template.setRoute(this.getRoute());
 		template.setState(this.getState() == null ? 0 : this.getState());
-		template.setTempletContent(this.getTempletContent());
-		template.setTempletTitle(this.getTempletTitle());
+		template.setContent(this.getContent());
+		template.setTitle(this.getTitle());
 		template.setType(this.getType());
 		template.setTypeSub(this.getTypeSub());
 	}

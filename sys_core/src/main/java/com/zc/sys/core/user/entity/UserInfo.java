@@ -47,7 +47,7 @@ public class UserInfo extends LongPKEntity {
 	/** E签宝账户唯一标识 **/
 	private String eSignAccountId;
 	/** E签宝电子签章数据 **/
-	private String eSignSealDate;
+	private String eSignSealData;
 	/** 民泰电子账号 **/
 	private String elecAcct;
 	/** 设备标识符 **/
@@ -57,7 +57,7 @@ public class UserInfo extends LongPKEntity {
 	/** 身份证头像面 **/
 	private String cardBg;
 	/** 锁定备注 **/
-	private String loginLocakRemark;
+	private String loginLockRemark;
 	/** 省 **/
 	private String province;
 	/** 市 **/
@@ -81,6 +81,13 @@ public class UserInfo extends LongPKEntity {
 	/** 注册ip **/
 	private String addIp;
 	
+	public UserInfo() {
+		super();
+	}
+	public UserInfo(User user) {
+		super();
+		this.user = user;
+	}
 	/** 获取【用户】 **/
 	public User getUser() {
 		return user;
@@ -169,14 +176,6 @@ public class UserInfo extends LongPKEntity {
 	public void seteSignAccountId(String eSignAccountId) {
 		this.eSignAccountId = eSignAccountId;
 	}
-	/** 获取【E签宝电子签章数据】 **/
-	public String geteSignSealDate() {
-		return eSignSealDate;
-	}
-	/** 设置【E签宝电子签章数据】 **/
-	public void seteSignSealDate(String eSignSealDate) {
-		this.eSignSealDate = eSignSealDate;
-	}
 	/** 获取【民泰电子账号】 **/
 	public String getElecAcct() {
 		return elecAcct;
@@ -208,14 +207,6 @@ public class UserInfo extends LongPKEntity {
 	/** 设置【身份证头像面】 **/
 	public void setCardBg(String cardBg) {
 		this.cardBg = cardBg;
-	}
-	/** 获取【锁定备注】 **/
-	public String getLoginLocakRemark() {
-		return loginLocakRemark;
-	}
-	/** 设置【锁定备注】 **/
-	public void setLoginLocakRemark(String loginLocakRemark) {
-		this.loginLocakRemark = loginLocakRemark;
 	}
 	/** 获取【省】 **/
 	public String getProvince() {
@@ -305,5 +296,20 @@ public class UserInfo extends LongPKEntity {
 	public void setAddIp(String addIp) {
 		this.addIp = addIp;
 	}
-	
+	/** 获取【E签宝电子签章数据】 **/
+	public String geteSignSealData() {
+		return eSignSealData;
+	}
+	/** 设置【E签宝电子签章数据】 **/
+	public void seteSignSealData(String eSignSealData) {
+		this.eSignSealData = eSignSealData;
+	}
+	/** 获取【锁定备注】 **/
+	public String getLoginLockRemark() {
+		return loginLockRemark;
+	}
+	/** 设置【锁定备注】 **/
+	public void setLoginLockRemark(String loginLockRemark) {
+		this.loginLockRemark = loginLockRemark;
+	}
 }

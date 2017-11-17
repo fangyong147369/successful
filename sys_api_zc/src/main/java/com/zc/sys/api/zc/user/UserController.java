@@ -75,7 +75,7 @@ public class UserController extends BaseController<UserModel> {
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	@ResponseBody
 	public Object reg(UserModel model) throws BussinessException {
-		return userService.reg(model);
+		return userService.regRequest(model);
 	}
 	
 	/**

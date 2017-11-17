@@ -75,7 +75,7 @@ public class UserInfoModel extends UserInfo {
 		this.setUserNature(model.getUserNature());
 		this.setRoute(model.getRoute());
 		this.setChannel(model.getChannel());
-		this.setAddIp(RequestUtil.getClientIp());//获取ip
+		this.setAddIp(model.getAddIp());//获取ip
 	}
 
 	/** 获取【当前页码】 **/

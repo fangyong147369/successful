@@ -25,11 +25,11 @@ public class Template extends LongPKEntity {
 	/** 子类型：例：1短信，2邮件，3站内信 **/
 	private Integer typeSub;
 	/** 模版标题 **/
-	private String templetTitle;
+	private String title;
 	/** 模版内容 **/
-	private String templetContent;
+	private String content;
 	/** 使用渠道-例：短信渠道，邮件渠道 **/
-	private String routeNid;
+	private String route;
 	/** 状态：0未启用，1启用 **/
 	private Integer state;
 	/** 备注 **/
@@ -67,30 +67,6 @@ public class Template extends LongPKEntity {
 	public void setTypeSub(Integer typeSub) {
 		this.typeSub = typeSub;
 	}
-	/** 获取【模版标题】 **/
-	public String getTempletTitle() {
-		return templetTitle;
-	}
-	/** 设置【模版标题】 **/
-	public void setTempletTitle(String templetTitle) {
-		this.templetTitle = templetTitle;
-	}
-	/** 获取【模版内容】 **/
-	public String getTempletContent() {
-		return templetContent;
-	}
-	/** 设置【模版内容】 **/
-	public void setTempletContent(String templetContent) {
-		this.templetContent = templetContent;
-	}
-	/** 获取【使用渠道-例：短信渠道，邮件渠道】 **/
-	public String getRouteNid() {
-		return routeNid;
-	}
-	/** 设置【使用渠道-例：短信渠道，邮件渠道】 **/
-	public void setRouteNid(String routeNid) {
-		this.routeNid = routeNid;
-	}
 	/** 获取【备注】 **/
 	public String getRemark() {
 		return remark;
@@ -107,5 +83,28 @@ public class Template extends LongPKEntity {
 	public void setState(Integer state) {
 		this.state = state;
 	}
-	
+	/** 获取【使用渠道-例：短信渠道，邮件渠道】 **/
+	public String getRoute() {
+		return route;
+	}
+	/** 设置【使用渠道-例：短信渠道，邮件渠道】 **/
+	public void setRoute(String route) {
+		this.route = route;
+	}
+	/** 获取【模版标题】 **/
+	public String getTitle() {
+		return title;
+	}
+	/** 设置【模版标题】 **/
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	/** 获取【模版内容】 **/
+	public String getContent() {
+		return content;
+	}
+	/** 设置【模版内容】 **/
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

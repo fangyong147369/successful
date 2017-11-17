@@ -333,6 +333,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
+	@Transactional
 	public int updateBySql(String sql, String[] names, Object[] values) {
 		Query query = em.createNativeQuery(sql);
 		for (int i = 0; i < names.length; i++) {
@@ -342,6 +343,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Override
+	@Transactional
 	public int updateByJpql(String jpql, String[] names, Object[] values) {
 		Query query = em.createQuery(jpql);
 		for (int i = 0; i < names.length; i++) {

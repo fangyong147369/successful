@@ -19,7 +19,10 @@ public abstract class LongPKEntity extends BaseEntity {
 	private Long id;
 
 	public Long getId() {
-		return id.longValue();
+		if(id != null){
+			id = id.longValue();
+		}
+		return id;
 	}
 
 	public void setId(Long id) {

@@ -2,7 +2,9 @@ package com.zc.sys.core.integral.model;
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.core.integral.entity.IntegralAccount;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 积分账户
  * @author zp
@@ -36,6 +38,18 @@ public class IntegralAccountModel extends IntegralAccount {
 		IntegralAccount integralAccount = new IntegralAccount();
 		BeanUtils.copyProperties(this, integralAccount);
 		return integralAccount;
+	}
+	
+	/**
+	 * 注册初始化
+	 */
+	public void initReg(UserModel model) {
+		double doubleZero = BigDecimalUtil.round(0);
+		this.setTotalIntegral(doubleZero);
+		this.setBalanceIntegral(doubleZero);
+		this.setExpenseIntegral(doubleZero);
+		this.setFreezeIntegral(doubleZero);
+		this.setGradeIntegral(0);
 	}
 
 	/** 获取【当前页码】 **/

@@ -7,6 +7,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.zc.sys.common.entity.LongPKEntity;
+import com.zc.sys.core.account.entity.Account;
 import com.zc.sys.core.common.constant.BaseConstant;
 /**
  * 用户
@@ -44,6 +45,10 @@ public class User extends LongPKEntity {
 	/** 关联 UserIdentify对象*/
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
 	private UserIdentify userIdentify;
+	
+	/** 关联Account对象*/
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+	private Account account;
 	
 	/** 获取【用户名】 **/
 	public String getUserName() {
@@ -125,4 +130,13 @@ public class User extends LongPKEntity {
 	public void setUserIdentify(UserIdentify userIdentify) {
 		this.userIdentify = userIdentify;
 	}
+	/** 获取【关联Account对象】 **/
+	public Account getAccount() {
+		return account;
+	}
+	/** 设置【关联Account对象】 **/
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
 }

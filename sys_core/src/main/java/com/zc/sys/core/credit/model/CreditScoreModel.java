@@ -2,7 +2,9 @@ package com.zc.sys.core.credit.model;
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.core.credit.entity.CreditScore;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 信用分账户
  * @author zp
@@ -36,6 +38,18 @@ public class CreditScoreModel extends CreditScore {
 		CreditScore creditScore = new CreditScore();
 		BeanUtils.copyProperties(this, creditScore);
 		return creditScore;
+	}
+	
+	/**
+	 * 初始化注册
+	 * @param model
+	 */
+	public void initReg(UserModel model) {
+		double doubleZero = BigDecimalUtil.round(0);
+		this.setBalanceScore(doubleZero);
+		this.setSysScore(doubleZero);
+		this.setZmxyScore(-1d);
+		this.setVersion(0);
 	}
 
 	/** 获取【当前页码】 **/

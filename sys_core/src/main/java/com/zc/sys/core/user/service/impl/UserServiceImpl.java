@@ -18,6 +18,17 @@ import com.zc.sys.core.account.entity.Account;
 import com.zc.sys.core.account.model.AccountModel;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.queue.pojo.QueueModel;
+import com.zc.sys.core.common.queue.service.QueueProducerService;
+import com.zc.sys.core.credit.dao.CreditScoreDao;
+import com.zc.sys.core.credit.entity.CreditScore;
+import com.zc.sys.core.credit.model.CreditScoreModel;
+import com.zc.sys.core.integral.dao.IntegralAccountDao;
+import com.zc.sys.core.integral.entity.IntegralAccount;
+import com.zc.sys.core.integral.model.IntegralAccountModel;
+import com.zc.sys.core.manage.dao.OrderTaskDao;
+import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.dao.UserInfoDao;
@@ -48,6 +59,12 @@ public class UserServiceImpl implements UserService {
 	private UserIdentifyDao userIdentifyDao;
 	@Resource
 	private AccountDao accountDao;
+	@Resource
+	private OrderTaskDao orderTaskDao;
+	@Resource
+	private IntegralAccountDao integralAccountDao;
+	@Resource
+	private CreditScoreDao creditScoreDao;
 	/**
  	 * 列表
  	 * @param model
@@ -99,21 +116,40 @@ public class UserServiceImpl implements UserService {
  	 */
 	@Override
 	@Transactional
-	public Object reg(UserModel model) {
+	public Result regRequest(UserModel model) {
 		//注册信息校验
 		model.checkReg();
-		model.setUserName(model.getMobile());//用户名默认手机号
-		model.setPwd(MD5.toMD5(model.getPwd()));
-		model.setAddTime(DateUtil.getNow());
+		//初始化注册
+		model.initReg();
 		User user = model.prototype();
-		userDao.save(user);//保存用户
+		//保存用户
+		userDao.save(user);
+		model.setId(user.getId());
 		
+		//发送队列处理实名
+		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
+		OrderTask orderTask = new OrderTask("userReg", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		orderTaskDao.save(orderTask);
+		model.setOrderTask(orderTask);
+		queueProducerService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
+		return Result.success();
+	}
+	
+	/**
+	 * 注册处理
+	 * @param model
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Result regDeal(UserModel model){
+		User user = userDao.find(model.getId());
 		//初始化用户基本信息
 		UserInfoModel infoModel = new UserInfoModel();
 		infoModel.setUser(user);
 		infoModel.initReg(model);//初始化
 		UserInfo userInfo = infoModel.prototype();
-		userInfoDao.save(userInfo);
+		userInfoDao.merge(userInfo);
 		model.setInfoModel(infoModel);
 		
 		//初始化认证信息
@@ -121,14 +157,28 @@ public class UserServiceImpl implements UserService {
 		identifyModel.setUser(user);
 		identifyModel.initReg(model);//初始化
 		UserIdentify userIdentify = identifyModel.prototype();
-		userIdentifyDao.save(userIdentify);
+		userIdentifyDao.merge(userIdentify);
 		
 		//初始化账户信息
 		AccountModel accountModel = new AccountModel();
 		accountModel.setUser(user);
 		accountModel.initReg(model);//初始化
 		Account account = accountModel.prototype();
-		accountDao.save(account);
+		accountDao.merge(account);
+		
+		//积分账户初始化
+		IntegralAccountModel integralAccountModel = new IntegralAccountModel();
+		integralAccountModel.setUser(user);
+		integralAccountModel.initReg(model);//初始化注册
+		IntegralAccount integralAccount = integralAccountModel.prototype();
+		integralAccountDao.merge(integralAccount);
+		
+		//信用账户初始化
+		CreditScoreModel creditScoreModel = new CreditScoreModel();
+		creditScoreModel.setUser(user);
+		creditScoreModel.initReg(model);//初始化注册
+		CreditScore creditScore = creditScoreModel.prototype();
+		creditScoreDao.merge(creditScore);
 		
 		//注册任务
 		Executer regExecuter = BeanUtil.getBean(UserRegExecuter.class);
@@ -145,10 +195,10 @@ public class UserServiceImpl implements UserService {
  	 * @return
  	 */
 	@Override
-	public Object login(UserModel model) {
+	public Result login(UserModel model) {
 		model.checkLogin();//登录信息校验
 		String loginName = StringUtil.isNull(model.getLoginName());
-		String pwd = StringUtil.isNull(model.getPwd());
+		String pwd = MD5.toMD5(StringUtil.isNull(model.getPwd()));
 		QueryParam param = QueryParam.getInstance();
 		SearchFilter orFilter1 = new SearchFilter("userName", Operators.EQ, loginName);
 		SearchFilter orFilter2 = new SearchFilter("email", Operators.EQ, loginName);
@@ -160,12 +210,12 @@ public class UserServiceImpl implements UserService {
 			return Result.error("登录失败，用户名或密码有误");
 		}
 		User user = userList.get(0);
-		model = UserModel.instance(userList.get(0));
+		model = UserModel.instance(user);
 		
 		//登录任务
 		Executer loginExecuter = BeanUtil.getBean(UserLoginExecuter.class);
 		loginExecuter.execute(model);
-		return Result.success().setData(user);
+		return Result.success().setData(model);
 	}
 
 }

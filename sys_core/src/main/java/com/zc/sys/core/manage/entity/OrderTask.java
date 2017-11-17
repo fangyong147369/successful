@@ -45,10 +45,21 @@ public class OrderTask extends LongPKEntity {
 	public OrderTask() {
 		super();
 	}
+	
 	public OrderTask(User user, String type, String orderNo, Integer state,
 			String remark, Date addTime) {
 		super();
 		this.user = user;
+		this.type = type;
+		this.orderNo = orderNo;
+		this.state = state;
+		this.remark = remark;
+		this.addTime = addTime;
+	}
+	
+	public OrderTask(String type, String orderNo, Integer state,
+			String remark, Date addTime) {
+		super();
 		this.type = type;
 		this.orderNo = orderNo;
 		this.state = state;

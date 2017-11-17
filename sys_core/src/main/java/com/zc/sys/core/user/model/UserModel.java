@@ -3,9 +3,13 @@ import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.encrypt.MD5;
+import com.zc.sys.common.util.http.RequestUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.service.CommonService;
+import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.User;
 /**
@@ -46,6 +50,11 @@ public class UserModel extends User {
 	private Integer realNameState;
 	/** 短信验证码 **/
 	private String code;
+	/** 添加ip **/
+	private String addIp;
+	
+	/** 订单信息 **/
+	private OrderTask orderTask;
 
 	public UserModel() {
 		super();
@@ -82,7 +91,7 @@ public class UserModel extends User {
 		if(!StringUtil.isPhone(mobile)){
 			throw new BussinessException("请输入正确手机号");
 		}
-		if(!this.checkMobileExist(mobile)){
+		if(this.checkMobileExist(mobile)){
 			throw new BussinessException("该手机号已存在");
 		}
 		//短信验证码校验
@@ -108,6 +117,16 @@ public class UserModel extends User {
 		if(StringUtil.isBlank(this.getLoginName()) || StringUtil.isBlank(this.getPwd())){
 			throw new BussinessException("登录信息不能为空");
 		}
+	}
+	
+	/**
+	 * 注册初始化
+	 */
+	public void initReg() {
+		this.setUserName(this.getMobile());//用户名默认手机号
+		this.setPwd(MD5.toMD5(this.getPwd()));
+		this.setAddTime(DateUtil.getNow());
+		this.setAddIp(RequestUtil.getClientIp());//获取ip
 	}
 	
 	/** 获取【当前页码】 **/
@@ -152,7 +171,10 @@ public class UserModel extends User {
 
 	/** 获取【用户类型】 **/
 	public Integer getType() {
-		return type.intValue();
+		if(type != null){
+			type = type.intValue();
+		}
+		return type;
 	}
 
 	/** 设置【用户类型】 **/
@@ -172,7 +194,10 @@ public class UserModel extends User {
 
 	/** 获取【用户类别】 **/
 	public Integer getUserNature() {
-		return userNature.intValue();
+		if(userNature != null){
+			userNature = userNature.intValue();
+		}
+		return userNature;
 	}
 
 	/** 设置【用户类别】 **/
@@ -182,7 +207,10 @@ public class UserModel extends User {
 
 	/** 获取【注册渠道】 **/
 	public Integer getRoute() {
-		return route.intValue();
+		if(route != null){
+			route = route.intValue();
+		}
+		return route;
 	}
 
 	/** 设置【注册渠道】 **/
@@ -202,7 +230,10 @@ public class UserModel extends User {
 
 	/** 获取【手机号认证状态】 **/
 	public Integer getMobileState() {
-		return mobileState.intValue();
+		if(mobileState != null){
+			mobileState = mobileState.intValue();
+		}
+		return mobileState;
 	}
 
 	/** 设置【手机号认证状态】 **/
@@ -222,6 +253,9 @@ public class UserModel extends User {
 
 	/** 获取【认证状态】 **/
 	public Integer getRealNameState() {
+		if(realNameState != null){
+			realNameState = realNameState.intValue();
+		}
 		return realNameState;
 	}
 
@@ -238,6 +272,26 @@ public class UserModel extends User {
 	/** 设置【短信验证码】 **/
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	/** 获取【订单信息】 **/
+	public OrderTask getOrderTask() {
+		return orderTask;
+	}
+
+	/** 设置【订单信息】 **/
+	public void setOrderTask(OrderTask orderTask) {
+		this.orderTask = orderTask;
+	}
+
+	/** 获取【添加ip】 **/
+	public String getAddIp() {
+		return addIp;
+	}
+
+	/** 设置【添加ip】 **/
+	public void setAddIp(String addIp) {
+		this.addIp = addIp;
 	}
 
 }
