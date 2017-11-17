@@ -22,6 +22,7 @@ import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 /**
  * 银行卡
  * @author zp
@@ -107,8 +108,8 @@ public class BankCardServiceImpl implements BankCardService {
 		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderNo(orderTask.getOrderNo());
-//		queueService.send(new QueueModel("user", orderTask, model));
-		return Result.success("实名处理中...请稍后！");
+		queueService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
+		return Result.success("绑卡处理中...请稍后！");
 	}
 
 	/**

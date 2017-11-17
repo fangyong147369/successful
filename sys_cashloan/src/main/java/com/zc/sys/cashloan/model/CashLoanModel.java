@@ -1,8 +1,10 @@
 package com.zc.sys.cashloan.model;
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.cashloan.entity.CashLoan;
+import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.core.user.entity.UserIdentify;
 /**
  * 现金贷借款
  * @author zp
@@ -42,6 +44,22 @@ public class CashLoanModel extends CashLoan {
 	 * 贷款校验
 	 */
 	public void checkCashLoan() {
+		UserIdentify userIdentify = this.getUser().getUserIdentify();
+		if(userIdentify.getState() != 1){
+			throw new BussinessException("用户状态异常");
+		}
+		if(userIdentify.getRealNameState() != 1){
+			throw new BussinessException("请先实名认证");
+		}
+		if(userIdentify.getMobileState() != 1){
+			throw new BussinessException("请先手机认证");
+		}
+		if(userIdentify.getBindCardNum() <= 0){
+			throw new BussinessException("请先绑定银行卡");
+		}
+		if(userIdentify.getOctopusState() != 1){
+			throw new BussinessException("请先认证手机号运行商信息");
+		}
 		
 	}
 	

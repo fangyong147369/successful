@@ -22,6 +22,7 @@ import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 
 /**
  * 现金贷借款
@@ -115,7 +116,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoan",
 				model.getCno(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
-//		queueService.send(new QueueModel("cashLoan", orderTask, model));
+		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), model));
 		return Result.success("贷款处理中...请稍后！");
 	}
 

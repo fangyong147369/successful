@@ -56,7 +56,10 @@ public class UserIdentify extends LongPKEntity {
 	}
 	/** 获取【实名认证状态(现金贷包含：OCR、活体)】 **/
 	public Integer getRealNameState() {
-		return realNameState.intValue();
+		if(realNameState != null){
+			return realNameState.intValue();
+		}
+		return realNameState;
 	}
 	/** 设置【实名认证状态(现金贷包含：OCR、活体)】 **/
 	public void setRealNameState(Integer realNameState) {
