@@ -97,6 +97,9 @@ public class UserIdentifyModel extends UserIdentify {
 		if(StringUtil.isBlank(this.realName)){
 			throw new BussinessException("实名信息不能为空");
 		}
+		if(this.cardType == null || this.cardType <= 0){
+			throw new BussinessException("参数错误");
+		}
 		this.checkCard(this.cardType,this.cardNo);//证件格式校验
 		this.checkCardNoExist(this.cardNo);//判断证件号是否存在
 		

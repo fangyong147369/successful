@@ -84,6 +84,9 @@ public class BankCardModel extends BankCard {
 		if(StringUtil.isBlank(this.getMobile()) || !StringUtil.isPhone(this.getMobile())){
 			throw new BussinessException("请输入正确的银行卡预留手机号");
 		}
+		if(StringUtil.isBlank(this.getBankCode())){
+			throw new BussinessException("请输入所属银行卡编码");
+		}
 	}
 	
 	/**
