@@ -74,14 +74,19 @@ public class CommonServiceImpl implements CommonService {
 	 * @return
 	 */
 	@Override
-	public Result getSMSCode(CommonModel model) {
+	public Result getMobileCode(CommonModel model) {
 		model.checkSMS();//短信发送校验
 		
-		String code = RandomUtil.code();
-		redisCacheUtil.setCode("SMS_" + model.getMobile(), "123456", 60*3);
+		String value = RandomUtil.code();
+		String key = "SMS_" + model.getMobile();
+		String cacheCode = redisCacheUtil.getCache(key, String.class);
+		if(StringUtil.isNotBlank(cacheCode)){
+			return Result.error("短信请求频繁，请稍后操作");
+		}
+		redisCacheUtil.setCode(key, "123456", 60*3);
 		if(!Global.sysState()){
 			//测试环境不发送短信
-			return Result.success("本次测试短信为：" + code);
+			return Result.success("本次测试短信为：" + value);
 		}
 		OrderTask orderTask = new OrderTask(null, "SMS_reg", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
@@ -99,11 +104,11 @@ public class CommonServiceImpl implements CommonService {
 	 * @return
 	 */
 	@Override
-	public void checkSMSCode(String mobile,String code) {
+	public void checkMobileCode(String mobile,String mobileCode) {
 		String key = "SMS_" + mobile;
 		String cacheCode = redisCacheUtil.getCache(key, String.class);
 		redisCacheUtil.delCode(key);
-		if(StringUtil.isBlank(cacheCode) || !code.equals(cacheCode)){
+		if(StringUtil.isBlank(cacheCode) || !mobileCode.equals(cacheCode)){
 			throw new BussinessException("短信验证码校验失败");
 		}
 	}

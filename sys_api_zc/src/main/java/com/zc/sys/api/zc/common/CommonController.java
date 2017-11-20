@@ -39,10 +39,10 @@ public class CommonController extends BaseController<CommonModel> {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/getSMSCode", method = RequestMethod.POST)
+	@RequestMapping(value = "/getMobileCode", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getSMSCode(CommonModel model) throws BussinessException {
-		return commonService.getSMSCode(model);
+	public Object getMobileCode(CommonModel model) throws BussinessException {
+		return commonService.getMobileCode(model);
 	}
 
 }

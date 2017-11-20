@@ -132,7 +132,10 @@ public class UserServiceImpl implements UserService {
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		queueProducerService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
-		return Result.success().setData(user);
+		
+		UserModel returnModel = UserModel.instance(user);
+		returnModel.initReturn();
+		return Result.success().setData(returnModel);
 	}
 	
 	/**
@@ -224,7 +227,7 @@ public class UserServiceImpl implements UserService {
 		loginExecuter.execute(model);
 		
 		UserModel returnModel = UserModel.instance(user);
-		returnModel.initRegReturn();
+		returnModel.initReturn();
 		return Result.success().setData(returnModel);
 	}
 

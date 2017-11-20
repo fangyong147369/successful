@@ -10,11 +10,4 @@ import com.zc.sys.core.user.model.UserModel;
  */
 public interface UserDao extends BaseDao<User> {
 	
-	/**
-	 * 计数
-	 * @param model
-	 * @return
-	 */
-	int countByModel(UserModel model);
-	
 }

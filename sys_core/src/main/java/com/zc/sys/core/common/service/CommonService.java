@@ -30,7 +30,7 @@ public interface CommonService {
 	 * @param model
 	 * @return
 	 */
-	Result getSMSCode(CommonModel model);
+	Result getMobileCode(CommonModel model);
 
 	/**
 	 * 校验短信验证码
@@ -38,6 +38,6 @@ public interface CommonService {
 	 * @param code
 	 * @return
 	 */
-	void checkSMSCode(String mobile,String code);
+	void checkMobileCode(String mobile,String code);
 
 }

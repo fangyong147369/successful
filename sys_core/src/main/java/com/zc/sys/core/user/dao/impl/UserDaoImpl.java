@@ -16,26 +16,4 @@ import com.zc.sys.core.user.model.UserModel;
 @Repository
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
-	/**
-	 * 计数
-	 * @param model
-	 * @return
-	 */
-	@Override
-	public int countByModel(UserModel model) {
-		QueryParam param = QueryParam.getInstance();
-		if (model != null) {
-			if (!StringUtil.isBlank(model.getMobile())) {
-				param.addParam("mobile", model.getMobile());
-			}
-			if(!StringUtil.isBlank(model.getCardNo())){
-				param.addParam("cardNo", model.getCardNo());
-			}
-			if(model.getRealNameState() != null){
-				param.addParam("userIdentify.realNameState", model.getRealNameState());
-			}
-		}
-		return super.countByCriteria(param);
-	}
-
 }

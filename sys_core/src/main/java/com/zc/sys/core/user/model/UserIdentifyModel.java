@@ -6,7 +6,7 @@ import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
-import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.dao.UserInfoDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
@@ -35,9 +35,19 @@ public class UserIdentifyModel extends UserIdentify {
 	private String cardNo;
 	/** 证件类型 **/
 	private Integer cardType;
+	/** 手机号 **/
+	private String mobile;
 	
 	/** 订单 **/
 	private OrderTask orderTask;
+
+	public UserIdentifyModel() {
+		super();
+	}
+
+	public UserIdentifyModel(String mobile) {
+		this.setMobile(mobile);
+	}
 
 	/**
 	 * 实体转换model
@@ -84,9 +94,6 @@ public class UserIdentifyModel extends UserIdentify {
 		if(this.getUser() == null || this.getUser().getId() == null || this.getUser().getId().longValue() <= 0){
 			throw new BussinessException("参数错误");
 		}
-		if(this.getRealNameState() !=1){
-			throw new BussinessException("参数错误");
-		}
 		if(StringUtil.isBlank(this.realName)){
 			throw new BussinessException("实名信息不能为空");
 		}
@@ -101,11 +108,11 @@ public class UserIdentifyModel extends UserIdentify {
 	 * @return
 	 */
 	public boolean checkCardNoExist(String cardNo){
-		UserDao userDao = BeanUtil.getBean(UserDao.class);
-		UserModel userModel = new UserModel();
-		userModel.setCardNo(cardNo);
-		userModel.setRealNameState(1);
-		int count = userDao.countByModel(userModel);
+		UserIdentifyDao userIdentifyDao = BeanUtil.getBean(UserIdentifyDao.class);
+		UserIdentifyModel userIdentifyModel = new UserIdentifyModel();
+		userIdentifyModel.setCardNo(cardNo);
+		userIdentifyModel.setRealNameState(1);
+		int count = userIdentifyDao.countByModel(userIdentifyModel);
 		return count > 0 ? true : false;
 	}
 	
@@ -138,7 +145,7 @@ public class UserIdentifyModel extends UserIdentify {
 		UserInfoDao userInfoDao = (UserInfoDao)BeanUtil.getBean(UserInfoDao.class);
 		UserInfo userInfo = userInfoDao.findObjByProperty("user.id", user.getId());
 		userInfo.setCardType(this.getCardType());
-		userInfoDao.save(userInfo);
+		userInfoDao.update(userInfo);
 		userIdentify.setUser(user);
 	}
 	
@@ -220,6 +227,16 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 设置【订单】 **/
 	public void setOrderTask(OrderTask orderTask) {
 		this.orderTask = orderTask;
+	}
+
+	/** 获取【手机号】 **/
+	public String getMobile() {
+		return mobile;
+	}
+
+	/** 设置【手机号】 **/
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 }

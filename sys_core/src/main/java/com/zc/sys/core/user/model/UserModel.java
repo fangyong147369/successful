@@ -11,6 +11,7 @@ import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
 /**
  * 用户
@@ -60,10 +61,6 @@ public class UserModel extends User {
 		super();
 	}
 	
-	public UserModel(String mobile) {
-		this.setMobile(mobile);
-	}
-
 	/**
 	 * 实体转换model
 	 */
@@ -95,8 +92,7 @@ public class UserModel extends User {
 			throw new BussinessException("该手机号已存在");
 		}
 		//短信验证码校验
-		commonService.checkSMSCode(mobile, this.getMobileCode());
-		
+		commonService.checkMobileCode(mobile, this.getMobileCode());
 	}
 	
 	/**
@@ -105,8 +101,8 @@ public class UserModel extends User {
 	 * @return
 	 */
 	public boolean checkMobileExist(String mobile){
-		UserDao userDao = BeanUtil.getBean(UserDao.class);
-		int count = userDao.countByModel(new UserModel(mobile));
+		UserIdentifyDao userIdentifyDao = BeanUtil.getBean(UserIdentifyDao.class);
+		int count = userIdentifyDao.countByModel(new UserIdentifyModel(mobile));
 		return count > 0 ? true : false;
 	}
 	
@@ -132,7 +128,7 @@ public class UserModel extends User {
 	/**
 	 * 注册返回数据
 	 */
-	public void initRegReturn() {
+	public void initReturn() {
 		this.setPwd(null);
 		this.setPayPwd(null);
 	}

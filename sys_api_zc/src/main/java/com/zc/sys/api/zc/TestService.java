@@ -13,12 +13,12 @@ public class TestService{
 
 	public void getSMSCode(){
 		String model = "mobile=15555555555";
-		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/common/getSMSCode", model);
+		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/common/getMobileCode", model);
 		System.err.println(dd);
 	}
 	
 	public void reg(){
-		String model = "mobile=15555555555&code=123456&pwd=123456";
+		String model = "mobile=15555555555&mobileCode=123456&pwd=123456";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/u/user/reg", model);
 		System.err.println(dd);
 	}
@@ -30,7 +30,7 @@ public class TestService{
 	}
 	
 	public void realName(){
-		String model = "user.id=1&realNameState=1&realName=毕若晗&cardType=1&cardNo=361001198711133789";
+		String model = "user.id=1&realName=毕若晗&cardType=1&cardNo=361001198711133789";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/u/useridentify/realName", model);
 		System.err.println(dd);
 	}
@@ -57,9 +57,9 @@ public class TestService{
 	public void testMain(){
 //		getSMSCode();
 //		reg();
-		login();
+//		login();
 //		realName();
-//		bindbank();
+		bindbank();
 //		cashloan();
 //		menu();
 	}
