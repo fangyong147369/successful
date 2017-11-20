@@ -66,4 +66,16 @@ public class OperatorController extends BaseController<OperatorModel> {
 	public Object getById(OperatorModel model) throws BussinessException {
 		return operatorService.getById(model);
 	}
+
+	/**
+	 * 登录
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
+	@ResponseBody
+	public Object signIn(OperatorModel model) throws BussinessException {
+		return operatorService.signIn(model);
+	}
+
 }

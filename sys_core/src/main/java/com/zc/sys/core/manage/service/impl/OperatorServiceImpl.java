@@ -1,10 +1,16 @@
 package com.zc.sys.core.manage.service.impl;
+import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.core.manage.entity.Operator;
+import com.zc.sys.core.manage.model.OperatorModel;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.manage.dao.OperatorDao;
-import com.zc.sys.core.manage.model.OperatorModel;
 import com.zc.sys.core.manage.service.OperatorService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 管理员
  * @author zp
@@ -16,6 +22,7 @@ public class OperatorServiceImpl implements OperatorService {
 
 	@Resource
 	private OperatorDao operatorDao;
+
 	/**
  	 * 列表
  	 * @param model
@@ -23,8 +30,18 @@ public class OperatorServiceImpl implements OperatorService {
  	 */
 	@Override
 	public Result list(OperatorModel model){
-
-		return null;
+		PageDataList<Operator> pageDataList = operatorDao.list(model);
+		PageDataList<OperatorModel> pageDataList_ = new PageDataList<OperatorModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List<OperatorModel> list = new ArrayList<OperatorModel>();
+		if(pageDataList != null && pageDataList.getList().size() > 0){
+			for (Operator operator : pageDataList.getList()) {
+				OperatorModel model_ = OperatorModel.instance(operator);
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -34,8 +51,9 @@ public class OperatorServiceImpl implements OperatorService {
  	 */
 	@Override
 	public Result add(OperatorModel model){
-
-		return null;
+		Operator operator = model.prototype();
+		operatorDao.save(operator);
+		return Result.success().setData(operator);
 	}
 
 	/**
@@ -45,8 +63,9 @@ public class OperatorServiceImpl implements OperatorService {
  	 */
 	@Override
 	public Result update(OperatorModel model){
-
-		return null;
+		Operator operator = operatorDao.find(model.getId());
+		operatorDao.update(operator);
+		return Result.success();
 	}
 
 	/**
@@ -56,8 +75,29 @@ public class OperatorServiceImpl implements OperatorService {
  	 */
 	@Override
 	public Result getById(OperatorModel model){
+		if(model.getId() == null || model.getId().longValue() <= 0){
+			return Result.error("参数错误！");
+		}
+		Operator operater = operatorDao.find(model.getId());
+		return Result.success().setData(operater);
+	}
 
-		return null;
+	/**
+	 * 登录
+	 * @param model
+	 * @return
+	 */
+	public Result signIn(OperatorModel model){
+		if(model.getName() == null || model.getName().isEmpty()){
+			return Result.error("用户名不能为空.");
+		}
+		if(model.getPwd() == null || model.getPwd().isEmpty()){
+			return Result.error("密码不能为空.");
+		}
+		String[] names=new String[]{"name","pwd"};
+		Object[] values=new Object[]{model.getName(),model.getPwd()};
+		Operator operater = operatorDao.findForUniqueBySql("select * from zc_m_operator  WHERE name=:name and pwd=:pwd ",names,values);
+		return Result.success().setData(operater);
 	}
 
 }

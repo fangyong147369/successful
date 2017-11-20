@@ -37,7 +37,6 @@ public class RoleServiceImpl implements RoleService {
 
 	/**
 	 * 列表
-	 * 
 	 * @param model
 	 * @return
 	 */
@@ -59,7 +58,6 @@ public class RoleServiceImpl implements RoleService {
 
 	/**
 	 * 添加
-	 * 
 	 * @param model
 	 * @return
 	 */
@@ -81,12 +79,11 @@ public class RoleServiceImpl implements RoleService {
 			roleMenu.setRole(r);
 			roleMenuDao.save(roleMenu);
 		}
-		return null;
+		return Result.success().setData(role);
 	}
 
 	/**
 	 * 修改
-	 * 
 	 * @param model
 	 * @return
 	 */
@@ -112,12 +109,11 @@ public class RoleServiceImpl implements RoleService {
 			roleMenu.setRole(r);
 			roleMenuDao.save(roleMenu);
 		}
-		return null;
+		return Result.success();
 	}
 
 	/**
 	 * 获取
-	 * 
 	 * @param model
 	 * @return
 	 */
@@ -127,7 +123,7 @@ public class RoleServiceImpl implements RoleService {
 			return Result.error("参数错误！");
 		}
 		Role role = roleDao.find(model.getId());
-		Hibernate.initialize(role.getRoleMenus());
+		//Hibernate.initialize(role.getRoleMenus());
 		return Result.success().setData(role);
 	}
 

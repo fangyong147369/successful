@@ -37,4 +37,11 @@ public interface OperatorService{
  	 */
 	public Result getById(OperatorModel model);
 
+	/**
+	 * 登录
+	 * @param model
+	 * @return
+	 */
+	public Result signIn(OperatorModel model);
+
 }
