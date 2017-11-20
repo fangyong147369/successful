@@ -1,6 +1,12 @@
 package com.zc.sys.core.manage.dao.impl;
 import javax.persistence.Query;
 
+import com.zc.sys.common.model.jpa.OrderFilter;
+import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.common.model.jpa.QueryParam;
+import com.zc.sys.common.model.jpa.SearchFilter;
+import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.manage.model.RoleMenuModel;
 import org.springframework.stereotype.Repository;
 
 import com.zc.sys.common.dao.jpa.BaseDaoImpl;
@@ -26,4 +32,24 @@ public class RoleMenuDaoImpl extends BaseDaoImpl<RoleMenu> implements RoleMenuDa
 		query.executeUpdate();
 	}
 
+	/**
+	 * 列表
+	 * @param model
+	 * @return
+	 */
+	@Override
+	public PageDataList<RoleMenu> list(RoleMenuModel model) {
+		QueryParam param = QueryParam.getInstance();
+		if(StringUtil.isNotBlank(model.getSearchName())){
+			SearchFilter orFilter2 = new SearchFilter("name", SearchFilter.Operators.LIKE, model.getSearchName().trim());
+			param.addOrFilter(orFilter2);
+		}else {
+			if (model.getRole() != null) {
+				param.addParam("role", model.getRole());
+			}
+		}
+		param.addOrder(OrderFilter.OrderType.ASC, "id");
+		param.addPage(model.getPageNo(), model.getPageSize());
+		return super.findPageList(param);
+	}
 }

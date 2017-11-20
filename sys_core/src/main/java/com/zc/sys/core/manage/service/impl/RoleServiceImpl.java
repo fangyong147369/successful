@@ -48,7 +48,7 @@ public class RoleServiceImpl implements RoleService {
 		List<RoleModel> list = new ArrayList<RoleModel>();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (Role role : pageDataList.getList()) {
-				role.setRoleMenus(null);
+				//role.setRoleMenus(null);
 				RoleModel model_ = RoleModel.instance(role);
 
 				list.add(model_);

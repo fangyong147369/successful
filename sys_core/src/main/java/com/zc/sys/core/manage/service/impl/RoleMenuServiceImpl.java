@@ -1,10 +1,16 @@
 package com.zc.sys.core.manage.service.impl;
+import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.core.manage.entity.RoleMenu;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.manage.dao.RoleMenuDao;
 import com.zc.sys.core.manage.model.RoleMenuModel;
 import com.zc.sys.core.manage.service.RoleMenuService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 角色-菜单
  * @author zp
@@ -23,8 +29,18 @@ public class RoleMenuServiceImpl implements RoleMenuService {
  	 */
 	@Override
 	public Result list(RoleMenuModel model){
-
-		return null;
+		PageDataList<RoleMenu> pageDataList = roleMenuDao.list(model);
+		PageDataList<RoleMenuModel> pageDataList_ = new PageDataList<RoleMenuModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List<RoleMenuModel> list = new ArrayList<RoleMenuModel>();
+		if(pageDataList != null && pageDataList.getList().size() > 0){
+			for (RoleMenu menu : pageDataList.getList()) {
+				RoleMenuModel model_ = RoleMenuModel.instance(menu);
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**

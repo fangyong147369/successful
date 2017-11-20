@@ -1,6 +1,9 @@
 package com.zc.sys.core.manage.dao;
 import com.zc.sys.common.dao.BaseDao;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.manage.entity.RoleMenu;
+import com.zc.sys.core.manage.model.RoleMenuModel;
+
 /**
  * 角色-菜单
  * @author zp
@@ -15,5 +18,11 @@ public interface RoleMenuDao extends BaseDao<RoleMenu> {
 	 * @param roleId 角色ID
 	 */
 	void deleteByRoleId(long roleId);
-	
+
+	/**
+	 * 列表
+	 * @param model
+	 * @return
+	 */
+	PageDataList<RoleMenu> list(RoleMenuModel model);
 }
