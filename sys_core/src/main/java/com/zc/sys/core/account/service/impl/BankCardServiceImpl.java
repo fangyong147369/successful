@@ -112,7 +112,7 @@ public class BankCardServiceImpl implements BankCardService {
 		//发送队列处理绑卡
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-		orderTask = orderTaskDao.merge(orderTask);
+		orderTask = orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		queueService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
 		return Result.success("绑卡处理中...请稍后！");

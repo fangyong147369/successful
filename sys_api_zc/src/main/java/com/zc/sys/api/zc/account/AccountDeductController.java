@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.account.model.AccountDeductModel;
 import com.zc.sys.core.account.service.AccountDeductService;
 import com.zc.sys.core.common.web.BaseController;
@@ -30,7 +30,7 @@ public class AccountDeductController extends BaseController<AccountDeductModel> 
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(AccountDeductModel model) throws BussinessException {
+	public Object list(AccountDeductModel model) throws BusinessException {
 		return accountDeductService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class AccountDeductController extends BaseController<AccountDeductModel> 
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(AccountDeductModel model) throws BussinessException {
+	public Object add(AccountDeductModel model) throws BusinessException {
 		return accountDeductService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class AccountDeductController extends BaseController<AccountDeductModel> 
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(AccountDeductModel model) throws BussinessException {
+	public Object update(AccountDeductModel model) throws BusinessException {
 		return accountDeductService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class AccountDeductController extends BaseController<AccountDeductModel> 
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(AccountDeductModel model) throws BussinessException {
+	public Object getById(AccountDeductModel model) throws BusinessException {
 		return accountDeductService.getById(model);
 	}
 }

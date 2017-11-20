@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.zc.sys.common.cache.RedisCacheUtil;
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.RandomUtil;
@@ -64,7 +64,7 @@ public class CommonServiceImpl implements CommonService {
 		if(StringUtil.isBlank(ckToken)){
 			redisCacheUtil.delCode(key);
 		}else {
-			throw new BussinessException("表单Token未设定，请刷新页面后重试。");
+			throw new BusinessException("表单Token未设定，请刷新页面后重试。");
 		}
 	}
 
@@ -109,7 +109,7 @@ public class CommonServiceImpl implements CommonService {
 		String cacheCode = redisCacheUtil.getCache(key, String.class);
 		redisCacheUtil.delCode(key);
 		if(StringUtil.isBlank(cacheCode) || !mobileCode.equals(cacheCode)){
-			throw new BussinessException("短信验证码校验失败");
+			throw new BusinessException("短信验证码校验失败");
 		}
 	}
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.user.model.UserInfoModel;
 import com.zc.sys.core.user.service.UserInfoService;
@@ -30,7 +30,7 @@ public class UserInfoController extends BaseController<UserInfoModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(UserInfoModel model) throws BussinessException {
+	public Object list(UserInfoModel model) throws BusinessException {
 		return userInfoService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class UserInfoController extends BaseController<UserInfoModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(UserInfoModel model) throws BussinessException {
+	public Object add(UserInfoModel model) throws BusinessException {
 		return userInfoService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class UserInfoController extends BaseController<UserInfoModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(UserInfoModel model) throws BussinessException {
+	public Object update(UserInfoModel model) throws BusinessException {
 		return userInfoService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class UserInfoController extends BaseController<UserInfoModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(UserInfoModel model) throws BussinessException {
+	public Object getById(UserInfoModel model) throws BusinessException {
 		return userInfoService.getById(model);
 	}
 }

@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import com.zc.sys.cashloan.constant.BaseConstant;
+import com.zc.sys.cashloan.constant.BaseCashLoanConstant;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.user.entity.User;
 /**
@@ -18,7 +18,7 @@ import com.zc.sys.core.user.entity.User;
  * @since 2017年11月09日
  */
 @Entity
-@Table(name=BaseConstant.DB_PREFIX + BaseConstant.DB_MODEL_Cl + "_cash_loan")
+@Table(name=BaseCashLoanConstant.DB_PREFIX + BaseCashLoanConstant.DB_MODEL_Cl + "_cash_loan")
 public class CashLoan extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,7 @@
 package com.zc.sys.core.account.model;
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.common.util.date.DateUtil;
@@ -62,30 +62,30 @@ public class BankCardModel extends BankCard {
 		UserIdentifyDao userIdentifyDao = (UserIdentifyDao)BeanUtil.getBean(UserIdentifyDao.class);
 		User user = this.getUser();
 		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
-			throw new BussinessException("参数错误");
+			throw new BusinessException("参数错误");
 		}
 		UserIdentify userIdentify = userIdentifyDao.findObjByProperty("user.id", user.getId());
 		this.setUser(userIdentify.getUser());
 		if(userIdentify.getState() != 1){
-			throw new BussinessException("用户状态异常");
+			throw new BusinessException("用户状态异常");
 		}
 		if(userIdentify.getRealNameState() != 1){
-			throw new BussinessException("请先实名认证");
+			throw new BusinessException("请先实名认证");
 		}
 		if(userIdentify.getMobileState() != 1){
-			throw new BussinessException("请先手机认证");
+			throw new BusinessException("请先手机认证");
 		}
 		/*if(userIdentify.getOctopusState() != 1){
 			throw new BussinessException("请先认证手机号运行商信息");
 		}*/
 		if(StringUtil.isBlank(this.getBankCardNo())){
-			throw new BussinessException("请输入银行卡账号");
+			throw new BusinessException("请输入银行卡账号");
 		}
 		if(StringUtil.isBlank(this.getMobile()) || !StringUtil.isPhone(this.getMobile())){
-			throw new BussinessException("请输入正确的银行卡预留手机号");
+			throw new BusinessException("请输入正确的银行卡预留手机号");
 		}
 		if(StringUtil.isBlank(this.getBankCode())){
-			throw new BussinessException("请输入所属银行卡编码");
+			throw new BusinessException("请输入所属银行卡编码");
 		}
 	}
 	

@@ -21,11 +21,11 @@ public class UserInfo extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	/** 用户 */
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 邀请用户 */
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "invite_user_id")
 	private User inviteUser;
 	/** 邀请码 **/

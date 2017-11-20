@@ -1,7 +1,7 @@
 package com.zc.sys.core.user.model;
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.encrypt.MD5;
@@ -86,10 +86,10 @@ public class UserModel extends User {
 		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
 		String mobile = this.getMobile();
 		if(!StringUtil.isPhone(mobile)){
-			throw new BussinessException("请输入正确手机号");
+			throw new BusinessException("请输入正确手机号");
 		}
 		if(this.checkMobileExist(mobile)){
-			throw new BussinessException("该手机号已存在");
+			throw new BusinessException("该手机号已存在");
 		}
 		//短信验证码校验
 		commonService.checkMobileCode(mobile, this.getMobileCode());
@@ -111,7 +111,7 @@ public class UserModel extends User {
 	 */
 	public void checkLogin() {
 		if(StringUtil.isBlank(this.getLoginName()) || StringUtil.isBlank(this.getPwd())){
-			throw new BussinessException("登录信息不能为空");
+			throw new BusinessException("登录信息不能为空");
 		}
 	}
 	

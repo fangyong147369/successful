@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.core.manage.model.NoticeMessageModel;
 import com.zc.sys.core.manage.model.OrderTaskModel;
@@ -26,7 +26,7 @@ public class NoticeMessageExecuter extends BaseExecuter{
 	@Override
 	public void init() {
 		if(!(this.obj instanceof NoticeMessageModel)){
-			throw new BussinessException("实例不存在");
+			throw new BusinessException("实例不存在");
 		}
 		this.model = (NoticeMessageModel) this.obj;
 	}

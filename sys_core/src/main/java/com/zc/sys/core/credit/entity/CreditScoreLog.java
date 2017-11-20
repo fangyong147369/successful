@@ -25,7 +25,7 @@ public class CreditScoreLog extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	/** 用户 */
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 操作信用分 **/
@@ -43,7 +43,7 @@ public class CreditScoreLog extends LongPKEntity {
 	/** 关联订单 **/
 	private String orderNo;
 	/** 操作管理员 **/
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "operator_id")
 	private Operator operator;
 	/** 备注 **/

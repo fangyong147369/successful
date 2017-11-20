@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.cashloan.model.CashLoanModel;
 import com.zc.sys.cashloan.service.CashLoanService;
@@ -30,7 +30,7 @@ public class CashLoanController extends BaseController<CashLoanModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(CashLoanModel model) throws BussinessException {
+	public Object list(CashLoanModel model) throws BusinessException {
 		return cashLoanService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class CashLoanController extends BaseController<CashLoanModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(CashLoanModel model) throws BussinessException {
+	public Object add(CashLoanModel model) throws BusinessException {
 		return cashLoanService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class CashLoanController extends BaseController<CashLoanModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(CashLoanModel model) throws BussinessException {
+	public Object update(CashLoanModel model) throws BusinessException {
 		return cashLoanService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class CashLoanController extends BaseController<CashLoanModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(CashLoanModel model) throws BussinessException {
+	public Object getById(CashLoanModel model) throws BusinessException {
 		return cashLoanService.getById(model);
 	}
 	
@@ -74,7 +74,7 @@ public class CashLoanController extends BaseController<CashLoanModel> {
 	 */
 	@RequestMapping(value = "/cashLoan", method = RequestMethod.POST)
 	@ResponseBody
-	public Object cashLoan(CashLoanModel model) throws BussinessException {
+	public Object cashLoan(CashLoanModel model) throws BusinessException {
 		return cashLoanService.cashLoanRequest(model);
 	}
 }

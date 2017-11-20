@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.util.WebUtils;
 
@@ -19,7 +19,7 @@ public class ExceptionCenterController implements HandlerExceptionResolver{
     
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object obj, Exception ex) {
-    	if (ex instanceof BussinessException) {
+    	if (ex instanceof BusinessException) {
     		WebUtils.responseJson(response, Result.error(ex.getMessage()));
     	}
 		return null;

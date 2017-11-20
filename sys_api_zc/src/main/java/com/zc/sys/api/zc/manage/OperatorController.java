@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.manage.model.OperatorModel;
 import com.zc.sys.core.manage.service.OperatorService;
@@ -30,7 +30,7 @@ public class OperatorController extends BaseController<OperatorModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(OperatorModel model) throws BussinessException {
+	public Object list(OperatorModel model) throws BusinessException {
 		return operatorService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class OperatorController extends BaseController<OperatorModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(OperatorModel model) throws BussinessException {
+	public Object add(OperatorModel model) throws BusinessException {
 		return operatorService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class OperatorController extends BaseController<OperatorModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(OperatorModel model) throws BussinessException {
+	public Object update(OperatorModel model) throws BusinessException {
 		return operatorService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class OperatorController extends BaseController<OperatorModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(OperatorModel model) throws BussinessException {
+	public Object getById(OperatorModel model) throws BusinessException {
 		return operatorService.getById(model);
 	}
 
@@ -74,7 +74,7 @@ public class OperatorController extends BaseController<OperatorModel> {
 	 */
 	@RequestMapping(value = "/signIn", method = RequestMethod.POST)
 	@ResponseBody
-	public Object signIn(OperatorModel model) throws BussinessException {
+	public Object signIn(OperatorModel model) throws BusinessException {
 		return operatorService.signIn(model);
 	}
 

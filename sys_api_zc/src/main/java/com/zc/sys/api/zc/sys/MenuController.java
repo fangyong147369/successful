@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.sys.service.MenuService;
@@ -30,7 +30,7 @@ public class MenuController extends BaseController<MenuModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(MenuModel model) throws BussinessException {
+	public Object list(MenuModel model) throws BusinessException {
 		return menuService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class MenuController extends BaseController<MenuModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(MenuModel model) throws BussinessException {
+	public Object add(MenuModel model) throws BusinessException {
 		return menuService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class MenuController extends BaseController<MenuModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(MenuModel model) throws BussinessException {
+	public Object update(MenuModel model) throws BusinessException {
 		return menuService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class MenuController extends BaseController<MenuModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(MenuModel model) throws BussinessException {
+	public Object getById(MenuModel model) throws BusinessException {
 		return menuService.getById(model);
 	}
 }

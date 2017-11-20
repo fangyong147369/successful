@@ -1,12 +1,14 @@
 package com.zc.sys.cashloan.model;
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.cashloan.constant.BaseCashLoanConstant;
 import com.zc.sys.cashloan.entity.CashLoan;
 import com.zc.sys.cashloan.service.CashLoanService;
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
@@ -58,28 +60,28 @@ public class CashLoanModel extends CashLoan {
 		UserIdentifyDao userIdentifyDao = (UserIdentifyDao)BeanUtil.getBean(UserIdentifyDao.class);
 		User user = this.getUser();
 		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
-			throw new BussinessException("参数错误");
+			throw new BusinessException("参数错误");
 		}
 		UserIdentify userIdentify = userIdentifyDao.findObjByProperty("user.id", user.getId());
 		this.setUser(userIdentify.getUser());
-		if(userIdentify.getState() != 1){
-			throw new BussinessException("用户状态异常");
+		if(userIdentify.getState() != BaseConstant.IDENTIFY_STATE_YES){
+			throw new BusinessException("用户状态异常");
 		}
-		if(userIdentify.getRealNameState() != 1){
-			throw new BussinessException("请先实名认证");
+		if(userIdentify.getRealNameState() != BaseConstant.IDENTIFY_STATE_YES){
+			throw new BusinessException("请先实名认证");
 		}
-		if(userIdentify.getMobileState() != 1){
-			throw new BussinessException("请先手机认证");
+		if(userIdentify.getMobileState() != BaseConstant.IDENTIFY_STATE_YES){
+			throw new BusinessException("请先手机认证");
 		}
-//		if(userIdentify.getOctopusState() != 1){
+//		if(userIdentify.getOctopusState() != BaseConstant.IDENTIFY_STATE_YES){
 //			throw new BussinessException("请先认证手机号运行商信息");
 //		}
 		if(userIdentify.getBindCardNum() <= 0){
-			throw new BussinessException("请先绑定银行卡");
+			throw new BusinessException("请先绑定银行卡");
 		}
 		//额度校验
 		if(this.getTotal() <= 0){
-			throw new BussinessException("请输入正确的借款金额");
+			throw new BusinessException("请输入正确的借款金额");
 		}
 		//放款账户校验
 	}
@@ -90,7 +92,7 @@ public class CashLoanModel extends CashLoan {
 	public void initCashLoan() {
 		this.setCno(StringUtil.getSerialNumber());
 		this.setType(1);//产品类型
-		this.setState(0);
+		this.setState(BaseCashLoanConstant.CASHLOAN_STATE_AUDITING);
 		this.setOverdueRate(0.15d);
 		this.setPeriodUnit(1);
 		this.setPeriod(30);
@@ -122,7 +124,7 @@ public class CashLoanModel extends CashLoan {
 	public void initAudit(CashLoan cashLoan) {
 		cashLoan.setAuditTime(DateUtil.getNow());
 		cashLoan.setRemark(this.getRemark());
-		cashLoan.setState(5);//审核通过
+		cashLoan.setState(BaseCashLoanConstant.CASHLOAN_STATE_LOANING);//审核通过
 	}
 	
 	/**
@@ -143,10 +145,10 @@ public class CashLoanModel extends CashLoan {
 	 */
 	public void checkLoan() {
 		if(this.getLoanWay()==null || this.getLoanWay() <= 0){
-			throw new BussinessException("参数错误");
+			throw new BusinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.getLoanAccount())){
-			throw new BussinessException("放款账号不能为空");
+			throw new BusinessException("放款账号不能为空");
 		}
 	}
 	
@@ -155,7 +157,7 @@ public class CashLoanModel extends CashLoan {
 	 */
 	public void initLoan(CashLoan cashLoan) {
 		cashLoan.setLoanTime(DateUtil.getNow());
-		cashLoan.setState(10);//已放款-还款状态
+		cashLoan.setState(BaseCashLoanConstant.CASHLOAN_STATE_REPAYMENTING);//已放款-还款状态
 	}
 
 	/** 获取【当前页码】 **/

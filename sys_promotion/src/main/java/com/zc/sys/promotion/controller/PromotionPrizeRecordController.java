@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.promotion.model.PromotionPrizeRecordModel;
 import com.zc.sys.promotion.service.PromotionPrizeRecordService;
@@ -30,7 +30,7 @@ public class PromotionPrizeRecordController extends BaseController<PromotionPriz
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(PromotionPrizeRecordModel model) throws BussinessException {
+	public Object list(PromotionPrizeRecordModel model) throws BusinessException {
 		return promotionPrizeRecordService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class PromotionPrizeRecordController extends BaseController<PromotionPriz
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(PromotionPrizeRecordModel model) throws BussinessException {
+	public Object add(PromotionPrizeRecordModel model) throws BusinessException {
 		return promotionPrizeRecordService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class PromotionPrizeRecordController extends BaseController<PromotionPriz
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(PromotionPrizeRecordModel model) throws BussinessException {
+	public Object update(PromotionPrizeRecordModel model) throws BusinessException {
 		return promotionPrizeRecordService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class PromotionPrizeRecordController extends BaseController<PromotionPriz
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(PromotionPrizeRecordModel model) throws BussinessException {
+	public Object getById(PromotionPrizeRecordModel model) throws BusinessException {
 		return promotionPrizeRecordService.getById(model);
 	}
 }

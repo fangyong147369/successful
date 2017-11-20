@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.manage.model.RoleMenuModel;
 import com.zc.sys.core.manage.service.RoleMenuService;
@@ -30,7 +30,7 @@ public class RoleMenuController extends BaseController<RoleMenuModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(RoleMenuModel model) throws BussinessException {
+	public Object list(RoleMenuModel model) throws BusinessException {
 		return roleMenuService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class RoleMenuController extends BaseController<RoleMenuModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(RoleMenuModel model) throws BussinessException {
+	public Object add(RoleMenuModel model) throws BusinessException {
 		return roleMenuService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class RoleMenuController extends BaseController<RoleMenuModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(RoleMenuModel model) throws BussinessException {
+	public Object update(RoleMenuModel model) throws BusinessException {
 		return roleMenuService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class RoleMenuController extends BaseController<RoleMenuModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(RoleMenuModel model) throws BussinessException {
+	public Object getById(RoleMenuModel model) throws BusinessException {
 		return roleMenuService.getById(model);
 	}
 }

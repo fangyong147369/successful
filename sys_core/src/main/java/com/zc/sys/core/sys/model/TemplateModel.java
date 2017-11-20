@@ -1,7 +1,7 @@
 package com.zc.sys.core.sys.model;
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.sys.entity.Template;
@@ -45,19 +45,19 @@ public class TemplateModel extends Template {
 	 */
 	public void validParam() {
 		if (StringUtil.isBlank(this.getName())) {
-			throw new BussinessException("名称不能为空！");
+			throw new BusinessException("名称不能为空！");
 		}
 		if (StringUtil.isBlank(this.getNid())) {
-			throw new BussinessException("标识不能为空！");
+			throw new BusinessException("标识不能为空！");
 		}
 		if (this.getType() == null || this.getType().longValue() <= 0) {
-			throw new BussinessException("请选择类型！");
+			throw new BusinessException("请选择类型！");
 		}
 		if (StringUtil.isBlank(this.getTitle())) {
-			throw new BussinessException("模版标题不能为空！");
+			throw new BusinessException("模版标题不能为空！");
 		}
 		if (StringUtil.isBlank(this.getContent())) {
-			throw new BussinessException("模版内容不能为空！");
+			throw new BusinessException("模版内容不能为空！");
 		}
 	}
 	

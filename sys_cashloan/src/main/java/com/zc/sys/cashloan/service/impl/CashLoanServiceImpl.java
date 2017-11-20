@@ -17,6 +17,7 @@ import com.zc.sys.cashloan.service.CashLoanService;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
@@ -122,7 +123,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoanAudit",
 				model.getCno(), 2, "", DateUtil.getNow());
-		orderTaskDao.merge(orderTask);
+		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		model.setRemark("自动审核通过");
 		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), model));
@@ -157,11 +158,11 @@ public class CashLoanServiceImpl implements CashLoanService {
 		//发送队列
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTaskLoan = new OrderTask(cashLoan.getUser(), "cashLoanLoan",
-				cashLoan.getCno(), 2, "", DateUtil.getNow());
-		orderTaskDao.merge(orderTaskLoan);
+				StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		orderTaskDao.save(orderTaskLoan);
 		CashLoanModel modelLoan = CashLoanModel.instance(cashLoan);
 		modelLoan.setOrderTask(orderTaskLoan);
-		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), modelLoan));
+		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTaskLoan), modelLoan));
 		
 		//现金贷审核任务
 		Executer cashLoanAuditExecuter = BeanUtil.getBean(CashLoanAuditExecuter.class);

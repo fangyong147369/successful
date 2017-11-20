@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.sys.model.DictModel;
 import com.zc.sys.core.sys.service.DictService;
@@ -30,7 +30,7 @@ public class DictController extends BaseController<DictModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(DictModel model) throws BussinessException {
+	public Object list(DictModel model) throws BusinessException {
 		return dictService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class DictController extends BaseController<DictModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(DictModel model) throws BussinessException {
+	public Object add(DictModel model) throws BusinessException {
 		return dictService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class DictController extends BaseController<DictModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(DictModel model) throws BussinessException {
+	public Object update(DictModel model) throws BusinessException {
 		return dictService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class DictController extends BaseController<DictModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(DictModel model) throws BussinessException {
+	public Object getById(DictModel model) throws BusinessException {
 		return dictService.getById(model);
 	}
 }

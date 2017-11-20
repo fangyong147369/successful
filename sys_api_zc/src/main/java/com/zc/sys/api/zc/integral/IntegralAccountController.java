@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.integral.model.IntegralAccountModel;
 import com.zc.sys.core.integral.service.IntegralAccountService;
@@ -30,7 +30,7 @@ public class IntegralAccountController extends BaseController<IntegralAccountMod
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(IntegralAccountModel model) throws BussinessException {
+	public Object list(IntegralAccountModel model) throws BusinessException {
 		return integralAccountService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class IntegralAccountController extends BaseController<IntegralAccountMod
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(IntegralAccountModel model) throws BussinessException {
+	public Object add(IntegralAccountModel model) throws BusinessException {
 		return integralAccountService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class IntegralAccountController extends BaseController<IntegralAccountMod
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(IntegralAccountModel model) throws BussinessException {
+	public Object update(IntegralAccountModel model) throws BusinessException {
 		return integralAccountService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class IntegralAccountController extends BaseController<IntegralAccountMod
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(IntegralAccountModel model) throws BussinessException {
+	public Object getById(IntegralAccountModel model) throws BusinessException {
 		return integralAccountService.getById(model);
 	}
 }

@@ -1,7 +1,7 @@
 package com.zc.sys.core.user.model;
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.http.RequestUtil;
 import com.zc.sys.common.util.validate.StringUtil;
@@ -54,7 +54,7 @@ public class UserInfoModel extends UserInfo {
 		if(!StringUtil.isBlank(model.getInviteCode())){
 			User inviteUser = (User) userDao.findObjByProperty("inviteCode", model.getInviteCode());
 			if(inviteUser == null){
-				throw new BussinessException("邀请码不存在");
+				throw new BusinessException("邀请码不存在");
 			}
 			this.setInviteUser(inviteUser);
 		}

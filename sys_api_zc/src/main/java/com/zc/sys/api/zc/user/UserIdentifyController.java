@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.core.user.service.UserIdentifyService;
@@ -30,7 +30,7 @@ public class UserIdentifyController extends BaseController<UserIdentifyModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(UserIdentifyModel model) throws BussinessException {
+	public Object list(UserIdentifyModel model) throws BusinessException {
 		return userIdentifyService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class UserIdentifyController extends BaseController<UserIdentifyModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(UserIdentifyModel model) throws BussinessException {
+	public Object add(UserIdentifyModel model) throws BusinessException {
 		return userIdentifyService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class UserIdentifyController extends BaseController<UserIdentifyModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(UserIdentifyModel model) throws BussinessException {
+	public Object update(UserIdentifyModel model) throws BusinessException {
 		return userIdentifyService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class UserIdentifyController extends BaseController<UserIdentifyModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(UserIdentifyModel model) throws BussinessException {
+	public Object getById(UserIdentifyModel model) throws BusinessException {
 		return userIdentifyService.getById(model);
 	}
 	
@@ -74,7 +74,7 @@ public class UserIdentifyController extends BaseController<UserIdentifyModel> {
 	 */
 	@RequestMapping(value = "/realName", method = RequestMethod.POST)
 	@ResponseBody
-	public Object realName(UserIdentifyModel model) throws BussinessException {
+	public Object realName(UserIdentifyModel model) throws BusinessException {
 		return userIdentifyService.realNameRequest(model);
 	}
 }

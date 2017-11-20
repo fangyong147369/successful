@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.integral.model.IntegralLogModel;
 import com.zc.sys.core.integral.service.IntegralLogService;
@@ -30,7 +30,7 @@ public class IntegralLogController extends BaseController<IntegralLogModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(IntegralLogModel model) throws BussinessException {
+	public Object list(IntegralLogModel model) throws BusinessException {
 		return integralLogService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class IntegralLogController extends BaseController<IntegralLogModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(IntegralLogModel model) throws BussinessException {
+	public Object add(IntegralLogModel model) throws BusinessException {
 		return integralLogService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class IntegralLogController extends BaseController<IntegralLogModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(IntegralLogModel model) throws BussinessException {
+	public Object update(IntegralLogModel model) throws BusinessException {
 		return integralLogService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class IntegralLogController extends BaseController<IntegralLogModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(IntegralLogModel model) throws BussinessException {
+	public Object getById(IntegralLogModel model) throws BusinessException {
 		return integralLogService.getById(model);
 	}
 }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.sys.model.ConfigModel;
 import com.zc.sys.core.sys.service.ConfigService;
@@ -30,7 +30,7 @@ public class ConfigController extends BaseController<ConfigModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(ConfigModel model) throws BussinessException {
+	public Object list(ConfigModel model) throws BusinessException {
 		return configService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class ConfigController extends BaseController<ConfigModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(ConfigModel model) throws BussinessException {
+	public Object add(ConfigModel model) throws BusinessException {
 		return configService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class ConfigController extends BaseController<ConfigModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(ConfigModel model) throws BussinessException {
+	public Object update(ConfigModel model) throws BusinessException {
 		return configService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class ConfigController extends BaseController<ConfigModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(ConfigModel model) throws BussinessException {
+	public Object getById(ConfigModel model) throws BusinessException {
 		return configService.getById(model);
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.sys.entity.Config;
@@ -91,16 +91,16 @@ public class ConfigModel extends Config{
 	 */
 	public void validParam() {
 		if (StringUtil.isBlank(this.getNid())) {
-			throw new BussinessException("标识不能为空！");
+			throw new BusinessException("标识不能为空！");
 		}
 		if (StringUtil.isBlank(this.getName())) {
-			throw new BussinessException("名称不能为空！");
+			throw new BusinessException("名称不能为空！");
 		}
 		if (StringUtil.isBlank(this.getValue())) {
-			throw new BussinessException("参数值不能为空！");
+			throw new BusinessException("参数值不能为空！");
 		}
 		if (this.getType() <= 0) {
-			throw new BussinessException("类型错误！");
+			throw new BusinessException("类型错误！");
 		}
 	}
 	

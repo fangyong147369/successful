@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.cashloan.model.CashLoanRepaymentModel;
 import com.zc.sys.cashloan.service.CashLoanRepaymentService;
@@ -30,7 +30,7 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(CashLoanRepaymentModel model) throws BussinessException {
+	public Object list(CashLoanRepaymentModel model) throws BusinessException {
 		return cashLoanRepaymentService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(CashLoanRepaymentModel model) throws BussinessException {
+	public Object add(CashLoanRepaymentModel model) throws BusinessException {
 		return cashLoanRepaymentService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(CashLoanRepaymentModel model) throws BussinessException {
+	public Object update(CashLoanRepaymentModel model) throws BusinessException {
 		return cashLoanRepaymentService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(CashLoanRepaymentModel model) throws BussinessException {
+	public Object getById(CashLoanRepaymentModel model) throws BusinessException {
 		return cashLoanRepaymentService.getById(model);
 	}
 }

@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.common.util.validate.StringUtil;
@@ -34,7 +34,7 @@ public class UserRealNameExecuter extends BaseExecuter{
 	@Override
 	public void init() {
 		if(!(this.obj instanceof UserIdentifyModel)){
-			throw new BussinessException("实例不存在");
+			throw new BusinessException("实例不存在");
 		}
 		this.model = (UserIdentifyModel) this.obj;
 	}

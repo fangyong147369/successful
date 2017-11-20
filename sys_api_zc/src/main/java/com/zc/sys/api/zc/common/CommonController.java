@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.model.CommonModel;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.common.web.BaseController;
@@ -30,7 +30,7 @@ public class CommonController extends BaseController<CommonModel> {
  	 */
 	@RequestMapping(value = "/getToken", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getToken(CommonModel model) throws BussinessException {
+	public Object getToken(CommonModel model) throws BusinessException {
 		return commonService.getToken();
 	}
 	
@@ -41,7 +41,7 @@ public class CommonController extends BaseController<CommonModel> {
 	 */
 	@RequestMapping(value = "/getMobileCode", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getMobileCode(CommonModel model) throws BussinessException {
+	public Object getMobileCode(CommonModel model) throws BusinessException {
 		return commonService.getMobileCode(model);
 	}
 

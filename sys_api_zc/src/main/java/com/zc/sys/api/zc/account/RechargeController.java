@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.account.model.RechargeModel;
 import com.zc.sys.core.account.service.RechargeService;
 import com.zc.sys.core.common.web.BaseController;
@@ -30,7 +30,7 @@ public class RechargeController extends BaseController<RechargeModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(RechargeModel model) throws BussinessException {
+	public Object list(RechargeModel model) throws BusinessException {
 		return rechargeService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class RechargeController extends BaseController<RechargeModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(RechargeModel model) throws BussinessException {
+	public Object add(RechargeModel model) throws BusinessException {
 		return rechargeService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class RechargeController extends BaseController<RechargeModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(RechargeModel model) throws BussinessException {
+	public Object update(RechargeModel model) throws BusinessException {
 		return rechargeService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class RechargeController extends BaseController<RechargeModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(RechargeModel model) throws BussinessException {
+	public Object getById(RechargeModel model) throws BusinessException {
 		return rechargeService.getById(model);
 	}
 }

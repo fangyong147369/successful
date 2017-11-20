@@ -128,7 +128,7 @@ public class UserServiceImpl implements UserService {
 		
 		//发送队列处理实名
 		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask("userReg", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		OrderTask orderTask = new OrderTask(user,"userReg", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		queueProducerService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 		infoModel.setUser(user);
 		infoModel.initReg(model);//初始化
 		UserInfo userInfo = infoModel.prototype();
-		userInfoDao.merge(userInfo);
+		userInfoDao.save(userInfo);
 		model.setInfoModel(infoModel);
 		
 		//初始化认证信息
@@ -160,28 +160,28 @@ public class UserServiceImpl implements UserService {
 		identifyModel.setUser(user);
 		identifyModel.initReg(model);//初始化
 		UserIdentify userIdentify = identifyModel.prototype();
-		userIdentifyDao.merge(userIdentify);
+		userIdentifyDao.save(userIdentify);
 		
 		//初始化账户信息
 		AccountModel accountModel = new AccountModel();
 		accountModel.setUser(user);
 		accountModel.initReg(model);//初始化
 		Account account = accountModel.prototype();
-		accountDao.merge(account);
+		accountDao.save(account);
 		
 		//积分账户初始化
 		IntegralAccountModel integralAccountModel = new IntegralAccountModel();
 		integralAccountModel.setUser(user);
 		integralAccountModel.initReg(model);//初始化注册
 		IntegralAccount integralAccount = integralAccountModel.prototype();
-		integralAccountDao.merge(integralAccount);
+		integralAccountDao.save(integralAccount);
 		
 		//信用账户初始化
 		CreditScoreModel creditScoreModel = new CreditScoreModel();
 		creditScoreModel.setUser(user);
 		creditScoreModel.initReg(model);//初始化注册
 		CreditScore creditScore = creditScoreModel.prototype();
-		creditScoreDao.merge(creditScore);
+		creditScoreDao.save(creditScore);
 		
 		//订单处理
 		OrderTask orderTask = orderTaskDao.find(model.getOrderTask().getId());

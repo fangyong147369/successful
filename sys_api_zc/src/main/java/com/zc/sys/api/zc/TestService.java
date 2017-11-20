@@ -36,7 +36,7 @@ public class TestService{
 	}
 	
 	public void bindbank(){
-		String model = "user.id=1&bankCardNo=11111111111111&mobile=15555555555";
+		String model = "user.id=1&bankCardNo=11111111111111&mobile=15555555555&bankCode=100";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/acc/bankcard/bindBC", model);
 		System.err.println(dd);
 	}
@@ -48,8 +48,14 @@ public class TestService{
 	}
 	
 	public void cashloan(){
-		String model = "user.id=1&total=1000&";
+		String model = "user.id=1&total=1000";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/cl/cashloan/cashLoan", model);
+		System.err.println(dd);
+	}
+	
+	public void operatorList(){
+		String model = "";
+		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/m/operator/list", model);
 		System.err.println(dd);
 	}
 	
@@ -59,9 +65,10 @@ public class TestService{
 //		reg();
 //		login();
 //		realName();
-		bindbank();
-//		cashloan();
+//		bindbank();
+		cashloan();
 //		menu();
+//		operatorList();
 	}
 	
 	public static void main(String[] args) {

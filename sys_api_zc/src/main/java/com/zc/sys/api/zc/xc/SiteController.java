@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.xc.model.SiteModel;
 import com.zc.sys.core.xc.service.SiteService;
@@ -30,7 +30,7 @@ public class SiteController extends BaseController<SiteModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(SiteModel model) throws BussinessException {
+	public Object list(SiteModel model) throws BusinessException {
 		return siteService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class SiteController extends BaseController<SiteModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(SiteModel model) throws BussinessException {
+	public Object add(SiteModel model) throws BusinessException {
 		return siteService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class SiteController extends BaseController<SiteModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(SiteModel model) throws BussinessException {
+	public Object update(SiteModel model) throws BusinessException {
 		return siteService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class SiteController extends BaseController<SiteModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(SiteModel model) throws BussinessException {
+	public Object getById(SiteModel model) throws BusinessException {
 		return siteService.getById(model);
 	}
 }

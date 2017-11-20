@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.account.model.WithdrawCashModel;
 import com.zc.sys.core.account.service.WithdrawCashService;
 import com.zc.sys.core.common.web.BaseController;
@@ -30,7 +30,7 @@ public class WithdrawCashController extends BaseController<WithdrawCashModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(WithdrawCashModel model) throws BussinessException {
+	public Object list(WithdrawCashModel model) throws BusinessException {
 		return withdrawCashService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class WithdrawCashController extends BaseController<WithdrawCashModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(WithdrawCashModel model) throws BussinessException {
+	public Object add(WithdrawCashModel model) throws BusinessException {
 		return withdrawCashService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class WithdrawCashController extends BaseController<WithdrawCashModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(WithdrawCashModel model) throws BussinessException {
+	public Object update(WithdrawCashModel model) throws BusinessException {
 		return withdrawCashService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class WithdrawCashController extends BaseController<WithdrawCashModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(WithdrawCashModel model) throws BussinessException {
+	public Object getById(WithdrawCashModel model) throws BusinessException {
 		return withdrawCashService.getById(model);
 	}
 }

@@ -1,6 +1,6 @@
 package com.zc.sys.core.common.model;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.util.validate.StringUtil;
 
 /**
@@ -19,7 +19,7 @@ public class CommonModel {
 	 */
 	public void checkSMS() {
 		if(StringUtil.isBlank(mobile) || !StringUtil.isPhone(mobile)){
-			throw new BussinessException("手机号不能为空");
+			throw new BusinessException("手机号不能为空");
 		}
 	}
 	

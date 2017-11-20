@@ -97,7 +97,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		//发送队列处理实名
 		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(userIdentify.getUser(), "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-		orderTaskDao.merge(orderTask);
+		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		queueProducerService.send(new QueueModel("user",OrderTaskModel.instance(model.getOrderTask()), model));
 		return Result.success("实名处理中...请稍后！");

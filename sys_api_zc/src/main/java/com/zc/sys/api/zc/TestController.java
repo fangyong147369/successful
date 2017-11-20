@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
@@ -30,7 +30,7 @@ public class TestController  extends BaseController<OperatorModel> {
  	 * @return
  	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public Object list(OperatorModel model) throws BussinessException {
+	public Object list(OperatorModel model) throws BusinessException {
 //		queueService.send(new QueueModel("appPushMessage", "1111111111111", ""));
 //		queueService.send(new QueueModel("cashLoan", "2222222222222", ""));
 //		queueService.send(new QueueModel("realNameIdentify", "3333333333333", ""));

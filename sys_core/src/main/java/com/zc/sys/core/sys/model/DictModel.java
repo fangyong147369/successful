@@ -2,7 +2,7 @@ package com.zc.sys.core.sys.model;
 
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.sys.entity.Dict;
@@ -48,25 +48,25 @@ public class DictModel extends Dict {
 	 */
 	public void validParam() {
 		if (this.getId() == null || this.getId().longValue() <= 0) {
-			throw new BussinessException("主键id不能为空！");
+			throw new BusinessException("主键id不能为空！");
 		}
 		if (StringUtil.isBlank(this.getName())) {
-			throw new BussinessException("名称不能为空！");
+			throw new BusinessException("名称不能为空！");
 		}
 		if (StringUtil.isBlank(this.getNid())) {
-			throw new BussinessException("nid标识不能为空！");
+			throw new BusinessException("nid标识不能为空！");
 		}
 		if (StringUtil.isBlank(this.getNidName())) {
-			throw new BussinessException("nid标识名称不能为空！");
+			throw new BusinessException("nid标识名称不能为空！");
 		}
 		if (StringUtil.isBlank(this.getValue())) {
-			throw new BussinessException("值不能为空！");
+			throw new BusinessException("值不能为空！");
 		}
 		if (this.getSort() == null || this.getSort().intValue() < 0) {
-			throw new BussinessException("排序不能为空！");
+			throw new BusinessException("排序不能为空！");
 		}
 		if (this.getState() == null) {
-			throw new BussinessException("状态不能为空！");
+			throw new BusinessException("状态不能为空！");
 		}
 	}
 

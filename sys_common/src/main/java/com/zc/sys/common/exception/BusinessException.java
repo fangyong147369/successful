@@ -6,7 +6,7 @@ package com.zc.sys.common.exception;
  * @version 2.0.0.0
  * @since 2017年6月28日
  */
-public class BussinessException extends RuntimeException {
+public class BusinessException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -16,30 +16,30 @@ public class BussinessException extends RuntimeException {
 	protected int type;
 	protected String buttonName;
 
-	public BussinessException(String msg, RuntimeException ex) {
+	public BusinessException(String msg, RuntimeException ex) {
 		super(msg, ex);
 	}
 
-	public BussinessException() {
+	public BusinessException() {
 		super();
 	}
 
-	public BussinessException(String message) {
+	public BusinessException(String message) {
 		super(message);
 	}
 
-	public BussinessException(String message, String url) {
+	public BusinessException(String message, String url) {
 		super(message);
 		this.url = url;
 	}
 
-	public BussinessException(String message, String url,String buttonName) {
+	public BusinessException(String message, String url,String buttonName) {
 		super(message);
 		this.url = url;
 		this.buttonName = buttonName;
 	}
 	
-	public BussinessException(String message, int type) {
+	public BusinessException(String message, int type) {
 		super(message);
 		this.type = type;
 	}

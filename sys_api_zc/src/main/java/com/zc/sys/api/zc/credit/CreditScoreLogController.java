@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.credit.model.CreditScoreLogModel;
 import com.zc.sys.core.credit.service.CreditScoreLogService;
@@ -30,7 +30,7 @@ public class CreditScoreLogController extends BaseController<CreditScoreLogModel
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(CreditScoreLogModel model) throws BussinessException {
+	public Object list(CreditScoreLogModel model) throws BusinessException {
 		return creditScoreLogService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class CreditScoreLogController extends BaseController<CreditScoreLogModel
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(CreditScoreLogModel model) throws BussinessException {
+	public Object add(CreditScoreLogModel model) throws BusinessException {
 		return creditScoreLogService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class CreditScoreLogController extends BaseController<CreditScoreLogModel
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(CreditScoreLogModel model) throws BussinessException {
+	public Object update(CreditScoreLogModel model) throws BusinessException {
 		return creditScoreLogService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class CreditScoreLogController extends BaseController<CreditScoreLogModel
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(CreditScoreLogModel model) throws BussinessException {
+	public Object getById(CreditScoreLogModel model) throws BusinessException {
 		return creditScoreLogService.getById(model);
 	}
 }

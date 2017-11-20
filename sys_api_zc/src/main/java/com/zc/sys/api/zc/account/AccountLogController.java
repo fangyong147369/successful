@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.account.model.AccountLogModel;
 import com.zc.sys.core.account.service.AccountLogService;
 import com.zc.sys.core.common.web.BaseController;
@@ -30,7 +30,7 @@ public class AccountLogController extends BaseController<AccountLogModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(AccountLogModel model) throws BussinessException {
+	public Object list(AccountLogModel model) throws BusinessException {
 		return accountLogService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class AccountLogController extends BaseController<AccountLogModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(AccountLogModel model) throws BussinessException {
+	public Object add(AccountLogModel model) throws BusinessException {
 		return accountLogService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class AccountLogController extends BaseController<AccountLogModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(AccountLogModel model) throws BussinessException {
+	public Object update(AccountLogModel model) throws BusinessException {
 		return accountLogService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class AccountLogController extends BaseController<AccountLogModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(AccountLogModel model) throws BussinessException {
+	public Object getById(AccountLogModel model) throws BusinessException {
 		return accountLogService.getById(model);
 	}
 }

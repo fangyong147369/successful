@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.account.model.BankCardModel;
 import com.zc.sys.core.account.service.BankCardService;
 import com.zc.sys.core.common.web.BaseController;
@@ -30,7 +30,7 @@ public class BankCardController extends BaseController<BankCardModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(BankCardModel model) throws BussinessException {
+	public Object list(BankCardModel model) throws BusinessException {
 		return bankCardService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class BankCardController extends BaseController<BankCardModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(BankCardModel model) throws BussinessException {
+	public Object add(BankCardModel model) throws BusinessException {
 		return bankCardService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class BankCardController extends BaseController<BankCardModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(BankCardModel model) throws BussinessException {
+	public Object update(BankCardModel model) throws BusinessException {
 		return bankCardService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class BankCardController extends BaseController<BankCardModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(BankCardModel model) throws BussinessException {
+	public Object getById(BankCardModel model) throws BusinessException {
 		return bankCardService.getById(model);
 	}
 	
@@ -74,7 +74,7 @@ public class BankCardController extends BaseController<BankCardModel> {
 	 */
 	@RequestMapping(value = "/bindBC", method = RequestMethod.POST)
 	@ResponseBody
-	public Object bindBC(BankCardModel model) throws BussinessException {
+	public Object bindBC(BankCardModel model) throws BusinessException {
 		return bankCardService.bindBCRequest(model);
 	}
 }

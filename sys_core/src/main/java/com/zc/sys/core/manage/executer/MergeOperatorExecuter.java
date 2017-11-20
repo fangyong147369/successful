@@ -2,7 +2,7 @@ package com.zc.sys.core.manage.executer;
 
 import org.springframework.stereotype.Component;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.executer.BaseExecuter;
 import com.zc.sys.core.manage.model.OperatorModel;
 
@@ -23,7 +23,7 @@ public class MergeOperatorExecuter extends BaseExecuter{
 		if(this.obj instanceof OperatorModel){
 			this.model = (OperatorModel) this.obj;
 		}else {
-			throw new BussinessException("实例化model不存在");
+			throw new BusinessException("实例化model不存在");
 		}
 	}
 	

@@ -23,7 +23,7 @@ public class IntegralAccount extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	/** 用户 */
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 积分总额 **/

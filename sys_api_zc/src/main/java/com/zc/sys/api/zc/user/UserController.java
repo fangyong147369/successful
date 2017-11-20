@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.user.model.UserModel;
 import com.zc.sys.core.user.service.UserService;
@@ -30,7 +30,7 @@ public class UserController extends BaseController<UserModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(UserModel model) throws BussinessException {
+	public Object list(UserModel model) throws BusinessException {
 		return userService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class UserController extends BaseController<UserModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(UserModel model) throws BussinessException {
+	public Object add(UserModel model) throws BusinessException {
 		return userService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class UserController extends BaseController<UserModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(UserModel model) throws BussinessException {
+	public Object update(UserModel model) throws BusinessException {
 		return userService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class UserController extends BaseController<UserModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(UserModel model) throws BussinessException {
+	public Object getById(UserModel model) throws BusinessException {
 		return userService.getById(model);
 	}
 	
@@ -74,7 +74,7 @@ public class UserController extends BaseController<UserModel> {
  	 */
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	@ResponseBody
-	public Object reg(UserModel model) throws BussinessException {
+	public Object reg(UserModel model) throws BusinessException {
 		return userService.regRequest(model);
 	}
 	
@@ -85,7 +85,7 @@ public class UserController extends BaseController<UserModel> {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public Object login(UserModel model) throws BussinessException {
+	public Object login(UserModel model) throws BusinessException {
 		return userService.login(model);
 	}
 }

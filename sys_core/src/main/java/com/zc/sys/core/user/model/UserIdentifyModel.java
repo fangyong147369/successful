@@ -1,7 +1,7 @@
 package com.zc.sys.core.user.model;
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
@@ -92,13 +92,13 @@ public class UserIdentifyModel extends UserIdentify {
 	 */
 	public void checkRealName() {
 		if(this.getUser() == null || this.getUser().getId() == null || this.getUser().getId().longValue() <= 0){
-			throw new BussinessException("参数错误");
+			throw new BusinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.realName)){
-			throw new BussinessException("实名信息不能为空");
+			throw new BusinessException("实名信息不能为空");
 		}
 		if(this.cardType == null || this.cardType <= 0){
-			throw new BussinessException("参数错误");
+			throw new BusinessException("参数错误");
 		}
 		this.checkCard(this.cardType,this.cardNo);//证件格式校验
 		this.checkCardNoExist(this.cardNo);//判断证件号是否存在
@@ -126,11 +126,11 @@ public class UserIdentifyModel extends UserIdentify {
 		switch (this.cardType) {
 		case 1://二代身份证
 			if(!StringUtil.isCard(cardNo)){
-				throw new BussinessException("证件格式错误");
+				throw new BusinessException("证件格式错误");
 			};
 			break;
 		default:
-			throw new BussinessException("参数有误");
+			throw new BusinessException("参数有误");
 		}
 	}
 	

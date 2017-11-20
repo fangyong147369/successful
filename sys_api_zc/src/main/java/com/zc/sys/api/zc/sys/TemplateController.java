@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.zc.sys.common.exception.BussinessException;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.sys.model.TemplateModel;
 import com.zc.sys.core.sys.service.TemplateService;
@@ -30,7 +30,7 @@ public class TemplateController extends BaseController<TemplateModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(TemplateModel model) throws BussinessException {
+	public Object list(TemplateModel model) throws BusinessException {
 		return templateService.list(model);
 	}
 
@@ -41,7 +41,7 @@ public class TemplateController extends BaseController<TemplateModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(TemplateModel model) throws BussinessException {
+	public Object add(TemplateModel model) throws BusinessException {
 		return templateService.add(model);
 	}
 
@@ -52,7 +52,7 @@ public class TemplateController extends BaseController<TemplateModel> {
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(TemplateModel model) throws BussinessException {
+	public Object update(TemplateModel model) throws BusinessException {
 		return templateService.update(model);
 	}
 
@@ -63,7 +63,7 @@ public class TemplateController extends BaseController<TemplateModel> {
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(TemplateModel model) throws BussinessException {
+	public Object getById(TemplateModel model) throws BusinessException {
 		return templateService.getById(model);
 	}
 }

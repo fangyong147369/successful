@@ -24,7 +24,7 @@ public class IntegralLog extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	/** 用户 */
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 操作积分 **/
@@ -42,7 +42,7 @@ public class IntegralLog extends LongPKEntity {
 	/** 冻结积分 **/
 	private Double freezeIntegral;
 	/** 交易方用户 */
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "to_user_id")
 	private User toUser;
 	/** 内容 **/
