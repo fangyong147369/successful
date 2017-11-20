@@ -23,6 +23,7 @@ import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.manage.model.OrderTaskModel;
+import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
 /**
@@ -38,6 +39,8 @@ public class BankCardServiceImpl implements BankCardService {
 	private BankCardDao bankCardDao;
 	@Resource
 	private OrderTaskDao orderTaskDao;
+	@Resource
+	private UserIdentifyDao userIdentifyDao;
 	/**
  	 * 列表
  	 * @param model
@@ -126,9 +129,9 @@ public class BankCardServiceImpl implements BankCardService {
 		BankCard bankCard = bankCardDao.find(model.getId());
 		bankCard.setState(1);
 		User user = bankCard.getUser();
-		UserIdentify userIdentify = user.getUserIdentify();
+		UserIdentify userIdentify = userIdentifyDao.findObjByProperty("user.id", user.getId());
 		userIdentify.setBindCardNum(userIdentify.getBindCardNum() + 1);
-		user.setUserIdentify(userIdentify);
+		userIdentifyDao.update(userIdentify);
 		bankCard.setUser(user);
 		bankCardDao.update(bankCard);
 		

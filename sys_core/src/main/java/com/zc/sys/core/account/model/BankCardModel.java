@@ -11,6 +11,7 @@ import com.zc.sys.core.account.entity.BankCard;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
 /**
@@ -58,14 +59,13 @@ public class BankCardModel extends BankCard {
 	 * 绑卡校验
 	 */
 	public void checkBindBC() {
-		UserDao userDao = (UserDao)BeanUtil.getBean(UserDao.class);
+		UserIdentifyDao userIdentifyDao = (UserIdentifyDao)BeanUtil.getBean(UserIdentifyDao.class);
 		User user = this.getUser();
 		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
 			throw new BussinessException("参数错误");
 		}
-		user = userDao.find(user.getId());
-		this.setUser(user);
-		UserIdentify userIdentify = this.getUser().getUserIdentify();
+		UserIdentify userIdentify = userIdentifyDao.findObjByProperty("user.id", user.getId());
+		this.setUser(userIdentify.getUser());
 		if(userIdentify.getState() != 1){
 			throw new BussinessException("用户状态异常");
 		}

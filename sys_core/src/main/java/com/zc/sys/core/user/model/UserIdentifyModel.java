@@ -7,6 +7,7 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.dao.UserInfoDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
 import com.zc.sys.core.user.entity.UserInfo;
@@ -134,9 +135,10 @@ public class UserIdentifyModel extends UserIdentify {
 		User user = userIdentify.getUser();
 		user.setRealName(this.getRealName());
 		
-		UserInfo userInfo = user.getUserInfo();
+		UserInfoDao userInfoDao = (UserInfoDao)BeanUtil.getBean(UserInfoDao.class);
+		UserInfo userInfo = userInfoDao.findObjByProperty("user.id", user.getId());
 		userInfo.setCardType(this.getCardType());
-		user.setUserInfo(userInfo);
+		userInfoDao.save(userInfo);
 		userIdentify.setUser(user);
 	}
 	

@@ -38,18 +38,6 @@ public class User extends LongPKEntity {
 	/** 注册时间 **/
 	private Date addTime;
 	
-	/** 关联 UserInfo对象*/
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
-	private UserInfo userInfo;
-	
-	/** 关联 UserIdentify对象*/
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
-	private UserIdentify userIdentify;
-	
-	/** 关联Account对象*/
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
-	private Account account;
-	
 	/** 获取【用户名】 **/
 	public String getUserName() {
 		return userName;
@@ -114,29 +102,4 @@ public class User extends LongPKEntity {
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
-	/** 获取【关联UserInfo对象】 **/
-	public UserInfo getUserInfo() {
-		return userInfo;
-	}
-	/** 设置【关联UserInfo对象】 **/
-	public void setUserInfo(UserInfo userInfo) {
-		this.userInfo = userInfo;
-	}
-	/** 获取【关联UserIdentify对象】 **/
-	public UserIdentify getUserIdentify() {
-		return userIdentify;
-	}
-	/** 设置【关联UserIdentify对象】 **/
-	public void setUserIdentify(UserIdentify userIdentify) {
-		this.userIdentify = userIdentify;
-	}
-	/** 获取【关联Account对象】 **/
-	public Account getAccount() {
-		return account;
-	}
-	/** 设置【关联Account对象】 **/
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-	
 }

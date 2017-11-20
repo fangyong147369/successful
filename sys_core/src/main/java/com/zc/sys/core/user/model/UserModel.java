@@ -49,7 +49,7 @@ public class UserModel extends User {
 	/** 认证状态 **/
 	private Integer realNameState;
 	/** 短信验证码 **/
-	private String code;
+	private String mobileCode;
 	/** 添加ip **/
 	private String addIp;
 	
@@ -95,7 +95,7 @@ public class UserModel extends User {
 			throw new BussinessException("该手机号已存在");
 		}
 		//短信验证码校验
-		commonService.checkSMSCode(mobile, this.getCode());
+		commonService.checkSMSCode(mobile, this.getMobileCode());
 		
 	}
 	
@@ -127,6 +127,14 @@ public class UserModel extends User {
 		this.setPwd(MD5.toMD5(this.getPwd()));
 		this.setAddTime(DateUtil.getNow());
 		this.setAddIp(RequestUtil.getClientIp());//获取ip
+	}
+	
+	/**
+	 * 注册返回数据
+	 */
+	public void initRegReturn() {
+		this.setPwd(null);
+		this.setPayPwd(null);
 	}
 	
 	/** 获取【当前页码】 **/
@@ -265,13 +273,13 @@ public class UserModel extends User {
 	}
 
 	/** 获取【短信验证码】 **/
-	public String getCode() {
-		return code;
+	public String getMobileCode() {
+		return mobileCode;
 	}
 
 	/** 设置【短信验证码】 **/
-	public void setCode(String code) {
-		this.code = code;
+	public void setMobileCode(String mobileCode) {
+		this.mobileCode = mobileCode;
 	}
 
 	/** 获取【订单信息】 **/
