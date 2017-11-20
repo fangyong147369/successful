@@ -16,6 +16,7 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.account.dao.AccountDao;
 import com.zc.sys.core.account.entity.Account;
 import com.zc.sys.core.account.model.AccountModel;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
@@ -128,7 +129,7 @@ public class UserServiceImpl implements UserService {
 		
 		//发送队列处理实名
 		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask(user,"userReg", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		OrderTask orderTask = new OrderTask(user,"userReg", StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		queueProducerService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
@@ -187,7 +188,7 @@ public class UserServiceImpl implements UserService {
 		OrderTask orderTask = orderTaskDao.find(model.getOrderTask().getId());
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("注册成功");
-		orderTask.setState(1);
+		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
 		orderTaskDao.update(orderTask);
 		
 		//注册任务

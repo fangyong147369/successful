@@ -10,6 +10,7 @@ import com.zc.sys.common.form.Result;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.RandomUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.executer.NoticeMessageExecuter;
 import com.zc.sys.core.common.global.BeanUtil;
@@ -88,7 +89,7 @@ public class CommonServiceImpl implements CommonService {
 			//测试环境不发送短信
 			return Result.success("本次测试短信为：" + value);
 		}
-		OrderTask orderTask = new OrderTask(null, "SMS_reg", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		OrderTask orderTask = new OrderTask(null, "SMS_reg", StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		NoticeMessageModel noticeModel = new NoticeMessageModel("SMS_reg",1, orderTask.getOrderNo(), OrderTaskModel.instance(orderTask),model.getMobile());
 		//短信任务

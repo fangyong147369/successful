@@ -9,6 +9,7 @@ import com.zc.sys.cashloan.model.CashLoanRepaymentModel;
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.core.account.model.BankCardModel;
 import com.zc.sys.core.account.service.BankCardService;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
@@ -39,7 +40,7 @@ public class QueueConsumerServiceImpl implements QueueConsumerService{
 	@Override
 	public void receive(QueueModel model) {
 		OrderTask orderTask = (OrderTask) orderTaskDao.findObjByProperty("orderNo", model.getOrderTaskModel().getOrderNo());
-		if(orderTask == null || orderTask.getState() != 2){
+		if(orderTask == null || orderTask.getState() != BaseConstant.BUSINESS_STATE_WAIT){
 			LogUtil.info("订单号+" + orderTask.getOrderNo() + "不存在，或者处理状态有误");
 			return;
 		}

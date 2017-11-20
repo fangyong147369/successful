@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
@@ -114,7 +115,7 @@ public class UserIdentifyModel extends UserIdentify {
 		UserIdentifyDao userIdentifyDao = BeanUtil.getBean(UserIdentifyDao.class);
 		UserIdentifyModel userIdentifyModel = new UserIdentifyModel();
 		userIdentifyModel.setCardNo(cardNo);
-		userIdentifyModel.setRealNameState(1);
+		userIdentifyModel.setRealNameState(BaseConstant.IDENTIFY_STATE_YES);
 		int count = userIdentifyDao.countByModel(userIdentifyModel);
 		return count > 0 ? true : false;
 	}

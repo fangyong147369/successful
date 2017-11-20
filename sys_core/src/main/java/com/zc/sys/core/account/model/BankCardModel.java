@@ -8,6 +8,7 @@ import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.http.RequestUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.account.entity.BankCard;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
@@ -94,7 +95,7 @@ public class BankCardModel extends BankCard {
 	 */
 	public void initBind() {
 		UserDao userDao = (UserDao)BeanUtil.getBean(UserDao.class);
-		this.setState(2);//绑卡处理中
+		this.setState(BaseConstant.BUSINESS_STATE_WAIT);//绑卡处理中
 		User user = (User) userDao.findObjByProperty("id",this.getUser().getId());
 		this.setUser(user);
 		this.setAddIp(RequestUtil.getClientIp());

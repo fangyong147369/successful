@@ -18,6 +18,7 @@ import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
@@ -122,7 +123,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		//发送队列
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoanAudit",
-				model.getCno(), 2, "", DateUtil.getNow());
+				model.getCno(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		model.setRemark("自动审核通过");
@@ -148,7 +149,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		OrderTask orderTask = model.getOrderTask();
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("现金贷款审核成功");
-		orderTask.setState(1);
+		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
 		orderTaskDao.update(orderTask);
 		
 		//放款--是否自动放款
@@ -158,7 +159,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		//发送队列
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTaskLoan = new OrderTask(cashLoan.getUser(), "cashLoanLoan",
-				StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+				StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
 		orderTaskDao.save(orderTaskLoan);
 		CashLoanModel modelLoan = CashLoanModel.instance(cashLoan);
 		modelLoan.setOrderTask(orderTaskLoan);
@@ -190,7 +191,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		OrderTask orderTask = model.getOrderTask();
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("现金贷款放款成功");
-		orderTask.setState(1);
+		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
 		orderTaskDao.update(orderTask);
 		
 		//现金贷放款成功任务

@@ -16,6 +16,7 @@ import com.zc.sys.core.account.entity.BankCard;
 import com.zc.sys.core.account.executer.UserBindBCExecuter;
 import com.zc.sys.core.account.model.BankCardModel;
 import com.zc.sys.core.account.service.BankCardService;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
@@ -111,7 +112,7 @@ public class BankCardServiceImpl implements BankCardService {
 		
 		//发送队列处理绑卡
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
 		orderTask = orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		queueService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
@@ -127,7 +128,7 @@ public class BankCardServiceImpl implements BankCardService {
 	@Transactional
 	public Result bindBCDeal(BankCardModel model) {
 		BankCard bankCard = bankCardDao.find(model.getId());
-		bankCard.setState(1);
+		bankCard.setState(BaseConstant.BUSINESS_STATE_YES);
 		User user = bankCard.getUser();
 		UserIdentify userIdentify = userIdentifyDao.findObjByProperty("user.id", user.getId());
 		userIdentify.setBindCardNum(userIdentify.getBindCardNum() + 1);
@@ -139,7 +140,7 @@ public class BankCardServiceImpl implements BankCardService {
 		OrderTask orderTask = orderTaskDao.find(model.getOrderTask().getId());
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("绑卡成功");
-		orderTask.setState(1);
+		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
 		orderTaskDao.update(orderTask);
 		
 		//绑定银行卡任务

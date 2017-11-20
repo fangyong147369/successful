@@ -54,9 +54,12 @@ public final class BaseConstant {
 	public static final int BUSINESS_STATE_FAIL = -1;
 	/** Business-State=========================================================end **/
 	
-	
-	
-	
+	/** Info-State=========================================================start **/
+	/** 通用信息启用状态-未启用 **/
+	public static final int INFO_STATE_NO = 0;
+	/** 通用信息启用状态-已启用 **/
+	public static final int INFO_STATE_YES = 1;
+	/** Info-State=========================================================end **/
 	
 	
 	

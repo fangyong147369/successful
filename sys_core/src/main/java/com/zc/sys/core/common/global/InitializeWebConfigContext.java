@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.zc.sys.common.cache.RedisCacheUtil;
 import com.zc.sys.common.util.log.LogUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.sys.dao.ConfigDao;
 import com.zc.sys.core.sys.dao.TemplateDao;
 import com.zc.sys.core.sys.entity.Template;
@@ -50,7 +51,7 @@ public class InitializeWebConfigContext {
 	 * 初始化系统模版
 	 */
 	public static Map<String, Object> initSysTempalte(){
-		List<Template> list = templateDao.findByProperty("state", 1);
+		List<Template> list = templateDao.findByProperty("state", BaseConstant.INFO_STATE_YES);
 		Map<String, Object> sysTemplateMap = new HashMap<String, Object>();
 		for (Template template : list) {
 			sysTemplateMap.put(template.getNid() + "_" + template.getType() + "_" + template.getTypeSub(), template);

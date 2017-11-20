@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
@@ -96,7 +97,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		
 		//发送队列处理实名
 		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask(userIdentify.getUser(), "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		OrderTask orderTask = new OrderTask(userIdentify.getUser(), "realName", StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		queueProducerService.send(new QueueModel("user",OrderTaskModel.instance(model.getOrderTask()), model));
@@ -119,7 +120,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		OrderTask orderTask = model.getOrderTask();
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("实名成功");
-		orderTask.setState(1);
+		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
 		orderTaskDao.update(orderTask);
 		
 		//实名成功任务
