@@ -66,4 +66,15 @@ public class BankCardController extends BaseController<BankCardModel> {
 	public Object getById(BankCardModel model) throws BussinessException {
 		return bankCardService.getById(model);
 	}
+	
+	/**
+	 * 绑卡
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/bindBC", method = RequestMethod.POST)
+	@ResponseBody
+	public Object bindBC(BankCardModel model) throws BussinessException {
+		return bankCardService.bindBCRequest(model);
+	}
 }

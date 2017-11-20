@@ -51,4 +51,11 @@ public interface CashLoanService{
  	 * @return
  	 */
 	public Result cashLoanDeal(CashLoanModel model);
+
+	/**
+ 	 * 现金贷款放款处理
+ 	 * @param model
+ 	 * @return
+ 	 */
+	public Result cashLoanLoan(CashLoanModel model);
 }

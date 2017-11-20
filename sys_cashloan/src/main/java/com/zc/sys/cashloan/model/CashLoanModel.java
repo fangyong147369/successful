@@ -2,8 +2,15 @@ package com.zc.sys.cashloan.model;
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.cashloan.entity.CashLoan;
+import com.zc.sys.cashloan.service.CashLoanService;
 import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
 /**
  * 现金贷借款
@@ -21,7 +28,10 @@ public class CashLoanModel extends CashLoan {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
-
+	
+	/** 订单 **/
+	private OrderTask orderTask;
+	
 	/**
 	 * 实体转换model
 	 */
@@ -44,6 +54,13 @@ public class CashLoanModel extends CashLoan {
 	 * 贷款校验
 	 */
 	public void checkCashLoan() {
+		UserDao userDao = (UserDao)BeanUtil.getBean(UserDao.class);
+		User user = this.getUser();
+		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
+			throw new BussinessException("参数错误");
+		}
+		user = userDao.find(user.getId());
+		this.setUser(user);
 		UserIdentify userIdentify = this.getUser().getUserIdentify();
 		if(userIdentify.getState() != 1){
 			throw new BussinessException("用户状态异常");
@@ -54,27 +71,91 @@ public class CashLoanModel extends CashLoan {
 		if(userIdentify.getMobileState() != 1){
 			throw new BussinessException("请先手机认证");
 		}
+//		if(userIdentify.getOctopusState() != 1){
+//			throw new BussinessException("请先认证手机号运行商信息");
+//		}
 		if(userIdentify.getBindCardNum() <= 0){
 			throw new BussinessException("请先绑定银行卡");
 		}
-		if(userIdentify.getOctopusState() != 1){
-			throw new BussinessException("请先认证手机号运行商信息");
+		//额度校验
+		if(this.getTotal() <= 0){
+			throw new BussinessException("请输入正确的借款金额");
 		}
-		
+		//放款账户校验
 	}
 	
 	/**
 	 * 初始化贷款
 	 */
 	public void initCashLoan() {
+		this.setCno(StringUtil.getSerialNumber());
+		this.setType(1);//产品类型
+		this.setState(0);
+		this.setOverdueRate(0.15d);
+		this.setPeriodUnit(1);
+		this.setPeriod(30);
+		this.setRate(0.10d);
+		this.setRepaymentType(1);
+		this.setRepaymentTotal(1015.00d);
+		this.setRepaymentCapital(1000.00d);
+		this.setRepaymentInterest(10.00d);
+		this.setRepaymentServiceFee(5.00d);
+		this.setIsInterestFreeNote(0);
+		this.setIsPrepayment(0);
+		this.setVersion(0);
+		this.setAddTime(DateUtil.getNow());
+		this.setLoanWay(1);
+		this.setLoanAccount("1111111111111111");
+	}
+	
+	/**
+	 * 审核信息校验
+	 */
+	public void checkAudit() {
 		
 	}
 	
 	/**
-	 * 放款处理
+	 * 审核信息初始化
+	 * @param cashLoan
+	 */
+	public void initAudit(CashLoan cashLoan) {
+		cashLoan.setAuditTime(DateUtil.getNow());
+		cashLoan.setRemark(this.getRemark());
+		cashLoan.setState(5);//审核通过
+	}
+	
+	/**
+	 * 贷款处理
 	 */
 	public void doQueue() {
-		
+		CashLoanService cashLoanService = (CashLoanService)BeanUtil.getBean(CashLoanService.class);
+		if(this.orderTask.getType().equals("cashLoanAudit")){
+			cashLoanService.cashLoanDeal(this);
+		}
+		if(this.orderTask.getType().equals("cashLoanLoan")){
+			cashLoanService.cashLoanLoan(this);
+		}
+	}
+	
+	/**
+	 * 校验放款信息
+	 */
+	public void checkLoan() {
+		if(this.getLoanWay()==null || this.getLoanWay() <= 0){
+			throw new BussinessException("参数错误");
+		}
+		if(StringUtil.isBlank(this.getLoanAccount())){
+			throw new BussinessException("放款账号不能为空");
+		}
+	}
+	
+	/**
+	 * 放款信息初始化
+	 */
+	public void initLoan(CashLoan cashLoan) {
+		cashLoan.setLoanTime(DateUtil.getNow());
+		cashLoan.setState(10);//已放款-还款状态
 	}
 
 	/** 获取【当前页码】 **/
@@ -105,6 +186,16 @@ public class CashLoanModel extends CashLoan {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	/** 获取【订单】 **/
+	public OrderTask getOrderTask() {
+		return orderTask;
+	}
+
+	/** 设置【订单】 **/
+	public void setOrderTask(OrderTask orderTask) {
+		this.orderTask = orderTask;
 	}
 
 }

@@ -1,14 +1,18 @@
 package com.zc.sys.core.account.model;
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.common.exception.BussinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.http.RequestUtil;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.account.entity.BankCard;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.User;
+import com.zc.sys.core.user.entity.UserIdentify;
 /**
  * 银行卡
  * @author zp
@@ -28,8 +32,9 @@ public class BankCardModel extends BankCard {
 	
 	/** 用户id **/
 	private Integer userId;
-	/** 订单号 **/
-	private String orderNo;
+	
+	/** 订单信息 **/
+	private OrderTask orderTask;
 
 	/**
 	 * 实体转换model
@@ -53,7 +58,32 @@ public class BankCardModel extends BankCard {
 	 * 绑卡校验
 	 */
 	public void checkBindBC() {
-		
+		UserDao userDao = (UserDao)BeanUtil.getBean(UserDao.class);
+		User user = this.getUser();
+		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
+			throw new BussinessException("参数错误");
+		}
+		user = userDao.find(user.getId());
+		this.setUser(user);
+		UserIdentify userIdentify = this.getUser().getUserIdentify();
+		if(userIdentify.getState() != 1){
+			throw new BussinessException("用户状态异常");
+		}
+		if(userIdentify.getRealNameState() != 1){
+			throw new BussinessException("请先实名认证");
+		}
+		if(userIdentify.getMobileState() != 1){
+			throw new BussinessException("请先手机认证");
+		}
+		/*if(userIdentify.getOctopusState() != 1){
+			throw new BussinessException("请先认证手机号运行商信息");
+		}*/
+		if(StringUtil.isBlank(this.getBankCardNo())){
+			throw new BussinessException("请输入银行卡账号");
+		}
+		if(StringUtil.isBlank(this.getMobile()) || !StringUtil.isPhone(this.getMobile())){
+			throw new BussinessException("请输入正确的银行卡预留手机号");
+		}
 	}
 	
 	/**
@@ -62,7 +92,7 @@ public class BankCardModel extends BankCard {
 	public void initBind() {
 		UserDao userDao = (UserDao)BeanUtil.getBean(UserDao.class);
 		this.setState(2);//绑卡处理中
-		User user = (User) userDao.findObjByProperty("id",this.getUserId());
+		User user = (User) userDao.findObjByProperty("id",this.getUser().getId());
 		this.setUser(user);
 		this.setAddIp(RequestUtil.getClientIp());
 		this.setAddTime(DateUtil.getNow());
@@ -110,14 +140,14 @@ public class BankCardModel extends BankCard {
 		this.userId = userId;
 	}
 
-	/** 获取【订单号】 **/
-	public String getOrderNo() {
-		return orderNo;
+	/** 获取【订单信息】 **/
+	public OrderTask getOrderTask() {
+		return orderTask;
 	}
 
-	/** 设置【订单号】 **/
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
+	/** 设置【订单信息】 **/
+	public void setOrderTask(OrderTask orderTask) {
+		this.orderTask = orderTask;
 	}
 
 }

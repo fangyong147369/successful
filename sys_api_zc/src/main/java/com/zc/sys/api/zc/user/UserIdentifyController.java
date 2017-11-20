@@ -66,4 +66,15 @@ public class UserIdentifyController extends BaseController<UserIdentifyModel> {
 	public Object getById(UserIdentifyModel model) throws BussinessException {
 		return userIdentifyService.getById(model);
 	}
+	
+	/**
+	 * 实名认证
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/realName", method = RequestMethod.POST)
+	@ResponseBody
+	public Object realName(UserIdentifyModel model) throws BussinessException {
+		return userIdentifyService.realNameRequest(model);
+	}
 }

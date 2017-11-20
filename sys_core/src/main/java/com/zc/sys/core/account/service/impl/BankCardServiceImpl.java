@@ -5,11 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.util.date.DateUtil;
-import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.account.dao.BankCardDao;
 import com.zc.sys.core.account.entity.BankCard;
@@ -23,6 +23,8 @@ import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.manage.model.OrderTaskModel;
+import com.zc.sys.core.user.entity.User;
+import com.zc.sys.core.user.entity.UserIdentify;
 /**
  * 银行卡
  * @author zp
@@ -96,6 +98,7 @@ public class BankCardServiceImpl implements BankCardService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result bindBCRequest(BankCardModel model) {
 		model.checkBindBC();//绑卡校验
 		model.initBind();//初始化
@@ -106,8 +109,8 @@ public class BankCardServiceImpl implements BankCardService {
 		//发送队列处理绑卡
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(bankCard.getUser(), "bindBC", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-		orderTaskDao.save(orderTask);
-		model.setOrderNo(orderTask.getOrderNo());
+		orderTask = orderTaskDao.merge(orderTask);
+		model.setOrderTask(orderTask);
 		queueService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
 		return Result.success("绑卡处理中...请稍后！");
 	}
@@ -118,18 +121,19 @@ public class BankCardServiceImpl implements BankCardService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result bindBCDeal(BankCardModel model) {
-		OrderTask orderTask = (OrderTask) orderTaskDao.findObjByProperty("orderNo", model.getOrderNo());
-		if(orderTask == null || orderTask.getState() != 2){
-			LogUtil.info("订单号+" + model.getOrderNo() + "不存在，或者处理状态有误");
-			return Result.error("订单号+" + model.getOrderNo() + "不存在，或者处理状态有误");
-		}
-		
 		BankCard bankCard = bankCardDao.find(model.getId());
 		bankCard.setState(1);
+		User user = bankCard.getUser();
+		UserIdentify userIdentify = user.getUserIdentify();
+		userIdentify.setBindCardNum(userIdentify.getBindCardNum() + 1);
+		user.setUserIdentify(userIdentify);
+		bankCard.setUser(user);
 		bankCardDao.update(bankCard);
 		
 		//订单处理
+		OrderTask orderTask = orderTaskDao.find(model.getOrderTask().getId());
 		orderTask.setDoTime(DateUtil.getNow());
 		orderTask.setDoResult("绑卡成功");
 		orderTask.setState(1);

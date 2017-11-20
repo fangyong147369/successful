@@ -180,6 +180,13 @@ public class UserServiceImpl implements UserService {
 		CreditScore creditScore = creditScoreModel.prototype();
 		creditScoreDao.merge(creditScore);
 		
+		//订单处理
+		OrderTask orderTask = orderTaskDao.find(model.getOrderTask().getId());
+		orderTask.setDoTime(DateUtil.getNow());
+		orderTask.setDoResult("注册成功");
+		orderTask.setState(1);
+		orderTaskDao.update(orderTask);
+		
 		//注册任务
 		Executer regExecuter = BeanUtil.getBean(UserRegExecuter.class);
 		regExecuter.execute(model);

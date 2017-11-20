@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.zc.sys.cashloan.model.CashLoanModel;
 import com.zc.sys.cashloan.model.CashLoanRepaymentModel;
 import com.zc.sys.common.util.log.LogUtil;
+import com.zc.sys.core.account.model.BankCardModel;
+import com.zc.sys.core.account.service.BankCardService;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
@@ -43,12 +45,12 @@ public class QueueConsumerServiceImpl implements QueueConsumerService{
 		}
 		//认证
 		if(model.getObj() instanceof UserIdentifyModel){
-//			((UserIdentifyModel)model.getObj()).doQueue();
+			((UserIdentifyModel)model.getObj()).doQueue();
 			return;
 		}
-		//现金贷放款
+		//现金贷审核
 		if(model.getObj() instanceof CashLoanModel){
-//			((CashLoanModel)model.getObj()).doQueue();
+			((CashLoanModel)model.getObj()).doQueue();
 			return;
 		}
 		//现金贷还款
@@ -61,9 +63,16 @@ public class QueueConsumerServiceImpl implements QueueConsumerService{
 			noticeMessageService.send((NoticeMessageModel)model.getObj());
 			return;
 		}
+		//用户注册
 		if(model.getObj() instanceof UserModel){
 			UserService userService = (UserService)BeanUtil.getBean(UserService.class);
 			userService.regDeal((UserModel)model.getObj());
+			return;
+		}
+		//绑卡
+		if(model.getObj() instanceof BankCardModel){
+			BankCardService bankCardService = (BankCardService)BeanUtil.getBean(BankCardService.class);
+			bankCardService.bindBCDeal((BankCardModel)model.getObj());
 			return;
 		}
 		LogUtil.info("订单号+" + orderTask.getOrderNo() + "无处理配置项.....");

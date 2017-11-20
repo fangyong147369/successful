@@ -43,7 +43,7 @@ public class UserRealNameExecuter extends BaseExecuter{
 	public void sendMessage() {
 		try {
 			OrderTask orderTask = new OrderTask(model.getUser(), "sendMessage", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-			orderTaskDao.save(orderTask);
+			orderTaskDao.merge(orderTask);
 //			NoticeMessageModel message = new NoticeMessageModel(2, null, model.getUser(), null, orderTask.getOrderNo(), orderTask);
 //			queueProducerService.send(new QueueModel("sendMessage",model.getOrderTask(), message));
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class UserRealNameExecuter extends BaseExecuter{
 	public void sendSMS() {
 		try {
 			OrderTask orderTask = new OrderTask(model.getUser(), "sendSMS", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-			orderTaskDao.save(orderTask);
+			orderTaskDao.merge(orderTask);
 //			NoticeMessageModel sms = new NoticeMessageModel(2, null, model.getUser(), null, orderTask.getOrderNo(), orderTask);
 //			queueProducerService.send(new QueueModel("sendSMS",model.getOrderTask(), sms));
 		} catch (Exception e) {

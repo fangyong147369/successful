@@ -9,13 +9,13 @@ import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
-import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
-import com.zc.sys.core.user.entity.UserInfo;
 import com.zc.sys.core.user.executer.UserRealNameExecuter;
 import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.core.user.service.UserIdentifyService;
@@ -86,32 +86,20 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	@Transactional
 	public Object realNameRequest(UserIdentifyModel model) {
 		model.checkRealName();//实名校验
-		model.setRealNameState(2);//认证中
-		UserIdentify userIdentify = (UserIdentify) userIdentifyDao.findObjByProperty("user.id", model.getUserId());
+		UserIdentify userIdentify = (UserIdentify) userIdentifyDao.findObjByProperty("user.id", model.getUser().getId());
 		/*if(userIdentify.getRealNameCount() > Global.getInt("realNameCount")){
 			return Result.error("已达到实名认证次数上限，请联系平台处理");
 		}*/
-		userIdentify.setRealNameCount(userIdentify.getRealNameCount() + 1);//认证次数+1
-		userIdentify.setRealNameState(model.getRealNameState());
-		
-		User user = userIdentify.getUser();
-		user.setRealName(model.getRealName());
-		
-		UserInfo userInfo = user.getUserInfo();
-		userInfo.setCardType(model.getCardType());
-		
-		user.setUserInfo(userInfo);
-		
-		userIdentify.setUser(user);
-		
+		model.initRealName(userIdentify);//初始化实名
 		userIdentifyDao.update(userIdentify);
+		model.setId(userIdentify.getId());
 		
 		//发送队列处理实名
 		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask(user, "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-		orderTaskDao.save(orderTask);
+		OrderTask orderTask = new OrderTask(userIdentify.getUser(), "realName", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+		orderTaskDao.merge(orderTask);
 		model.setOrderTask(orderTask);
-//		queueProducerService.send(new QueueModel("user",model.getOrderTask(), model));
+		queueProducerService.send(new QueueModel("user",OrderTaskModel.instance(model.getOrderTask()), model));
 		return Result.success("实名处理中...请稍后！");
 	}
 

@@ -10,19 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.cashloan.dao.CashLoanDao;
 import com.zc.sys.cashloan.entity.CashLoan;
+import com.zc.sys.cashloan.executer.CashLoanAuditExecuter;
+import com.zc.sys.cashloan.executer.CashLoanLoanExecuter;
 import com.zc.sys.cashloan.model.CashLoanModel;
 import com.zc.sys.cashloan.service.CashLoanService;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.util.date.DateUtil;
-import com.zc.sys.common.util.log.LogUtil;
-import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.manage.model.OrderTaskModel;
+import com.zc.sys.core.user.executer.UserRealNameExecuter;
 
 /**
  * 现金贷借款
@@ -110,14 +112,21 @@ public class CashLoanServiceImpl implements CashLoanService {
 		model.initCashLoan();// 初始化贷款
 		CashLoan cashLoan = model.prototype();
 		cashLoanDao.save(cashLoan);
+		model.setId(cashLoan.getId());
 
-		//发送队列处理实名
+		//是否自动审核贷款
+		/*if(Global.getInt("isCashLoanAutoAudit") == 1){
+			
+		}*/
+		//发送队列
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoan",
+		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoanAudit",
 				model.getCno(), 2, "", DateUtil.getNow());
-		orderTaskDao.save(orderTask);
+		orderTaskDao.merge(orderTask);
+		model.setOrderTask(orderTask);
+		model.setRemark("自动审核通过");
 		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), model));
-		return Result.success("贷款处理中...请稍后！");
+		return Result.success("借款处理中...请稍后！");
 	}
 
 	/**
@@ -129,15 +138,63 @@ public class CashLoanServiceImpl implements CashLoanService {
 	@Override
 	@Transactional
 	public Result cashLoanDeal(CashLoanModel model) {
-		OrderTask orderTask = (OrderTask) orderTaskDao.findObjByProperty("orderNo", model.getCno());
-		if(orderTask == null || orderTask.getState() != 2){
-			LogUtil.info("订单号+" + model.getCno() + "不存在，或者处理状态有误");
-			return Result.error("订单号+" + model.getCno() + "不存在，或者处理状态有误");
-		}
+		model.checkAudit();
+		CashLoan cashLoan = cashLoanDao.find(model.getId());
+		model.initAudit(cashLoan);
+		cashLoanDao.save(cashLoan);
 		
-		//放款
+		//订单处理
+		OrderTask orderTask = model.getOrderTask();
+		orderTask.setDoTime(DateUtil.getNow());
+		orderTask.setDoResult("现金贷款审核成功");
+		orderTask.setState(1);
+		orderTaskDao.update(orderTask);
 		
+		//放款--是否自动放款
+		/*if(Global.getInt("isCashLoanAutoLoan") == 1){
 		
+		}*/
+		//发送队列
+		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
+		OrderTask orderTaskLoan = new OrderTask(cashLoan.getUser(), "cashLoanLoan",
+				cashLoan.getCno(), 2, "", DateUtil.getNow());
+		orderTaskDao.merge(orderTaskLoan);
+		CashLoanModel modelLoan = CashLoanModel.instance(cashLoan);
+		modelLoan.setOrderTask(orderTaskLoan);
+		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), modelLoan));
+		
+		//现金贷审核任务
+		Executer cashLoanAuditExecuter = BeanUtil.getBean(CashLoanAuditExecuter.class);
+		cashLoanAuditExecuter.execute(model);
+		return Result.success();
+	}
+
+	/**
+ 	 * 现金贷款放款处理
+ 	 * @param model
+ 	 * @return
+ 	 */
+	@Override
+	public Result cashLoanLoan(CashLoanModel model) {
+		model.checkLoan();
+		CashLoan cashLoan = cashLoanDao.find(model.getId());
+		model.initLoan(cashLoan);
+		cashLoanDao.update(cashLoan);
+		
+		//生成还款计划
+		
+		//放款到账户
+		
+		//订单处理
+		OrderTask orderTask = model.getOrderTask();
+		orderTask.setDoTime(DateUtil.getNow());
+		orderTask.setDoResult("现金贷款放款成功");
+		orderTask.setState(1);
+		orderTaskDao.update(orderTask);
+		
+		//现金贷放款成功任务
+		Executer cashLoanLoanExecuter = BeanUtil.getBean(CashLoanLoanExecuter.class);
+		cashLoanLoanExecuter.execute(model);
 		return Result.success();
 	}
 

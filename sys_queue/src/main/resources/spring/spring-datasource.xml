@@ -46,6 +46,7 @@
 		<property name="packagesToScan">
 			<list>
 				<value>com.zc.sys.core.*.entity</value>
+				<value>com.zc.sys.*.entity</value>
 			</list>
 		</property>
 		<property name="jpaProperties">

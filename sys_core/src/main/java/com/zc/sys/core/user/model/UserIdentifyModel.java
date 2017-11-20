@@ -7,7 +7,10 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
+import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
+import com.zc.sys.core.user.entity.UserInfo;
+import com.zc.sys.core.user.service.UserIdentifyService;
 /**
  * 用户认证
  * @author zp
@@ -34,8 +37,6 @@ public class UserIdentifyModel extends UserIdentify {
 	
 	/** 订单 **/
 	private OrderTask orderTask;
-	/** 用户id **/
-	private Integer userId;
 
 	/**
 	 * 实体转换model
@@ -65,7 +66,7 @@ public class UserIdentifyModel extends UserIdentify {
 		if(model.getMobileState() == null){
 			model.setMobileState(0);
 		}
-		this.setMobileState(model.getMobileState());
+		this.setMobileState(1);
 		this.setBindCardNum(0);
 		this.setRealNameCount(0);
 		this.setCardImgState(0);
@@ -79,8 +80,11 @@ public class UserIdentifyModel extends UserIdentify {
 	 * 实名信息校验
 	 */
 	public void checkRealName() {
-		if(this.getId() <= 0){
-			throw new BussinessException("参数有误");
+		if(this.getUser() == null || this.getUser().getId() == null || this.getUser().getId().longValue() <= 0){
+			throw new BussinessException("参数错误");
+		}
+		if(this.getRealNameState() !=1){
+			throw new BussinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.realName)){
 			throw new BussinessException("实名信息不能为空");
@@ -120,10 +124,30 @@ public class UserIdentifyModel extends UserIdentify {
 	}
 	
 	/**
+	 * 初始化实名认证
+	 * @param userIdentify
+	 */
+	public void initRealName(UserIdentify userIdentify) {
+		userIdentify.setRealNameCount(userIdentify.getRealNameCount() + 1);//认证次数+1
+		userIdentify.setRealNameState(2);
+		
+		User user = userIdentify.getUser();
+		user.setRealName(this.getRealName());
+		
+		UserInfo userInfo = user.getUserInfo();
+		userInfo.setCardType(this.getCardType());
+		user.setUserInfo(userInfo);
+		userIdentify.setUser(user);
+	}
+	
+	/**
 	 * 任务分发
 	 */
 	public void doQueue(){
-		
+		UserIdentifyService userIdentifyService = (UserIdentifyService)BeanUtil.getBean(UserIdentifyService.class);
+		if(this.orderTask.getType().equals("realName")){
+			userIdentifyService.realNameDeal(this);
+		}
 	}
 	
 	/** 获取【当前页码】 **/
@@ -184,16 +208,6 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 设置【证件类型】 **/
 	public void setCardType(Integer cardType) {
 		this.cardType = cardType;
-	}
-
-	/** 获取【用户id】 **/
-	public Integer getUserId() {
-		return userId.intValue();
-	}
-
-	/** 设置【用户id】 **/
-	public void setUserId(Integer userId) {
-		this.userId = userId;
 	}
 
 	/** 获取【订单】 **/
