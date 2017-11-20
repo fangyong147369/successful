@@ -36,6 +36,10 @@ public class RoleMenuServiceImpl implements RoleMenuService {
 		if(pageDataList != null && pageDataList.getList().size() > 0){
 			for (RoleMenu menu : pageDataList.getList()) {
 				RoleMenuModel model_ = RoleMenuModel.instance(menu);
+				model_.setMenuId(menu.getMenu().getId());
+				model_.setParentId(menu.getMenu().getParentId());
+				model_.setMenuName(menu.getMenu().getName());
+				model_.setMenuUrl(menu.getMenu().getHref());
 				list.add(model_);
 			}
 		}

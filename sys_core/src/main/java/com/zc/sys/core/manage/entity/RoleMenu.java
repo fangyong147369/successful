@@ -28,6 +28,7 @@ public class RoleMenu extends LongPKEntity {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
 	private Role role;
+
 	/**
 	 * 菜单主键
 	 */

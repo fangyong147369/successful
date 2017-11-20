@@ -40,16 +40,16 @@ public class RoleMenuDaoImpl extends BaseDaoImpl<RoleMenu> implements RoleMenuDa
 	@Override
 	public PageDataList<RoleMenu> list(RoleMenuModel model) {
 		QueryParam param = QueryParam.getInstance();
-		if(StringUtil.isNotBlank(model.getSearchName())){
-			SearchFilter orFilter2 = new SearchFilter("name", SearchFilter.Operators.LIKE, model.getSearchName().trim());
-			param.addOrFilter(orFilter2);
-		}else {
+//		if(StringUtil.isNotBlank(model.getSearchName())){
+//			SearchFilter orFilter2 = new SearchFilter("name", SearchFilter.Operators.LIKE, model.getSearchName().trim());
+//			param.addOrFilter(orFilter2);
+//		}else {
 			if (model.getRole() != null) {
 				param.addParam("role.id", model.getRole().getId());
 			}
-		}
+		//}
 		param.addOrder(OrderFilter.OrderType.ASC, "id");
-		param.addPage(model.getPageNo(), model.getPageSize());
+		//param.addPage(model.getPageNo(), model.getPageSize());
 		return super.findPageList(param);
 	}
 }

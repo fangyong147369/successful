@@ -102,9 +102,11 @@ public class OperatorServiceImpl implements OperatorService {
 		String[] names=new String[]{"name","pwd"};
 		Object[] values=new Object[]{model.getName(),model.getPwd()};
 		Operator operater = operatorDao.findForUniqueBySql("select * from zc_m_operator  WHERE name=:name and pwd=:pwd ",names,values);
-		//OperatorModel model_ = OperatorModel.instance(operater);
-		//model_.setRole(operater.getRole());
-		return Result.success().setData(operater);
+		OperatorModel model_ = OperatorModel.instance(operater);
+		RoleModel roleModel = new RoleModel();
+		roleModel.setId(operater.getRole().getId());
+		model_.setRoleModel(roleModel);
+		return Result.success().setData(model_ );
 	}
 
 }

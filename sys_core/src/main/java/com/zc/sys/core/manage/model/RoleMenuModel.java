@@ -13,12 +13,20 @@ public class RoleMenuModel extends RoleMenu {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
 
-	/** 当前页码 **/
-	private int pageNo;
-	/** 每页数据条数 **/
-	private int pageSize = Page.ROWS;
-	/** 条件查询 **/
-	private String searchName;
+//	/** 当前页码 **/
+//	private int pageNo;
+//	/** 每页数据条数 **/
+//	private int pageSize = Page.ROWS;
+//	/** 条件查询 **/
+//	private String searchName;
+
+	private Long menuId;
+
+	private Long parentId;
+
+	private String menuName;
+
+	private String menuUrl;
 
 	/**
 	 * 实体转换model
@@ -38,34 +46,66 @@ public class RoleMenuModel extends RoleMenu {
 		return roleMenu;
 	}
 
-	/** 获取【当前页码】 **/
-	public int getPageNo() {
-		return pageNo;
+	public Long getMenuId(){
+		return menuId;
 	}
 
-	/** 设置【当前页码】 **/
-	public void setPageNo(int pageNo) {
-		this.pageNo = pageNo;
+	public void setMenuId(Long menuId){
+		this.menuId=menuId;
 	}
 
-	/** 获取【每页数据条数】 **/
-	public int getPageSize() {
-		return pageSize;
+	public Long getParentId(){
+		return parentId;
 	}
 
-	/** 设置【每页数据条数】 **/
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public void setParentId(Long parentId){
+		this.parentId=parentId;
 	}
 
-	/** 获取【条件查询】 **/
-	public String getSearchName() {
-		return searchName;
+	public String getMenuName(){
+		return menuName;
 	}
 
-	/** 设置【条件查询】 **/
-	public void setSearchName(String searchName) {
-		this.searchName = searchName;
+	public void setMenuName(String menuName){
+		this.menuName=menuName;
 	}
+
+	public String getMenuUrl(){
+		return menuUrl;
+	}
+
+	public void setMenuUrl(String menuUrl){
+		this.menuUrl=menuUrl;
+	}
+
+//	/** 获取【当前页码】 **/
+//	public int getPageNo() {
+//		return pageNo;
+//	}
+//
+//	/** 设置【当前页码】 **/
+//	public void setPageNo(int pageNo) {
+//		this.pageNo = pageNo;
+//	}
+//
+//	/** 获取【每页数据条数】 **/
+//	public int getPageSize() {
+//		return pageSize;
+//	}
+//
+//	/** 设置【每页数据条数】 **/
+//	public void setPageSize(int pageSize) {
+//		this.pageSize = pageSize;
+//	}
+//
+//	/** 获取【条件查询】 **/
+//	public String getSearchName() {
+//		return searchName;
+//	}
+//
+//	/** 设置【条件查询】 **/
+//	public void setSearchName(String searchName) {
+//		this.searchName = searchName;
+//	}
 
 }

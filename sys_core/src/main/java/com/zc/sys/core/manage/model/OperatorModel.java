@@ -70,12 +70,12 @@ public class OperatorModel extends Operator {
 		this.searchName = searchName;
 	}
 
-	/** 获取【roleMoel】 **/
-	public RoleModel getRoleMoel() {
+	/** 获取【roleModel】 **/
+	public RoleModel getRoleModel() {
 		return roleModel;
 	}
 
-	/** 设置【roleMoel】 **/
+	/** 设置【roleModel】 **/
 	public void setRoleModel(RoleModel roleModel) {
 		this.roleModel = roleModel;
 	}
