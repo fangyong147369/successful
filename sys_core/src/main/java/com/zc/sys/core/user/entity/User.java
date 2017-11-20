@@ -6,8 +6,8 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
-import com.zc.sys.core.account.entity.Account;
 import com.zc.sys.core.common.constant.BaseConstant;
 /**
  * 用户
@@ -37,6 +37,11 @@ public class User extends LongPKEntity {
 	private String cardNo;
 	/** 注册时间 **/
 	private Date addTime;
+	
+	/** 关联 UserInfo对象*/
+	@JsonBackReference
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+	private UserInfo userInfo;
 	
 	/** 获取【用户名】 **/
 	public String getUserName() {
@@ -102,4 +107,13 @@ public class User extends LongPKEntity {
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
+	/** 获取【关联UserInfo对象】 **/
+	public UserInfo getUserInfo() {
+		return userInfo;
+	}
+	/** 设置【关联UserInfo对象】 **/
+	public void setUserInfo(UserInfo userInfo) {
+		this.userInfo = userInfo;
+	}
+	
 }

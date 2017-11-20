@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.sys.entity.Menu;
@@ -23,12 +24,14 @@ public class RoleMenu extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
 
+	@JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
 	private Role role;
 	/**
 	 * 菜单主键
 	 */
+	@JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menu_id")
 	private Menu menu;
