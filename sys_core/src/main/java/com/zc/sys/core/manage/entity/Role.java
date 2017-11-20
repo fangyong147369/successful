@@ -62,15 +62,15 @@ public class Role extends LongPKEntity {
 		this.remark = remark;
 	}
 
-	/** 获取【获取权限】 **/
-	public List<RoleMenu> getRoleMenus() {
-		return roleMenus;
-	}
-
-	/** 设置【获取权限】 **/
-	public void setRoleMenus(List<RoleMenu> roleMenus) {
-		this.roleMenus = roleMenus;
-	}
+//	/** 获取【获取权限】 **/
+//	public List<RoleMenu> getRoleMenus() {
+//		return roleMenus;
+//	}
+//
+//	/** 设置【获取权限】 **/
+//	public void setRoleMenus(List<RoleMenu> roleMenus) {
+//		this.roleMenus = roleMenus;
+//	}
 
 	
 }

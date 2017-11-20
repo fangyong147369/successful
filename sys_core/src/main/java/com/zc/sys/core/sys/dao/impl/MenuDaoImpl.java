@@ -1,6 +1,6 @@
 package com.zc.sys.core.sys.dao.impl;
-import org.springframework.stereotype.Repository;
 
+import org.springframework.stereotype.Repository;
 import com.zc.sys.common.dao.jpa.BaseDaoImpl;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.model.jpa.QueryParam;
@@ -11,6 +11,7 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.sys.entity.Menu;
 import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.sys.dao.MenuDao;
+
 /**
  * 菜单
  * @author zp
@@ -34,6 +35,9 @@ public class MenuDaoImpl extends BaseDaoImpl<Menu> implements MenuDao {
 		}else {
 			if (StringUtil.isNotBlank(model.getName())) {
 				param.addParam("name", Operators.LIKE, model.getName().trim());
+			}
+			if (model.getParentId() != null) {
+				param.addParam("parentId", model.getParentId());
 			}
 			if (model.getState() != null) {
 				param.addParam("state", model.getState());

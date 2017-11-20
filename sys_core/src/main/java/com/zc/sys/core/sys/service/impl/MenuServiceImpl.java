@@ -13,6 +13,7 @@ import com.zc.sys.core.sys.dao.MenuDao;
 import com.zc.sys.core.sys.entity.Menu;
 import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.sys.service.MenuService;
+
 /**
  * 菜单
  * @author zp
@@ -55,7 +56,7 @@ public class MenuServiceImpl implements MenuService {
 	public Result add(MenuModel model){
 		Menu menu = model.prototype();
 		menuDao.save(menu);
-		return Result.success();
+		return Result.success().setData(menu);
 	}
 
 	/**
