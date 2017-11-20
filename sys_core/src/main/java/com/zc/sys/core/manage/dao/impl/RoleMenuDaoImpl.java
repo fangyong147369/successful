@@ -28,7 +28,7 @@ public class RoleMenuDaoImpl extends BaseDaoImpl<RoleMenu> implements RoleMenuDa
 	 */
 	@Override
 	public void deleteByRoleId(long roleId) {
-		Query query = em.createNativeQuery("delete from RoleMenu where role.id=?1").setParameter(1, roleId);
+		Query query = em.createNativeQuery("delete from zc_m_role_menu where role_id=?1").setParameter(1, roleId);
 		query.executeUpdate();
 	}
 
@@ -45,7 +45,7 @@ public class RoleMenuDaoImpl extends BaseDaoImpl<RoleMenu> implements RoleMenuDa
 			param.addOrFilter(orFilter2);
 		}else {
 			if (model.getRole() != null) {
-				param.addParam("role", model.getRole());
+				param.addParam("role.id", model.getRole().getId());
 			}
 		}
 		param.addOrder(OrderFilter.OrderType.ASC, "id");

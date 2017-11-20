@@ -125,13 +125,7 @@ public class RoleServiceImpl implements RoleService {
 			return Result.error("参数错误！");
 		}
 		Role role = roleDao.find(model.getId());
-//		role.setRoleMenus(roleMenuDao.findByProperty("role.id",role.getId()));
-//		String[] names=new String[]{"roleId"};
-//		Object[] values=new Object[]{role.getId()};
-//		role.setRoleMenus(roleMenuDao.listByJpql("select * from zc_m_role_menu  WHERE role.id=:roleId",names,values));
-		RoleModel m=RoleModel.instance(role);
-		//m.setRoleMenus(role.getRoleMenus());
- 		//Hibernate.initialize(role.getRoleMenus());
+		Hibernate.initialize(role.getRoleMenus());
 		return Result.success().setData(role);
 	}
 
