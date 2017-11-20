@@ -19,6 +19,8 @@ public class OperatorModel extends Operator {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	
+	private RoleModel roleMoel;
 
 	/**
 	 * 实体转换model
@@ -66,6 +68,16 @@ public class OperatorModel extends Operator {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	/** 获取【roleMoel】 **/
+	public RoleModel getRoleMoel() {
+		return roleMoel;
+	}
+
+	/** 设置【roleMoel】 **/
+	public void setRoleMoel(RoleModel roleMoel) {
+		this.roleMoel = roleMoel;
 	}
 
 }
