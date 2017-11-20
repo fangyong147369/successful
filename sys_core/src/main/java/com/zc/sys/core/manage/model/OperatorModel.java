@@ -20,7 +20,7 @@ public class OperatorModel extends Operator {
 	/** 条件查询 **/
 	private String searchName;
 	
-	private RoleModel roleMoel;
+	private RoleModel roleModel;
 
 	/**
 	 * 实体转换model
@@ -72,12 +72,12 @@ public class OperatorModel extends Operator {
 
 	/** 获取【roleMoel】 **/
 	public RoleModel getRoleMoel() {
-		return roleMoel;
+		return roleModel;
 	}
 
 	/** 设置【roleMoel】 **/
-	public void setRoleMoel(RoleModel roleMoel) {
-		this.roleMoel = roleMoel;
+	public void setRoleModel(RoleModel roleModel) {
+		this.roleModel = roleModel;
 	}
 
 }

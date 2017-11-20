@@ -3,7 +3,7 @@ import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.manage.entity.Operator;
 import com.zc.sys.core.manage.model.OperatorModel;
 import com.zc.sys.core.manage.model.RoleModel;
-
+import com.zc.sys.core.manage.entity.Role;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,7 +41,7 @@ public class OperatorServiceImpl implements OperatorService {
 		if(pageDataList != null && pageDataList.getList().size() > 0){
 			for (Operator operator : pageDataList.getList()) {
 				OperatorModel model_ = OperatorModel.instance(operator);
-				model_.setRoleMoel(RoleModel.instance(operator.getRole()));
+				model_.setRoleModel(RoleModel.instance(operator.getRole()));
 				list.add(model_);
 			}
 		}
@@ -102,6 +102,8 @@ public class OperatorServiceImpl implements OperatorService {
 		String[] names=new String[]{"name","pwd"};
 		Object[] values=new Object[]{model.getName(),model.getPwd()};
 		Operator operater = operatorDao.findForUniqueBySql("select * from zc_m_operator  WHERE name=:name and pwd=:pwd ",names,values);
+		//OperatorModel model_ = OperatorModel.instance(operater);
+		//model_.setRole(operater.getRole());
 		return Result.success().setData(operater);
 	}
 
