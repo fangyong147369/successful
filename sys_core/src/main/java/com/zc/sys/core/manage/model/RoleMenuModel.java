@@ -29,6 +29,8 @@ public class RoleMenuModel extends RoleMenu {
 	private String menuUrl;
 	
 	private MenuModel menuModel;
+	
+//	private RoleModel roleModel;
 
 	/**
 	 * 实体转换model
@@ -90,6 +92,18 @@ public class RoleMenuModel extends RoleMenu {
 		this.menuModel = menuModel;
 	}
 
+//	/** 获取【roleModel】 **/
+//	public RoleModel getRoleModel() {
+//		return roleModel;
+//	}
+//
+//	/** 设置【roleModel】 **/
+//	public void setRoleModel(RoleModel roleModel) {
+//		this.roleModel = roleModel;
+//	}
+	
+	
+	
 //	/** 获取【当前页码】 **/
 //	public int getPageNo() {
 //		return pageNo;

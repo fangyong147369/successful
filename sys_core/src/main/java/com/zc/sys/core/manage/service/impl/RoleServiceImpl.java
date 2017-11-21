@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import com.zc.sys.core.manage.model.RoleMenuModel;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +15,10 @@ import com.zc.sys.core.manage.dao.RoleDao;
 import com.zc.sys.core.manage.dao.RoleMenuDao;
 import com.zc.sys.core.manage.entity.Role;
 import com.zc.sys.core.manage.entity.RoleMenu;
+import com.zc.sys.core.manage.model.RoleMenuModel;
 import com.zc.sys.core.manage.model.RoleModel;
 import com.zc.sys.core.manage.service.RoleService;
+import com.zc.sys.core.sys.dao.MenuDao;
 import com.zc.sys.core.sys.entity.Menu;
 
 /**
@@ -35,6 +35,8 @@ public class RoleServiceImpl implements RoleService {
 	private RoleDao roleDao;
 	@Resource
 	private RoleMenuDao roleMenuDao;
+	@Resource
+	private MenuDao menuDao;
 
 	/**
 	 * 列表
@@ -74,7 +76,7 @@ public class RoleServiceImpl implements RoleService {
 		Role r = roleDao.save(role);
 		for (int i = 0; i < menuIdArr.length; i++) {
 			long menuId = Long.parseLong(menuIdArr[i]);
-			Menu menu = new Menu(menuId);
+			Menu menu = menuDao.find(menuId);
 			RoleMenu roleMenu = new RoleMenu();
 			roleMenu.setMenu(menu);
 			roleMenu.setRole(r);
@@ -104,7 +106,7 @@ public class RoleServiceImpl implements RoleService {
 		// 保存新菜单
 		for (int i = 0; i < menuIdArr.length; i++) {
 			long menuId = Long.parseLong(menuIdArr[i]);
-			Menu menu = new Menu(menuId);
+			Menu menu = menuDao.find(menuId);
 			RoleMenu roleMenu = new RoleMenu();
 			roleMenu.setMenu(menu);
 			roleMenu.setRole(r);

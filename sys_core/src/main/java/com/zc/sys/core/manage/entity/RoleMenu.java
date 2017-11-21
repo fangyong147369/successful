@@ -1,6 +1,5 @@
 package com.zc.sys.core.manage.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -26,7 +25,7 @@ public class RoleMenu extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id")
 	private Role role;
 
@@ -34,7 +33,7 @@ public class RoleMenu extends LongPKEntity {
 	 * 菜单主键
 	 */
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "menu_id")
 	private Menu menu;
 

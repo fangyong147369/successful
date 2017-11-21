@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.manage.dao.RoleMenuDao;
 import com.zc.sys.core.manage.model.RoleMenuModel;
+import com.zc.sys.core.manage.model.RoleModel;
 import com.zc.sys.core.manage.service.RoleMenuService;
 import com.zc.sys.core.sys.model.MenuModel;
 
@@ -45,6 +46,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
 				model_.setMenuName(menu.getMenu().getName());
 				model_.setMenuUrl(menu.getMenu().getHref());*/
 				model_.setMenuModel(MenuModel.instance(menu.getMenu()));
+//				model.setRoleModel(RoleModel.instance(menu.getRole()));
 				list.add(model_);
 			}
 		}
