@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.zc.sys.core.sys.model.MenuModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -112,6 +113,7 @@ public class RoleServiceImpl implements RoleService {
 			roleMenu.setRole(r);
 			roleMenuDao.save(roleMenu);
 		}
+		roleDao.clear();
 		return Result.success();
 	}
 
@@ -129,7 +131,7 @@ public class RoleServiceImpl implements RoleService {
 		List<RoleMenu> list = new ArrayList<RoleMenu>();
 		for (RoleMenu menu : role.getRoleMenus()) {
 			RoleMenuModel model_ = RoleMenuModel.instance(menu);
-			model_.setMenuId(menu.getMenu().getId());
+			model_.setMenuModel(MenuModel.instance(menu.getMenu()));
 			list.add(model_);
 		}
 		//Hibernate.initialize(list);

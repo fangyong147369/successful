@@ -20,13 +20,13 @@ public class RoleMenuModel extends RoleMenu {
 //	/** 条件查询 **/
 //	private String searchName;
 
-	private Long menuId;
-
-	private Long parentId;
-
-	private String menuName;
-
-	private String menuUrl;
+//	private Long menuId;
+//
+//	private Long parentId;
+//
+//	private String menuName;
+//
+//	private String menuUrl;
 	
 	private MenuModel menuModel;
 	
@@ -50,37 +50,37 @@ public class RoleMenuModel extends RoleMenu {
 		return roleMenu;
 	}
 
-	public Long getMenuId(){
-		return menuId;
-	}
-
-	public void setMenuId(Long menuId){
-		this.menuId=menuId;
-	}
-
-	public Long getParentId(){
-		return parentId;
-	}
-
-	public void setParentId(Long parentId){
-		this.parentId=parentId;
-	}
-
-	public String getMenuName(){
-		return menuName;
-	}
-
-	public void setMenuName(String menuName){
-		this.menuName=menuName;
-	}
-
-	public String getMenuUrl(){
-		return menuUrl;
-	}
-
-	public void setMenuUrl(String menuUrl){
-		this.menuUrl=menuUrl;
-	}
+//	public Long getMenuId(){
+//		return menuId;
+//	}
+//
+//	public void setMenuId(Long menuId){
+//		this.menuId=menuId;
+//	}
+//
+//	public Long getParentId(){
+//		return parentId;
+//	}
+//
+//	public void setParentId(Long parentId){
+//		this.parentId=parentId;
+//	}
+//
+//	public String getMenuName(){
+//		return menuName;
+//	}
+//
+//	public void setMenuName(String menuName){
+//		this.menuName=menuName;
+//	}
+//
+//	public String getMenuUrl(){
+//		return menuUrl;
+//	}
+//
+//	public void setMenuUrl(String menuUrl){
+//		this.menuUrl=menuUrl;
+//	}
 
 	/** 获取【menuModel】 **/
 	public MenuModel getMenuModel() {
