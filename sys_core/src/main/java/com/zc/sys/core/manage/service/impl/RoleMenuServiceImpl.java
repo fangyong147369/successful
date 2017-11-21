@@ -1,12 +1,16 @@
 package com.zc.sys.core.manage.service.impl;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.manage.entity.RoleMenu;
+
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.manage.dao.RoleMenuDao;
 import com.zc.sys.core.manage.model.RoleMenuModel;
 import com.zc.sys.core.manage.service.RoleMenuService;
+import com.zc.sys.core.sys.model.MenuModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +40,11 @@ public class RoleMenuServiceImpl implements RoleMenuService {
 		if(pageDataList != null && pageDataList.getList().size() > 0){
 			for (RoleMenu menu : pageDataList.getList()) {
 				RoleMenuModel model_ = RoleMenuModel.instance(menu);
-				model_.setMenuId(menu.getMenu().getId());
+				/*model_.setMenuId(menu.getMenu().getId());
 				model_.setParentId(menu.getMenu().getParentId());
 				model_.setMenuName(menu.getMenu().getName());
-				model_.setMenuUrl(menu.getMenu().getHref());
+				model_.setMenuUrl(menu.getMenu().getHref());*/
+				model_.setMenuModel(MenuModel.instance(menu.getMenu()));
 				list.add(model_);
 			}
 		}

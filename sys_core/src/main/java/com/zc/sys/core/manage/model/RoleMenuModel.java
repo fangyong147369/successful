@@ -1,8 +1,8 @@
 package com.zc.sys.core.manage.model;
 import org.springframework.beans.BeanUtils;
 
-import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.core.manage.entity.RoleMenu;
+import com.zc.sys.core.sys.model.MenuModel;
 /**
  * 角色-菜单
  * @author zp
@@ -27,6 +27,8 @@ public class RoleMenuModel extends RoleMenu {
 	private String menuName;
 
 	private String menuUrl;
+	
+	private MenuModel menuModel;
 
 	/**
 	 * 实体转换model
@@ -76,6 +78,16 @@ public class RoleMenuModel extends RoleMenu {
 
 	public void setMenuUrl(String menuUrl){
 		this.menuUrl=menuUrl;
+	}
+
+	/** 获取【menuModel】 **/
+	public MenuModel getMenuModel() {
+		return menuModel;
+	}
+
+	/** 设置【menuModel】 **/
+	public void setMenuModel(MenuModel menuModel) {
+		this.menuModel = menuModel;
 	}
 
 //	/** 获取【当前页码】 **/

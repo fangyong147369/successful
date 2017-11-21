@@ -1,9 +1,10 @@
 package com.zc.sys.core.manage.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -25,7 +26,7 @@ public class RoleMenu extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	@JsonBackReference
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "role_id")
 	private Role role;
 
@@ -33,7 +34,7 @@ public class RoleMenu extends LongPKEntity {
 	 * 菜单主键
 	 */
 	@JsonBackReference
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "menu_id")
 	private Menu menu;
 
