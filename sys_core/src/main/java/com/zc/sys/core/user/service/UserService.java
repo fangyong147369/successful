@@ -45,13 +45,6 @@ public interface UserService{
 	public Result regRequest(UserModel model);
 	
 	/**
-	 * 注册处理
-	 * @param model
-	 * @return
-	 */
-	public Result regDeal(UserModel model);
-	
-	/**
 	 * 登录
 	 * @param model
 	 * @return

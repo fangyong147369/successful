@@ -34,7 +34,9 @@ public class CashLoan extends LongPKEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 产品类型 **/
-	private Integer type;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "type")
+	private CashLoanConfig cashLoanConfig;
 	/** 状态 **/
 	private Integer state;
 	/** 借款本金总额 **/
@@ -127,12 +129,12 @@ public class CashLoan extends LongPKEntity {
 		this.user = user;
 	}
 	/** 获取【产品类型】 **/
-	public Integer getType() {
-		return type;
+	public CashLoanConfig getCashLoanConfig() {
+		return cashLoanConfig;
 	}
 	/** 设置【产品类型】 **/
-	public void setType(Integer type) {
-		this.type = type;
+	public void setCashLoanConfig(CashLoanConfig cashLoanConfig) {
+		this.cashLoanConfig = cashLoanConfig;
 	}
 	/** 获取【状态】 **/
 	public Integer getState() {

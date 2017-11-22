@@ -69,6 +69,7 @@ public class BankCardServiceImpl implements BankCardService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(BankCardModel model){
 
 		return null;
@@ -80,6 +81,7 @@ public class BankCardServiceImpl implements BankCardService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(BankCardModel model){
 
 		return null;

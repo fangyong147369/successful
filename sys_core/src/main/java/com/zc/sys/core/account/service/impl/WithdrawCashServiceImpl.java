@@ -1,6 +1,9 @@
 package com.zc.sys.core.account.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.account.dao.WithdrawCashDao;
 import com.zc.sys.core.account.model.WithdrawCashModel;
@@ -33,6 +36,7 @@ public class WithdrawCashServiceImpl implements WithdrawCashService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(WithdrawCashModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class WithdrawCashServiceImpl implements WithdrawCashService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(WithdrawCashModel model){
 
 		return null;

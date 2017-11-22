@@ -6,6 +6,7 @@ import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.dao.UserInfoDao;
@@ -41,6 +42,8 @@ public class UserIdentifyModel extends UserIdentify {
 	
 	/** 订单 **/
 	private OrderTask orderTask;
+	/** 重复标识 **/
+	private String token;
 
 	public UserIdentifyModel() {
 		super();
@@ -92,6 +95,8 @@ public class UserIdentifyModel extends UserIdentify {
 	 * 实名信息校验
 	 */
 	public void checkRealName() {
+		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
 		if(this.getUser() == null || this.getUser().getId() == null || this.getUser().getId().longValue() <= 0){
 			throw new BusinessException("参数错误");
 		}
@@ -141,7 +146,7 @@ public class UserIdentifyModel extends UserIdentify {
 	 */
 	public void initRealName(UserIdentify userIdentify) {
 		userIdentify.setRealNameCount(userIdentify.getRealNameCount() + 1);//认证次数+1
-		userIdentify.setRealNameState(2);
+		userIdentify.setRealNameState(BaseConstant.BUSINESS_STATE_YES);
 		
 		User user = userIdentify.getUser();
 		user.setRealName(this.getRealName());
@@ -241,6 +246,16 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 设置【手机号】 **/
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	/** 获取【重复标识】 **/
+	public String getToken() {
+		return token;
+	}
+
+	/** 设置【重复标识】 **/
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

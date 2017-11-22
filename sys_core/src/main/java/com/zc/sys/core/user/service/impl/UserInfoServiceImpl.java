@@ -1,6 +1,9 @@
 package com.zc.sys.core.user.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.user.dao.UserInfoDao;
 import com.zc.sys.core.user.model.UserInfoModel;
@@ -33,6 +36,7 @@ public class UserInfoServiceImpl implements UserInfoService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(UserInfoModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class UserInfoServiceImpl implements UserInfoService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(UserInfoModel model){
 
 		return null;

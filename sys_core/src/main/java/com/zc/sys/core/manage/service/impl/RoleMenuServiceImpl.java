@@ -3,6 +3,7 @@ import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.manage.entity.RoleMenu;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -60,6 +61,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(RoleMenuModel model){
 
 		return null;
@@ -71,6 +73,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(RoleMenuModel model){
 
 		return null;

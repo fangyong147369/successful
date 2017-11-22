@@ -1,6 +1,9 @@
 package com.zc.sys.core.account.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.account.dao.AccountLogDao;
 import com.zc.sys.core.account.model.AccountLogModel;
@@ -33,6 +36,7 @@ public class AccountLogServiceImpl implements AccountLogService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(AccountLogModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class AccountLogServiceImpl implements AccountLogService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(AccountLogModel model){
 
 		return null;

@@ -10,17 +10,13 @@ import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.QueryParam;
 import com.zc.sys.common.model.jpa.SearchFilter;
 import com.zc.sys.common.model.jpa.SearchFilter.Operators;
-import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.encrypt.MD5;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.account.dao.AccountDao;
 import com.zc.sys.core.account.entity.Account;
 import com.zc.sys.core.account.model.AccountModel;
-import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
-import com.zc.sys.core.common.queue.pojo.QueueModel;
-import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.credit.dao.CreditScoreDao;
 import com.zc.sys.core.credit.entity.CreditScore;
 import com.zc.sys.core.credit.model.CreditScoreModel;
@@ -28,8 +24,6 @@ import com.zc.sys.core.integral.dao.IntegralAccountDao;
 import com.zc.sys.core.integral.entity.IntegralAccount;
 import com.zc.sys.core.integral.model.IntegralAccountModel;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
-import com.zc.sys.core.manage.entity.OrderTask;
-import com.zc.sys.core.manage.model.OrderTaskModel;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.dao.UserInfoDao;
@@ -83,6 +77,7 @@ public class UserServiceImpl implements UserService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(UserModel model){
 
 		return null;
@@ -94,6 +89,7 @@ public class UserServiceImpl implements UserService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(UserModel model){
 
 		return null;
@@ -127,27 +123,6 @@ public class UserServiceImpl implements UserService {
 		userDao.save(user);
 		model.setId(user.getId());
 		
-		//发送队列处理实名
-		QueueProducerService queueProducerService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask(user,"userReg", StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
-		orderTaskDao.save(orderTask);
-		model.setOrderTask(orderTask);
-		queueProducerService.send(new QueueModel("user", OrderTaskModel.instance(orderTask), model));
-		
-		UserModel returnModel = UserModel.instance(user);
-		returnModel.initReturn();
-		return Result.success().setData(returnModel);
-	}
-	
-	/**
-	 * 注册处理
-	 * @param model
-	 * @return
-	 */
-	@Override
-	@Transactional
-	public Result regDeal(UserModel model){
-		User user = userDao.find(model.getId());
 		//初始化用户基本信息
 		UserInfoModel infoModel = new UserInfoModel();
 		infoModel.setUser(user);
@@ -184,22 +159,18 @@ public class UserServiceImpl implements UserService {
 		CreditScore creditScore = creditScoreModel.prototype();
 		creditScoreDao.save(creditScore);
 		
-		//订单处理
-		OrderTask orderTask = orderTaskDao.find(model.getOrderTask().getId());
-		orderTask.setDoTime(DateUtil.getNow());
-		orderTask.setDoResult("注册成功");
-		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
-		orderTaskDao.update(orderTask);
-		
 		//注册任务
 		Executer regExecuter = BeanUtil.getBean(UserRegExecuter.class);
 		regExecuter.execute(model);
 		//邀请任务
 		Executer inviteExecuter = BeanUtil.getBean(UserInviteExecuter.class);
 		inviteExecuter.execute(infoModel);
-		return Result.success();
+		
+		UserModel returnModel = UserModel.instance(user);
+		returnModel.initReturn();
+		return Result.success().setData(returnModel);
 	}
-
+	
 	/**
  	 * 登录
  	 * @param model
@@ -232,16 +203,32 @@ public class UserServiceImpl implements UserService {
 		return Result.success().setData(returnModel);
 	}
 
+	/**
+	 * 修改交易密码
+	 * @param model
+	 * @return
+	 */
 	@Override
+	@Transactional
 	public Result updatePayPwd(UserModel model) {
-		
-		return null;
+		User user = model.checkUpdatePayPwd();//校验修改交易密码
+		model.initUpdatePayPwd(user);//初始化信息
+		userDao.update(user);
+		return Result.success();
 	}
 
+	/**
+	 * 修改登录密码
+	 * @param model
+	 * @return
+	 */
 	@Override
+	@Transactional
 	public Result updatePwd(UserModel model) {
 		User user = model.checkUpdatePwd();//校验修改登录密码
-		return null;
+		model.initUpdatePwd(user);//初始化信息
+		userDao.update(user);
+		return Result.success();
 	}
 	
 	

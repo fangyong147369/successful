@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.cashloan.constant.BaseCashLoanConstant;
+import com.zc.sys.cashloan.dao.CashLoanConfigDao;
 import com.zc.sys.cashloan.entity.CashLoan;
+import com.zc.sys.cashloan.entity.CashLoanConfig;
 import com.zc.sys.cashloan.entity.CashLoanRepayment;
 import com.zc.sys.cashloan.service.CashLoanService;
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.encrypt.MD5;
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.constant.BaseConstant;
@@ -42,6 +45,13 @@ public class CashLoanModel extends CashLoan {
 	/** 订单 **/
 	private OrderTask orderTask;
 	
+	/** 交易密码 **/
+	private String payPwd;
+	/** 重复标识 **/
+	private String token;
+	/** 免息券id **/
+	private long interestFreeNoteId;
+	
 	/**
 	 * 实体转换model
 	 */
@@ -64,6 +74,17 @@ public class CashLoanModel extends CashLoan {
 	 * 贷款校验
 	 */
 	public void checkCashLoan() {
+		CommonService commonService = BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
+		if(this.getCashLoanConfig() == null || this.getCashLoanConfig().getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		CashLoanConfigDao cashLoanConfigDao = BeanUtil.getBean(CashLoanConfigDao.class);
+		CashLoanConfig cashLoanConfig = cashLoanConfigDao.find(this.getCashLoanConfig().getId());
+		if(cashLoanConfig == null || cashLoanConfig.getState() != BaseConstant.INFO_STATE_YES){
+			throw new BusinessException("产品配置不存在");
+		}
+		this.setCashLoanConfig(cashLoanConfig);
 		UserIdentifyDao userIdentifyDao = (UserIdentifyDao)BeanUtil.getBean(UserIdentifyDao.class);
 		User user = this.getUser();
 		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
@@ -86,11 +107,17 @@ public class CashLoanModel extends CashLoan {
 		if(userIdentify.getBindCardNum() <= 0){
 			throw new BusinessException("请先绑定银行卡");
 		}
+		if(StringUtil.isBlank(this.getUser().getPayPwd()) || MD5.toMD5(this.payPwd).equals(this.getUser().getPayPwd())){
+			throw new BusinessException("交易密码输入错误或未设置");
+		}
+		//免息券判断
+		
 		//额度校验
 		if(this.getTotal() <= 0){
 			throw new BusinessException("请输入正确的借款金额");
 		}
 		//放款账户校验
+		
 	}
 	
 	/**
@@ -98,23 +125,13 @@ public class CashLoanModel extends CashLoan {
 	 */
 	public void initCashLoan() {
 		this.setCno(StringUtil.getSerialNumber());
-		this.setType(1);//产品类型
 		this.setState(BaseCashLoanConstant.CASHLOAN_STATE_AUDITING);
-		this.setOverdueRate(0.15d);
-		this.setPeriodUnit(1);
-		this.setPeriod(30);
-		this.setRate(0.10d);
-		this.setRepaymentType(1);
-		this.setRepaymentTotal(1015.00d);
-		this.setRepaymentCapital(1000.00d);
-		this.setRepaymentInterest(10.00d);
-		this.setRepaymentServiceFee(5.00d);
-		this.setIsInterestFreeNote(0);
-		this.setIsPrepayment(0);
+		this.setOverdueRate(this.getCashLoanConfig().getOverdueRate());
+		this.setRate(this.getCashLoanConfig().getRate());
+		this.setRepaymentType(Integer.parseInt(this.getCashLoanConfig().getRepaymentType()));
+		this.setIsPrepayment(this.getCashLoanConfig().getIsPrepayment());
 		this.setVersion(0);
 		this.setAddTime(DateUtil.getNow());
-		this.setLoanWay(1);
-		this.setLoanAccount("1111111111111111");
 	}
 	
 	/**
@@ -240,6 +257,36 @@ public class CashLoanModel extends CashLoan {
 	/** 设置【订单】 **/
 	public void setOrderTask(OrderTask orderTask) {
 		this.orderTask = orderTask;
+	}
+
+	/** 获取【交易密码】 **/
+	public String getPayPwd() {
+		return payPwd;
+	}
+
+	/** 设置【交易密码】 **/
+	public void setPayPwd(String payPwd) {
+		this.payPwd = payPwd;
+	}
+
+	/** 获取【重复标识】 **/
+	public String getToken() {
+		return token;
+	}
+
+	/** 设置【重复标识】 **/
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	/** 获取【免息券id】 **/
+	public long getInterestFreeNoteId() {
+		return interestFreeNoteId;
+	}
+
+	/** 设置【免息券id】 **/
+	public void setInterestFreeNoteId(long interestFreeNoteId) {
+		this.interestFreeNoteId = interestFreeNoteId;
 	}
 
 }

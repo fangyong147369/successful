@@ -1,6 +1,9 @@
 package com.zc.sys.core.integral.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.integral.dao.IntegralAccountDao;
 import com.zc.sys.core.integral.model.IntegralAccountModel;
@@ -33,6 +36,7 @@ public class IntegralAccountServiceImpl implements IntegralAccountService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(IntegralAccountModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class IntegralAccountServiceImpl implements IntegralAccountService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(IntegralAccountModel model){
 
 		return null;

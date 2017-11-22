@@ -4,7 +4,9 @@ import com.zc.sys.core.manage.entity.Operator;
 import com.zc.sys.core.manage.model.OperatorModel;
 import com.zc.sys.core.manage.model.RoleModel;
 import com.zc.sys.core.manage.entity.Role;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -55,6 +57,7 @@ public class OperatorServiceImpl implements OperatorService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(OperatorModel model){
 		Operator operator = model.prototype();
 		operatorDao.save(operator);
@@ -67,6 +70,7 @@ public class OperatorServiceImpl implements OperatorService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(OperatorModel model){
 		Operator operator = operatorDao.find(model.getId());
 		operatorDao.update(operator);

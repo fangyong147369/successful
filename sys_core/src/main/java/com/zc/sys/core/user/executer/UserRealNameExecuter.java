@@ -14,6 +14,7 @@ import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.manage.model.NoticeMessageModel;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 import com.zc.sys.core.user.model.UserIdentifyModel;
 
 /**
@@ -42,10 +43,11 @@ public class UserRealNameExecuter extends BaseExecuter{
 	@Override
 	public void sendMessage() {
 		try {
-//			OrderTask orderTask = new OrderTask(model.getUser(), "sendMessage", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-//			orderTaskDao.merge(orderTask);
-//			NoticeMessageModel message = new NoticeMessageModel(2, null, model.getUser(), null, orderTask.getOrderNo(), orderTask);
-//			queueProducerService.send(new QueueModel("sendMessage",model.getOrderTask(), message));
+			OrderTask orderTask = new OrderTask(model.getUser(), "sendMessage", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+			orderTaskDao.save(orderTask);
+			OrderTaskModel orderTaskModel =OrderTaskModel.instance(orderTask);
+			NoticeMessageModel message = new NoticeMessageModel(1, null, model.getUser(), null, orderTask.getOrderNo(), orderTaskModel);
+			queueProducerService.send(new QueueModel("sendMessage",orderTaskModel, message));
 		} catch (Exception e) {
 			LogUtil.info("Message消息发送失败" + e.getMessage());
 		}
@@ -54,10 +56,11 @@ public class UserRealNameExecuter extends BaseExecuter{
 	@Override
 	public void sendSMS() {
 		try {
-//			OrderTask orderTask = new OrderTask(model.getUser(), "sendSMS", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
-//			orderTaskDao.merge(orderTask);
-//			NoticeMessageModel sms = new NoticeMessageModel(2, null, model.getUser(), null, orderTask.getOrderNo(), orderTask);
-//			queueProducerService.send(new QueueModel("sendSMS",model.getOrderTask(), sms));
+			OrderTask orderTask = new OrderTask(model.getUser(), "sendSMS", StringUtil.getSerialNumber(), 2, "", DateUtil.getNow());
+			orderTaskDao.save(orderTask);
+			OrderTaskModel orderTaskModel =OrderTaskModel.instance(orderTask);
+			NoticeMessageModel sms = new NoticeMessageModel(2, null, model.getUser(), null, orderTask.getOrderNo(), orderTaskModel);
+			queueProducerService.send(new QueueModel("sendSMS",orderTaskModel, sms));
 		} catch (Exception e) {
 			LogUtil.info("SMS消息发送失败" + e.getMessage());
 		}

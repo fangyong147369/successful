@@ -1,6 +1,9 @@
 package com.zc.sys.core.integral.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.integral.dao.IntegralLogDao;
 import com.zc.sys.core.integral.model.IntegralLogModel;
@@ -33,6 +36,7 @@ public class IntegralLogServiceImpl implements IntegralLogService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(IntegralLogModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class IntegralLogServiceImpl implements IntegralLogService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(IntegralLogModel model){
 
 		return null;

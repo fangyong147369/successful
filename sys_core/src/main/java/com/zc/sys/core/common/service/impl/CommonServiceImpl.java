@@ -57,7 +57,7 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public Result getToken() {
 		String token = StringUtil.getSerialNumber();
-		redisCacheUtil.setCode("token_" + token, "token_" + token, 60 * 60);
+		redisCacheUtil.setCode("token_" + token, "token_" + token, 60 * 30);
 		return Result.success().setData(token);
 	}
 
@@ -87,7 +87,7 @@ public class CommonServiceImpl implements CommonService {
 		model.checkSMS();//短信发送校验
 		
 		String value = RandomUtil.code();
-		String key = "SMS_" + model.getMobile();
+		String key = "SMS_" + model.getHandleSmsType() + "_" + model.getMobile();
 		String cacheCode = redisCacheUtil.getCache(key, String.class);
 		if(StringUtil.isNotBlank(cacheCode)){
 			return Result.error("短信请求频繁，请稍后操作");
@@ -113,8 +113,8 @@ public class CommonServiceImpl implements CommonService {
 	 * @return
 	 */
 	@Override
-	public void checkMobileCode(String mobile,String mobileCode) {
-		String key = "SMS_" + mobile;
+	public void checkMobileCode(String mobile,String mobileCode,int handleSmsType) {
+		String key = "SMS_" + handleSmsType + "_" + mobile;
 		String cacheCode = redisCacheUtil.getCache(key, String.class);
 		redisCacheUtil.delCode(key);
 		if(StringUtil.isBlank(cacheCode) || !mobileCode.equals(cacheCode)){

@@ -1,6 +1,9 @@
 package com.zc.sys.core.account.service.impl;
-import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.account.dao.AccountDeductDao;
 import com.zc.sys.core.account.model.AccountDeductModel;
@@ -33,6 +36,7 @@ public class AccountDeductServiceImpl implements AccountDeductService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(AccountDeductModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class AccountDeductServiceImpl implements AccountDeductService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(AccountDeductModel model){
 
 		return null;

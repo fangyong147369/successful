@@ -88,4 +88,26 @@ public class UserController extends BaseController<UserModel> {
 	public Object login(UserModel model) throws BusinessException {
 		return userService.login(model);
 	}
+	
+	/**
+	 * 修改登录密码
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/updatePwd", method = RequestMethod.POST)
+	@ResponseBody
+	public Object updatePwd(UserModel model) throws BusinessException {
+		return userService.updatePwd(model);
+	}
+	
+	/**
+	 * 修改设置交易密码
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/updatePayPwd", method = RequestMethod.POST)
+	@ResponseBody
+	public Object updatePayPwd(UserModel model) throws BusinessException {
+		return userService.updatePayPwd(model);
+	}
 }

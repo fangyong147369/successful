@@ -1,5 +1,7 @@
 package com.zc.sys.common.util.codeGenerate.template;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 
@@ -171,6 +173,7 @@ public class CodeTemplate {
 		StringBuilder sb = new StringBuilder();
 		sb.append("package ").append(serviceImplPackage).append(";\n");
 		sb.append("import org.springframework.stereotype.Service;\n");
+		sb.append("import org.springframework.transaction.annotation.Transactional;\n");
 		sb.append("import javax.annotation.Resource;\n");
 		sb.append("import com.zc.sys.common.form.Result;\n");
 		sb.append("import ").append(daoPackage).append(".").append(daoName).append(";\n");
@@ -192,6 +195,7 @@ public class CodeTemplate {
 		sb.append("\n");
 		sb.append("\t/**\n \t * 添加\n \t * @param model\n \t * @return\n \t */\n");
 		sb.append("\t@Override\n");
+		sb.append("\t@Transactional\n");
 		sb.append("\tpublic Result add("+modelName+" model){\n");
 		sb.append("\n");
 		sb.append("\t\treturn null;\n");
@@ -199,6 +203,7 @@ public class CodeTemplate {
 		sb.append("\n");
 		sb.append("\t/**\n \t * 修改\n \t * @param model\n \t * @return\n \t */\n");
 		sb.append("\t@Override\n");
+		sb.append("\t@Transactional\n");
 		sb.append("\tpublic Result update("+modelName+" model){\n");
 		sb.append("\n");
 		sb.append("\t\treturn null;\n");
@@ -225,7 +230,7 @@ public class CodeTemplate {
 		sb.append("import org.springframework.web.bind.annotation.ResponseBody;\n");
 		sb.append("import org.springframework.web.bind.annotation.RequestMethod;\n");
 		sb.append("\n");
-		sb.append("import com.zc.sys.common.exception.BussinessException;\n");
+		sb.append("import com.zc.sys.common.exception.BusinessException;\n");
 		sb.append("import com.zc.sys.core.common.web.BaseController;\n");
 		sb.append("import ").append(modelPackage).append(".").append(modelName).append(";\n");
 		sb.append("import ").append(servicePackage).append(".").append(serviceName).append(";\n");
@@ -240,28 +245,28 @@ public class CodeTemplate {
 		sb.append("\t/**\n \t * 列表\n \t * @param model\n \t * @return\n \t */\n");
 		sb.append("\t@RequestMapping(value = \"/list\", method = RequestMethod.POST)\n");
 		sb.append("\t@ResponseBody\n");
-		sb.append("\tpublic Object list("+modelName+" model) throws BussinessException {\n");
+		sb.append("\tpublic Object list("+modelName+" model) throws BusinessException {\n");
 		sb.append("\t\treturn "+serviceNameUncapitalize+".list(model);\n");
 		sb.append("\t}\n");
 		sb.append("\n");
 		sb.append("\t/**\n \t * 添加\n \t * @param model\n \t * @return\n \t */\n");
 		sb.append("\t@RequestMapping(value = \"/add\", method = RequestMethod.POST)\n");
 		sb.append("\t@ResponseBody\n");
-		sb.append("\tpublic Object add("+modelName+" model) throws BussinessException {\n");
+		sb.append("\tpublic Object add("+modelName+" model) throws BusinessException {\n");
 		sb.append("\t\treturn "+serviceNameUncapitalize+".add(model);\n");
 		sb.append("\t}\n");
 		sb.append("\n");
 		sb.append("\t/**\n \t * 修改\n \t * @param model\n \t * @return\n \t */\n");
 		sb.append("\t@RequestMapping(value = \"/update\", method = RequestMethod.POST)\n");
 		sb.append("\t@ResponseBody\n");
-		sb.append("\tpublic Object update("+modelName+" model) throws BussinessException {\n");
+		sb.append("\tpublic Object update("+modelName+" model) throws BusinessException {\n");
 		sb.append("\t\treturn "+serviceNameUncapitalize+".update(model);\n");
 		sb.append("\t}\n");
 		sb.append("\n");
 		sb.append("\t/**\n \t * 获取\n \t * @param model\n \t * @return\n \t */\n");
 		sb.append("\t@RequestMapping(value = \"/getById\", method = RequestMethod.POST)\n");
 		sb.append("\t@ResponseBody\n");
-		sb.append("\tpublic Object getById("+modelName+" model) throws BussinessException {\n");
+		sb.append("\tpublic Object getById("+modelName+" model) throws BusinessException {\n");
 		sb.append("\t\treturn "+serviceNameUncapitalize+".getById(model);\n");
 		sb.append("\t}\n");
 		sb.append("}");

@@ -62,6 +62,7 @@ public class CashLoanRepaymentServiceImpl implements CashLoanRepaymentService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(CashLoanRepaymentModel model){
 
 		return null;
@@ -73,6 +74,7 @@ public class CashLoanRepaymentServiceImpl implements CashLoanRepaymentService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(CashLoanRepaymentModel model){
 
 		return null;
@@ -97,8 +99,7 @@ public class CashLoanRepaymentServiceImpl implements CashLoanRepaymentService {
 	@Override
 	@Transactional
 	public Result cashLoanRepaymentRequest(CashLoanRepaymentModel model) {
-		CashLoanRepayment cashLoanRepayment = null;
-		cashLoanRepayment = model.checkRepayment(cashLoanRepayment);//校验还款
+		CashLoanRepayment cashLoanRepayment = model.checkRepayment();//校验还款
 		model.initRepayment(cashLoanRepayment);//初始化还款信息
 		cashLoanRepaymentDao.update(cashLoanRepayment);
 		

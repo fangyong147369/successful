@@ -2,6 +2,7 @@ package com.zc.sys.core.manage.service.impl;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.util.log.LogUtil;
@@ -50,6 +51,7 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(NoticeMessageModel model){
 
 		return null;
@@ -61,6 +63,7 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(NoticeMessageModel model){
 
 		return null;
@@ -114,11 +117,10 @@ public class NoticeMessageServiceImpl implements NoticeMessageService {
 		case 3://邮件
 			
 			break;
-
 		default:
 			return Result.error("参数错误");
 		}
-		NoticeMessage message = NoticeMessageModel.instance(model);
+		NoticeMessage message = model.prototype();
 		noticeMessageDao.save(message);
 		return Result.success();
 	}

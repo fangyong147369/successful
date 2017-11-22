@@ -1,6 +1,9 @@
 package com.zc.sys.core.credit.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.credit.dao.CreditScoreLogDao;
 import com.zc.sys.core.credit.model.CreditScoreLogModel;
@@ -33,6 +36,7 @@ public class CreditScoreLogServiceImpl implements CreditScoreLogService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(CreditScoreLogModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class CreditScoreLogServiceImpl implements CreditScoreLogService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(CreditScoreLogModel model){
 
 		return null;

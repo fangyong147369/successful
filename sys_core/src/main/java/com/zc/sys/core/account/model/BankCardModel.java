@@ -10,6 +10,7 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.account.entity.BankCard;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
@@ -37,6 +38,8 @@ public class BankCardModel extends BankCard {
 	
 	/** 订单信息 **/
 	private OrderTask orderTask;
+	/** 重复标识 **/
+	private String token;
 
 	/**
 	 * 实体转换model
@@ -60,6 +63,8 @@ public class BankCardModel extends BankCard {
 	 * 绑卡校验
 	 */
 	public void checkBindBC() {
+		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
 		UserIdentifyDao userIdentifyDao = (UserIdentifyDao)BeanUtil.getBean(UserIdentifyDao.class);
 		User user = this.getUser();
 		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
@@ -152,6 +157,16 @@ public class BankCardModel extends BankCard {
 	/** 设置【订单信息】 **/
 	public void setOrderTask(OrderTask orderTask) {
 		this.orderTask = orderTask;
+	}
+
+	/** 获取【重复标识】 **/
+	public String getToken() {
+		return token;
+	}
+
+	/** 设置【重复标识】 **/
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

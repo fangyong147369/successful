@@ -66,8 +66,6 @@ public class QueueConsumerServiceImpl implements QueueConsumerService{
 		}
 		//用户注册
 		if(model.getObj() instanceof UserModel){
-			UserService userService = (UserService)BeanUtil.getBean(UserService.class);
-			userService.regDeal((UserModel)model.getObj());
 			return;
 		}
 		//绑卡

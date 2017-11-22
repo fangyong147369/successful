@@ -12,9 +12,11 @@ import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.encrypt.MD5;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
 /**
  * 现金贷还款计划
@@ -32,9 +34,13 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	/** 交易密码 **/
+	private String payPwd;
 	
 	/** 订单信息 **/
 	private OrderTask orderTask;
+	/** 重复标识 **/
+	private String token;
 
 	/**
 	 * 实体转换model
@@ -69,14 +75,19 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	 * 校验还款信息
 	 * @param cashLoanRepaymet
 	 */
-	public CashLoanRepayment checkRepayment(CashLoanRepayment cashLoanRepayment) {
+	public CashLoanRepayment checkRepayment() {
+		CommonService commonService = BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
 		CashLoanRepaymentDao cashLoanRepaymentDao = BeanUtil.getBean(CashLoanRepaymentDao.class);
 		if(this.getId() == null || StringUtil.isBlank(this.getPeriod())){
 			throw new BusinessException("参数错误");
 		}
-		cashLoanRepayment = cashLoanRepaymentDao.find(this.getId());
+		CashLoanRepayment cashLoanRepayment = cashLoanRepaymentDao.find(this.getId());
 		if(cashLoanRepayment == null){
 			throw new BusinessException("参数错误");
+		}
+		if(StringUtil.isBlank(this.getUser().getPayPwd()) || MD5.toMD5(this.payPwd).equals(cashLoanRepayment.getUser().getPayPwd())){
+			throw new BusinessException("交易密码输入错误或未设置");
 		}
 		if(cashLoanRepayment.getCashLoan().getState() != BaseCashLoanConstant.CASHLOAN_STATE_REPAYMENTING 
 				&& cashLoanRepayment.getCashLoan().getState() != BaseCashLoanConstant.CASHLOAN_STATE_OVERDUE){
@@ -189,5 +200,24 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	public void setOrderTask(OrderTask orderTask) {
 		this.orderTask = orderTask;
 	}
-	
+
+	/** 获取【交易密码】 **/
+	public String getPayPwd() {
+		return payPwd;
+	}
+
+	/** 设置【交易密码】 **/
+	public void setPayPwd(String payPwd) {
+		this.payPwd = payPwd;
+	}
+
+	/** 获取【重复标识】 **/
+	public String getToken() {
+		return token;
+	}
+
+	/** 设置【重复标识】 **/
+	public void setToken(String token) {
+		this.token = token;
+	}
 }

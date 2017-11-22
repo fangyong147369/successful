@@ -44,7 +44,7 @@ public final class BaseConstant {
 	/** Business-State=========================================================start **/
 	/** 通用业务处理状态-未处理 **/
 	public static final int BUSINESS_STATE_NO = 0;
-	/** 通用业务处理状态-已处理 **/
+	/** 通用业务处理状态-已处理/已认证 **/
 	public static final int BUSINESS_STATE_YES = 1;
 	/** 通用业务处理状态-处理中 **/
 	public static final int BUSINESS_STATE_WAIT = 2;
@@ -74,10 +74,12 @@ public final class BaseConstant {
 	/** Repayment-Way=========================================================end **/
 	
 	/** update-Way=========================================================start **/
+	/** 修改密码方式-设置 **/
+	public static final int UPDATE_PWD_WAY_SET = 1;
 	/** 修改密码方式-正常 **/
-	public static final int UPDATE_PWD_WAY_NORMAL = 1;
+	public static final int UPDATE_PWD_WAY_UPDATE = 2;
 	/** 修改密码方式-忘记 **/
-	public static final int UPDATE_PWD_WAY_FORGET = 2;
+	public static final int UPDATE_PWD_WAY_FORGET = 3;
 	/** update-Way=========================================================end **/
 	
 	/** handle-SMS-type=========================================================start **/

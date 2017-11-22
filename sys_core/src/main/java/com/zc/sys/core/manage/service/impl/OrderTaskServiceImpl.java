@@ -1,6 +1,9 @@
 package com.zc.sys.core.manage.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.model.OrderTaskModel;
@@ -33,6 +36,7 @@ public class OrderTaskServiceImpl implements OrderTaskService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(OrderTaskModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class OrderTaskServiceImpl implements OrderTaskService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(OrderTaskModel model){
 
 		return null;

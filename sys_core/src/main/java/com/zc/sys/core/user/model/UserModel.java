@@ -37,7 +37,7 @@ public class UserModel extends User {
 	/** 原密码 **/
 	private String oldPwd;
 	/** 修改密码方式：1-修改密码，2-忘记密码 **/
-	private Integer updatePwdWay;
+	private int updatePwdWay;
 	
 	/** 邀请码 **/
 	private String inviteCode;
@@ -63,6 +63,8 @@ public class UserModel extends User {
 	
 	/** 订单信息 **/
 	private OrderTask orderTask;
+	/** 重复标识 **/
+	private String token;
 
 	public UserModel() {
 		super();
@@ -91,6 +93,7 @@ public class UserModel extends User {
 	 */
 	public void checkReg(){
 		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
 		String mobile = this.getMobile();
 		if(!StringUtil.isPhone(mobile)){
 			throw new BusinessException("请输入正确手机号");
@@ -102,7 +105,7 @@ public class UserModel extends User {
 			throw new BusinessException("登录密码输入有误");
 		}
 		//短信验证码校验
-		commonService.checkMobileCode(mobile, this.getMobileCode());
+		commonService.checkMobileCode(mobile, this.getMobileCode(),BaseConstant.HANDLE_SMS_TYPE_REG);
 	}
 	
 	/**
@@ -120,6 +123,8 @@ public class UserModel extends User {
 	 * 登录信息校验
 	 */
 	public void checkLogin() {
+		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
 		if(StringUtil.isBlank(this.getLoginName()) || StringUtil.isBlank(this.getPwd())){
 			throw new BusinessException("登录信息不能为空");
 		}
@@ -147,6 +152,8 @@ public class UserModel extends User {
 	 * 校验修改登录密码
 	 */
 	public User checkUpdatePwd() {
+		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
 		UserDao userDao = BeanUtil.getBean(UserDao.class);
 		if(this.getId() == null || this.getId() <= 0){
 			throw new BusinessException("参数错误");
@@ -158,29 +165,83 @@ public class UserModel extends User {
 		if(user == null){
 			throw new BusinessException("参数错误");
 		}
-		if(this.updatePwdWay == null && (this.updatePwdWay != BaseConstant.UPDATE_PWD_WAY_NORMAL || this.updatePwdWay != BaseConstant.UPDATE_PWD_WAY_FORGET)){
-			throw new BusinessException("参数错误");
-		}
 		switch (this.updatePwdWay) {
-		case 1:
-			if(StringUtil.isBlank(this.getPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !MD5.toMD5(this.oldPwd).equals(this.getConfirmPwd())){
+		case BaseConstant.UPDATE_PWD_WAY_UPDATE://正常修改
+			if(StringUtil.isBlank(this.getOldPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !MD5.toMD5(this.oldPwd).equals(user.getPwd())){
 				throw new BusinessException("原密码输入有误");
 			}
 			break;
-		case 2:
-			CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+		case BaseConstant.UPDATE_PWD_WAY_FORGET://忘记密码
 			if(StringUtil.isBlank(this.mobileCode)){
 				throw new BusinessException("短信验证码不能为空");
 			}
 			//短信验证码校验
-			commonService.checkMobileCode(this.getMobile(), this.getMobileCode());
+			commonService.checkMobileCode(user.getMobile(), this.getMobileCode(),BaseConstant.HANDLE_SMS_TYPE_PWD);
 			break;
-			
 		default:
-			break;
+			throw new BusinessException("参数错误");
 		}
-		
 		return user;
+	}
+	
+	/**
+	 * 初始化信息
+	 * @param user
+	 */
+	public void initUpdatePwd(User user) {
+		user.setPwd(MD5.toMD5(this.getPwd()));
+	}
+	
+
+	/**
+	 * 校验修改交易密码
+	 * @return
+	 */
+	public User checkUpdatePayPwd() {
+		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+		commonService.checkToken(this.token);
+		UserDao userDao = BeanUtil.getBean(UserDao.class);
+		if(this.getId() == null || this.getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		if(StringUtil.isBlank(this.getPayPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !this.getPayPwd().equals(this.getConfirmPwd())){
+			throw new BusinessException("新密码输入有误");
+		}
+		User user = userDao.find(this.getId());
+		if(user == null){
+			throw new BusinessException("参数错误");
+		}
+		if(MD5.toMD5(this.getPayPwd()).equals(user.getPwd())){
+			throw new BusinessException("交易密码不能和登录密码相同");
+		}
+		switch (this.updatePwdWay) {
+		case BaseConstant.UPDATE_PWD_WAY_SET://设置
+			//设置密码判断
+			break;
+		case BaseConstant.UPDATE_PWD_WAY_UPDATE://修改
+			if(StringUtil.isBlank(this.oldPwd) || StringUtil.isBlank(this.getConfirmPwd()) || !MD5.toMD5(this.oldPwd).equals(this.getPayPwd())){
+				throw new BusinessException("原交易密码输入有误");
+			}
+			break;
+		case BaseConstant.UPDATE_PWD_WAY_FORGET://忘记密码
+			if(StringUtil.isBlank(this.mobileCode)){
+				throw new BusinessException("短信验证码不能为空");
+			}
+			//短信验证码校验
+			commonService.checkMobileCode(user.getMobile(), this.getMobileCode(),BaseConstant.HANDLE_SMS_TYPE_PAYPWD);
+			break;
+		default:
+			throw new BusinessException("参数错误");
+		}
+		return user;
+	}
+
+	/**
+	 * 初始化信息
+	 * @param user
+	 */
+	public void initUpdatePayPwd(User user) {
+		user.setPayPwd(MD5.toMD5(this.getPayPwd()));
 	}
 	
 	/** 获取【当前页码】 **/
@@ -376,6 +437,21 @@ public class UserModel extends User {
 	/** 设置【修改密码方式：1-修改密码，2-忘记密码】 **/
 	public void setUpdatePwdWay(Integer updatePwdWay) {
 		this.updatePwdWay = updatePwdWay;
+	}
+
+	/** 设置【修改密码方式：1-修改密码，2-忘记密码】 **/
+	public void setUpdatePwdWay(int updatePwdWay) {
+		this.updatePwdWay = updatePwdWay;
+	}
+
+	/** 获取【重复标识】 **/
+	public String getToken() {
+		return token;
+	}
+
+	/** 设置【重复标识】 **/
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }

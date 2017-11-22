@@ -74,6 +74,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 	 * @return
 	 */
 	@Override
+	@Transactional
 	public Result add(CashLoanModel model) {
 
 		return null;
@@ -86,6 +87,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 	 * @return
 	 */
 	@Override
+	@Transactional
 	public Result update(CashLoanModel model) {
 
 		return null;
@@ -179,6 +181,7 @@ public class CashLoanServiceImpl implements CashLoanService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result cashLoanLoan(CashLoanModel model) {
 		model.checkLoan();
 		CashLoan cashLoan = cashLoanDao.find(model.getId());

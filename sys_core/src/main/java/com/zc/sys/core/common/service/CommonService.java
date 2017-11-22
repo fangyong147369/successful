@@ -38,7 +38,7 @@ public interface CommonService {
 	 * @param code
 	 * @return
 	 */
-	void checkMobileCode(String mobile,String code);
+	void checkMobileCode(String mobile,String code,int handleSmsType);
 
 	/**
 	 * 利息计算器

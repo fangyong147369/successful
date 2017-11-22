@@ -1,6 +1,9 @@
 package com.zc.sys.core.manage.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.manage.dao.AppUploadRecordDao;
 import com.zc.sys.core.manage.model.AppUploadRecordModel;
@@ -33,6 +36,7 @@ public class AppUploadRecordServiceImpl implements AppUploadRecordService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(AppUploadRecordModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class AppUploadRecordServiceImpl implements AppUploadRecordService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(AppUploadRecordModel model){
 
 		return null;

@@ -1,6 +1,9 @@
 package com.zc.sys.core.account.service.impl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
+
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.account.dao.RechargeDao;
 import com.zc.sys.core.account.model.RechargeModel;
@@ -33,6 +36,7 @@ public class RechargeServiceImpl implements RechargeService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(RechargeModel model){
 
 		return null;
@@ -44,6 +48,7 @@ public class RechargeServiceImpl implements RechargeService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(RechargeModel model){
 
 		return null;

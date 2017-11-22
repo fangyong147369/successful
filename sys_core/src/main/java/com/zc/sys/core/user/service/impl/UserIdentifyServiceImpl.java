@@ -50,6 +50,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(UserIdentifyModel model){
 
 		return null;
@@ -61,6 +62,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(UserIdentifyModel model){
 
 		return null;
@@ -91,7 +93,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		/*if(userIdentify.getRealNameCount() > Global.getInt("realNameCount")){
 			return Result.error("已达到实名认证次数上限，请联系平台处理");
 		}*/
-		model.initRealName(userIdentify);//初始化实名
+		userIdentify.setRealNameState(BaseConstant.IDENTIFY_STATE_WAIT);
 		userIdentifyDao.update(userIdentify);
 		model.setId(userIdentify.getId());
 		
@@ -113,7 +115,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	@Transactional
 	public Object realNameDeal(UserIdentifyModel model) {
 		UserIdentify userIdentify = userIdentifyDao.find(model.getId());
-		userIdentify.setRealNameState(1);
+		model.initRealName(userIdentify);
 		userIdentifyDao.update(userIdentify);
 		
 		//订单处理
@@ -125,7 +127,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		
 		//实名成功任务
 		Executer realNameExecuter = BeanUtil.getBean(UserRealNameExecuter.class);
-		realNameExecuter.execute(model);
+		realNameExecuter.execute(UserIdentifyModel.instance(userIdentify));
 		return Result.success();
 	}
 
@@ -135,6 +137,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	 * @return
 	 */
 	@Override
+	@Transactional
 	public Object octopusRequest(UserIdentifyModel model) {
 		
 		return null;
