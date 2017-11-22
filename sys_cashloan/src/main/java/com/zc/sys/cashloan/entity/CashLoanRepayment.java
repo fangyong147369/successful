@@ -43,7 +43,7 @@ public class CashLoanRepayment extends LongPKEntity {
 	/** 预还利息 **/
 	private Double repaymentInterest;
 	/** 预还服务费 **/
-	private Double repyamentServiceFee;
+	private Double repaymentServiceFee;
 	/** 实还款总额 **/
 	private Double repaidTotal;
 	/** 实还款本金 **/
@@ -139,12 +139,12 @@ public class CashLoanRepayment extends LongPKEntity {
 		this.repaymentInterest = repaymentInterest;
 	}
 	/** 获取【预还服务费】 **/
-	public Double getRepyamentServiceFee() {
-		return repyamentServiceFee;
+	public Double getRepaymentServiceFee() {
+		return repaymentServiceFee;
 	}
 	/** 设置【预还服务费】 **/
-	public void setRepyamentServiceFee(Double repyamentServiceFee) {
-		this.repyamentServiceFee = repyamentServiceFee;
+	public void setRepaymentServiceFee(Double repaymentServiceFee) {
+		this.repaymentServiceFee = repaymentServiceFee;
 	}
 	/** 获取【实还款总额】 **/
 	public Double getRepaidTotal() {

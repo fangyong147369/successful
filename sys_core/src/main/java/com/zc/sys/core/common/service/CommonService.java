@@ -40,4 +40,12 @@ public interface CommonService {
 	 */
 	void checkMobileCode(String mobile,String code);
 
+	/**
+	 * 利息计算器
+	 * @param model
+	 * @return
+	 */
+	void calculator(CommonModel model);
+
+	
 }

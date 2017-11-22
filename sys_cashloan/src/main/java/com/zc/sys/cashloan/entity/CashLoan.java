@@ -1,6 +1,7 @@
 package com.zc.sys.cashloan.entity;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -10,6 +11,7 @@ import javax.persistence.Version;
 
 import com.zc.sys.cashloan.constant.BaseCashLoanConstant;
 import com.zc.sys.common.entity.LongPKEntity;
+import com.zc.sys.core.manage.entity.Operator;
 import com.zc.sys.core.user.entity.User;
 /**
  * 现金贷借款
@@ -77,12 +79,22 @@ public class CashLoan extends LongPKEntity {
 	private Integer isPrepayment;
 	/** 审核时间 **/
 	private Date auditTime;
+	/** 审核管理员 **/
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "audit_operator_id")
+	private Operator auditOperator;
 	/** 放款时间 **/
 	private Date loanTime;
 	/** 放款方式:放款到银行卡/放款到账户余额 **/
 	private Integer loanWay;
 	/** 放款账户 **/
 	private String loanAccount;
+	/** 放款流水 **/
+	private String loanOrderNo;
+	/** 放款管理员 **/
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "loan_operator_id")
+	private Operator loanOperator;
 	/** 备注 **/
 	private String remark;
 	/** 添加时间 **/
@@ -348,5 +360,29 @@ public class CashLoan extends LongPKEntity {
 	/** 设置【版本控制】 **/
 	public void setVersion(Integer version) {
 		this.version = version;
+	}
+	/** 获取【放款流水】 **/
+	public String getLoanOrderNo() {
+		return loanOrderNo;
+	}
+	/** 设置【放款流水】 **/
+	public void setLoanOrderNo(String loanOrderNo) {
+		this.loanOrderNo = loanOrderNo;
+	}
+	/** 获取【审核管理员】 **/
+	public Operator getAuditOperator() {
+		return auditOperator;
+	}
+	/** 设置【审核管理员】 **/
+	public void setAuditOperator(Operator auditOperator) {
+		this.auditOperator = auditOperator;
+	}
+	/** 获取【放款管理员】 **/
+	public Operator getLoanOperator() {
+		return loanOperator;
+	}
+	/** 设置【放款管理员】 **/
+	public void setLoanOperator(Operator loanOperator) {
+		this.loanOperator = loanOperator;
 	}
 }

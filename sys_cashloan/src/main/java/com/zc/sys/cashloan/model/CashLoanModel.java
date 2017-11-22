@@ -1,15 +1,24 @@
 package com.zc.sys.cashloan.model;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.cashloan.constant.BaseCashLoanConstant;
 import com.zc.sys.cashloan.entity.CashLoan;
+import com.zc.sys.cashloan.entity.CashLoanRepayment;
 import com.zc.sys.cashloan.service.CashLoanService;
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.interest.CalculatorModel;
+import com.zc.sys.core.common.model.CommonModel;
+import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
@@ -158,6 +167,41 @@ public class CashLoanModel extends CashLoan {
 	public void initLoan(CashLoan cashLoan) {
 		cashLoan.setLoanTime(DateUtil.getNow());
 		cashLoan.setState(BaseCashLoanConstant.CASHLOAN_STATE_REPAYMENTING);//已放款-还款状态
+		cashLoan.setLoanOrderNo(this.getOrderTask().getOrderNo());
+	}
+	
+	/**
+	 * 生成还款计划
+	 */
+	public List<CashLoanRepayment> createRepayments(CashLoan cashLoan){
+		LogUtil.info("-----产生还款计划开始---- cashLoanId:"+cashLoan.getId()+"----cashLoanCno:"+cashLoan.getCno());
+		CommonService commonService = BeanUtil.getBean(CommonService.class);
+		List<CashLoanRepayment> repays = new ArrayList<CashLoanRepayment>();
+		//计算还款计划
+		CommonModel commonModel = new CommonModel(cashLoan.getPeriodUnit(), cashLoan.getPeriod(), cashLoan.getTotal(), 
+				this.getRate(), DateUtil.rollDay(cashLoan.getLoanTime(), 1), cashLoan.getRepaymentType());
+		commonService.calculator(commonModel);
+		
+		List<CalculatorModel> CalculatorModelList = commonModel.getCalculatorModelList();
+		for (CalculatorModel calculatorModel : CalculatorModelList) {
+			CashLoanRepayment cashLoanRepayment = new CashLoanRepayment();
+			cashLoanRepayment.setAddTime(DateUtil.getNow());
+			cashLoanRepayment.setCashLoan(cashLoan);
+			cashLoanRepayment.setPeriod(calculatorModel.getPeriod());
+			cashLoanRepayment.setRepaymentAccount(cashLoan.getLoanAccount());
+			cashLoanRepayment.setRepaymentCapital(calculatorModel.getCapital());
+			cashLoanRepayment.setRepaymentInterest(calculatorModel.getInterest());
+//			cashLoanRepayment.setRepaymentServiceFee(repaymentServiceFee);//服务费
+			cashLoanRepayment.setRepaymentTime(calculatorModel.getRepayTime());
+			cashLoanRepayment.setRepaymentTotal(calculatorModel.getPeriodTotal());//本息总额
+			cashLoanRepayment.setRepaymentWay(2);
+			cashLoanRepayment.setState(2);//还款中
+			cashLoanRepayment.setUser(cashLoan.getUser());
+			repays.add(cashLoanRepayment);
+		}
+		
+		LogUtil.info("-----产生还款计划结束---- cashLoanId:"+cashLoan.getId()+"----cashLoanCno:"+cashLoan.getCno());
+		return repays;
 	}
 
 	/** 获取【当前页码】 **/

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zc.sys.common.exception.BusinessException;
+import com.zc.sys.common.form.Result;
 import com.zc.sys.core.common.model.CommonModel;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.common.web.BaseController;
@@ -45,4 +46,15 @@ public class CommonController extends BaseController<CommonModel> {
 		return commonService.getMobileCode(model);
 	}
 
+	/**
+	 * 利息计算器
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/calculator", method = RequestMethod.POST)
+	@ResponseBody
+	public Object calculator(CommonModel model) throws BusinessException {
+		commonService.calculator(model);
+		return Result.success().setData(model);
+	}
 }

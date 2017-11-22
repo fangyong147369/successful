@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.cashloan.dao.CashLoanDao;
+import com.zc.sys.cashloan.dao.CashLoanRepaymentDao;
 import com.zc.sys.cashloan.entity.CashLoan;
 import com.zc.sys.cashloan.executer.CashLoanAuditExecuter;
 import com.zc.sys.cashloan.executer.CashLoanLoanExecuter;
@@ -26,7 +27,6 @@ import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.manage.model.OrderTaskModel;
-import com.zc.sys.core.user.executer.UserRealNameExecuter;
 
 /**
  * 现金贷借款
@@ -40,6 +40,8 @@ public class CashLoanServiceImpl implements CashLoanService {
 
 	@Resource
 	private CashLoanDao cashLoanDao;
+	@Resource
+	private CashLoanRepaymentDao cashLoanRepaymentDao;
 	@Resource
 	private OrderTaskDao orderTaskDao;
 
@@ -123,7 +125,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		//发送队列
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
 		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoanAudit",
-				model.getCno(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
+				StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
 		orderTaskDao.save(orderTask);
 		model.setOrderTask(orderTask);
 		model.setRemark("自动审核通过");
@@ -184,6 +186,7 @@ public class CashLoanServiceImpl implements CashLoanService {
 		cashLoanDao.update(cashLoan);
 		
 		//生成还款计划
+		cashLoanRepaymentDao.save(model.createRepayments(cashLoan));
 		
 		//放款到账户
 		

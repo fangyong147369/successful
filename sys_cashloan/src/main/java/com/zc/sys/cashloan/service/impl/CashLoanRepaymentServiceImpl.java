@@ -13,6 +13,15 @@ import com.zc.sys.cashloan.model.CashLoanRepaymentModel;
 import com.zc.sys.cashloan.service.CashLoanRepaymentService;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.common.util.date.DateUtil;
+import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
+import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.queue.pojo.QueueModel;
+import com.zc.sys.core.common.queue.service.QueueProducerService;
+import com.zc.sys.core.manage.dao.OrderTaskDao;
+import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.manage.model.OrderTaskModel;
 /**
  * 现金贷还款计划
  * @author zp
@@ -24,6 +33,8 @@ public class CashLoanRepaymentServiceImpl implements CashLoanRepaymentService {
 
 	@Resource
 	private CashLoanRepaymentDao cashLoanRepaymentDao;
+	@Resource
+	private OrderTaskDao orderTaskDao;
 	/**
  	 * 列表
  	 * @param model
@@ -86,18 +97,34 @@ public class CashLoanRepaymentServiceImpl implements CashLoanRepaymentService {
 	@Override
 	@Transactional
 	public Result cashLoanRepaymentRequest(CashLoanRepaymentModel model) {
+		CashLoanRepayment cashLoanRepayment = new CashLoanRepayment();
+		model.checkRepayment(cashLoanRepayment);//校验还款
+		model.initRepayment(cashLoanRepayment);//初始化还款信息
+		cashLoanRepaymentDao.update(cashLoanRepayment);
 		
-		return null;
+		//发送队列
+		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
+		OrderTask orderTask = new OrderTask(cashLoanRepayment.getUser(), "cashLoanRepayment",
+				StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
+		orderTaskDao.save(orderTask);
+		model.setOrderTask(orderTask);
+		queueService.send(new QueueModel("cashLoanRepayment", OrderTaskModel.instance(orderTask), model));
+		return Result.success("还款处理中...请稍后！");
 	}
 
 	/**
- 	 * 现金贷款还款请求
+ 	 * 现金贷款还款处理
  	 * @param model
  	 * @return
  	 */
 	@Override
 	@Transactional
 	public Result cashLoanRepaymentDeal(CashLoanRepaymentModel model) {
+		CashLoanRepayment cashLoanRepayment = cashLoanRepaymentDao.find(model.getId());
+		model.initDetail(cashLoanRepayment);
+		cashLoanRepaymentDao.update(cashLoanRepayment);
+		
+		//自动扣款业务
 		
 		return null;
 	}

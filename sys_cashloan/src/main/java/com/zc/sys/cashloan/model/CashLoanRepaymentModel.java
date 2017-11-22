@@ -1,7 +1,10 @@
 package com.zc.sys.cashloan.model;
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.cashloan.entity.CashLoanRepayment;
 /**
  * 现金贷还款计划
@@ -19,6 +22,9 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	
+	/** 订单信息 **/
+	private OrderTask orderTask;
 
 	/**
 	 * 实体转换model
@@ -38,11 +44,40 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 		return cashLoanRepayment;
 	}
 	
-
 	/**
 	 * 现金贷还款处理
 	 */
 	public void doQueue() {
+		
+	}
+	
+
+	/**
+	 * 校验还款信息
+	 * @param cashLoanRepaymet
+	 */
+	public void checkRepayment(CashLoanRepayment cashLoanRepaymet) {
+		if(this.getId() == null || StringUtil.isBlank(cashLoanRepaymet.getPeriod())){
+			throw new BusinessException("参数错误");
+		}
+		
+	}
+
+	/**
+	 * 初始化还款信息
+	 * @param cashLoanRepaymet
+	 */
+	public void initRepayment(CashLoanRepayment cashLoanRepaymet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * 初始化信息
+	 * @param cashLoanRepayment
+	 */
+	public void initDetail(CashLoanRepayment cashLoanRepayment) {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -76,4 +111,14 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 		this.searchName = searchName;
 	}
 
+	/** 获取【订单信息】 **/
+	public OrderTask getOrderTask() {
+		return orderTask;
+	}
+
+	/** 设置【订单信息】 **/
+	public void setOrderTask(OrderTask orderTask) {
+		this.orderTask = orderTask;
+	}
+	
 }

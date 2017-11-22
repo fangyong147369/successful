@@ -61,9 +61,17 @@ public final class BaseConstant {
 	public static final int INFO_STATE_YES = 1;
 	/** Info-State=========================================================end **/
 	
+	/** PeriodUnit=========================================================start **/
+	/** 借款期限单位-月 **/
+	public static final int PERIODUNIT_MONTH = 0;
+	/** 借款期限单位-天 **/
+	public static final int PERIODUNIT_DAY = 1;
+	/** PeriodUnit=========================================================end **/
+	
+	/** Repayment-Way=========================================================start **/
+	/** 现金贷-还款方式-一次性还本付息 **/
+	public static final int REPAYMENT_WAY_ONETIME = 1;
 	
 	
-	
-	
-	
+	/** Repayment-Way=========================================================end **/
 }

@@ -5,6 +5,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -43,7 +44,7 @@ public class CreditScoreLog extends LongPKEntity {
 	/** 关联订单 **/
 	private String orderNo;
 	/** 操作管理员 **/
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "operator_id")
 	private Operator operator;
 	/** 备注 **/

@@ -1,5 +1,8 @@
 package com.zc.sys.core.common.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zc.sys.common.cache.RedisCacheUtil;
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.util.calculate.BigDecimalUtil;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.RandomUtil;
 import com.zc.sys.common.util.validate.StringUtil;
@@ -15,6 +19,10 @@ import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.executer.NoticeMessageExecuter;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.global.Global;
+import com.zc.sys.core.common.interest.CalculatorModel;
+import com.zc.sys.core.common.interest.EachPlan;
+import com.zc.sys.core.common.interest.InterestCalculator;
+import com.zc.sys.core.common.interest.OnetimeRepaymentCalculator;
 import com.zc.sys.core.common.model.CommonModel;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.dao.NoticeMessageDao;
@@ -112,6 +120,48 @@ public class CommonServiceImpl implements CommonService {
 		if(StringUtil.isBlank(cacheCode) || !mobileCode.equals(cacheCode)){
 			throw new BusinessException("短信验证码校验失败");
 		}
+	}
+
+	/**
+	 * 利息计算器
+	 * @param model
+	 * @return
+	 */
+	@Override
+	public void calculator(CommonModel model) {
+		model.checkAndInitCalculator();
+		InterestCalculator ic = null;
+		List<EachPlan> list = new ArrayList<EachPlan>();
+		List<CalculatorModel> list_ = new ArrayList<CalculatorModel>();
+		if(model.getPeriodUnit() == BaseConstant.PERIODUNIT_DAY){//天
+			if(model.getRepaymentType() == BaseConstant.REPAYMENT_WAY_ONETIME){//一次性
+				ic = new OnetimeRepaymentCalculator(model.getAmount(), BigDecimalUtil.mul(model.getRate(),365), model.getStartTime(), 1, 0);
+				list = ic.calculator(model.getPeriod());
+			}
+		}
+		
+		int i = 0;
+		for (EachPlan eachPlan : list) {
+			CalculatorModel calculatorModel = new CalculatorModel();
+			calculatorModel.setCapital(eachPlan.getCapital());
+			calculatorModel.setInterest(eachPlan.getInterest());
+			calculatorModel.setPeriod(i+1);
+			calculatorModel.setPeriodTotal(eachPlan.getNetTotal());
+			calculatorModel.setRepayTime(eachPlan.getRepayTime());
+			double needRepay = eachPlan.getNeedRepay();
+			calculatorModel.setNeedRepay(needRepay);
+			
+			list_.add(calculatorModel);
+
+			//还款利息总额
+			model.setInterestTotal(BigDecimalUtil.add(eachPlan.getInterest(),model.getInterestTotal()));
+			i++;
+		}
+		//还款总额
+		model.setTotal(BigDecimalUtil.add(model.getInterestTotal(), model.getAmount()));
+		model.setCalculatorModelList(list_);
+		model.setInterestTotal(BigDecimalUtil.round(model.getInterestTotal(), 2));
+		model.setTotal(BigDecimalUtil.round(model.getTotal(), 2));
 	}
 
 }
