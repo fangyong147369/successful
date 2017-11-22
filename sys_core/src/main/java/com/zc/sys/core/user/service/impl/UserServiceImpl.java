@@ -232,4 +232,18 @@ public class UserServiceImpl implements UserService {
 		return Result.success().setData(returnModel);
 	}
 
+	@Override
+	public Result updatePayPwd(UserModel model) {
+		
+		return null;
+	}
+
+	@Override
+	public Result updatePwd(UserModel model) {
+		User user = model.checkUpdatePwd();//校验修改登录密码
+		return null;
+	}
+	
+	
+
 }

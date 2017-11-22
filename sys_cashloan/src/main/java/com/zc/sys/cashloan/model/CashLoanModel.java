@@ -1,6 +1,5 @@
 package com.zc.sys.cashloan.model;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -20,7 +19,6 @@ import com.zc.sys.core.common.interest.CalculatorModel;
 import com.zc.sys.core.common.model.CommonModel;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
-import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
@@ -140,7 +138,7 @@ public class CashLoanModel extends CashLoan {
 	 * 贷款处理
 	 */
 	public void doQueue() {
-		CashLoanService cashLoanService = (CashLoanService)BeanUtil.getBean(CashLoanService.class);
+		CashLoanService cashLoanService =BeanUtil.getBean(CashLoanService.class);
 		if(this.orderTask.getType().equals("cashLoanAudit")){
 			cashLoanService.cashLoanDeal(this);
 		}
@@ -195,7 +193,7 @@ public class CashLoanModel extends CashLoan {
 			cashLoanRepayment.setRepaymentTime(calculatorModel.getRepayTime());
 			cashLoanRepayment.setRepaymentTotal(calculatorModel.getPeriodTotal());//本息总额
 			cashLoanRepayment.setRepaymentWay(2);
-			cashLoanRepayment.setState(2);//还款中
+			cashLoanRepayment.setState(BaseConstant.BUSINESS_STATE_NO);//还款中
 			cashLoanRepayment.setUser(cashLoan.getUser());
 			repays.add(cashLoanRepayment);
 		}

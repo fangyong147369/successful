@@ -65,7 +65,7 @@ public class Global {
 		return StringUtil.toInt(getValue(key));
 	}
 	
-	public static double getDouble(String key) {
+	public static double getdouble(String key) {
 		return Double.parseDouble(getValue(key));
 	}
 	

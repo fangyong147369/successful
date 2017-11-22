@@ -1,11 +1,21 @@
 package com.zc.sys.cashloan.model;
+import java.util.Date;
+
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.cashloan.constant.BaseCashLoanConstant;
+import com.zc.sys.cashloan.dao.CashLoanRepaymentDao;
+import com.zc.sys.cashloan.entity.CashLoan;
+import com.zc.sys.cashloan.entity.CashLoanRepayment;
+import com.zc.sys.cashloan.service.CashLoanRepaymentService;
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.calculate.BigDecimalUtil;
+import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
+import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.manage.entity.OrderTask;
-import com.zc.sys.cashloan.entity.CashLoanRepayment;
 /**
  * 现金贷还款计划
  * @author zp
@@ -48,7 +58,10 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	 * 现金贷还款处理
 	 */
 	public void doQueue() {
-		
+		CashLoanRepaymentService cashLoanRepaymentService = BeanUtil.getBean(CashLoanRepaymentService.class);
+		if(this.orderTask.getType().equals("cashLoanRepayment")){
+			cashLoanRepaymentService.cashLoanRepaymentDeal(this);
+		}
 	}
 	
 
@@ -56,11 +69,31 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	 * 校验还款信息
 	 * @param cashLoanRepaymet
 	 */
-	public void checkRepayment(CashLoanRepayment cashLoanRepaymet) {
-		if(this.getId() == null || StringUtil.isBlank(cashLoanRepaymet.getPeriod())){
+	public CashLoanRepayment checkRepayment(CashLoanRepayment cashLoanRepayment) {
+		CashLoanRepaymentDao cashLoanRepaymentDao = BeanUtil.getBean(CashLoanRepaymentDao.class);
+		if(this.getId() == null || StringUtil.isBlank(this.getPeriod())){
 			throw new BusinessException("参数错误");
 		}
-		
+		cashLoanRepayment = cashLoanRepaymentDao.find(this.getId());
+		if(cashLoanRepayment == null){
+			throw new BusinessException("参数错误");
+		}
+		if(cashLoanRepayment.getCashLoan().getState() != BaseCashLoanConstant.CASHLOAN_STATE_REPAYMENTING 
+				&& cashLoanRepayment.getCashLoan().getState() != BaseCashLoanConstant.CASHLOAN_STATE_OVERDUE){
+			throw new BusinessException("还款状态有误");
+		}
+		//当前期是否最近期还款
+		boolean isCurrentRepayment = cashLoanRepaymentDao.isCurrentRepayment(cashLoanRepayment.getPeriod(), cashLoanRepayment.getCashLoan().getId());
+		if(!isCurrentRepayment){
+			throw new BusinessException("操作失败，上期还未还款");
+		}
+		if(this.getRepaymentWay() == null || this.getRepaymentWay() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		if(StringUtil.isBlank(this.getRepaymentAccount())){
+			throw new BusinessException("参数错误");
+		}
+		return cashLoanRepayment;
 	}
 
 	/**
@@ -68,8 +101,17 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	 * @param cashLoanRepaymet
 	 */
 	public void initRepayment(CashLoanRepayment cashLoanRepaymet) {
-		// TODO Auto-generated method stub
-		
+		cashLoanRepaymet.setState(BaseConstant.BUSINESS_STATE_WAIT);
+	}
+	
+	/**
+	 * 校验还款处理
+	 * @param cashLoanRepayment
+	 */
+	public void checkDetail(CashLoanRepayment cashLoanRepayment) {
+		if(cashLoanRepayment.getState() != BaseConstant.BUSINESS_STATE_WAIT){
+			throw new BusinessException("还款状态有误");
+		}
 	}
 
 	/**
@@ -77,8 +119,35 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 	 * @param cashLoanRepayment
 	 */
 	public void initDetail(CashLoanRepayment cashLoanRepayment) {
-		// TODO Auto-generated method stub
+		double curCapital = cashLoanRepayment.getRepaymentCapital();//本金
+		double curInterest = cashLoanRepayment.getRepaymentInterest();//利息
+		double curServiceFee = cashLoanRepayment.getRepaymentServiceFee();//服务费
+		double curOverdueInterest = cashLoanRepayment.getOverdueInterest();//逾期利息
+		double curTotal = cashLoanRepayment.getRepaymentTotal();//总额
+		Date repaymentTime = DateUtil.getNow();//还款时间
+		String orderNo = StringUtil.getSerialNumber();//还款订单号
+		int repaymentWay = this.getRepaymentWay();//还款方式
+		String repaymentAccount = this.getRepaymentAccount();//还款账户
 		
+		CashLoan cashLoan = cashLoanRepayment.getCashLoan();
+		cashLoan.setRepaidCapital(BigDecimalUtil.add(cashLoan.getRepaidCapital(),curCapital));
+		cashLoan.setRepaidInterest(BigDecimalUtil.add(cashLoan.getRepaidInterest(),curInterest));
+		cashLoan.setRepaidServiceFee(BigDecimalUtil.add(cashLoan.getRepaidServiceFee(),curServiceFee));
+		cashLoan.setRepaidOverdueInterest(BigDecimalUtil.add(cashLoan.getRepaidCapital(),curOverdueInterest));
+		cashLoan.setRepaidTotal(BigDecimalUtil.add(cashLoan.getRepaidTotal(),curTotal));
+		cashLoanRepayment.setCashLoan(cashLoan);
+		
+		
+		cashLoanRepayment.setRepaidCapital(BigDecimalUtil.add(cashLoanRepayment.getRepaidCapital(),curCapital));
+		cashLoanRepayment.setRepaidInterest(BigDecimalUtil.add(cashLoanRepayment.getRepaidInterest(),curInterest));
+		cashLoanRepayment.setRepaidServiceFee(BigDecimalUtil.add(cashLoanRepayment.getRepaidServiceFee(),curServiceFee));
+		cashLoanRepayment.setRepaidOverdueInterest(BigDecimalUtil.add(cashLoanRepayment.getRepaidCapital(),curOverdueInterest));
+		cashLoanRepayment.setRepaidTotal(BigDecimalUtil.add(cashLoanRepayment.getRepaidTotal(),curTotal));
+		cashLoanRepayment.setRepaymentTime(repaymentTime);
+		cashLoanRepayment.setOrderNo(orderNo);
+		cashLoanRepayment.setRepaymentWay(repaymentWay);
+		cashLoanRepayment.setRepaymentAccount(repaymentAccount);
+		cashLoanRepayment.setState(BaseConstant.BUSINESS_STATE_YES);
 	}
 
 	/** 获取【当前页码】 **/

@@ -31,13 +31,13 @@ public class AccountLog extends LongPKEntity {
 	/** 名称 **/
 	private String name;
 	/** 账户总额 **/
-	private Double total;
+	private double total;
 	/** 操作金额 **/
-	private Double amount;
+	private double amount;
 	/** 可用余额 **/
-	private Double balance;
+	private double balance;
 	/** 冻结金额 **/
-	private Double freezeAmount;
+	private double freezeAmount;
 	/** 交易方用户 **/
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "to_user")
@@ -79,35 +79,35 @@ public class AccountLog extends LongPKEntity {
 		this.name = name;
 	}
 	/** 获取【账户总额】 **/
-	public Double getTotal() {
+	public double getTotal() {
 		return total;
 	}
 	/** 设置【账户总额】 **/
-	public void setTotal(Double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 	/** 获取【操作金额】 **/
-	public Double getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 	/** 设置【操作金额】 **/
-	public void setAmount(Double amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	/** 获取【可用余额】 **/
-	public Double getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 	/** 设置【可用余额】 **/
-	public void setBalance(Double balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	/** 获取【冻结金额】 **/
-	public Double getFreezeAmount() {
+	public double getFreezeAmount() {
 		return freezeAmount;
 	}
 	/** 设置【冻结金额】 **/
-	public void setFreezeAmount(Double freezeAmount) {
+	public void setFreezeAmount(double freezeAmount) {
 		this.freezeAmount = freezeAmount;
 	}
 	/** 获取【交易方用户】 **/

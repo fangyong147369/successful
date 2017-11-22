@@ -58,4 +58,17 @@ public interface UserService{
 	 */
 	public Result login(UserModel model);
 
+	/**
+	 * 修改交易密码
+	 * @param model
+	 * @return
+	 */
+	public Result updatePayPwd(UserModel model);
+	
+	/**
+	 * 修改登录密码
+	 * @param model
+	 * @return
+	 */
+	public Result updatePwd(UserModel model);
 }

@@ -18,4 +18,12 @@ public interface CashLoanRepaymentDao extends BaseDao<CashLoanRepayment> {
 	 */
 	PageDataList<CashLoanRepayment> list(CashLoanRepaymentModel model);
 	
+	/**
+	 * 当前是否为最近还款
+	 * @param period
+	 * @param cashLoanId
+	 * @return
+	 */
+	boolean isCurrentRepayment(int period,long cashLoanId);
+	
 }

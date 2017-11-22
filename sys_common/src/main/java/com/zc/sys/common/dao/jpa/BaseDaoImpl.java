@@ -28,6 +28,7 @@ import org.hibernate.transform.Transformers;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.common.dao.BaseDao;
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.model.jpa.QueryParam;
@@ -163,7 +164,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	@Override
 	public T find(Serializable entityId) {
 		if (entityId == null)
-			throw new RuntimeException(this.entityClass.getName() + ":传入的实体id不能为空");
+			throw new BusinessException(this.entityClass.getName() + ":传入的实体id不能为空");
 		return em.find(this.entityClass, entityId);
 	}
 

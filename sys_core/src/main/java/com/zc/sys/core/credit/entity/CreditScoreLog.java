@@ -30,13 +30,13 @@ public class CreditScoreLog extends LongPKEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 操作信用分 **/
-	private Double score;
+	private double score;
 	/** 类型 **/
 	private String type;
 	/** 名称 **/
 	private String name;
 	/** 信用分 **/
-	private Double balanceScore;
+	private double balanceScore;
 	/** 内容 **/
 	private String content;
 	/** 收支方式 **/
@@ -60,11 +60,11 @@ public class CreditScoreLog extends LongPKEntity {
 		this.user = user;
 	}
 	/** 获取【操作信用分】 **/
-	public Double getScore() {
+	public double getScore() {
 		return score;
 	}
 	/** 设置【操作信用分】 **/
-	public void setScore(Double score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 	/** 获取【类型】 **/
@@ -84,11 +84,11 @@ public class CreditScoreLog extends LongPKEntity {
 		this.name = name;
 	}
 	/** 获取【信用分】 **/
-	public Double getBalanceScore() {
+	public double getBalanceScore() {
 		return balanceScore;
 	}
 	/** 设置【信用分】 **/
-	public void setBalanceScore(Double balanceScore) {
+	public void setBalanceScore(double balanceScore) {
 		this.balanceScore = balanceScore;
 	}
 	/** 获取【内容】 **/

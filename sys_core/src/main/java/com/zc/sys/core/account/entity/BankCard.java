@@ -47,7 +47,7 @@ public class BankCard extends LongPKEntity {
 	/** 预留手机号 **/
 	private String mobile;
 	/** 剩余提取金额 **/
-	private Double amount;
+	private double amount;
 	/** 状态 **/
 	private Integer state;
 	/** 自动扣款状态 **/
@@ -139,11 +139,11 @@ public class BankCard extends LongPKEntity {
 		this.mobile = mobile;
 	}
 	/** 获取【剩余提取金额】 **/
-	public Double getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 	/** 设置【剩余提取金额】 **/
-	public void setAmount(Double amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	/** 获取【状态】 **/

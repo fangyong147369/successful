@@ -28,19 +28,19 @@ public class IntegralLog extends LongPKEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 操作积分 **/
-	private Double integral;
+	private double integral;
 	/** 类型 **/
 	private String type;
 	/** 名称 **/
 	private String name;
 	/** 积分总额 **/
-	private Double totalIntegral;
+	private double totalIntegral;
 	/** 可用积分 **/
-	private Double balanceIntegral;
+	private double balanceIntegral;
 	/** 消费积分 **/
-	private Double expenseIntegral;
+	private double expenseIntegral;
 	/** 冻结积分 **/
-	private Double freezeIntegral;
+	private double freezeIntegral;
 	/** 交易方用户 */
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "to_user_id")
@@ -64,11 +64,11 @@ public class IntegralLog extends LongPKEntity {
 		this.user = user;
 	}
 	/** 获取【操作积分】 **/
-	public Double getIntegral() {
+	public double getIntegral() {
 		return integral;
 	}
 	/** 设置【操作积分】 **/
-	public void setIntegral(Double integral) {
+	public void setIntegral(double integral) {
 		this.integral = integral;
 	}
 	/** 获取【类型】 **/
@@ -88,35 +88,35 @@ public class IntegralLog extends LongPKEntity {
 		this.name = name;
 	}
 	/** 获取【积分总额】 **/
-	public Double getTotalIntegral() {
+	public double getTotalIntegral() {
 		return totalIntegral;
 	}
 	/** 设置【积分总额】 **/
-	public void setTotalIntegral(Double totalIntegral) {
+	public void setTotalIntegral(double totalIntegral) {
 		this.totalIntegral = totalIntegral;
 	}
 	/** 获取【可用积分】 **/
-	public Double getBalanceIntegral() {
+	public double getBalanceIntegral() {
 		return balanceIntegral;
 	}
 	/** 设置【可用积分】 **/
-	public void setBalanceIntegral(Double balanceIntegral) {
+	public void setBalanceIntegral(double balanceIntegral) {
 		this.balanceIntegral = balanceIntegral;
 	}
 	/** 获取【消费积分】 **/
-	public Double getExpenseIntegral() {
+	public double getExpenseIntegral() {
 		return expenseIntegral;
 	}
 	/** 设置【消费积分】 **/
-	public void setExpenseIntegral(Double expenseIntegral) {
+	public void setExpenseIntegral(double expenseIntegral) {
 		this.expenseIntegral = expenseIntegral;
 	}
 	/** 获取【冻结积分】 **/
-	public Double getFreezeIntegral() {
+	public double getFreezeIntegral() {
 		return freezeIntegral;
 	}
 	/** 设置【冻结积分】 **/
-	public void setFreezeIntegral(Double freezeIntegral) {
+	public void setFreezeIntegral(double freezeIntegral) {
 		this.freezeIntegral = freezeIntegral;
 	}
 	/** 获取【交易方用户】 **/

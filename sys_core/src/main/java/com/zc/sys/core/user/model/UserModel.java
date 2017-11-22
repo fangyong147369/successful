@@ -7,6 +7,7 @@ import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.encrypt.MD5;
 import com.zc.sys.common.util.http.RequestUtil;
 import com.zc.sys.common.util.validate.StringUtil;
+import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
@@ -31,6 +32,12 @@ public class UserModel extends User {
 	private String searchName;
 	/** 登录名 **/
 	private String loginName;
+	/** 确认密码 **/
+	private String confirmPwd;
+	/** 原密码 **/
+	private String oldPwd;
+	/** 修改密码方式：1-修改密码，2-忘记密码 **/
+	private Integer updatePwdWay;
 	
 	/** 邀请码 **/
 	private String inviteCode;
@@ -91,6 +98,9 @@ public class UserModel extends User {
 		if(this.checkMobileExist(mobile)){
 			throw new BusinessException("该手机号已存在");
 		}
+		if(StringUtil.isBlank(this.getPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !this.getPwd().equals(this.getConfirmPwd())){
+			throw new BusinessException("登录密码输入有误");
+		}
 		//短信验证码校验
 		commonService.checkMobileCode(mobile, this.getMobileCode());
 	}
@@ -131,6 +141,46 @@ public class UserModel extends User {
 	public void initReturn() {
 		this.setPwd(null);
 		this.setPayPwd(null);
+	}
+
+	/**
+	 * 校验修改登录密码
+	 */
+	public User checkUpdatePwd() {
+		UserDao userDao = BeanUtil.getBean(UserDao.class);
+		if(this.getId() == null || this.getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		if(StringUtil.isBlank(this.getPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !this.getPwd().equals(this.getConfirmPwd())){
+			throw new BusinessException("新密码输入有误");
+		}
+		User user = userDao.find(this.getId());
+		if(user == null){
+			throw new BusinessException("参数错误");
+		}
+		if(this.updatePwdWay == null && (this.updatePwdWay != BaseConstant.UPDATE_PWD_WAY_NORMAL || this.updatePwdWay != BaseConstant.UPDATE_PWD_WAY_FORGET)){
+			throw new BusinessException("参数错误");
+		}
+		switch (this.updatePwdWay) {
+		case 1:
+			if(StringUtil.isBlank(this.getPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !MD5.toMD5(this.oldPwd).equals(this.getConfirmPwd())){
+				throw new BusinessException("原密码输入有误");
+			}
+			break;
+		case 2:
+			CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
+			if(StringUtil.isBlank(this.mobileCode)){
+				throw new BusinessException("短信验证码不能为空");
+			}
+			//短信验证码校验
+			commonService.checkMobileCode(this.getMobile(), this.getMobileCode());
+			break;
+			
+		default:
+			break;
+		}
+		
+		return user;
 	}
 	
 	/** 获取【当前页码】 **/
@@ -296,6 +346,36 @@ public class UserModel extends User {
 	/** 设置【添加ip】 **/
 	public void setAddIp(String addIp) {
 		this.addIp = addIp;
+	}
+
+	/** 获取【确认密码】 **/
+	public String getConfirmPwd() {
+		return confirmPwd;
+	}
+
+	/** 设置【确认密码】 **/
+	public void setConfirmPwd(String confirmPwd) {
+		this.confirmPwd = confirmPwd;
+	}
+
+	/** 获取【原密码】 **/
+	public String getOldPwd() {
+		return oldPwd;
+	}
+
+	/** 设置【原密码】 **/
+	public void setOldPwd(String oldPwd) {
+		this.oldPwd = oldPwd;
+	}
+
+	/** 获取【修改密码方式：1-修改密码，2-忘记密码】 **/
+	public Integer getUpdatePwdWay() {
+		return updatePwdWay;
+	}
+
+	/** 设置【修改密码方式：1-修改密码，2-忘记密码】 **/
+	public void setUpdatePwdWay(Integer updatePwdWay) {
+		this.updatePwdWay = updatePwdWay;
 	}
 
 }

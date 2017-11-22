@@ -10,7 +10,6 @@ package com.zc.sys.core.common.constant;
 public final class BaseConstant {
 	
 	/** DB=========================================================start **/
-	
 	/** 表前缀  **/
 	public static final String DB_PREFIX = "zc_";
 	/** 表模块-s-系统配置  **/
@@ -29,7 +28,6 @@ public final class BaseConstant {
 	public static final String DB_MODEL_Jf = "jf";
 	/** 表模块-cs-信用分 **/
 	public static final String DB_MODEL_Cs = "cs";
-	
 	/** DB=========================================================end **/
 	
 	/** Identify-State=========================================================start **/
@@ -74,4 +72,20 @@ public final class BaseConstant {
 	
 	
 	/** Repayment-Way=========================================================end **/
+	
+	/** update-Way=========================================================start **/
+	/** 修改密码方式-正常 **/
+	public static final int UPDATE_PWD_WAY_NORMAL = 1;
+	/** 修改密码方式-忘记 **/
+	public static final int UPDATE_PWD_WAY_FORGET = 2;
+	/** update-Way=========================================================end **/
+	
+	/** handle-SMS-type=========================================================start **/
+	/** 主动短信类型-注册 **/
+	public static final int HANDLE_SMS_TYPE_REG = 1;
+	/** 主动短信类型-登录密码 **/
+	public static final int HANDLE_SMS_TYPE_PWD = 2;
+	/** 主动短信类型-交易密码 **/
+	public static final int HANDLE_SMS_TYPE_PAYPWD = 3;
+	/** handle-SMS-type=========================================================end **/
 }

@@ -27,11 +27,11 @@ public class Account extends LongPKEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 账户总额 **/
-	private Double total;
+	private double total;
 	/** 可用余额 **/
-	private Double balance;
+	private double balance;
 	/** 冻结金额 **/
-	private Double freezeAmount;
+	private double freezeAmount;
 	/** 版本控制 **/
 	@Version
 	private Integer version;
@@ -46,27 +46,27 @@ public class Account extends LongPKEntity {
 		this.user = user;
 	}
 	/** 获取【账户总额】 **/
-	public Double getTotal() {
+	public double getTotal() {
 		return total;
 	}
 	/** 设置【账户总额】 **/
-	public void setTotal(Double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 	/** 获取【可用余额】 **/
-	public Double getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 	/** 设置【可用余额】 **/
-	public void setBalance(Double balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	/** 获取【冻结金额】 **/
-	public Double getFreezeAmount() {
+	public double getFreezeAmount() {
 		return freezeAmount;
 	}
 	/** 设置【冻结金额】 **/
-	public void setFreezeAmount(Double freezeAmount) {
+	public void setFreezeAmount(double freezeAmount) {
 		this.freezeAmount = freezeAmount;
 	}
 	/** 获取【版本控制】 **/

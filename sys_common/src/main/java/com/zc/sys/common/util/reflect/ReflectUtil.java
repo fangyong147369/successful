@@ -24,7 +24,7 @@ public class ReflectUtil {
 
 	public static List<?> PRIMITIVE_TYPES = Arrays.asList(new Class[] { char.class, short.class, byte.class, int.class,
 			long.class, float.class, double.class, boolean.class, Short.class, Byte.class, Integer.class, Long.class,
-			Float.class, Double.class, Boolean.class, String.class, Date.class });
+			Float.class, double.class, Boolean.class, String.class, Date.class });
 
 	public static boolean isPrimitive(Class<?> type) {
 		return PRIMITIVE_TYPES.contains(type);

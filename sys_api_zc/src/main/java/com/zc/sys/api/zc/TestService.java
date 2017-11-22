@@ -1,5 +1,6 @@
 package com.zc.sys.api.zc;
 
+import org.hibernate.Hibernate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -59,6 +60,24 @@ public class TestService{
 		System.err.println(dd);
 	}
 	
+	public void roleById(){
+		String model = "id=1";
+		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/m/role/getById", model);
+		System.err.println(dd);
+	}
+	
+	public void roleMenuList(){
+		String model = "role.id=1";
+		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/m/rolemenu/list", model);
+		System.err.println(dd);
+	}
+	
+	public void roleUpdate(){
+		String model = "id=1&name=管理员&state=1&remark=测试&menuIdStr=4,1,3,8,5,6,7,10";
+		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/m/role/update", model);
+		System.err.println(dd);
+	}
+	
 	@Test
 	public void testMain(){
 //		getSMSCode();
@@ -66,9 +85,12 @@ public class TestService{
 //		login();
 //		realName();
 //		bindbank();
-		cashloan();
+//		cashloan();
 //		menu();
 //		operatorList();
+//		roleById();
+		roleMenuList();
+//		roleUpdate();
 	}
 	
 	public static void main(String[] args) {

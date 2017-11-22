@@ -38,6 +38,9 @@ public class CommonModel {
 	private double total;
 	/** 还款计划model **/
 	private List<CalculatorModel> CalculatorModelList;
+	
+	/** 主动发送短信类型 **/
+	private int handleSmsType;
 
 	public CommonModel() {
 		super();
@@ -68,6 +71,9 @@ public class CommonModel {
 	public void checkSMS() {
 		if(StringUtil.isBlank(mobile) || !StringUtil.isPhone(mobile)){
 			throw new BusinessException("手机号不能为空");
+		}
+		if(this.getHandleSmsType() <= 0){
+			throw new BusinessException("参数错误");
 		}
 	}
 	
@@ -194,6 +200,16 @@ public class CommonModel {
 	/** 设置【calculatorModelList】 **/
 	public void setCalculatorModelList(List<CalculatorModel> calculatorModelList) {
 		CalculatorModelList = calculatorModelList;
+	}
+
+	/** 获取【主动发送短信类型】 **/
+	public int getHandleSmsType() {
+		return handleSmsType;
+	}
+
+	/** 设置【主动发送短信类型】 **/
+	public void setHandleSmsType(int handleSmsType) {
+		this.handleSmsType = handleSmsType;
 	}
 	
 }

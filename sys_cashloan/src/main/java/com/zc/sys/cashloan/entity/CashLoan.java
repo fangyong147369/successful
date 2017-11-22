@@ -38,7 +38,7 @@ public class CashLoan extends LongPKEntity {
 	/** 状态 **/
 	private Integer state;
 	/** 借款本金总额 **/
-	private Double total;
+	private double total;
 	/** 还款方式 **/
 	private Integer repaymentType;
 	/** 期限单位 **/
@@ -46,35 +46,35 @@ public class CashLoan extends LongPKEntity {
 	/** 期限 **/
 	private Integer period;
 	/** 天利率 **/
-	private Double rate;
+	private double rate;
 	/** 逾期天利率 **/
-	private Double overdueRate;
+	private double overdueRate;
 	/** 服务费收取类型 **/
 	private Integer serviceFeeType;
 	/** 服务费收取值 **/
-	private Double serviceFeeValue;
+	private double serviceFeeValue;
 	/** 应还总额 **/
-	private Double repaymentTotal;
+	private double repaymentTotal;
 	/** 应还本金 **/
-	private Double repaymentCapital;
+	private double repaymentCapital;
 	/** 应还利息 **/
-	private Double repaymentInterest;
+	private double repaymentInterest;
 	/** 应还服务费 **/
-	private Double repaymentServiceFee;
+	private double repaymentServiceFee;
 	/** 已还款总额 **/
-	private Double repaidTotal;
+	private double repaidTotal;
 	/** 已还款本金 **/
-	private Double repaidCapital;
+	private double repaidCapital;
 	/** 已还款利息 **/
-	private Double repaidInterest;
+	private double repaidInterest;
 	/** 已还逾期利息 **/
-	private Double repaidOverdueInterest;
+	private double repaidOverdueInterest;
 	/** 已还服务费 **/
-	private Double repaidServiceFee;
+	private double repaidServiceFee;
 	/** 是否使用免息券 **/
 	private Integer isInterestFreeNote;
 	/** 免息总金额 **/
-	private Double interestFreeAmount;
+	private double interestFreeAmount;
 	/** 是否可提前还款 **/
 	private Integer isPrepayment;
 	/** 审核时间 **/
@@ -143,11 +143,11 @@ public class CashLoan extends LongPKEntity {
 		this.state = state;
 	}
 	/** 获取【借款本金总额】 **/
-	public Double getTotal() {
+	public double getTotal() {
 		return total;
 	}
 	/** 设置【借款本金总额】 **/
-	public void setTotal(Double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 	/** 获取【还款方式】 **/
@@ -175,19 +175,19 @@ public class CashLoan extends LongPKEntity {
 		this.period = period;
 	}
 	/** 获取【天利率】 **/
-	public Double getRate() {
+	public double getRate() {
 		return rate;
 	}
 	/** 设置【天利率】 **/
-	public void setRate(Double rate) {
+	public void setRate(double rate) {
 		this.rate = rate;
 	}
 	/** 获取【逾期天利率】 **/
-	public Double getOverdueRate() {
+	public double getOverdueRate() {
 		return overdueRate;
 	}
 	/** 设置【逾期天利率】 **/
-	public void setOverdueRate(Double overdueRate) {
+	public void setOverdueRate(double overdueRate) {
 		this.overdueRate = overdueRate;
 	}
 	/** 获取【服务费收取类型】 **/
@@ -199,83 +199,83 @@ public class CashLoan extends LongPKEntity {
 		this.serviceFeeType = serviceFeeType;
 	}
 	/** 获取【服务费收取值】 **/
-	public Double getServiceFeeValue() {
+	public double getServiceFeeValue() {
 		return serviceFeeValue;
 	}
 	/** 设置【服务费收取值】 **/
-	public void setServiceFeeValue(Double serviceFeeValue) {
+	public void setServiceFeeValue(double serviceFeeValue) {
 		this.serviceFeeValue = serviceFeeValue;
 	}
 	/** 获取【应还总额】 **/
-	public Double getRepaymentTotal() {
+	public double getRepaymentTotal() {
 		return repaymentTotal;
 	}
 	/** 设置【应还总额】 **/
-	public void setRepaymentTotal(Double repaymentTotal) {
+	public void setRepaymentTotal(double repaymentTotal) {
 		this.repaymentTotal = repaymentTotal;
 	}
 	/** 获取【应还本金】 **/
-	public Double getRepaymentCapital() {
+	public double getRepaymentCapital() {
 		return repaymentCapital;
 	}
 	/** 设置【应还本金】 **/
-	public void setRepaymentCapital(Double repaymentCapital) {
+	public void setRepaymentCapital(double repaymentCapital) {
 		this.repaymentCapital = repaymentCapital;
 	}
 	/** 获取【应还利息】 **/
-	public Double getRepaymentInterest() {
+	public double getRepaymentInterest() {
 		return repaymentInterest;
 	}
 	/** 设置【应还利息】 **/
-	public void setRepaymentInterest(Double repaymentInterest) {
+	public void setRepaymentInterest(double repaymentInterest) {
 		this.repaymentInterest = repaymentInterest;
 	}
 	/** 获取【应还服务费】 **/
-	public Double getRepaymentServiceFee() {
+	public double getRepaymentServiceFee() {
 		return repaymentServiceFee;
 	}
 	/** 设置【应还服务费】 **/
-	public void setRepaymentServiceFee(Double repaymentServiceFee) {
+	public void setRepaymentServiceFee(double repaymentServiceFee) {
 		this.repaymentServiceFee = repaymentServiceFee;
 	}
 	/** 获取【已还款总额】 **/
-	public Double getRepaidTotal() {
+	public double getRepaidTotal() {
 		return repaidTotal;
 	}
 	/** 设置【已还款总额】 **/
-	public void setRepaidTotal(Double repaidTotal) {
+	public void setRepaidTotal(double repaidTotal) {
 		this.repaidTotal = repaidTotal;
 	}
 	/** 获取【已还款本金】 **/
-	public Double getRepaidCapital() {
+	public double getRepaidCapital() {
 		return repaidCapital;
 	}
 	/** 设置【已还款本金】 **/
-	public void setRepaidCapital(Double repaidCapital) {
+	public void setRepaidCapital(double repaidCapital) {
 		this.repaidCapital = repaidCapital;
 	}
 	/** 获取【已还款利息】 **/
-	public Double getRepaidInterest() {
+	public double getRepaidInterest() {
 		return repaidInterest;
 	}
 	/** 设置【已还款利息】 **/
-	public void setRepaidInterest(Double repaidInterest) {
+	public void setRepaidInterest(double repaidInterest) {
 		this.repaidInterest = repaidInterest;
 	}
 	/** 获取【已还逾期利息】 **/
-	public Double getRepaidOverdueInterest() {
+	public double getRepaidOverdueInterest() {
 		return repaidOverdueInterest;
 	}
 	/** 设置【已还逾期利息】 **/
-	public void setRepaidOverdueInterest(Double repaidOverdueInterest) {
+	public void setRepaidOverdueInterest(double repaidOverdueInterest) {
 		this.repaidOverdueInterest = repaidOverdueInterest;
 	}
 	/** 获取【已还服务费】 **/
-	public Double getRepaidServiceFee() {
+	public double getRepaidServiceFee() {
 		return repaidServiceFee;
 	}
 	/** 设置【已还服务费】 **/
-	public void setRepaidServiceFee(Double repaidServiceFee) {
+	public void setRepaidServiceFee(double repaidServiceFee) {
 		this.repaidServiceFee = repaidServiceFee;
 	}
 	/** 获取【是否使用免息券】 **/
@@ -287,11 +287,11 @@ public class CashLoan extends LongPKEntity {
 		this.isInterestFreeNote = isInterestFreeNote;
 	}
 	/** 获取【免息总金额】 **/
-	public Double getInterestFreeAmount() {
+	public double getInterestFreeAmount() {
 		return interestFreeAmount;
 	}
 	/** 设置【免息总金额】 **/
-	public void setInterestFreeAmount(Double interestFreeAmount) {
+	public void setInterestFreeAmount(double interestFreeAmount) {
 		this.interestFreeAmount = interestFreeAmount;
 	}
 	/** 获取【是否可提前还款】 **/

@@ -66,4 +66,15 @@ public class CashLoanRepaymentController extends BaseController<CashLoanRepaymen
 	public Object getById(CashLoanRepaymentModel model) throws BusinessException {
 		return cashLoanRepaymentService.getById(model);
 	}
+	
+	/**
+	 * 获取
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/repayment", method = RequestMethod.POST)
+	@ResponseBody
+	public Object repayment(CashLoanRepaymentModel model) throws BusinessException {
+		return cashLoanRepaymentService.cashLoanRepaymentRequest(model);
+	}
 }

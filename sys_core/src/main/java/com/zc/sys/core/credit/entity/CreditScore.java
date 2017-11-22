@@ -26,11 +26,11 @@ public class CreditScore extends LongPKEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 信用评分 **/
-	private Double balanceScore;
+	private double balanceScore;
 	/** 系统评分 **/
-	private Double sysScore;
+	private double sysScore;
 	/** 芝麻信用分-1-未授权 **/
-	private Double zmxyScore;
+	private double zmxyScore;
 	/** 版本控制 **/
 	private Integer version;
 	/** 获取【用户】 **/
@@ -42,27 +42,27 @@ public class CreditScore extends LongPKEntity {
 		this.user = user;
 	}
 	/** 获取【信用评分】 **/
-	public Double getBalanceScore() {
+	public double getBalanceScore() {
 		return balanceScore;
 	}
 	/** 设置【信用评分】 **/
-	public void setBalanceScore(Double balanceScore) {
+	public void setBalanceScore(double balanceScore) {
 		this.balanceScore = balanceScore;
 	}
 	/** 获取【系统评分】 **/
-	public Double getSysScore() {
+	public double getSysScore() {
 		return sysScore;
 	}
 	/** 设置【系统评分】 **/
-	public void setSysScore(Double sysScore) {
+	public void setSysScore(double sysScore) {
 		this.sysScore = sysScore;
 	}
 	/** 获取【芝麻信用分-1-未授权】 **/
-	public Double getZmxyScore() {
+	public double getZmxyScore() {
 		return zmxyScore;
 	}
 	/** 设置【芝麻信用分-1-未授权】 **/
-	public void setZmxyScore(Double zmxyScore) {
+	public void setZmxyScore(double zmxyScore) {
 		this.zmxyScore = zmxyScore;
 	}
 	/** 获取【版本控制】 **/

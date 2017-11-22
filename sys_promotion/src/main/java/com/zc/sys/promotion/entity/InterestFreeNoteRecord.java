@@ -40,7 +40,7 @@ public class InterestFreeNoteRecord extends LongPKEntity {
 	/** 使用时间 **/
 	private Date useTime;
 	/** 免息金额 **/
-	private Double amount;
+	private double amount;
 	/** 开始时间 **/
 	private Date startTime;
 	/** 结束时间 **/
@@ -90,11 +90,11 @@ public class InterestFreeNoteRecord extends LongPKEntity {
 		this.useTime = useTime;
 	}
 	/** 获取【免息金额】 **/
-	public Double getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 	/** 设置【免息金额】 **/
-	public void setAmount(Double amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	/** 获取【开始时间】 **/

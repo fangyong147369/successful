@@ -35,9 +35,9 @@ public class InterestFreeNote extends LongPKEntity {
 	/** 已发放数量 **/
 	private Integer useQuota;
 	/** 最小借款额度 **/
-	private Double minAmount;
+	private double minAmount;
 	/** 最大借款额度 **/
-	private Double maxAmount;
+	private double maxAmount;
 	/** 简介 **/
 	private String summary;
 	/** 备注 **/
@@ -109,19 +109,19 @@ public class InterestFreeNote extends LongPKEntity {
 		this.useQuota = useQuota;
 	}
 	/** 获取【最小借款额度】 **/
-	public Double getMinAmount() {
+	public double getMinAmount() {
 		return minAmount;
 	}
 	/** 设置【最小借款额度】 **/
-	public void setMinAmount(Double minAmount) {
+	public void setMinAmount(double minAmount) {
 		this.minAmount = minAmount;
 	}
 	/** 获取【最大借款额度】 **/
-	public Double getMaxAmount() {
+	public double getMaxAmount() {
 		return maxAmount;
 	}
 	/** 设置【最大借款额度】 **/
-	public void setMaxAmount(Double maxAmount) {
+	public void setMaxAmount(double maxAmount) {
 		this.maxAmount = maxAmount;
 	}
 	/** 获取【简介】 **/

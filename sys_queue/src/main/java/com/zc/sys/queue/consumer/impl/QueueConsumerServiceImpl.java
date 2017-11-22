@@ -56,7 +56,7 @@ public class QueueConsumerServiceImpl implements QueueConsumerService{
 		}
 		//现金贷还款
 		if(model.getObj() instanceof CashLoanRepaymentModel){
-//			((CashLoanRepaymentModel)model.getObj()).doQueue();
+			((CashLoanRepaymentModel)model.getObj()).doQueue();
 			return;
 		}
 		if(model.getObj() instanceof NoticeMessageModel){
