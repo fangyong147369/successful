@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.cashloan.constant.BaseCashLoanConstant;
 import com.zc.sys.cashloan.dao.CashLoanConfigDao;
+import com.zc.sys.cashloan.dao.CashLoanDao;
 import com.zc.sys.cashloan.entity.CashLoan;
 import com.zc.sys.cashloan.entity.CashLoanConfig;
 import com.zc.sys.cashloan.entity.CashLoanRepayment;
@@ -137,8 +138,22 @@ public class CashLoanModel extends CashLoan {
 	/**
 	 * 审核信息校验
 	 */
-	public void checkAudit() {
-		
+	public CashLoan checkAudit() {
+		if(this.getAuditOperator() == null || this.getAuditOperator().getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		if(this.getId() == null || this.getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		CashLoanDao cashLoanDao = BeanUtil.getBean(CashLoanDao.class);
+		CashLoan cashLoan = cashLoanDao.find(this.getId());
+		if(cashLoan == null){
+			throw new BusinessException("参数错误");
+		}
+		if(cashLoan.getState() != BaseCashLoanConstant.CASHLOAN_STATE_AUDITING){
+			throw new BusinessException("贷款信息有误，请核实后操作");
+		}
+		return cashLoan;
 	}
 	
 	/**
@@ -217,6 +232,27 @@ public class CashLoanModel extends CashLoan {
 		
 		LogUtil.info("-----产生还款计划结束---- cashLoanId:"+cashLoan.getId()+"----cashLoanCno:"+cashLoan.getCno());
 		return repays;
+	}
+	
+	/**
+	 * 手动放款校验
+	 */
+	public CashLoan checkLoanHandle() {
+		if(this.getLoanOperator() == null || this.getLoanOperator().getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		if(this.getId() == null || this.getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		CashLoanDao cashLoanDao = BeanUtil.getBean(CashLoanDao.class);
+		CashLoan cashLoan = cashLoanDao.find(this.getId());
+		if(cashLoan == null){
+			throw new BusinessException("参数错误");
+		}
+		if(cashLoan.getState() != BaseCashLoanConstant.CASHLOAN_STATE_LOANING){
+			throw new BusinessException("贷款信息有误，请核实后操作");
+		}
+		return cashLoan;
 	}
 
 	/** 获取【当前页码】 **/

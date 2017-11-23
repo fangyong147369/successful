@@ -11,22 +11,20 @@ import org.springframework.transaction.annotation.Transactional;
 import com.zc.sys.cashloan.dao.CashLoanDao;
 import com.zc.sys.cashloan.dao.CashLoanRepaymentDao;
 import com.zc.sys.cashloan.entity.CashLoan;
-import com.zc.sys.cashloan.executer.CashLoanAuditExecuter;
 import com.zc.sys.cashloan.executer.CashLoanLoanExecuter;
 import com.zc.sys.cashloan.model.CashLoanModel;
 import com.zc.sys.cashloan.service.CashLoanService;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
-import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
-import com.zc.sys.core.manage.dao.OrderTaskDao;
 import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.manage.model.OrderTaskModel;
+import com.zc.sys.core.manage.service.OrderTaskService;
 
 /**
  * 现金贷借款
@@ -42,8 +40,6 @@ public class CashLoanServiceImpl implements CashLoanService {
 	private CashLoanDao cashLoanDao;
 	@Resource
 	private CashLoanRepaymentDao cashLoanRepaymentDao;
-	@Resource
-	private OrderTaskDao orderTaskDao;
 
 	/**
 	 * 列表
@@ -126,13 +122,32 @@ public class CashLoanServiceImpl implements CashLoanService {
 		}*/
 		//发送队列
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTask = new OrderTask(model.getUser(), "cashLoanAudit",
-				StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
-		orderTaskDao.save(orderTask);
+		OrderTaskService orderTaskService = BeanUtil.getBean(OrderTaskService.class);
+		OrderTask orderTask = orderTaskService.add(model.getUser(), "cashLoanAudit", StringUtil.getSerialNumber(), "");
 		model.setOrderTask(orderTask);
 		model.setRemark("自动审核通过");
 		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), model));
-		return Result.success("借款处理中...请稍后！");
+		return Result.success("借款处理中...请稍后！").setData(orderTask.getOrderNo());
+	}
+	
+	/**
+	 * 现金贷款管理员审核
+	 * @param model
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Result cashLoanAudit(CashLoanModel model){
+		CashLoan cashLoan = model.checkAudit();
+		model = CashLoanModel.instance(cashLoan);
+		model.setRemark(model.getRemark());
+		//发送队列
+		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
+		OrderTaskService orderTaskService = BeanUtil.getBean(OrderTaskService.class);
+		OrderTask orderTask = orderTaskService.add(cashLoan.getUser(), "cashLoanAudit", StringUtil.getSerialNumber(), "");
+		model.setOrderTask(orderTask);
+		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), model));
+		return Result.success("借款审核中...请稍后！").setData(orderTask.getOrderNo());
 	}
 
 	/**
@@ -144,17 +159,13 @@ public class CashLoanServiceImpl implements CashLoanService {
 	@Override
 	@Transactional
 	public Result cashLoanDeal(CashLoanModel model) {
-		model.checkAudit();
 		CashLoan cashLoan = cashLoanDao.find(model.getId());
 		model.initAudit(cashLoan);
-		cashLoanDao.save(cashLoan);
+		cashLoanDao.update(cashLoan);
 		
 		//订单处理
-		OrderTask orderTask = model.getOrderTask();
-		orderTask.setDoTime(DateUtil.getNow());
-		orderTask.setDoResult("现金贷款审核成功");
-		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
-		orderTaskDao.update(orderTask);
+		OrderTaskService orderTaskService = BeanUtil.getBean(OrderTaskService.class);
+		orderTaskService.update(model.getOrderTask(), BaseConstant.BUSINESS_STATE_YES, "现金贷款审核成功");
 		
 		//放款--是否自动放款
 		/*if(Global.getInt("isCashLoanAutoLoan") == 1){
@@ -162,17 +173,29 @@ public class CashLoanServiceImpl implements CashLoanService {
 		}*/
 		//发送队列
 		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTaskLoan = new OrderTask(cashLoan.getUser(), "cashLoanLoan",
-				StringUtil.getSerialNumber(), BaseConstant.BUSINESS_STATE_WAIT, "", DateUtil.getNow());
-		orderTaskDao.save(orderTaskLoan);
+		OrderTask orderTaskLoan =orderTaskService.add(cashLoan.getUser(), "cashLoanLoan", StringUtil.getSerialNumber(), "");
 		CashLoanModel modelLoan = CashLoanModel.instance(cashLoan);
 		modelLoan.setOrderTask(orderTaskLoan);
 		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTaskLoan), modelLoan));
-		
-		//现金贷审核任务
-		Executer cashLoanAuditExecuter = BeanUtil.getBean(CashLoanAuditExecuter.class);
-		cashLoanAuditExecuter.execute(model);
 		return Result.success();
+	}
+	
+	/**
+	 * 手动放款
+	 * @param model
+	 * @return
+	 */
+	@Override
+	@Transactional
+	public Result cashLoanLoanHandle(CashLoanModel model){
+		CashLoan cashLoan =model.checkLoanHandle();
+		
+		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
+		OrderTaskService orderTaskService = BeanUtil.getBean(OrderTaskService.class);
+		OrderTask orderTaskLoan = orderTaskService.add(cashLoan.getUser(), "cashLoanLoan", StringUtil.getSerialNumber(), "");
+		model.setOrderTask(orderTaskLoan);
+		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTaskLoan), model));
+		return Result.success("放款处理中...请稍后!").setData(orderTaskLoan.getOrderNo());
 	}
 
 	/**
@@ -194,11 +217,8 @@ public class CashLoanServiceImpl implements CashLoanService {
 		//放款到账户
 		
 		//订单处理
-		OrderTask orderTask = model.getOrderTask();
-		orderTask.setDoTime(DateUtil.getNow());
-		orderTask.setDoResult("现金贷款放款成功");
-		orderTask.setState(BaseConstant.BUSINESS_STATE_YES);
-		orderTaskDao.update(orderTask);
+		OrderTaskService orderTaskService = BeanUtil.getBean(OrderTaskService.class);
+		orderTaskService.update(model.getOrderTask(), BaseConstant.BUSINESS_STATE_YES, "现金贷款放款成功");
 		
 		//现金贷放款成功任务
 		Executer cashLoanLoanExecuter = BeanUtil.getBean(CashLoanLoanExecuter.class);

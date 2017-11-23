@@ -67,4 +67,9 @@ public interface Executer {
 	 * 短信
 	 */
 	void sendSMS();
+
+	/**
+	 * 队列发送
+	 */
+	void queueSend();
 }

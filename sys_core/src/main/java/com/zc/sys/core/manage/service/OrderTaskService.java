@@ -1,5 +1,7 @@
 package com.zc.sys.core.manage.service;
+import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.manage.model.OrderTaskModel;
+import com.zc.sys.core.user.entity.User;
 import com.zc.sys.common.form.Result;
 /**
  * 模版配置
@@ -21,14 +23,14 @@ public interface OrderTaskService{
  	 * @param model
  	 * @return
  	 */
-	public Result add(OrderTaskModel model);
+	public OrderTask add(User user,String type,String orderNo,String remark);
 
 	/**
  	 * 修改
  	 * @param model
  	 * @return
  	 */
-	public Result update(OrderTaskModel model);
+	public void update(OrderTask orderTask,int state,String result);
 
 	/**
  	 * 获取

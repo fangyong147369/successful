@@ -46,12 +46,26 @@ public interface CashLoanService{
 	public Result cashLoanRequest(CashLoanModel model);
 	
 	/**
+	 * 现金贷款管理员审核
+	 * @param model
+	 * @return
+	 */
+	public Result cashLoanAudit(CashLoanModel model);
+	
+	/**
  	 * 现金贷款处理
  	 * @param model
  	 * @return
  	 */
 	public Result cashLoanDeal(CashLoanModel model);
 
+	/**
+	 * 手动放款
+	 * @param model
+	 * @return
+	 */
+	public Result cashLoanLoanHandle(CashLoanModel model);
+	
 	/**
  	 * 现金贷款放款处理
  	 * @param model

@@ -35,28 +35,6 @@ public class OrderTaskController extends BaseController<OrderTaskModel> {
 	}
 
 	/**
- 	 * 添加
- 	 * @param model
- 	 * @return
- 	 */
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	@ResponseBody
-	public Object add(OrderTaskModel model) throws BusinessException {
-		return orderTaskService.add(model);
-	}
-
-	/**
- 	 * 修改
- 	 * @param model
- 	 * @return
- 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	@ResponseBody
-	public Object update(OrderTaskModel model) throws BusinessException {
-		return orderTaskService.update(model);
-	}
-
-	/**
  	 * 获取
  	 * @param model
  	 * @return
