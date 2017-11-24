@@ -65,4 +65,17 @@ public class CreditScoreServiceImpl implements CreditScoreService {
 		return null;
 	}
 
+	/**
+	 * 芝麻信用授权
+	 * @param model
+	 * @return
+	 */
+	@Override
+	public Result zmxyAuthorize(CreditScoreModel model) {
+		
+		return null;
+	}
+	
+	
+
 }

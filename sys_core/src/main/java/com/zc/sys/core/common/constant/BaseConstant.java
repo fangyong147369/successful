@@ -32,38 +32,38 @@ public final class BaseConstant {
 	
 	/** Identify-State=========================================================start **/
 	/** 通用认证状态-未认证 **/
-	public static final int IDENTIFY_STATE_NO = 0;
+	public static final int IDENTIFY_STATE_NO = -1;
 	/** 通用认证状态-已认证 **/
 	public static final int IDENTIFY_STATE_YES = 1;
 	/** 通用认证状态-认证处理中 **/
 	public static final int IDENTIFY_STATE_WAIT = 2;
 	/** 通用认证状态-认证失败 **/
-	public static final int IDENTIFY_STATE_FAIL = -1;
+	public static final int IDENTIFY_STATE_FAIL = -2;
 	/** Identify-State=========================================================end **/
 	
 	/** Business-State=========================================================start **/
 	/** 通用业务处理状态-未处理 **/
-	public static final int BUSINESS_STATE_NO = 0;
+	public static final int BUSINESS_STATE_NO = -1;
 	/** 通用业务处理状态-已处理/已认证 **/
 	public static final int BUSINESS_STATE_YES = 1;
 	/** 通用业务处理状态-处理中 **/
 	public static final int BUSINESS_STATE_WAIT = 2;
 	/** 通用业务处理状态-处理失败 **/
-	public static final int BUSINESS_STATE_FAIL = -1;
+	public static final int BUSINESS_STATE_FAIL = -2;
 	/** Business-State=========================================================end **/
 	
 	/** Info-State=========================================================start **/
 	/** 通用信息启用状态-未启用 **/
-	public static final int INFO_STATE_NO = 0;
+	public static final int INFO_STATE_NO = -1;
 	/** 通用信息启用状态-已启用 **/
 	public static final int INFO_STATE_YES = 1;
 	/** Info-State=========================================================end **/
 	
 	/** PeriodUnit=========================================================start **/
 	/** 借款期限单位-月 **/
-	public static final int PERIODUNIT_MONTH = 0;
+	public static final int PERIODUNIT_MONTH = 1;
 	/** 借款期限单位-天 **/
-	public static final int PERIODUNIT_DAY = 1;
+	public static final int PERIODUNIT_DAY = 2;
 	/** PeriodUnit=========================================================end **/
 	
 	/** Repayment-Way=========================================================start **/

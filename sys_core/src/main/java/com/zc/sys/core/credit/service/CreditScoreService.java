@@ -36,5 +36,12 @@ public interface CreditScoreService{
  	 * @return
  	 */
 	public Result getById(CreditScoreModel model);
-
+	
+	/**
+	 * 芝麻信用授权
+	 * @param model
+	 * @return
+	 */
+	public Result zmxyAuthorize(CreditScoreModel model);
+	
 }

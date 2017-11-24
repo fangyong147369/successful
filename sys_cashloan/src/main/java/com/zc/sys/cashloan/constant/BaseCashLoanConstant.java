@@ -18,7 +18,7 @@ public final class BaseCashLoanConstant {
 	
 	/** CashLoan-State=========================================================start **/
 	/** 现金贷-状态-审核中 **/
-	public static final int CASHLOAN_STATE_AUDITING = 0;
+	public static final int CASHLOAN_STATE_AUDITING = 2;
 	/** 现金贷-状态-审核失败 **/
 	public static final int CASHLOAN_STATE_AUDIT_FAIL = -1;
 	/** 现金贷-状态-放款中 **/

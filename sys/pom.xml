@@ -19,7 +19,7 @@
 		<module>../sys_queue</module>
 		<module>../sys_promotion</module>
 	</modules>
-	
+
 
 	<repositories>
 		<repository>
@@ -400,6 +400,19 @@
 			<groupId>zc.commons-pool</groupId>
 			<artifactId>commons-pool</artifactId>
 			<version>1.6</version>
+		</dependency>
+
+		<!-- 芝麻信用 -->
+		<dependency>
+			<groupId>zc.zmxy</groupId>
+			<artifactId>zmxy-sdk-java</artifactId>
+			<version>20171122003901</version>
+		</dependency>
+		<dependency>
+			<groupId>zc.zmxy</groupId>
+			<artifactId>zmxy-sdk-java</artifactId>
+			<version>20171122003901</version>
+			<classifier>source</classifier>
 		</dependency>
 
 		<!-- 其他 -->

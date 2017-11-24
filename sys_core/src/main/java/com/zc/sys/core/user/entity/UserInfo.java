@@ -48,6 +48,8 @@ public class UserInfo extends LongPKEntity {
 	private String eSignAccountId;
 	/** E签宝电子签章数据 **/
 	private String eSignSealData;
+	/** 芝麻信用授权标识 **/
+	private String zmxyOpenId;
 	/** 民泰电子账号 **/
 	private String elecAcct;
 	/** 设备标识符 **/
@@ -311,5 +313,13 @@ public class UserInfo extends LongPKEntity {
 	/** 设置【锁定备注】 **/
 	public void setLoginLockRemark(String loginLockRemark) {
 		this.loginLockRemark = loginLockRemark;
+	}
+	/** 获取【芝麻信用授权标识】 **/
+	public String getZmxyOpenId() {
+		return zmxyOpenId;
+	}
+	/** 设置【芝麻信用授权标识】 **/
+	public void setZmxyOpenId(String zmxyOpenId) {
+		this.zmxyOpenId = zmxyOpenId;
 	}
 }
