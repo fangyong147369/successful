@@ -69,7 +69,7 @@ public class OrderTaskServiceImpl implements OrderTaskService {
  	 */
 	@Override
 	public Result getById(OrderTaskModel model){
-		if(model.getId() == null || model.getId() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误");
 		}
 		return Result.success().setData(orderTaskDao.find(model.getId()));

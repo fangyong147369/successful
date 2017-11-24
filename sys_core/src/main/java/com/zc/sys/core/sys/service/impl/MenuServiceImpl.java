@@ -80,7 +80,7 @@ public class MenuServiceImpl implements MenuService {
  	 */
 	@Override
 	public Result getById(MenuModel model){
-		if(model.getId() == null || model.getId().longValue() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误！");
 		}
 		Menu menu = menuDao.find(model.getId());

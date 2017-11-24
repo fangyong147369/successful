@@ -20,9 +20,9 @@ public class RoleMenuModel extends RoleMenu {
 //	/** 条件查询 **/
 //	private String searchName;
 
-//	private Long menuId;
+//	private long menuId;
 //
-//	private Long parentId;
+//	private long parentId;
 //
 //	private String menuName;
 //
@@ -50,19 +50,19 @@ public class RoleMenuModel extends RoleMenu {
 		return roleMenu;
 	}
 
-//	public Long getMenuId(){
+//	public long getMenuId(){
 //		return menuId;
 //	}
 //
-//	public void setMenuId(Long menuId){
+//	public void setMenuId(long menuId){
 //		this.menuId=menuId;
 //	}
 //
-//	public Long getParentId(){
+//	public long getParentId(){
 //		return parentId;
 //	}
 //
-//	public void setParentId(Long parentId){
+//	public void setParentId(long parentId){
 //		this.parentId=parentId;
 //	}
 //

@@ -47,7 +47,7 @@ public class DictModel extends Dict {
 	 * 参数校验
 	 */
 	public void validParam() {
-		if (this.getId() == null || this.getId().longValue() <= 0) {
+		if (this.getId() <= 0) {
 			throw new BusinessException("主键id不能为空！");
 		}
 		if (StringUtil.isBlank(this.getName())) {

@@ -58,7 +58,7 @@ public class DictServiceImpl implements DictService {
 	@Override
 	@Transactional
 	public Result update(DictModel model) {
-		if(model.getId() == null || model.getId().longValue() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误！");
 		}
 		model.validParam();//参数校验
@@ -68,7 +68,7 @@ public class DictServiceImpl implements DictService {
 
 	@Override
 	public Result getById(DictModel model) {
-		if(model.getId() == null || model.getId().longValue() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误！");
 		}
 		Dict dict = dictDao.find(model.getId());

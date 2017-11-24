@@ -5,7 +5,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 /**
- * 统一定义Long型id(主键)的entity基类.
+ * 统一定义long型id(主键)的entity基类.
  * 基类统一定义id的属性名称、数据类型、列名映射及生成策略.
  * @author zp
  */
@@ -16,16 +16,13 @@ public abstract class LongPKEntity extends BaseEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 
-	public Long getId() {
-		if(id != null){
-			id = id.longValue();
-		}
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	

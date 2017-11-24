@@ -79,7 +79,7 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 		CommonService commonService = BeanUtil.getBean(CommonService.class);
 		commonService.checkToken(this.token);
 		CashLoanRepaymentDao cashLoanRepaymentDao = BeanUtil.getBean(CashLoanRepaymentDao.class);
-		if(this.getId() == null || StringUtil.isBlank(this.getPeriod())){
+		if(this.getId() <= 0 || StringUtil.isBlank(this.getPeriod())){
 			throw new BusinessException("参数错误");
 		}
 		CashLoanRepayment cashLoanRepayment = cashLoanRepaymentDao.find(this.getId());

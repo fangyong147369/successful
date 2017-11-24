@@ -155,7 +155,7 @@ public class UserModel extends User {
 		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
 		commonService.checkToken(this.token);
 		UserDao userDao = BeanUtil.getBean(UserDao.class);
-		if(this.getId() == null || this.getId() <= 0){
+		if(this.getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.getPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !this.getPwd().equals(this.getConfirmPwd())){
@@ -201,7 +201,7 @@ public class UserModel extends User {
 		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
 		commonService.checkToken(this.token);
 		UserDao userDao = BeanUtil.getBean(UserDao.class);
-		if(this.getId() == null || this.getId() <= 0){
+		if(this.getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.getPayPwd()) || StringUtil.isBlank(this.getConfirmPwd()) || !this.getPayPwd().equals(this.getConfirmPwd())){

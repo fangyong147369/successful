@@ -67,7 +67,7 @@ public class BankCardModel extends BankCard {
 		commonService.checkToken(this.token);
 		UserIdentifyDao userIdentifyDao = (UserIdentifyDao)BeanUtil.getBean(UserIdentifyDao.class);
 		User user = this.getUser();
-		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
+		if(user == null  || user.getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		UserIdentify userIdentify = userIdentifyDao.findObjByProperty("user.id", user.getId());

@@ -71,7 +71,7 @@ public class ConfigServiceImpl implements ConfigService {
 	@Override
 	@Transactional
 	public Result update(ConfigModel model){
-		if(model.getId() == null || model.getId().longValue() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误！");
 		}
 		model.validParam();//参数校验
@@ -92,7 +92,7 @@ public class ConfigServiceImpl implements ConfigService {
  	 */
 	@Override
 	public Result getById(ConfigModel model){
-		if(model.getId() == null || model.getId().longValue() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误！");
 		}
 		Config config = configDao.find(model.getId());

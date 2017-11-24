@@ -84,7 +84,7 @@ public class OperatorServiceImpl implements OperatorService {
  	 */
 	@Override
 	public Result getById(OperatorModel model){
-		if(model.getId() == null || model.getId().longValue() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误！");
 		}
 		Operator operater = operatorDao.find(model.getId());

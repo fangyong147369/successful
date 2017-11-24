@@ -97,7 +97,7 @@ public class UserIdentifyModel extends UserIdentify {
 	public void checkRealName() {
 		CommonService commonService = (CommonService)BeanUtil.getBean(CommonService.class);
 		commonService.checkToken(this.token);
-		if(this.getUser() == null || this.getUser().getId() == null || this.getUser().getId().longValue() <= 0){
+		if(this.getUser() == null || this.getUser().getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.realName)){

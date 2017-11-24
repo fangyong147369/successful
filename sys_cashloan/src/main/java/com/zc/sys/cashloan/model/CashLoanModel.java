@@ -88,7 +88,7 @@ public class CashLoanModel extends CashLoan {
 		this.setCashLoanConfig(cashLoanConfig);
 		UserIdentifyDao userIdentifyDao = (UserIdentifyDao)BeanUtil.getBean(UserIdentifyDao.class);
 		User user = this.getUser();
-		if(user == null || user.getId() == null || user.getId().longValue() <= 0){
+		if(user.getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		UserIdentify userIdentify = userIdentifyDao.findObjByProperty("user.id", user.getId());
@@ -142,7 +142,7 @@ public class CashLoanModel extends CashLoan {
 		if(this.getAuditOperator() == null || this.getAuditOperator().getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
-		if(this.getId() == null || this.getId() <= 0){
+		if(this.getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		CashLoanDao cashLoanDao = BeanUtil.getBean(CashLoanDao.class);
@@ -241,7 +241,7 @@ public class CashLoanModel extends CashLoan {
 		if(this.getLoanOperator() == null || this.getLoanOperator().getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
-		if(this.getId() == null || this.getId() <= 0){
+		if(this.getId() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		CashLoanDao cashLoanDao = BeanUtil.getBean(CashLoanDao.class);

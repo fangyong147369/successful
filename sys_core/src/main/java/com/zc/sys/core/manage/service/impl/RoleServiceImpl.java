@@ -124,7 +124,7 @@ public class RoleServiceImpl implements RoleService {
 	 */
 	@Override
 	public Result getById(RoleModel model) {
-		if (model.getId() == null || model.getId().longValue() <= 0) {
+		if (model.getId() <= 0) {
 			return Result.error("参数错误！");
 		}
 		Role role = roleDao.find(model.getId());

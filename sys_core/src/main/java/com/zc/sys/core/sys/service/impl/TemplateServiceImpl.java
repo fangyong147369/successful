@@ -81,7 +81,7 @@ public class TemplateServiceImpl implements TemplateService {
  	 */
 	@Override
 	public Result getById(TemplateModel model){
-		if(model.getId() == null || model.getId().longValue() <= 0){
+		if(model.getId() <= 0){
 			return Result.error("参数错误！");
 		}
 		Template template = templateDao.find(model.getId());
