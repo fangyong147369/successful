@@ -23,7 +23,7 @@ public class Menu extends LongPKEntity {
 	/** 菜单名称 **/
 	private String name;
 	/** 父级ID **/
-	private Long parentId;
+	private long parentId;
 	/** 链接地址 **/
 	private String href;
 	/** 类型 **/
@@ -47,7 +47,7 @@ public class Menu extends LongPKEntity {
 	 * 
 	 * @param id 主键
 	 */
-	public Menu(Long id) {
+	public Menu(long id) {
 		super();
 		this.setId(id);
 	}
@@ -61,11 +61,11 @@ public class Menu extends LongPKEntity {
 		this.name = name;
 	}
 	/** 获取【父级ID】 **/
-	public Long getParentId() {
+	public long getParentId() {
 		return parentId;
 	}
 	/** 设置【父级ID】 **/
-	public void setParentId(Long parentId) {
+	public void setParentId(long parentId) {
 		this.parentId = parentId;
 	}
 	/** 获取【链接地址】 **/

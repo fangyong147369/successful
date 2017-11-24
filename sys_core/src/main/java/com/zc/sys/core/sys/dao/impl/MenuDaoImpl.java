@@ -36,7 +36,7 @@ public class MenuDaoImpl extends BaseDaoImpl<Menu> implements MenuDao {
 			if (StringUtil.isNotBlank(model.getName())) {
 				param.addParam("name", Operators.LIKE, model.getName().trim());
 			}
-			if (model.getParentId() != null) {
+			if (model.getParentId() > 0) {
 				param.addParam("parentId", model.getParentId());
 			}
 			if (model.getState() != 0) {
