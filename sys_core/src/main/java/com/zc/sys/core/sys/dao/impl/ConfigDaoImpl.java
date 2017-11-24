@@ -32,10 +32,10 @@ public class ConfigDaoImpl extends BaseDaoImpl<Config> implements ConfigDao {
 				SearchFilter orFilter2 = new SearchFilter("nid", Operators.LIKE, model.getSearchName().trim());
 				param.addOrFilter(orFilter1, orFilter2);
 			}else{ //精确查询条件
-				if (model.getState()!=null&&model.getState() != 99) {
+				if (model.getState() !=0 &&model.getState() != 99) {
 					param.addParam("status", model.getState());
 				}
-				if (model.getType() !=null&&model.getType() != 99) {
+				if (model.getType() != 0 &&model.getType() != 99) {
 					param.addParam("type", model.getType());
 				}
 				if (StringUtil.isNotBlank(model.getName())) {

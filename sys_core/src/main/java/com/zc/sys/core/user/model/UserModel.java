@@ -42,20 +42,20 @@ public class UserModel extends User {
 	/** 邀请码 **/
 	private String inviteCode;
 	/** 用户类型 **/
-	private Integer type;
+	private int type;
 	/** 用户类别 **/
-	private Integer userNature;
+	private int userNature;
 	/** 注册渠道 **/
-	private Integer route;
+	private int route;
 	/** 推广途径 **/
 	private String channel;
 	/** 用户基本信息 **/
 	private UserInfoModel infoModel;
 	
 	/** 手机号认证状态 **/
-	private Integer mobileState;
+	private int mobileState;
 	/** 认证状态 **/
-	private Integer realNameState;
+	private int realNameState;
 	/** 短信验证码 **/
 	private String mobileCode;
 	/** 添加ip **/
@@ -285,15 +285,12 @@ public class UserModel extends User {
 	}
 
 	/** 获取【用户类型】 **/
-	public Integer getType() {
-		if(type != null){
-			type = type.intValue();
-		}
+	public int getType() {
 		return type;
 	}
 
 	/** 设置【用户类型】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
@@ -308,28 +305,22 @@ public class UserModel extends User {
 	}
 
 	/** 获取【用户类别】 **/
-	public Integer getUserNature() {
-		if(userNature != null){
-			userNature = userNature.intValue();
-		}
+	public int getUserNature() {
 		return userNature;
 	}
 
 	/** 设置【用户类别】 **/
-	public void setUserNature(Integer userNature) {
+	public void setUserNature(int userNature) {
 		this.userNature = userNature;
 	}
 
 	/** 获取【注册渠道】 **/
-	public Integer getRoute() {
-		if(route != null){
-			route = route.intValue();
-		}
+	public int getRoute() {
 		return route;
 	}
 
 	/** 设置【注册渠道】 **/
-	public void setRoute(Integer route) {
+	public void setRoute(int route) {
 		this.route = route;
 	}
 
@@ -344,15 +335,12 @@ public class UserModel extends User {
 	}
 
 	/** 获取【手机号认证状态】 **/
-	public Integer getMobileState() {
-		if(mobileState != null){
-			mobileState = mobileState.intValue();
-		}
+	public int getMobileState() {
 		return mobileState;
 	}
 
 	/** 设置【手机号认证状态】 **/
-	public void setMobileState(Integer mobileState) {
+	public void setMobileState(int mobileState) {
 		this.mobileState = mobileState;
 	}
 
@@ -367,15 +355,12 @@ public class UserModel extends User {
 	}
 
 	/** 获取【认证状态】 **/
-	public Integer getRealNameState() {
-		if(realNameState != null){
-			realNameState = realNameState.intValue();
-		}
+	public int getRealNameState() {
 		return realNameState;
 	}
 
 	/** 设置【认证状态】 **/
-	public void setRealNameState(Integer realNameState) {
+	public void setRealNameState(int realNameState) {
 		this.realNameState = realNameState;
 	}
 
@@ -430,13 +415,8 @@ public class UserModel extends User {
 	}
 
 	/** 获取【修改密码方式：1-修改密码，2-忘记密码】 **/
-	public Integer getUpdatePwdWay() {
+	public int getUpdatePwdWay() {
 		return updatePwdWay;
-	}
-
-	/** 设置【修改密码方式：1-修改密码，2-忘记密码】 **/
-	public void setUpdatePwdWay(Integer updatePwdWay) {
-		this.updatePwdWay = updatePwdWay;
 	}
 
 	/** 设置【修改密码方式：1-修改密码，2-忘记密码】 **/

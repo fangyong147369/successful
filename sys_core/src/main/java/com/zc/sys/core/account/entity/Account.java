@@ -34,7 +34,7 @@ public class Account extends LongPKEntity {
 	private double freezeAmount;
 	/** 版本控制 **/
 	@Version
-	private Integer version;
+	private int version;
 	
 	
 	/** 获取【用户】 **/
@@ -70,11 +70,11 @@ public class Account extends LongPKEntity {
 		this.freezeAmount = freezeAmount;
 	}
 	/** 获取【版本控制】 **/
-	public Integer getVersion() {
+	public int getVersion() {
 		return version;
 	}
 	/** 设置【版本控制】 **/
-	public void setVersion(Integer version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 	

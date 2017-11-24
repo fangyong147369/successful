@@ -24,18 +24,18 @@ public class Config extends LongPKEntity {
 	/** 值 **/
 	private String value;
 	/** 状态，0：未启用，1：启用 **/
-	private Integer state;
+	private int state;
 	/** 配置分类 **/
-	private Integer type;
+	private int type;
 	/** 备注 **/
 	private String remark;
 	
 	/** 获取【状态，0：未启用，1：启用】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态，0：未启用，1：启用】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【名称】 **/
@@ -63,11 +63,11 @@ public class Config extends LongPKEntity {
 		this.value = value;
 	}
 	/** 获取【类型，1：基础参数;2：rule规则nid】 **/
-	public Integer getType() {
+	public int getType() {
 		return type;
 	}
 	/** 设置【类型，1：基础参数;2：rule规则nid】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	/** 获取【备注】 **/

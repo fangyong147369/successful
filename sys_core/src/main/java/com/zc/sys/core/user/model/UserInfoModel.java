@@ -58,13 +58,13 @@ public class UserInfoModel extends UserInfo {
 			}
 			this.setInviteUser(inviteUser);
 		}
-		if(model.getType() == null){
+		if(model.getType() == 0){
 			model.setType(1);//普通用户
 		}
-		if(model.getUserNature() == null){
+		if(model.getUserNature() == 0){
 			model.setUserNature(1);//个人用户
 		}
-		if(model.getRoute() == null){
+		if(model.getRoute() == 0){
 			model.setRoute(0);//PC渠道
 		}
 		if(model.getChannel() == null){

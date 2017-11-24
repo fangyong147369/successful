@@ -45,7 +45,7 @@ public class AccountLog extends LongPKEntity {
 	/** 内容 **/
 	private String content;
 	/** 收支方式 **/
-	private Integer paymentsType;
+	private int paymentsType;
 	/** 关联订单 **/
 	private String orderNo;
 	/** 备注 **/
@@ -127,11 +127,11 @@ public class AccountLog extends LongPKEntity {
 		this.content = content;
 	}
 	/** 获取【收支方式】 **/
-	public Integer getPaymentsType() {
+	public int getPaymentsType() {
 		return paymentsType;
 	}
 	/** 设置【收支方式】 **/
-	public void setPaymentsType(Integer paymentsType) {
+	public void setPaymentsType(int paymentsType) {
 		this.paymentsType = paymentsType;
 	}
 	/** 获取【关联订单】 **/

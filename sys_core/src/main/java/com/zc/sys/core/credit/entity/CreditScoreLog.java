@@ -40,7 +40,7 @@ public class CreditScoreLog extends LongPKEntity {
 	/** 内容 **/
 	private String content;
 	/** 收支方式 **/
-	private Integer paymentType;
+	private int paymentType;
 	/** 关联订单 **/
 	private String orderNo;
 	/** 操作管理员 **/
@@ -100,11 +100,11 @@ public class CreditScoreLog extends LongPKEntity {
 		this.content = content;
 	}
 	/** 获取【收支方式】 **/
-	public Integer getPaymentType() {
+	public int getPaymentType() {
 		return paymentType;
 	}
 	/** 设置【收支方式】 **/
-	public void setPaymentType(Integer paymentType) {
+	public void setPaymentType(int paymentType) {
 		this.paymentType = paymentType;
 	}
 	/** 获取【关联订单】 **/

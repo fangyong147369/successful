@@ -183,7 +183,7 @@ public class CashLoanModel extends CashLoan {
 	 * 校验放款信息
 	 */
 	public void checkLoan() {
-		if(this.getLoanWay()==null || this.getLoanWay() <= 0){
+		if(this.getLoanWay() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.getLoanAccount())){

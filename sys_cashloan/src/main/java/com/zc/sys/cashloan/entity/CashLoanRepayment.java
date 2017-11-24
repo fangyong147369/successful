@@ -31,9 +31,9 @@ public class CashLoanRepayment extends LongPKEntity {
 	@JoinColumn(name = "cash_loan_id")
 	private CashLoan cashLoan;
 	/** 状态 **/
-	private Integer state;
+	private int state;
 	/** 期限 **/
-	private Integer period;
+	private int period;
 	/** 预还款时间 **/
 	private Date repaymentTime;
 	/** 预还总额 **/
@@ -59,15 +59,15 @@ public class CashLoanRepayment extends LongPKEntity {
 	/** 实还款时间 **/
 	private Date repaidTime;
 	/** 是否逾期 **/
-	private Integer isOverdue;
+	private int isOverdue;
 	/** 逾期天数 **/
-	private Integer overdueDay;
+	private int overdueDay;
 	/** 逾期利息 **/
 	private double overdueInterest;
 	/** 还款/垫付订单号 **/
 	private String orderNo;
 	/** 还款方式：余额还款/代扣还款 **/
-	private Integer repaymentWay;
+	private int repaymentWay;
 	/** 还款账户 **/
 	private String repaymentAccount;
 	/** 备注 **/
@@ -91,19 +91,19 @@ public class CashLoanRepayment extends LongPKEntity {
 		this.cashLoan = cashLoan;
 	}
 	/** 获取【状态】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【期限】 **/
-	public Integer getPeriod() {
+	public int getPeriod() {
 		return period;
 	}
 	/** 设置【期限】 **/
-	public void setPeriod(Integer period) {
+	public void setPeriod(int period) {
 		this.period = period;
 	}
 	/** 获取【预还款时间】 **/
@@ -203,19 +203,19 @@ public class CashLoanRepayment extends LongPKEntity {
 		this.repaidTime = repaidTime;
 	}
 	/** 获取【是否逾期】 **/
-	public Integer getIsOverdue() {
+	public int getIsOverdue() {
 		return isOverdue;
 	}
 	/** 设置【是否逾期】 **/
-	public void setIsOverdue(Integer isOverdue) {
+	public void setIsOverdue(int isOverdue) {
 		this.isOverdue = isOverdue;
 	}
 	/** 获取【逾期天数】 **/
-	public Integer getOverdueDay() {
+	public int getOverdueDay() {
 		return overdueDay;
 	}
 	/** 设置【逾期天数】 **/
-	public void setOverdueDay(Integer overdueDay) {
+	public void setOverdueDay(int overdueDay) {
 		this.overdueDay = overdueDay;
 	}
 	/** 获取【逾期利息】 **/
@@ -235,11 +235,11 @@ public class CashLoanRepayment extends LongPKEntity {
 		this.orderNo = orderNo;
 	}
 	/** 获取【还款方式：余额还款代扣还款】 **/
-	public Integer getRepaymentWay() {
+	public int getRepaymentWay() {
 		return repaymentWay;
 	}
 	/** 设置【还款方式：余额还款代扣还款】 **/
-	public void setRepaymentWay(Integer repaymentWay) {
+	public void setRepaymentWay(int repaymentWay) {
 		this.repaymentWay = repaymentWay;
 	}
 	/** 获取【还款账户】 **/

@@ -19,9 +19,9 @@ public class Dict extends LongPKNoneEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
 	/** 状态，0：禁用，1：启用 **/
-	private Integer state;
+	private int state;
 	/** 排序 **/
-	private Integer sort;
+	private int sort;
 	/** 标识 **/
 	private String nid;
 	/** 标识名 **/
@@ -34,19 +34,19 @@ public class Dict extends LongPKNoneEntity {
 	private String remark;
 	
 	/** 获取【状态，0：禁用，1：启用】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态，0：禁用，1：启用】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【排序】 **/
-	public Integer getSort() {
+	public int getSort() {
 		return sort;
 	}
 	/** 设置【排序】 **/
-	public void setSort(Integer sort) {
+	public void setSort(int sort) {
 		this.sort = sort;
 	}
 	/** 获取【标识】 **/

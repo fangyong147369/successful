@@ -33,7 +33,7 @@ public class BankCard extends LongPKEntity {
 	/** 所属银行名称 **/
 	private String bankName;
 	/** 类型 **/
-	private Integer type;
+	private int type;
 	/** 支行编码 **/
 	private String branch;
 	/** 支行名称 **/
@@ -49,9 +49,9 @@ public class BankCard extends LongPKEntity {
 	/** 剩余提取金额 **/
 	private double amount;
 	/** 状态 **/
-	private Integer state;
+	private int state;
 	/** 自动扣款状态 **/
-	private Integer autoDeduct;
+	private int autoDeduct;
 	/** 备注 **/
 	private String remark;
 	/** 添加时间 **/
@@ -147,11 +147,11 @@ public class BankCard extends LongPKEntity {
 		this.amount = amount;
 	}
 	/** 获取【状态】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【备注】 **/
@@ -179,19 +179,19 @@ public class BankCard extends LongPKEntity {
 		this.addIp = addIp;
 	}
 	/** 获取【自动扣款状态】 **/
-	public Integer getAutoDeduct() {
+	public int getAutoDeduct() {
 		return autoDeduct;
 	}
 	/** 设置【自动扣款状态】 **/
-	public void setAutoDeduct(Integer autoDeduct) {
+	public void setAutoDeduct(int autoDeduct) {
 		this.autoDeduct = autoDeduct;
 	}
 	/** 获取【类型】 **/
-	public Integer getType() {
+	public int getType() {
 		return type;
 	}
 	/** 设置【类型】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	

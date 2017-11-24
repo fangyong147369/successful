@@ -21,9 +21,9 @@ public class Template extends LongPKEntity {
 	/** 标识-规则：模块_类型_名称，例：notice_SMS_reg **/
 	private String nid;
 	/** 类型：1-资金模版，2-通知信息模版，3-操作日志模版，4-积分日志模版，5-协议模版 **/
-	private Integer type;
+	private int type;
 	/** 子类型：例：1短信，2邮件，3站内信 **/
-	private Integer typeSub;
+	private int typeSub;
 	/** 模版标题 **/
 	private String title;
 	/** 模版内容 **/
@@ -31,7 +31,7 @@ public class Template extends LongPKEntity {
 	/** 使用渠道-例：短信渠道，邮件渠道 **/
 	private String route;
 	/** 状态：0未启用，1启用 **/
-	private Integer state;
+	private int state;
 	/** 备注 **/
 	private String remark;
 	
@@ -52,19 +52,19 @@ public class Template extends LongPKEntity {
 		this.nid = nid;
 	}
 	/** 获取【类型：1-资金流水模版，2-通知信息模版，3-操作日志模版，4-积分日志模版，5-协议模版】 **/
-	public Integer getType() {
+	public int getType() {
 		return type;
 	}
 	/** 设置【类型：1-资金流水模版，2-通知信息模版，3-操作日志模版，4-积分日志模版，5-协议模版】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	/** 获取【子类型】 **/
-	public Integer getTypeSub() {
+	public int getTypeSub() {
 		return typeSub;
 	}
 	/** 设置【子类型】 **/
-	public void setTypeSub(Integer typeSub) {
+	public void setTypeSub(int typeSub) {
 		this.typeSub = typeSub;
 	}
 	/** 获取【备注】 **/
@@ -76,11 +76,11 @@ public class Template extends LongPKEntity {
 		this.remark = remark;
 	}
 	/** 获取【状态：0未启用，1启用】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态：0未启用，1启用】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【使用渠道-例：短信渠道，邮件渠道】 **/

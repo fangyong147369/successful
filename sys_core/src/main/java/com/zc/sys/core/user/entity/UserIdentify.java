@@ -25,25 +25,25 @@ public class UserIdentify extends LongPKEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 实名认证状态(现金贷包含：OCR、活体) **/
-	private Integer realNameState;
+	private int realNameState;
 	/** 邮箱认证状态 **/
-	private Integer emailState;
+	private int emailState;
 	/** 手机号认证状态 **/
-	private Integer mobileState;
+	private int mobileState;
 	/** 绑卡数量 **/
-	private Integer bindCardNum;
+	private int bindCardNum;
 	/** 实名认证次数 **/
-	private Integer realNameCount;
+	private int realNameCount;
 	/** 身份证图片认证状态 **/
-	private Integer cardImgState;
+	private int cardImgState;
 	/** 数据魔盒-运营商-数据认证状态 **/
-	private Integer octopusState;
+	private int octopusState;
 	/** 用户状态 **/
-	private Integer state;
+	private int state;
 	/** 登录失败次数 **/
-	private Integer loginFailCount;
+	private int loginFailCount;
 	/** e签宝印章创建状态 **/
-	private Integer eSignState;
+	private int eSignState;
 	
 	
 	/** 获取【用户】 **/
@@ -55,86 +55,83 @@ public class UserIdentify extends LongPKEntity {
 		this.user = user;
 	}
 	/** 获取【实名认证状态(现金贷包含：OCR、活体)】 **/
-	public Integer getRealNameState() {
-		if(realNameState != null){
-			return realNameState.intValue();
-		}
+	public int getRealNameState() {
 		return realNameState;
 	}
 	/** 设置【实名认证状态(现金贷包含：OCR、活体)】 **/
-	public void setRealNameState(Integer realNameState) {
+	public void setRealNameState(int realNameState) {
 		this.realNameState = realNameState;
 	}
 	/** 获取【邮箱认证状态】 **/
-	public Integer getEmailState() {
-		return emailState.intValue();
+	public int getEmailState() {
+		return emailState;
 	}
 	/** 设置【邮箱认证状态】 **/
-	public void setEmailState(Integer emailState) {
+	public void setEmailState(int emailState) {
 		this.emailState = emailState;
 	}
 	/** 获取【手机号认证状态】 **/
-	public Integer getMobileState() {
-		return mobileState.intValue();
+	public int getMobileState() {
+		return mobileState;
 	}
 	/** 设置【手机号认证状态】 **/
-	public void setMobileState(Integer mobileState) {
+	public void setMobileState(int mobileState) {
 		this.mobileState = mobileState;
 	}
 	/** 获取【绑卡数量】 **/
-	public Integer getBindCardNum() {
-		return bindCardNum.intValue();
+	public int getBindCardNum() {
+		return bindCardNum;
 	}
 	/** 设置【绑卡数量】 **/
-	public void setBindCardNum(Integer bindCardNum) {
+	public void setBindCardNum(int bindCardNum) {
 		this.bindCardNum = bindCardNum;
 	}
 	/** 获取【实名认证次数】 **/
-	public Integer getRealNameCount() {
-		return realNameCount.intValue();
+	public int getRealNameCount() {
+		return realNameCount;
 	}
 	/** 设置【实名认证次数】 **/
-	public void setRealNameCount(Integer realNameCount) {
+	public void setRealNameCount(int realNameCount) {
 		this.realNameCount = realNameCount;
 	}
 	/** 获取【身份证图片认证状态】 **/
-	public Integer getCardImgState() {
-		return cardImgState.intValue();
+	public int getCardImgState() {
+		return cardImgState;
 	}
 	/** 设置【身份证图片认证状态】 **/
-	public void setCardImgState(Integer cardImgState) {
+	public void setCardImgState(int cardImgState) {
 		this.cardImgState = cardImgState;
 	}
 	/** 获取【数据魔盒-运营商-数据认证状态】 **/
-	public Integer getOctopusState() {
-		return octopusState.intValue();
+	public int getOctopusState() {
+		return octopusState;
 	}
 	/** 设置【数据魔盒-运营商-数据认证状态】 **/
-	public void setOctopusState(Integer octopusState) {
+	public void setOctopusState(int octopusState) {
 		this.octopusState = octopusState;
 	}
 	/** 获取【用户状态】 **/
-	public Integer getState() {
-		return state.intValue();
+	public int getState() {
+		return state;
 	}
 	/** 设置【用户状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【登录失败次数】 **/
-	public Integer getLoginFailCount() {
-		return loginFailCount.intValue();
+	public int getLoginFailCount() {
+		return loginFailCount;
 	}
 	/** 设置【登录失败次数】 **/
-	public void setLoginFailCount(Integer loginFailCount) {
+	public void setLoginFailCount(int loginFailCount) {
 		this.loginFailCount = loginFailCount;
 	}
 	/** 获取【e签宝印章创建状态】 **/
-	public Integer geteSignState() {
-		return eSignState.intValue();
+	public int geteSignState() {
+		return eSignState;
 	}
 	/** 设置【e签宝印章创建状态】 **/
-	public void seteSignState(Integer eSignState) {
+	public void seteSignState(int eSignState) {
 		this.eSignState = eSignState;
 	}
 }

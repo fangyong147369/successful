@@ -25,7 +25,7 @@ public class NoticeMessage extends LongPKEntity {
 	/** 标识 **/
 	private String nid;
 	/** 类型1-message;2-SMS;3-email;4-appPush **/
-	private Integer type;
+	private int type;
 	/** 发送用户 **/
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "send_user_id")
@@ -39,7 +39,7 @@ public class NoticeMessage extends LongPKEntity {
 	@JoinColumn(name = "operator_id")
 	private Operator operator;
 	/** 状态 **/
-	private Integer state;
+	private int state;
 	/** 标题 **/
 	private String title;
 	/** 内容 **/
@@ -68,11 +68,11 @@ public class NoticeMessage extends LongPKEntity {
 		this.nid = nid;
 	}
 	/** 获取【类型】 **/
-	public Integer getType() {
+	public int getType() {
 		return type;
 	}
 	/** 设置【类型】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	/** 获取【发送用户】 **/
@@ -100,11 +100,11 @@ public class NoticeMessage extends LongPKEntity {
 		this.operator = operator;
 	}
 	/** 获取【状态】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【标题】 **/

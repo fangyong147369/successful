@@ -34,7 +34,7 @@ public class OperatorDaoImpl extends BaseDaoImpl<Operator> implements OperatorDa
             if (StringUtil.isNotBlank(model.getName())) {
                 param.addParam("name", SearchFilter.Operators.LIKE, model.getName().trim());
             }
-            if (model.getState() != null) {
+            if (model.getState() != 0) {
                 param.addParam("state", model.getState());
             }
         }

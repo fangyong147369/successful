@@ -32,7 +32,7 @@ public class OrderTask extends LongPKEntity {
 	/** 关联订单号 **/
 	private String orderNo;
 	/** 状态 **/
-	private Integer state;
+	private int state;
 	/** 备注 **/
 	private String remark;
 	/** 处理结果 **/
@@ -46,7 +46,7 @@ public class OrderTask extends LongPKEntity {
 		super();
 	}
 	
-	public OrderTask(User user, String type, String orderNo, Integer state,
+	public OrderTask(User user, String type, String orderNo, int state,
 			String remark, Date addTime) {
 		super();
 		this.user = user;
@@ -57,7 +57,7 @@ public class OrderTask extends LongPKEntity {
 		this.addTime = addTime;
 	}
 	
-	public OrderTask(String type, String orderNo, Integer state,
+	public OrderTask(String type, String orderNo, int state,
 			String remark, Date addTime) {
 		super();
 		this.type = type;
@@ -91,11 +91,11 @@ public class OrderTask extends LongPKEntity {
 		this.orderNo = orderNo;
 	}
 	/** 获取【状态】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【备注】 **/

@@ -62,10 +62,10 @@ public class DictModel extends Dict {
 		if (StringUtil.isBlank(this.getValue())) {
 			throw new BusinessException("值不能为空！");
 		}
-		if (this.getSort() == null || this.getSort().intValue() < 0) {
+		if (this.getSort() == 0 || this.getSort() < 0) {
 			throw new BusinessException("排序不能为空！");
 		}
-		if (this.getState() == null) {
+		if (this.getState() == 0) {
 			throw new BusinessException("状态不能为空！");
 		}
 	}

@@ -32,7 +32,7 @@ public class NoticeMessageModel extends NoticeMessage {
 		super();
 	}
 	
-	public NoticeMessageModel(Integer type, User sendUser, User receiveUser,
+	public NoticeMessageModel(int type, User sendUser, User receiveUser,
 			Operator operator,String orderNo,OrderTaskModel orderTaskModel) {
 		super();
 		this.setType(type);
@@ -43,7 +43,7 @@ public class NoticeMessageModel extends NoticeMessage {
 		this.setOrderTaskModel(orderTaskModel);
 	}
 	
-	public NoticeMessageModel(String nid,Integer type,String orderNo,OrderTaskModel orderTaskModel,String receiveAddr){
+	public NoticeMessageModel(String nid,int type,String orderNo,OrderTaskModel orderTaskModel,String receiveAddr){
 		this.setNid(nid);
 		this.setType(type);
 		this.setOrderNo(orderNo);

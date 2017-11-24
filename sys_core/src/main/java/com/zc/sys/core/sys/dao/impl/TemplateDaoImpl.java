@@ -36,7 +36,7 @@ public class TemplateDaoImpl extends BaseDaoImpl<Template> implements TemplateDa
 			if (StringUtil.isNotBlank(model.getName())) {
 				param.addParam("name", Operators.LIKE, model.getName().trim());
 			}
-			if (model.getState() != null) {
+			if (model.getState() != 0) {
 				param.addParam("state", model.getState());
 			}
 		}

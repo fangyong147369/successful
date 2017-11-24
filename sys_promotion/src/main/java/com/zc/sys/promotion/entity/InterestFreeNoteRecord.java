@@ -32,7 +32,7 @@ public class InterestFreeNoteRecord extends LongPKEntity {
 	@JoinColumn(name = "interest_free_note_id")
 	private InterestFreeNote interestFreeNote;
 	/** 状态 **/
-	private Integer state;
+	private int state;
 	/** 发放管理员 **/
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "operator_id")
@@ -66,11 +66,11 @@ public class InterestFreeNoteRecord extends LongPKEntity {
 		this.interestFreeNote = interestFreeNote;
 	}
 	/** 获取【状态】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【发放管理员】 **/

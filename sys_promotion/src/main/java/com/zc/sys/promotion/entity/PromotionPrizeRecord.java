@@ -30,11 +30,11 @@ public class PromotionPrizeRecord extends LongPKEntity {
 	@JoinColumn(name = "promotion_id")
 	private Promotion promotion;
 	/** 状态 **/
-	private Integer state;
+	private int state;
 	/** 活动条件记录值 **/
 	private String value;
 	/** 类型 **/
-	private Integer type;
+	private int type;
 	/** 备注 **/
 	private String remark;
 	/** 添加时间 **/
@@ -56,11 +56,11 @@ public class PromotionPrizeRecord extends LongPKEntity {
 		this.promotion = promotion;
 	}
 	/** 获取【状态】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【活动条件记录值】 **/
@@ -72,11 +72,11 @@ public class PromotionPrizeRecord extends LongPKEntity {
 		this.value = value;
 	}
 	/** 获取【类型】 **/
-	public Integer getType() {
+	public int getType() {
 		return type;
 	}
 	/** 设置【类型】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	/** 获取【备注】 **/

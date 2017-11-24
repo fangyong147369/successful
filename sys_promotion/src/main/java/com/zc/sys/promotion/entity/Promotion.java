@@ -21,11 +21,11 @@ public class Promotion extends LongPKEntity {
 	/** 标题 **/
 	private String name;
 	/** 推广方式 **/
-	private Integer way;
+	private int way;
 	/** 摘要 **/
 	private String summary;
 	/** 状态 **/
-	private Integer stae;
+	private int stae;
 	/** 开始时间 **/
 	private Date startTime;
 	/** 结束时间 **/
@@ -43,11 +43,11 @@ public class Promotion extends LongPKEntity {
 		this.name = name;
 	}
 	/** 获取【推广方式】 **/
-	public Integer getWay() {
+	public int getWay() {
 		return way;
 	}
 	/** 设置【推广方式】 **/
-	public void setWay(Integer way) {
+	public void setWay(int way) {
 		this.way = way;
 	}
 	/** 获取【摘要】 **/
@@ -59,11 +59,11 @@ public class Promotion extends LongPKEntity {
 		this.summary = summary;
 	}
 	/** 获取【状态】 **/
-	public Integer getStae() {
+	public int getStae() {
 		return stae;
 	}
 	/** 设置【状态】 **/
-	public void setStae(Integer stae) {
+	public void setStae(int stae) {
 		this.stae = stae;
 	}
 	/** 获取【开始时间】 **/

@@ -32,7 +32,7 @@ public class CreditScore extends LongPKEntity {
 	/** 芝麻信用分-1-未授权 **/
 	private double zmxyScore;
 	/** 版本控制 **/
-	private Integer version;
+	private int version;
 	/** 获取【用户】 **/
 	public User getUser() {
 		return user;
@@ -66,11 +66,11 @@ public class CreditScore extends LongPKEntity {
 		this.zmxyScore = zmxyScore;
 	}
 	/** 获取【版本控制】 **/
-	public Integer getVersion() {
+	public int getVersion() {
 		return version;
 	}
 	/** 设置【版本控制】 **/
-	public void setVersion(Integer version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 }

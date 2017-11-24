@@ -39,7 +39,7 @@ public class Operator extends LongPKEntity {
 	/** 邮箱 **/
 	private String email;
 	/** 状态：1-正常, -1-禁用 **/
-	private Integer state;
+	private int state;
 	/** 角色主键 **/
 	@JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY)
@@ -109,11 +109,11 @@ public class Operator extends LongPKEntity {
 		this.email = email;
 	}
 	/** 获取【状态：1-正常-1-禁用】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态：1-正常-1-禁用】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【角色主键】 **/

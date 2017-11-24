@@ -98,7 +98,7 @@ public class CashLoanRepaymentModel extends CashLoanRepayment {
 		if(!isCurrentRepayment){
 			throw new BusinessException("操作失败，上期还未还款");
 		}
-		if(this.getRepaymentWay() == null || this.getRepaymentWay() <= 0){
+		if(this.getRepaymentWay() <= 0){
 			throw new BusinessException("参数错误");
 		}
 		if(StringUtil.isBlank(this.getRepaymentAccount())){

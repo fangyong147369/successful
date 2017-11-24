@@ -31,17 +31,17 @@ public class UserInfo extends LongPKEntity {
 	/** 邀请码 **/
 	private String inviteCode;
 	/** 用户类型 **/
-	private Integer type;
+	private int type;
 	/** 用户类别 **/
-	private Integer userNature;
+	private int userNature;
 	/** 证件类型 **/
-	private Integer cardType;
+	private int cardType;
 	/** 注册渠道 **/
-	private Integer route;
+	private int route;
 	/** 推广途径 **/
 	private String channel;
 	/** 性别 **/
-	private Integer sex;
+	private int sex;
 	/** 头像地址 **/
 	private String headImg;
 	/** E签宝账户唯一标识 **/
@@ -69,7 +69,7 @@ public class UserInfo extends LongPKEntity {
 	/** 公司名称 **/
 	private String companyName;
 	/** 公司类型 **/
-	private Integer companyType;
+	private int companyType;
 	/** 公司证件号(企业征信代码) **/
 	private String companyCardNo;
 	/** 公司描述 **/
@@ -113,35 +113,35 @@ public class UserInfo extends LongPKEntity {
 		this.inviteCode = inviteCode;
 	}
 	/** 获取【用户类型】 **/
-	public Integer getType() {
+	public int getType() {
 		return type;
 	}
 	/** 设置【用户类型】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	/** 获取【用户类别】 **/
-	public Integer getUserNature() {
+	public int getUserNature() {
 		return userNature;
 	}
 	/** 设置【用户类别】 **/
-	public void setUserNature(Integer userNature) {
+	public void setUserNature(int userNature) {
 		this.userNature = userNature;
 	}
 	/** 获取【证件类型】 **/
-	public Integer getCardType() {
+	public int getCardType() {
 		return cardType;
 	}
 	/** 设置【证件类型】 **/
-	public void setCardType(Integer cardType) {
+	public void setCardType(int cardType) {
 		this.cardType = cardType;
 	}
 	/** 获取【注册渠道】 **/
-	public Integer getRoute() {
+	public int getRoute() {
 		return route;
 	}
 	/** 设置【注册渠道】 **/
-	public void setRoute(Integer route) {
+	public void setRoute(int route) {
 		this.route = route;
 	}
 	/** 获取【推广途径】 **/
@@ -153,11 +153,11 @@ public class UserInfo extends LongPKEntity {
 		this.channel = channel;
 	}
 	/** 获取【性别】 **/
-	public Integer getSex() {
+	public int getSex() {
 		return sex;
 	}
 	/** 设置【性别】 **/
-	public void setSex(Integer sex) {
+	public void setSex(int sex) {
 		this.sex = sex;
 	}
 	/** 获取【头像地址】 **/
@@ -249,11 +249,11 @@ public class UserInfo extends LongPKEntity {
 		this.companyName = companyName;
 	}
 	/** 获取【公司类型】 **/
-	public Integer getCompanyType() {
+	public int getCompanyType() {
 		return companyType;
 	}
 	/** 设置【公司类型】 **/
-	public void setCompanyType(Integer companyType) {
+	public void setCompanyType(int companyType) {
 		this.companyType = companyType;
 	}
 	/** 获取【公司证件号(企业征信代码)】 **/

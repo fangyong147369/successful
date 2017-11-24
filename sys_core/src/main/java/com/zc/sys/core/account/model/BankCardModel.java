@@ -34,7 +34,7 @@ public class BankCardModel extends BankCard {
 	private String searchName;
 	
 	/** 用户id **/
-	private Integer userId;
+	private long userId;
 	
 	/** 订单信息 **/
 	private OrderTask orderTask;
@@ -140,12 +140,12 @@ public class BankCardModel extends BankCard {
 	}
 
 	/** 获取【用户id】 **/
-	public Integer getUserId() {
-		return userId.intValue();
+	public long getUserId() {
+		return userId;
 	}
 
 	/** 设置【用户id】 **/
-	public void setUserId(Integer userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 

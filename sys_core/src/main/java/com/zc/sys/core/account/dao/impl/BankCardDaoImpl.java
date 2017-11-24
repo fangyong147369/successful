@@ -33,7 +33,7 @@ public class BankCardDaoImpl extends BaseDaoImpl<BankCard> implements BankCardDa
 			SearchFilter orFilter2 = new SearchFilter("nid", Operators.LIKE, model.getSearchName().trim());
 			param.addOrFilter(orFilter1,orFilter2);
 		}else {
-			if (model.getState() != null) {
+			if (model.getState() != 0) {
 				param.addParam("state", model.getState());
 			}
 		}

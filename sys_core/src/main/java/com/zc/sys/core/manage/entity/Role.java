@@ -25,7 +25,7 @@ public class Role extends LongPKEntity {
 	/** 角色名 **/
 	private String name;
 	/** 状态：0-未启用；1-启用 **/
-	private Integer state;
+	private int state;
 	/** 备注 **/
 	private String remark;
 	/** 获取权限 **/
@@ -43,12 +43,12 @@ public class Role extends LongPKEntity {
 	}
 
 	/** 获取【状态：0-未启用；1-启用】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 
 	/** 设置【状态：0-未启用；1-启用】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 

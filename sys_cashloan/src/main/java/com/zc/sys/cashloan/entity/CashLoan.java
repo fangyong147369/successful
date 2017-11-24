@@ -38,21 +38,21 @@ public class CashLoan extends LongPKEntity {
 	@JoinColumn(name = "type")
 	private CashLoanConfig cashLoanConfig;
 	/** 状态 **/
-	private Integer state;
+	private int state;
 	/** 借款本金总额 **/
 	private double total;
 	/** 还款方式 **/
-	private Integer repaymentType;
+	private int repaymentType;
 	/** 期限单位 **/
-	private Integer periodUnit;
+	private int periodUnit;
 	/** 期限 **/
-	private Integer period;
+	private int period;
 	/** 天利率 **/
 	private double rate;
 	/** 逾期天利率 **/
 	private double overdueRate;
 	/** 服务费收取类型 **/
-	private Integer serviceFeeType;
+	private int serviceFeeType;
 	/** 服务费收取值 **/
 	private double serviceFeeValue;
 	/** 应还总额 **/
@@ -74,11 +74,11 @@ public class CashLoan extends LongPKEntity {
 	/** 已还服务费 **/
 	private double repaidServiceFee;
 	/** 是否使用免息券 **/
-	private Integer isInterestFreeNote;
+	private int isInterestFreeNote;
 	/** 免息总金额 **/
 	private double interestFreeAmount;
 	/** 是否可提前还款 **/
-	private Integer isPrepayment;
+	private int isPrepayment;
 	/** 审核时间 **/
 	private Date auditTime;
 	/** 审核管理员 **/
@@ -88,7 +88,7 @@ public class CashLoan extends LongPKEntity {
 	/** 放款时间 **/
 	private Date loanTime;
 	/** 放款方式:放款到银行卡/放款到账户余额 **/
-	private Integer loanWay;
+	private int loanWay;
 	/** 放款账户 **/
 	private String loanAccount;
 	/** 放款流水 **/
@@ -103,7 +103,7 @@ public class CashLoan extends LongPKEntity {
 	private Date addTime;
 	/** 版本控制 **/
 	@Version
-	private Integer version;
+	private int version;
 	/** 获取【借款编号】 **/
 	public String getCno() {
 		return cno;
@@ -137,11 +137,11 @@ public class CashLoan extends LongPKEntity {
 		this.cashLoanConfig = cashLoanConfig;
 	}
 	/** 获取【状态】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【借款本金总额】 **/
@@ -153,27 +153,27 @@ public class CashLoan extends LongPKEntity {
 		this.total = total;
 	}
 	/** 获取【还款方式】 **/
-	public Integer getRepaymentType() {
+	public int getRepaymentType() {
 		return repaymentType;
 	}
 	/** 设置【还款方式】 **/
-	public void setRepaymentType(Integer repaymentType) {
+	public void setRepaymentType(int repaymentType) {
 		this.repaymentType = repaymentType;
 	}
 	/** 获取【期限单位】 **/
-	public Integer getPeriodUnit() {
+	public int getPeriodUnit() {
 		return periodUnit;
 	}
 	/** 设置【期限单位】 **/
-	public void setPeriodUnit(Integer periodUnit) {
+	public void setPeriodUnit(int periodUnit) {
 		this.periodUnit = periodUnit;
 	}
 	/** 获取【期限】 **/
-	public Integer getPeriod() {
+	public int getPeriod() {
 		return period;
 	}
 	/** 设置【期限】 **/
-	public void setPeriod(Integer period) {
+	public void setPeriod(int period) {
 		this.period = period;
 	}
 	/** 获取【天利率】 **/
@@ -193,11 +193,11 @@ public class CashLoan extends LongPKEntity {
 		this.overdueRate = overdueRate;
 	}
 	/** 获取【服务费收取类型】 **/
-	public Integer getServiceFeeType() {
+	public int getServiceFeeType() {
 		return serviceFeeType;
 	}
 	/** 设置【服务费收取类型】 **/
-	public void setServiceFeeType(Integer serviceFeeType) {
+	public void setServiceFeeType(int serviceFeeType) {
 		this.serviceFeeType = serviceFeeType;
 	}
 	/** 获取【服务费收取值】 **/
@@ -281,11 +281,11 @@ public class CashLoan extends LongPKEntity {
 		this.repaidServiceFee = repaidServiceFee;
 	}
 	/** 获取【是否使用免息券】 **/
-	public Integer getIsInterestFreeNote() {
+	public int getIsInterestFreeNote() {
 		return isInterestFreeNote;
 	}
 	/** 设置【是否使用免息券】 **/
-	public void setIsInterestFreeNote(Integer isInterestFreeNote) {
+	public void setIsInterestFreeNote(int isInterestFreeNote) {
 		this.isInterestFreeNote = isInterestFreeNote;
 	}
 	/** 获取【免息总金额】 **/
@@ -297,11 +297,11 @@ public class CashLoan extends LongPKEntity {
 		this.interestFreeAmount = interestFreeAmount;
 	}
 	/** 获取【是否可提前还款】 **/
-	public Integer getIsPrepayment() {
+	public int getIsPrepayment() {
 		return isPrepayment;
 	}
 	/** 设置【是否可提前还款】 **/
-	public void setIsPrepayment(Integer isPrepayment) {
+	public void setIsPrepayment(int isPrepayment) {
 		this.isPrepayment = isPrepayment;
 	}
 	/** 获取【审核时间】 **/
@@ -321,14 +321,11 @@ public class CashLoan extends LongPKEntity {
 		this.loanTime = loanTime;
 	}
 	/** 获取【放款方式:放款到银行卡放款到账户余额】 **/
-	public Integer getLoanWay() {
-		if(loanWay != null){
-			loanWay = loanWay.intValue();
-		}
+	public int getLoanWay() {
 		return loanWay;
 	}
 	/** 设置【放款方式:放款到银行卡放款到账户余额】 **/
-	public void setLoanWay(Integer loanWay) {
+	public void setLoanWay(int loanWay) {
 		this.loanWay = loanWay;
 	}
 	/** 获取【放款账户】 **/
@@ -356,11 +353,11 @@ public class CashLoan extends LongPKEntity {
 		this.addTime = addTime;
 	}
 	/** 获取【版本控制】 **/
-	public Integer getVersion() {
+	public int getVersion() {
 		return version;
 	}
 	/** 设置【版本控制】 **/
-	public void setVersion(Integer version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 	/** 获取【放款流水】 **/

@@ -36,7 +36,7 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 证件号码 **/
 	private String cardNo;
 	/** 证件类型 **/
-	private Integer cardType;
+	private int cardType;
 	/** 手机号 **/
 	private String mobile;
 	
@@ -78,7 +78,7 @@ public class UserIdentifyModel extends UserIdentify {
 	public void initReg(UserModel model) {
 		this.setRealNameState(0);
 		this.setEmailState(0);
-		if(model.getMobileState() == null){
+		if(model.getMobileState() == 0){
 			model.setMobileState(0);
 		}
 		this.setMobileState(1);
@@ -103,7 +103,7 @@ public class UserIdentifyModel extends UserIdentify {
 		if(StringUtil.isBlank(this.realName)){
 			throw new BusinessException("实名信息不能为空");
 		}
-		if(this.cardType == null || this.cardType <= 0){
+		if(this.cardType <= 0){
 			throw new BusinessException("参数错误");
 		}
 		this.checkCard(this.cardType,this.cardNo);//证件格式校验
@@ -219,12 +219,12 @@ public class UserIdentifyModel extends UserIdentify {
 	}
 
 	/** 获取【证件类型】 **/
-	public Integer getCardType() {
+	public int getCardType() {
 		return cardType;
 	}
 
 	/** 设置【证件类型】 **/
-	public void setCardType(Integer cardType) {
+	public void setCardType(int cardType) {
 		this.cardType = cardType;
 	}
 

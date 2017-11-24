@@ -27,11 +27,11 @@ public class Menu extends LongPKEntity {
 	/** 链接地址 **/
 	private String href;
 	/** 类型 **/
-	private Integer type;
+	private int type;
 	/** 状态0-未启用；1-启用 **/
-	private Integer state;
+	private int state;
 	/** 排序 **/
-	private Integer sort;
+	private int sort;
 	/** 备注 **/
 	private String remark;
 	
@@ -77,27 +77,27 @@ public class Menu extends LongPKEntity {
 		this.href = href;
 	}
 	/** 获取【类型】 **/
-	public Integer getType() {
+	public int getType() {
 		return type;
 	}
 	/** 设置【类型】 **/
-	public void setType(Integer type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	/** 获取【状态0-未启用；1-启用】 **/
-	public Integer getState() {
+	public int getState() {
 		return state;
 	}
 	/** 设置【状态0-未启用；1-启用】 **/
-	public void setState(Integer state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 	/** 获取【排序】 **/
-	public Integer getSort() {
+	public int getSort() {
 		return sort;
 	}
 	/** 设置【排序】 **/
-	public void setSort(Integer sort) {
+	public void setSort(int sort) {
 		this.sort = sort;
 	}
 	/** 获取【备注】 **/

@@ -50,7 +50,7 @@ public class TemplateModel extends Template {
 		if (StringUtil.isBlank(this.getNid())) {
 			throw new BusinessException("标识不能为空！");
 		}
-		if (this.getType() == null || this.getType().longValue() <= 0) {
+		if (this.getType() <= 0) {
 			throw new BusinessException("请选择类型！");
 		}
 		if (StringUtil.isBlank(this.getTitle())) {
@@ -70,7 +70,7 @@ public class TemplateModel extends Template {
 		template.setNid(this.getNid());
 		template.setRemark(this.getRemark());
 		template.setRoute(this.getRoute());
-		template.setState(this.getState() == null ? 0 : this.getState());
+		template.setState(this.getState());
 		template.setContent(this.getContent());
 		template.setTitle(this.getTitle());
 		template.setType(this.getType());

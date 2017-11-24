@@ -39,7 +39,7 @@ public class MenuDaoImpl extends BaseDaoImpl<Menu> implements MenuDao {
 			if (model.getParentId() != null) {
 				param.addParam("parentId", model.getParentId());
 			}
-			if (model.getState() != null) {
+			if (model.getState() != 0) {
 				param.addParam("state", model.getState());
 			}
 		}

@@ -35,10 +35,10 @@ public class IntegralAccount extends LongPKEntity {
 	/** 冻结积分 **/
 	private double freezeIntegral;
 	/** 积分等级 **/
-	private Integer gradeIntegral;
+	private int gradeIntegral;
 	/** 版本控制 **/
 	@Version
-	private Integer version;
+	private int version;
 	/** 获取【用户】 **/
 	public User getUser() {
 		return user;
@@ -80,19 +80,19 @@ public class IntegralAccount extends LongPKEntity {
 		this.freezeIntegral = freezeIntegral;
 	}
 	/** 获取【积分等级】 **/
-	public Integer getGradeIntegral() {
+	public int getGradeIntegral() {
 		return gradeIntegral;
 	}
 	/** 设置【积分等级】 **/
-	public void setGradeIntegral(Integer gradeIntegral) {
+	public void setGradeIntegral(int gradeIntegral) {
 		this.gradeIntegral = gradeIntegral;
 	}
 	/** 获取【版本控制】 **/
-	public Integer getVersion() {
+	public int getVersion() {
 		return version;
 	}
 	/** 设置【版本控制】 **/
-	public void setVersion(Integer version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 }

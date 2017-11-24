@@ -34,7 +34,7 @@ public class CashLoanRepaymentDaoImpl extends BaseDaoImpl<CashLoanRepayment> imp
 			/*SearchFilter orFilter1 = new SearchFilter("name", Operators.LIKE, model.getSearchName().trim());
 			param.addOrFilter(orFilter1);*/
 		}else {
-			if (model.getState() != null) {
+			if (model.getState() != 0) {
 				param.addParam("state", model.getState());
 			}
 		}

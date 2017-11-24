@@ -31,7 +31,7 @@ public class UserIdentifyDaoImpl extends BaseDaoImpl<UserIdentify> implements Us
 			if(!StringUtil.isBlank(model.getCardNo())){
 				param.addParam("user.cardNo", model.getCardNo());
 			}
-			if(model.getRealNameState() != null){
+			if(model.getRealNameState() != 0){
 				param.addParam("realNameState", model.getRealNameState());
 			}
 		}
