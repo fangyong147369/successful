@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.manage.entity.Operator;
 import com.zc.sys.core.user.entity.User;
-import com.zc.sys.promotion.constant.BaseConstant;
+import com.zc.sys.promotion.constant.BasePromotionConstant;
 /**
  * 免息券发放记录
  * @author zp
@@ -18,7 +18,7 @@ import com.zc.sys.promotion.constant.BaseConstant;
  * @since 2017年11月09日
  */
 @Entity
-@Table(name=BaseConstant.DB_PREFIX + BaseConstant.DB_MODEL_Pt + "_interest_free_note_record")
+@Table(name=BasePromotionConstant.DB_PREFIX + BasePromotionConstant.DB_MODEL_Pt + "_interest_free_note_record")
 public class InterestFreeNoteRecord extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;

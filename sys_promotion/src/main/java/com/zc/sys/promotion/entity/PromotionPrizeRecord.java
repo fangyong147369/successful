@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.zc.sys.common.entity.LongPKEntity;
-import com.zc.sys.promotion.constant.BaseConstant;
+import com.zc.sys.promotion.constant.BasePromotionConstant;
 /**
  * 活动推广奖励记录
  * @author zp
@@ -16,7 +16,7 @@ import com.zc.sys.promotion.constant.BaseConstant;
  * @since 2017年11月09日
  */
 @Entity
-@Table(name=BaseConstant.DB_PREFIX + BaseConstant.DB_MODEL_Pt + "_promotion_prize_record")
+@Table(name=BasePromotionConstant.DB_PREFIX + BasePromotionConstant.DB_MODEL_Pt + "_promotion_prize_record")
 public class PromotionPrizeRecord extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;

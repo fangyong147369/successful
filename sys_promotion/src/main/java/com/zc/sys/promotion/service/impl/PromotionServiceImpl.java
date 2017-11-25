@@ -1,8 +1,15 @@
 package com.zc.sys.promotion.service.impl;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.promotion.dao.PromotionDao;
+import com.zc.sys.promotion.entity.Promotion;
 import com.zc.sys.promotion.model.PromotionModel;
 import com.zc.sys.promotion.service.PromotionService;
 /**
@@ -23,8 +30,18 @@ public class PromotionServiceImpl implements PromotionService {
  	 */
 	@Override
 	public Result list(PromotionModel model){
-
-		return null;
+		PageDataList<Promotion> pageDataList = promotionDao.list(model);
+		PageDataList<PromotionModel> pageDataList_ = new PageDataList<PromotionModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List<PromotionModel> list = new ArrayList<PromotionModel>();
+		if(pageDataList != null && pageDataList.getList().size() > 0){
+			for (Promotion promotion : pageDataList.getList()) {
+				PromotionModel model_ = PromotionModel.instance(promotion);
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -34,8 +51,11 @@ public class PromotionServiceImpl implements PromotionService {
  	 */
 	@Override
 	public Result add(PromotionModel model){
-
-		return null;
+		model.validAdd();//校验添加参数
+		model.initAdd();//初始化添加
+		Promotion promotion = model.prototype();
+		promotionDao.save(promotion);
+		return Result.success();
 	}
 
 	/**
@@ -45,7 +65,7 @@ public class PromotionServiceImpl implements PromotionService {
  	 */
 	@Override
 	public Result update(PromotionModel model){
-
+		
 		return null;
 	}
 

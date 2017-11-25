@@ -1,4 +1,4 @@
-package com.zc.sys.promotion.controller;
+package com.zc.sys.api.zc.promotion;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;

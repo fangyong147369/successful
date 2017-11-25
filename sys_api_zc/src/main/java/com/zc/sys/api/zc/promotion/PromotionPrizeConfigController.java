@@ -1,4 +1,4 @@
-package com.zc.sys.promotion.controller;
+package com.zc.sys.api.zc.promotion;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.core.common.web.BaseController;
-import com.zc.sys.promotion.model.InterestFreeNoteModel;
-import com.zc.sys.promotion.service.InterestFreeNoteService;
+import com.zc.sys.promotion.model.PromotionPrizeConfigModel;
+import com.zc.sys.promotion.service.PromotionPrizeConfigService;
 /**
- * 免息券
+ * 活动推广奖励配置
  * @author zp
  * @version 2.0.0.0
  * @since 2017年11月09日
  */
 @RestController
-@RequestMapping("/pt/interestfreenote")
-public class InterestFreeNoteController extends BaseController<InterestFreeNoteModel> {
+@RequestMapping("/pt/promotionprizeconfig")
+public class PromotionPrizeConfigController extends BaseController<PromotionPrizeConfigModel> {
 
 	@Resource
-	InterestFreeNoteService interestFreeNoteService;
+	PromotionPrizeConfigService promotionPrizeConfigService;
 
 	/**
  	 * 列表
@@ -30,8 +30,8 @@ public class InterestFreeNoteController extends BaseController<InterestFreeNoteM
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(InterestFreeNoteModel model) throws BusinessException {
-		return interestFreeNoteService.list(model);
+	public Object list(PromotionPrizeConfigModel model) throws BusinessException {
+		return promotionPrizeConfigService.list(model);
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class InterestFreeNoteController extends BaseController<InterestFreeNoteM
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(InterestFreeNoteModel model) throws BusinessException {
-		return interestFreeNoteService.add(model);
+	public Object add(PromotionPrizeConfigModel model) throws BusinessException {
+		return promotionPrizeConfigService.add(model);
 	}
 
 	/**
@@ -52,8 +52,8 @@ public class InterestFreeNoteController extends BaseController<InterestFreeNoteM
  	 */
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public Object update(InterestFreeNoteModel model) throws BusinessException {
-		return interestFreeNoteService.update(model);
+	public Object update(PromotionPrizeConfigModel model) throws BusinessException {
+		return promotionPrizeConfigService.update(model);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class InterestFreeNoteController extends BaseController<InterestFreeNoteM
  	 */
 	@RequestMapping(value = "/getById", method = RequestMethod.POST)
 	@ResponseBody
-	public Object getById(InterestFreeNoteModel model) throws BusinessException {
-		return interestFreeNoteService.getById(model);
+	public Object getById(PromotionPrizeConfigModel model) throws BusinessException {
+		return promotionPrizeConfigService.getById(model);
 	}
 }

@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.zc.sys.common.entity.LongPKEntity;
-import com.zc.sys.promotion.constant.BaseConstant;
+import com.zc.sys.promotion.constant.BasePromotionConstant;
 /**
  * 活动推广
  * @author zp
@@ -13,7 +13,7 @@ import com.zc.sys.promotion.constant.BaseConstant;
  * @since 2017年11月09日
  */
 @Entity
-@Table(name=BaseConstant.DB_PREFIX + BaseConstant.DB_MODEL_Pt + "_promotion")
+@Table(name=BasePromotionConstant.DB_PREFIX + BasePromotionConstant.DB_MODEL_Pt + "_promotion")
 public class Promotion extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
@@ -22,10 +22,12 @@ public class Promotion extends LongPKEntity {
 	private String name;
 	/** 推广方式 **/
 	private int way;
+	/** 推广内容 **/
+	private String content;
 	/** 摘要 **/
 	private String summary;
 	/** 状态 **/
-	private int stae;
+	private int state;
 	/** 开始时间 **/
 	private Date startTime;
 	/** 结束时间 **/
@@ -59,12 +61,12 @@ public class Promotion extends LongPKEntity {
 		this.summary = summary;
 	}
 	/** 获取【状态】 **/
-	public int getStae() {
-		return stae;
+	public int getState() {
+		return state;
 	}
 	/** 设置【状态】 **/
-	public void setStae(int stae) {
-		this.stae = stae;
+	public void setState(int state) {
+		this.state = state;
 	}
 	/** 获取【开始时间】 **/
 	public Date getStartTime() {
@@ -97,5 +99,13 @@ public class Promotion extends LongPKEntity {
 	/** 设置【添加时间】 **/
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
+	}
+	/** 获取【推广内容】 **/
+	public String getContent() {
+		return content;
+	}
+	/** 设置【推广内容】 **/
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

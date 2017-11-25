@@ -720,6 +720,29 @@ public class DateUtil {
 		return 0;
 	}
     
+    /** 
+     * 计算两个日期之间相差的毫秒
+     * @param date1 
+     * @param date2 
+     * @return date1 - date2
+     */  
+    public static int msBetween(Date date1, Date date2){
+    	DateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+    	Calendar cal = Calendar.getInstance();
+    	try {
+    		Date d1 = sdf.parse(DateUtil.dateStr3(date1));
+    		Date d2 = sdf.parse(DateUtil.dateStr3(date2));
+    		cal.setTime(d1);
+    		long time1 = cal.getTimeInMillis();
+    		cal.setTime(d2);
+    		long time2 = cal.getTimeInMillis();
+    		return Integer.parseInt(String.valueOf((time1 - time2)));
+    	} catch (ParseException e) {
+    		e.printStackTrace();
+    	}
+    	return 0;
+    }
+    
     /**
 	 * 
 	 * 自定义format格式化字符串为date

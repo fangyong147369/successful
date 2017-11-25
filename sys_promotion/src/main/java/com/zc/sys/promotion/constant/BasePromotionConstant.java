@@ -7,7 +7,7 @@ package com.zc.sys.promotion.constant;
  * @version 2.0.0.0
  * @since 2017年11月6日
  */
-public final class BaseConstant {
+public final class BasePromotionConstant {
 	
 	/** DB=========================================================start **/
 	

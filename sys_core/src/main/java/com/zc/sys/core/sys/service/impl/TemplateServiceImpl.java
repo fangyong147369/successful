@@ -53,8 +53,8 @@ public class TemplateServiceImpl implements TemplateService {
 	@Override
 	@Transactional
 	public Result add(TemplateModel model){
-		Template template = model.prototype();
 		model.validParam();//校验参数
+		Template template = model.prototype();
 		templateDao.save(template);
 		return Result.success();
 	}
@@ -67,8 +67,8 @@ public class TemplateServiceImpl implements TemplateService {
 	@Override
 	@Transactional
 	public Result update(TemplateModel model){
-		Template template = templateDao.find(model.getId());
 		model.validParam();//校验参数
+		Template template = templateDao.find(model.getId());
 		model.setUpdateParam(template);//设置修改基本参数
 		templateDao.update(template);
 		return Result.success();
