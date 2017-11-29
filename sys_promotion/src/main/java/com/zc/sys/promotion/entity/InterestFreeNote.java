@@ -29,7 +29,7 @@ public class InterestFreeNote extends LongPKEntity {
 	/** 有效期类型：天数/截止时间 **/
 	private int validityType;
 	/** 有效期值 **/
-	private String value;
+	private String validityValue;
 	/** 发放配额 **/
 	private int quota;
 	/** 已发放数量 **/
@@ -85,12 +85,12 @@ public class InterestFreeNote extends LongPKEntity {
 		this.validityType = validityType;
 	}
 	/** 获取【有效期值】 **/
-	public String getValue() {
-		return value;
+	public String getValidityValue() {
+		return validityValue;
 	}
 	/** 设置【有效期值】 **/
-	public void setValue(String value) {
-		this.value = value;
+	public void setValidityValue(String validityValue) {
+		this.validityValue = validityValue;
 	}
 	/** 获取【发放配额】 **/
 	public int getQuota() {

@@ -13,7 +13,7 @@ security:
 messageSelector:
   notice: "code in ('sendSMS','sendEmail','sendMessage','sendAppPushMessage')"
   cashLoan: "code in ('cashLoan','cashLoanRepayment')"
-  other: "code in ('user')"
+  other: "code in ('user','promotion')"
 
 #运行端口
 server:

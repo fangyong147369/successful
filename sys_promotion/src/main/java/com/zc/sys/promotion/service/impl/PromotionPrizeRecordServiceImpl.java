@@ -1,8 +1,15 @@
 package com.zc.sys.promotion.service.impl;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.promotion.dao.PromotionPrizeRecordDao;
+import com.zc.sys.promotion.entity.PromotionPrizeRecord;
 import com.zc.sys.promotion.model.PromotionPrizeRecordModel;
 import com.zc.sys.promotion.service.PromotionPrizeRecordService;
 /**
@@ -23,8 +30,18 @@ public class PromotionPrizeRecordServiceImpl implements PromotionPrizeRecordServ
  	 */
 	@Override
 	public Result list(PromotionPrizeRecordModel model){
-
-		return null;
+		PageDataList<PromotionPrizeRecord> pageDataList = promotionPrizeRecordDao.list(model);
+		PageDataList<PromotionPrizeRecordModel> pageDataList_ = new PageDataList<PromotionPrizeRecordModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List<PromotionPrizeRecordModel> list = new ArrayList<PromotionPrizeRecordModel>();
+		if(pageDataList != null && pageDataList.getList().size() > 0){
+			for (PromotionPrizeRecord promotionPrizeRecord : pageDataList.getList()) {
+				PromotionPrizeRecordModel model_ = PromotionPrizeRecordModel.instance(promotionPrizeRecord);
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**

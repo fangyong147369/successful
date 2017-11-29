@@ -28,6 +28,8 @@ public abstract class AbstractExecuter implements Executer {
 		handleNotice();
 		//新增操作记录
 		addOperateLog();
+		//处理推广活动
+		handlePromotion();
 		//队列发送
 		queueSend();
 	}
@@ -67,4 +69,7 @@ public abstract class AbstractExecuter implements Executer {
 
 	@Override
 	public abstract void queueSend();
+	
+	@Override
+	public abstract void handlePromotion();
 }

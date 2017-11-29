@@ -47,6 +47,11 @@ public interface Executer {
 	 * 更新账户
 	 */
 	void handleAccount();
+	
+	/**
+	 * 处理推广活动
+	 */
+	void handlePromotion();
 
 	/**
 	 * 推送

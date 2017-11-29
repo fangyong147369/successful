@@ -5,13 +5,18 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.promotion.constant.BasePromotionConstant.PromotionWay;
 import com.zc.sys.promotion.dao.PromotionDao;
 import com.zc.sys.promotion.entity.Promotion;
 import com.zc.sys.promotion.model.PromotionModel;
 import com.zc.sys.promotion.service.PromotionService;
+import com.zc.sys.promotion.way.PromotionWayService;
 /**
  * 活动推广
  * @author zp
@@ -50,6 +55,7 @@ public class PromotionServiceImpl implements PromotionService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result add(PromotionModel model){
 		model.validAdd();//校验添加参数
 		model.initAdd();//初始化添加
@@ -64,9 +70,12 @@ public class PromotionServiceImpl implements PromotionService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(PromotionModel model){
-		
-		return null;
+		Promotion promotion = model.validUpdate();//校验修改参数
+		model.initUpdate(promotion);//初始化修改
+		promotionDao.update(promotion);
+		return Result.success();
 	}
 
 	/**
@@ -76,8 +85,38 @@ public class PromotionServiceImpl implements PromotionService {
  	 */
 	@Override
 	public Result getById(PromotionModel model){
-
-		return null;
+		if(model.getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		return Result.success().setData(promotionDao.find(model.getId()));
 	}
+
+	/**
+	 * 活动处理
+	 * @param model
+	 */
+	@Override
+	@Transactional
+	public void handlePromotion(PromotionModel model) {
+		model.validParam();//参数校验
+		model.initParam();//初始化参数
+		List<Promotion> usePromotionList = promotionDao.findUse(model);
+		if(usePromotionList.size() <= 0){
+			throw new BusinessException("活动未配置");
+		}
+		
+		//循环查询到的活动list
+		for (Promotion promotion : usePromotionList) {
+			for (PromotionWay promotionWay : PromotionWay.values()) {
+				if(promotionWay.getIndex() == promotion.getWay()){
+					model.setId(promotion.getId());
+					PromotionWayService pwService = BeanUtil.getBean(promotionWay.toString());
+					pwService.doPromotionPrize(model);
+				}
+			}
+		}
+	}
+	
+	
 
 }

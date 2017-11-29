@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.zc.sys.common.exception.BusinessException;
+import com.zc.sys.common.exception.NoRollBackException;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.promotion.model.InterestFreeNoteRecordModel;
 import com.zc.sys.promotion.service.InterestFreeNoteRecordService;
@@ -38,10 +39,11 @@ public class InterestFreeNoteRecordController extends BaseController<InterestFre
  	 * 添加
  	 * @param model
  	 * @return
+	 * @throws NoRollBackException 
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(InterestFreeNoteRecordModel model) throws BusinessException {
+	public Object add(InterestFreeNoteRecordModel model) throws NoRollBackException {
 		return interestFreeNoteRecordService.add(model);
 	}
 

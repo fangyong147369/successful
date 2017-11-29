@@ -90,4 +90,11 @@ public final class BaseConstant {
 	/** 主动短信类型-交易密码 **/
 	public static final int HANDLE_SMS_TYPE_PAYPWD = 3;
 	/** handle-SMS-type=========================================================end **/
+	
+	/** validity-type=========================================================start **/
+	/** 有效期类型-天数 **/
+	public static final int VALIDITY_TYPE_DAY = 1;
+	/** 有效期类型-时间 **/
+	public static final int VALIDITY_TYPE_TIME = 2;
+	/** validity-type=========================================================end **/
 }

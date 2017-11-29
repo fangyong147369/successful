@@ -1,5 +1,6 @@
 package com.zc.sys.promotion.service;
 import com.zc.sys.promotion.model.InterestFreeNoteRecordModel;
+import com.zc.sys.common.exception.NoRollBackException;
 import com.zc.sys.common.form.Result;
 /**
  * 免息券发放记录
@@ -21,7 +22,7 @@ public interface InterestFreeNoteRecordService{
  	 * @param model
  	 * @return
  	 */
-	public Result add(InterestFreeNoteRecordModel model);
+	public Result add(InterestFreeNoteRecordModel model) throws NoRollBackException ;
 
 	/**
  	 * 修改
@@ -36,5 +37,12 @@ public interface InterestFreeNoteRecordService{
  	 * @return
  	 */
 	public Result getById(InterestFreeNoteRecordModel model);
+	
+	/**
+	 * 发放
+	 * @param model
+	 * @return
+	 */
+	public Result giveOut(InterestFreeNoteRecordModel model) throws NoRollBackException;
 
 }

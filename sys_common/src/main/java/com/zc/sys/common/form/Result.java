@@ -3,6 +3,7 @@ package com.zc.sys.common.form;
 import com.zc.sys.common.util.BeanUtilCommon;
 import com.zc.sys.common.util.encrypt.AES256Util;
 import com.zc.sys.common.util.json.JsonUtil;
+import com.zc.sys.common.util.validate.StringUtil;
 
 /**
  * 请求返回结果
@@ -142,7 +143,7 @@ public class Result {
 				return jsonData;
 			}
 		}
-		return data;
+		return StringUtil.isNull(data);
 	}
 
 	/** 设置【返回对象】 **/

@@ -1,7 +1,15 @@
 package com.zc.sys.promotion.dao.impl;
 import org.springframework.stereotype.Repository;
+
 import com.zc.sys.common.dao.jpa.BaseDaoImpl;
+import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.common.model.jpa.QueryParam;
+import com.zc.sys.common.model.jpa.SearchFilter;
+import com.zc.sys.common.model.jpa.OrderFilter.OrderType;
+import com.zc.sys.common.model.jpa.SearchFilter.Operators;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.promotion.entity.PromotionPrizeRecord;
+import com.zc.sys.promotion.model.PromotionPrizeRecordModel;
 import com.zc.sys.promotion.dao.PromotionPrizeRecordDao;
 /**
  * 活动推广奖励记录
@@ -11,5 +19,28 @@ import com.zc.sys.promotion.dao.PromotionPrizeRecordDao;
  */
 @Repository
 public class PromotionPrizeRecordDaoImpl extends BaseDaoImpl<PromotionPrizeRecord> implements PromotionPrizeRecordDao {
+
+	/**
+	 * 列表
+	 * @param model
+	 * @return
+	 */
+	@Override
+	public PageDataList<PromotionPrizeRecord> list(
+			PromotionPrizeRecordModel model) {
+		QueryParam param = QueryParam.getInstance();
+		if(StringUtil.isNotBlank(model.getSearchName())){
+			SearchFilter orFilter1 = new SearchFilter("name", Operators.LIKE, model.getSearchName().trim());
+			SearchFilter orFilter2 = new SearchFilter("nid", Operators.LIKE, model.getSearchName().trim());
+			param.addOrFilter(orFilter1,orFilter2);
+		}else {
+			if (model.getState() != 0) {
+				param.addParam("state", model.getState());
+			}
+		}
+		param.addOrder(OrderType.ASC, "id");
+		param.addPage(model.getPageNo(), model.getPageSize());
+		return super.findPageList(param);
+	}
 
 }

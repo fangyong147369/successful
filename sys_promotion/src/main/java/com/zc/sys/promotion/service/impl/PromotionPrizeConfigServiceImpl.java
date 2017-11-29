@@ -1,8 +1,16 @@
 package com.zc.sys.promotion.service.impl;
-import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.promotion.dao.PromotionPrizeConfigDao;
+import com.zc.sys.promotion.entity.PromotionPrizeConfig;
 import com.zc.sys.promotion.model.PromotionPrizeConfigModel;
 import com.zc.sys.promotion.service.PromotionPrizeConfigService;
 /**
@@ -23,8 +31,18 @@ public class PromotionPrizeConfigServiceImpl implements PromotionPrizeConfigServ
  	 */
 	@Override
 	public Result list(PromotionPrizeConfigModel model){
-
-		return null;
+		PageDataList<PromotionPrizeConfig> pageDataList = promotionPrizeConfigDao.list(model);
+		PageDataList<PromotionPrizeConfigModel> pageDataList_ = new PageDataList<PromotionPrizeConfigModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List<PromotionPrizeConfigModel> list = new ArrayList<PromotionPrizeConfigModel>();
+		if(pageDataList != null && pageDataList.getList().size() > 0){
+			for (PromotionPrizeConfig promotionPrizeConfig : pageDataList.getList()) {
+				PromotionPrizeConfigModel model_ = PromotionPrizeConfigModel.instance(promotionPrizeConfig);
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -34,8 +52,11 @@ public class PromotionPrizeConfigServiceImpl implements PromotionPrizeConfigServ
  	 */
 	@Override
 	public Result add(PromotionPrizeConfigModel model){
-
-		return null;
+		model.validAdd();//校验添加参数
+		model.initAdd();//初始化添加
+		PromotionPrizeConfig promotionPrizeConfig = model.prototype();
+		promotionPrizeConfigDao.save(promotionPrizeConfig);
+		return Result.success();
 	}
 
 	/**
@@ -45,8 +66,10 @@ public class PromotionPrizeConfigServiceImpl implements PromotionPrizeConfigServ
  	 */
 	@Override
 	public Result update(PromotionPrizeConfigModel model){
-
-		return null;
+		PromotionPrizeConfig promotionPrizeConfig = model.validUpdate();//校验修改参数
+		model.initUpdate(promotionPrizeConfig);//初始化修改
+		promotionPrizeConfigDao.update(promotionPrizeConfig);
+		return Result.success();
 	}
 
 	/**
@@ -56,8 +79,10 @@ public class PromotionPrizeConfigServiceImpl implements PromotionPrizeConfigServ
  	 */
 	@Override
 	public Result getById(PromotionPrizeConfigModel model){
-
-		return null;
+		if(model.getId() <= 0){
+			throw new BusinessException("参数错误");
+		}
+		return Result.success().setData(promotionPrizeConfigDao.find(model.getId()));
 	}
 
 }

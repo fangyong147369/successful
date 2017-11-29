@@ -57,6 +57,9 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public Result getToken() {
 		String token = StringUtil.getSerialNumber();
+		if(!Global.sysState()){
+			token = "123456";
+		}
 		redisCacheUtil.setCode("token_" + token, "token_" + token, 60 * 30);
 		return Result.success().setData(token);
 	}
@@ -70,7 +73,7 @@ public class CommonServiceImpl implements CommonService {
 	public void checkToken(String token) {
 		String key = "token_" + token;
 		String ckToken = redisCacheUtil.getCache(key, String.class);
-		if(StringUtil.isBlank(ckToken)){
+		if(!StringUtil.isBlank(ckToken)){
 			redisCacheUtil.delCode(key);
 		}else {
 			throw new BusinessException("表单Token未设定，请刷新页面后重试。");

@@ -121,7 +121,6 @@ public class UserServiceImpl implements UserService {
 		User user = model.prototype();
 		//保存用户
 		userDao.save(user);
-		model.setId(user.getId());
 		
 		//初始化用户基本信息
 		UserInfoModel infoModel = new UserInfoModel();
@@ -161,10 +160,10 @@ public class UserServiceImpl implements UserService {
 		
 		//注册任务
 		Executer regExecuter = BeanUtil.getBean(UserRegExecuter.class);
-		regExecuter.execute(model);
+		regExecuter.execute(UserModel.instance(user));
 		//邀请任务
 		Executer inviteExecuter = BeanUtil.getBean(UserInviteExecuter.class);
-		inviteExecuter.execute(infoModel);
+		inviteExecuter.execute(UserInfoModel.instance(userInfo));
 		
 		UserModel returnModel = UserModel.instance(user);
 		returnModel.initReturn();

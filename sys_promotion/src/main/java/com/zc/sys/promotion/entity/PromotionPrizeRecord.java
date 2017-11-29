@@ -1,13 +1,17 @@
 package com.zc.sys.promotion.entity;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.zc.sys.common.entity.LongPKEntity;
+import com.zc.sys.core.manage.entity.Operator;
+import com.zc.sys.core.user.entity.User;
 import com.zc.sys.promotion.constant.BasePromotionConstant;
 /**
  * 活动推广奖励记录
@@ -21,6 +25,10 @@ public class PromotionPrizeRecord extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
 
+	/** 用户 */
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id")
+	private User user;
 	/** 活动推广奖励配置id **/
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prize_config_id")
@@ -39,6 +47,10 @@ public class PromotionPrizeRecord extends LongPKEntity {
 	private String remark;
 	/** 添加时间 **/
 	private Date addTime;
+	/** 发放管理员 **/
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "operator_id")
+	private Operator operator;
 	/** 获取【活动推广奖励配置id】 **/
 	public PromotionPrizeConfig getPromotionPrizeConfig() {
 		return promotionPrizeConfig;
@@ -95,4 +107,21 @@ public class PromotionPrizeRecord extends LongPKEntity {
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
+	/** 获取【用户】 **/
+	public User getUser() {
+		return user;
+	}
+	/** 设置【用户】 **/
+	public void setUser(User user) {
+		this.user = user;
+	}
+	/** 获取【发放管理员】 **/
+	public Operator getOperator() {
+		return operator;
+	}
+	/** 设置【发放管理员】 **/
+	public void setOperator(Operator operator) {
+		this.operator = operator;
+	}
+	
 }

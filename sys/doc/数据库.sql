@@ -780,7 +780,7 @@ CREATE TABLE `zc_pt_promotion` (
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_pt_promotion_prize_config`;
 CREATE TABLE `zc_pt_promotion_prize_config` (
-  `_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',
   `promotion_id` int(11) DEFAULT NULL COMMENT '推广id',
   `type` int(11) DEFAULT NULL COMMENT '奖品类型',
   `prize_no` varchar(64) DEFAULT NULL COMMENT '对应编号',
@@ -800,11 +800,13 @@ CREATE TABLE `zc_pt_promotion_prize_config` (
 DROP TABLE IF EXISTS `zc_pt_promotion_prize_record`;
 CREATE TABLE `zc_pt_promotion_prize_record` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',
+  `user_id` int(11) DEFAULT NULL COMMENT '用户',
   `prize_config_id` int(11) DEFAULT NULL COMMENT '推广配置id',
   `promotion_id` int(11) DEFAULT NULL COMMENT '推广id',
   `state` int(11) DEFAULT NULL COMMENT '状态',
   `value` varchar(128) DEFAULT NULL COMMENT '活动条件记录值',
   `type` int(11) DEFAULT NULL COMMENT '类型',
+  `operator_id` int(11) DEFAULT NULL COMMENT '管理员',
   `remark` varchar(64) DEFAULT NULL COMMENT '备注',
   `add_time` datetime DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
@@ -985,6 +987,7 @@ CREATE TABLE `zc_u_user_info` (
   `head_img` varchar(128) DEFAULT NULL COMMENT '头像',
   `e_sign_account_id` varchar(50) DEFAULT NULL COMMENT 'E签宝账户唯一标识',
   `e_sign_seal_data` varchar(16384) DEFAULT NULL COMMENT 'E签宝电子签章数据',
+  `zmxy_open_id` varchar(500) DEFAULT NULL COMMENT '芝麻信用授权标识',
   `elec_acct` varchar(64) DEFAULT NULL COMMENT '民泰电子账号',
   `ad_identifier` varchar(100) DEFAULT NULL COMMENT '设备标识符',
   `card_fg` varchar(100) DEFAULT NULL COMMENT '身份证国徽面',

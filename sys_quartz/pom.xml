@@ -12,6 +12,24 @@
 	<name>sys_quartz</name>
 	<packaging>war</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.zc.sys</groupId>
+			<artifactId>sys_core</artifactId>
+			<version>2.0.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zc.sys</groupId>
+			<artifactId>sys_cashloan</artifactId>
+			<version>2.0.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zc.sys</groupId>
+			<artifactId>sys_promotion</artifactId>
+			<version>2.0.0.0</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>

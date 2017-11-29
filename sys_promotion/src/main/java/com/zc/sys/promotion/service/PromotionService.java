@@ -1,6 +1,7 @@
 package com.zc.sys.promotion.service;
 import com.zc.sys.promotion.model.PromotionModel;
 import com.zc.sys.common.form.Result;
+import com.zc.sys.core.common.model.PromotionHandleModel;
 /**
  * 活动推广
  * @author zp
@@ -36,5 +37,11 @@ public interface PromotionService{
  	 * @return
  	 */
 	public Result getById(PromotionModel model);
+
+	/**
+	 * 活动处理
+	 * @param promotionModel
+	 */
+	public void handlePromotion(PromotionModel promotionModel);
 
 }
