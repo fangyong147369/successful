@@ -424,19 +424,17 @@ CREATE TABLE `zc_m_operator` (
   `pay_pwd` varchar(128) DEFAULT NULL COMMENT '交易密码',
   `mobile` varchar(64) DEFAULT NULL COMMENT '手机号',
   `email` varchar(64) DEFAULT NULL COMMENT '邮箱',
-  `state` int(11) DEFAULT NULL COMMENT '状态',
+  `state` int(11) DEFAULT '0' COMMENT '状态',
   `role_id` int(11) DEFAULT NULL COMMENT '角色id',
   `add_time` datetime DEFAULT NULL COMMENT '添加时间',
   `login_ip` varchar(64) DEFAULT NULL COMMENT '最后登录ip',
   `login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `add_manager` varchar(32) DEFAULT NULL COMMENT '添加用户',
-  `update_manager
-update_manager
-update_manager` varchar(32) DEFAULT NULL COMMENT '修改用户',
+  `update_manager` varchar(32) DEFAULT NULL COMMENT '修改用户',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `remark` varchar(128) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='管理员表：zc_m_operator';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='管理员表：zc_m_operator';
 
 -- ----------------------------
 -- Records of zc_m_operator

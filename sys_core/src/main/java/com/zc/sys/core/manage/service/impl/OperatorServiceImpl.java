@@ -1,21 +1,22 @@
 package com.zc.sys.core.manage.service.impl;
-import com.zc.sys.common.model.jpa.PageDataList;
-import com.zc.sys.core.manage.entity.Operator;
-import com.zc.sys.core.manage.model.OperatorModel;
-import com.zc.sys.core.manage.model.RoleModel;
-import com.zc.sys.core.manage.entity.Role;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.common.model.jpa.QueryParam;
+import com.zc.sys.common.util.encrypt.MD5;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.manage.dao.OperatorDao;
+import com.zc.sys.core.manage.entity.Operator;
+import com.zc.sys.core.manage.model.OperatorModel;
+import com.zc.sys.core.manage.model.RoleModel;
 import com.zc.sys.core.manage.service.OperatorService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 管理员
@@ -97,15 +98,17 @@ public class OperatorServiceImpl implements OperatorService {
 	 * @return
 	 */
 	public Result signIn(OperatorModel model){
-		if(model.getName() == null || model.getName().isEmpty()){
-			return Result.error("用户名不能为空.");
+		model.checkLogin();//登录校验参数
+		String loginName = StringUtil.isNull(model.getName());
+		String pwd = MD5.toMD5(StringUtil.isNull(model.getPwd()));
+		QueryParam param = QueryParam.getInstance();
+		param.addParam("name", loginName);
+		param.addParam("pwd", pwd);
+		List<Operator> operaterList = operatorDao.findByCriteria(param);
+		if(operaterList.size() != 1){
+			return Result.error("登录失败，用户名或密码有误");
 		}
-		if(model.getPwd() == null || model.getPwd().isEmpty()){
-			return Result.error("密码不能为空.");
-		}
-		String[] names=new String[]{"name","pwd"};
-		Object[] values=new Object[]{model.getName(),model.getPwd()};
-		Operator operater = operatorDao.findForUniqueBySql("select * from zc_m_operator  WHERE name=:name and pwd=:pwd ",names,values);
+		Operator operater = operaterList.get(0);
 		OperatorModel model_ = OperatorModel.instance(operater);
 		RoleModel roleModel = new RoleModel();
 		roleModel.setId(operater.getRole().getId());

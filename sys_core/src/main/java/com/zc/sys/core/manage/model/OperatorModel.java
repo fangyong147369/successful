@@ -1,7 +1,10 @@
 package com.zc.sys.core.manage.model;
 import org.springframework.beans.BeanUtils;
 
+import com.zc.sys.common.exception.BusinessException;
+import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.manage.entity.Operator;
 /**
  * 管理员
@@ -38,6 +41,18 @@ public class OperatorModel extends Operator {
 		Operator operator = new Operator();
 		BeanUtils.copyProperties(this, operator);
 		return operator;
+	}
+	
+	/**
+	 * 登录校验参数
+	 */
+	public void checkLogin() {
+		if(StringUtil.isBlank(this.getName())){
+			throw new BusinessException("用户名不能为空.");
+		}
+		if(StringUtil.isBlank(this.getPwd())){
+			throw new BusinessException("密码不能为空.");
+		}
 	}
 
 	/** 获取【当前页码】 **/

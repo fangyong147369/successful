@@ -2,6 +2,7 @@ package com.zc.sys.core.manage.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -42,7 +43,7 @@ public class Operator extends LongPKEntity {
 	private int state;
 	/** 角色主键 **/
 	@JsonBackReference
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "role_id")
 	private Role role;
 	/** 添加时间 **/
