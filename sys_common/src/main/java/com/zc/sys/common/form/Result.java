@@ -143,7 +143,7 @@ public class Result {
 				return jsonData;
 			}
 		}
-		return data;
+		return data == null ? "":data;
 	}
 
 	/** 设置【返回对象】 **/

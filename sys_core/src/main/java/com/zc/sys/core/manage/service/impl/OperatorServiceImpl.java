@@ -110,10 +110,8 @@ public class OperatorServiceImpl implements OperatorService {
 		}
 		Operator operater = operaterList.get(0);
 		OperatorModel model_ = OperatorModel.instance(operater);
-		RoleModel roleModel = new RoleModel();
-		roleModel.setId(operater.getRole().getId());
-		model_.setRoleModel(roleModel);
-		return Result.success().setData(model_ );
+		model_.setRoleModel(RoleModel.instance(operater.getRole()));
+		return Result.success().setData(model_);
 	}
 
 }

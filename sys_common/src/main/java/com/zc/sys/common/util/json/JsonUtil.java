@@ -43,7 +43,6 @@ public class JsonUtil {
 	 * 转换json对象为Map
 	 * @param json
 	 */
-	@SuppressWarnings("unchecked")
 	public static Map<String, Object> formatToMap(String json) {
 		return (Map<String, Object>) formatObject(json, Map.class);
 	}
