@@ -26,6 +26,10 @@ import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
+import com.zc.sys.promotion.dao.InterestFreeNoteDao;
+import com.zc.sys.promotion.dao.InterestFreeNoteRecordDao;
+import com.zc.sys.promotion.entity.InterestFreeNote;
+import com.zc.sys.promotion.entity.InterestFreeNoteRecord;
 /**
  * 现金贷借款
  * @author zp
@@ -108,11 +112,20 @@ public class CashLoanModel extends CashLoan {
 		if(userIdentify.getBindCardNum() <= 0){
 			throw new BusinessException("请先绑定银行卡");
 		}
-		if(StringUtil.isBlank(this.getUser().getPayPwd()) || MD5.toMD5(this.payPwd).equals(this.getUser().getPayPwd())){
+		if(StringUtil.isBlank(this.getUser().getPayPwd()) || !MD5.toMD5(this.payPwd).equals(this.getUser().getPayPwd())){
 			throw new BusinessException("交易密码输入错误或未设置");
 		}
 		//免息券判断
-		
+		if(this.interestFreeNoteId > 0){
+			InterestFreeNoteRecordDao interestFreeNoteRecordDao = BeanUtil.getBean(InterestFreeNoteRecordDao.class);
+			InterestFreeNoteRecord interestFreeNoteRecord = interestFreeNoteRecordDao.find(interestFreeNoteId);
+			if(interestFreeNoteRecord == null || interestFreeNoteRecord.getUser().getId() != this.getUser().getId()){
+				throw new BusinessException("参数错误");
+			}
+			if(interestFreeNoteRecord.getState() != BaseConstant.BUSINESS_STATE_NO){
+				throw new BusinessException("当前免息券不可用");
+			}
+		}
 		//额度校验
 		if(this.getTotal() <= 0){
 			throw new BusinessException("请输入正确的借款金额");
@@ -133,6 +146,10 @@ public class CashLoanModel extends CashLoan {
 		this.setIsPrepayment(this.getCashLoanConfig().getIsPrepayment());
 		this.setVersion(0);
 		this.setAddTime(DateUtil.getNow());
+		if(this.interestFreeNoteId > 0){
+			this.setIsInterestFreeNote(BaseConstant.BUSINESS_STATE_YES);
+//			this.setInterestFreeAmount();
+		}
 	}
 	
 	/**

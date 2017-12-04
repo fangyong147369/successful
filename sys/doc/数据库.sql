@@ -787,7 +787,7 @@ CREATE TABLE `zc_pt_promotion_prize_config` (
   `state` int(11) DEFAULT NULL COMMENT '状态',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `add_time` datetime DEFAULT NULL COMMENT '添加时间',
-  PRIMARY KEY (`_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='活动推广奖励配置：zc_pt_promotion_prize_config';
 
 -- ----------------------------

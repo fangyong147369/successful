@@ -28,25 +28,29 @@ public class TestService{
 	}
 	
 	public void reg(){
+		getToken();
 		String model = "mobile=15555555555&mobileCode=123456&pwd=123456&confirmPwd=123456&token=123456";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/u/user/reg", model);
 		System.err.println(dd);
 	}
 	
 	public void login(){
-		String model = "loginName=15555555555&pwd=123456";
+		getToken();
+		String model = "loginName=15555555555&pwd=123456&token=123456";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/u/user/login", model);
 		System.err.println(dd);
 	}
 	
 	public void realName(){
-		String model = "user.id=1&realName=毕若晗&cardType=1&cardNo=361001198711133789";
+		getToken();
+		String model = "user.id=1&realName=毕若晗&cardType=1&cardNo=361001198711133789&token=123456";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/u/useridentify/realName", model);
 		System.err.println(dd);
 	}
 	
 	public void bindbank(){
-		String model = "user.id=1&bankCardNo=11111111111111&mobile=15555555555&bankCode=100";
+		getToken();
+		String model = "user.id=1&bankCardNo=11111111111111&mobile=15555555555&bankCode=100&token=123456";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/acc/bankcard/bindBC", model);
 		System.err.println(dd);
 	}
@@ -58,7 +62,8 @@ public class TestService{
 	}
 	
 	public void cashloan(){
-		String model = "user.id=1&total=10000";
+		getToken();
+		String model = "user.id=1&total=10000&cashLoanConfig.id=1&payPwd=1234567&token=123456";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/cl/cashloan/cashLoan", model);
 		System.err.println(dd);
 	}
@@ -106,7 +111,8 @@ public class TestService{
 	}
 	
 	public void updatePayPwd(){
-		String model = "id=1&oldPwd=123456&payPwd=123456&confirmPwd=123456&updatePwdWay=3&mobileCode=123456";
+		getToken();
+		String model = "id=1&oldPwd=123456&payPwd=1234567&confirmPwd=1234567&updatePwdWay=1&mobileCode=123456&token=123456";
 		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/u/user/updatePayPwd", model);
 		System.err.println(dd);
 	}
@@ -135,11 +141,10 @@ public class TestService{
 //		promotionAdd();
 //		promotionprizeconfigAdd();
 //		updatePwd();
-		getSMSCode();
+//		getSMSCode();
 //		updatePayPwd();
-		getToken();
-		reg();
-//		login();
+//		reg();
+		login();
 //		realName();
 //		bindbank();
 //		cashloan();
