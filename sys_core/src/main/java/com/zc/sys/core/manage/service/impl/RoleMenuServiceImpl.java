@@ -1,21 +1,19 @@
 package com.zc.sys.core.manage.service.impl;
-import com.zc.sys.common.model.jpa.PageDataList;
-import com.zc.sys.core.manage.entity.RoleMenu;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
-
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.manage.dao.RoleMenuDao;
+import com.zc.sys.core.manage.entity.RoleMenu;
 import com.zc.sys.core.manage.model.RoleMenuModel;
-import com.zc.sys.core.manage.model.RoleModel;
 import com.zc.sys.core.manage.service.RoleMenuService;
 import com.zc.sys.core.sys.model.MenuModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 角色-菜单
