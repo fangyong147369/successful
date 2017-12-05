@@ -1,7 +1,6 @@
 package com.zc.sys.core.user.dao;
 import com.zc.sys.common.dao.BaseDao;
 import com.zc.sys.core.user.entity.User;
-import com.zc.sys.core.user.model.UserModel;
 /**
  * 用户
  * @author zp

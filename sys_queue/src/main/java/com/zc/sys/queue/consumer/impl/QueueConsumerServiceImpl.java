@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.zc.sys.cashloan.model.CashLoanModel;
 import com.zc.sys.cashloan.model.CashLoanRepaymentModel;
-import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.util.log.LogUtil;
 import com.zc.sys.core.account.model.BankCardModel;
 import com.zc.sys.core.account.service.BankCardService;
@@ -21,7 +20,6 @@ import com.zc.sys.core.manage.service.NoticeMessageService;
 import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.core.user.model.UserModel;
 import com.zc.sys.promotion.model.PromotionModel;
-import com.zc.sys.promotion.service.PromotionService;
 import com.zc.sys.queue.consumer.QueueConsumerService;
 
 /**
