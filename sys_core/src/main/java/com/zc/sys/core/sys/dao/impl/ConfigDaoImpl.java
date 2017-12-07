@@ -53,7 +53,7 @@ public class ConfigDaoImpl extends BaseDaoImpl<Config> implements ConfigDao {
 
 	@Override
 	public ConfigModel getConfig() {
-		List<Config> list = this.findAll();
+		List<Config> list = this.findByProperty("state", 1);
 		ConfigModel config = new ConfigModel(list.size());
 		for (int i = 0; i < list.size(); i++) {
 			Config sys = (Config) list.get(i);

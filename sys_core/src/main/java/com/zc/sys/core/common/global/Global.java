@@ -69,7 +69,7 @@ public class Global {
 		return Double.parseDouble(getValue(key));
 	}
 	
-	//系统状态false-测试环境;true-生产环境
+	//系统状态dev-测试环境;prod-生产环境
 	public static boolean sysState(){
 		if(StringUtil.isNull(Global.getValue("sys_state")).equals("prod")){
 			return true;

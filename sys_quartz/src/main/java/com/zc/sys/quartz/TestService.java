@@ -11,7 +11,7 @@ import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.http.UtilHttp;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)  
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:applicationConfig-test.xml"})
 public class TestService{
 
@@ -135,8 +135,15 @@ public class TestService{
 		System.err.println(dd);
 	}
 	
+	public void menuAdd(){
+		String model = "parentId=4&name=参数配置&href=/s/config/list&sort=5&state=0";
+		String dd = UtilHttp.sendPost("http://127.0.0.1:8080/s/menu/add", model);
+		System.err.println(dd);
+	}
+	
 	@Test
 	public void testMain(){
+//		menuAdd();
 //		interestfreenoteAdd();
 //		promotionAdd();
 //		promotionprizeconfigAdd();
@@ -144,7 +151,7 @@ public class TestService{
 //		getSMSCode();
 //		updatePayPwd();
 //		reg();
-		login();
+//		login();
 //		realName();
 //		bindbank();
 //		cashloan();

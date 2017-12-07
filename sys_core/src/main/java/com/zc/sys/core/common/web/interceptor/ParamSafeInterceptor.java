@@ -25,12 +25,12 @@ public class ParamSafeInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		System.err.println("=====================preHandle.........");
-//		Enumeration em = request.getParameterNames();
-//		 while (em.hasMoreElements()) {
-//		    String name = (String) em.nextElement();
-//		    String value = request.getParameter(name);
-//		    System.err.println(name+"============"+value);
-//		}
+		Enumeration em = request.getParameterNames();
+		 while (em.hasMoreElements()) {
+		    String name = (String) em.nextElement();
+		    String value = request.getParameter(name);
+		    System.err.println(name+"============"+value);
+		}
 		return true;
 	}
 
