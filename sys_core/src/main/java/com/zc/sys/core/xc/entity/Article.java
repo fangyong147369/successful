@@ -6,9 +6,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.user.entity.User;
@@ -22,10 +23,10 @@ import com.zc.sys.core.user.entity.User;
 @Table(name=BaseConstant.DB_PREFIX + BaseConstant.DB_MODEL_Xc + "_article")
 public class Article extends LongPKEntity {
 	/** 序列号 **/
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;	
 	/** 所属栏目 **/
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "site_id")
 	private Site site;
 	/** 简介 **/

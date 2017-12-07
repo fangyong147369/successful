@@ -1,16 +1,16 @@
 ﻿package com.zc.sys.core.xc.entity;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
-import com.zc.sys.core.user.entity.UserInfo;
 /**
  * 栏目
  * @author zp
@@ -49,8 +49,8 @@ public class Site extends LongPKEntity {
 	/** 最后操作管理员 **/
 	private String operateUser;
 	/** 关联Article对象*/
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site")
-	private Article article;
+	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY)
+	private List<Article> articles;
 	
 	public String getName() {
 		return name;
@@ -130,10 +130,10 @@ public class Site extends LongPKEntity {
 	public void setOperateUser(String operateUser) {
 		this.operateUser = operateUser;
 	}
-	public Article getArticle() {
-		return article;
+	public List<Article> getArticle() {
+		return articles;
 	}
-	public void setArticle(Article article) {
-		this.article = article;
+	public void setArticle(List<Article> article) {
+		this.articles = article;
 	}	
 }
