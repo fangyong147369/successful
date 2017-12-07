@@ -15,3 +15,11 @@
 /sys_quartz/*.classpath
 /sys_queue/bin
 /sys_queue/*.classpath
+/sys/.settings
+/sys_api_zc/.settings
+/sys_cashloan/.settings
+/sys_common/.settings
+/sys_core/.settings
+/sys_promotion/.settings
+/sys_quartz/.settings
+/sys_queue/.settings
