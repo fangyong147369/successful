@@ -34,3 +34,5 @@
 /sys_quartz/src/main/java/com/zc/sys/quartz/TestService.java
 /sys_quartz/src/main/java/com/zc/sys/quartz/App.java
 /sys_queue/src/main/java/com/zc/sys/queue/TestController.java
+/sys_api_zc/src/test/java/com/zc/sys/api/zc/codegen/applicationConfig-test.xml
+/sys_api_zc/src/test/java/com/zc/sys/api/zc/codegen/CodeGen.java
