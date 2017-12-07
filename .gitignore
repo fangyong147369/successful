@@ -23,5 +23,8 @@
 /sys_promotion/.settings
 /sys_quartz/.settings
 /sys_queue/.settings
-/sys_api_zc/src/test/java/com
-/sys_cashloan/src/test/java/com
+/sys_api_zc/src/test
+/sys_cashloan/src/test
+/sys_core/src/test
+/sys_promotion/src/test
+/sys_quartz/src/test
