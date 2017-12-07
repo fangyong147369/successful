@@ -5,3 +5,13 @@
 /*
 /zc_p2p
 /zc_test/.classpath
+/sys/bin
+/sys_api_zc/*.classpath
+/sys_cashloan/*.classpath
+/sys_common/*.classpath
+/sys_core/*.classpath
+/sys_core/bin
+/sys_promotion/*.classpath
+/sys_quartz/*.classpath
+/sys_queue/bin
+/sys_queue/*.classpath
