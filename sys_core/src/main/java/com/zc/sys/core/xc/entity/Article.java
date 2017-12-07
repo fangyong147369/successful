@@ -1,9 +1,17 @@
 package com.zc.sys.core.xc.entity;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
+import com.zc.sys.core.user.entity.User;
 /**
  * 文章
  * @author zp
@@ -16,10 +24,10 @@ public class Article extends LongPKEntity {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
 	
-	/** 状态，-1：禁用，1：启用 **/
-	private int state;
 	/** 所属栏目 **/
-	private Long siteId;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "site_id")
+	private Site site;
 	/** 简介 **/
 	private String introduction;
 	/** 模版标题 **/
@@ -32,18 +40,22 @@ public class Article extends LongPKEntity {
 	private int isHot;
 	/** 点击量 **/
 	private int clicks;
+	/** 图片地址 **/
+	private String picPath;
+	/** 最后修改时间 **/
+	private Timestamp updateTime;
+	/** 最后修改ip**/
+	private String updateIp;
+	/** 最后操作管理员 **/
+	private String operateUser;
+	/** 状态，-1：禁用，1：启用 **/
+	private int state;
 	
-	public int getState() {
-		return state;
+	public Site getSite() {
+		return site;
 	}
-	public void setState(int state) {
-		this.state = state;
-	}
-	public Long getSiteId() {
-		return siteId;
-	}
-	public void setSiteId(Long siteId) {
-		this.siteId = siteId;
+	public void setSite(Site site) {
+		this.site = site;
 	}
 	public String getIntroduction() {
 		return introduction;
@@ -63,29 +75,54 @@ public class Article extends LongPKEntity {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 	public int getSort() {
 		return sort;
 	}
-
 	public void setSort(int sort) {
 		this.sort = sort;
 	}
-
 	public int getIsHot() {
 		return isHot;
 	}
-
 	public void setIsHot(int isHot) {
 		this.isHot = isHot;
 	}
-
 	public int getClicks() {
 		return clicks;
 	}
-
 	public void setClicks(int clicks) {
 		this.clicks = clicks;
-	}		
+	}
+	public String getPicPath() {
+		return picPath;
+	}
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
+	}
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+	public String getUpdateIp() {
+		return updateIp;
+	}
+	public void setUpdateIp(String updateIp) {
+		this.updateIp = updateIp;
+	}
+	public String getOperateUser() {
+		return operateUser;
+	}
+	public void setOperateUser(String operateUser) {
+		this.operateUser = operateUser;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
 
+		
 }

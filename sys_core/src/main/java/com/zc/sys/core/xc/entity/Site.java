@@ -1,9 +1,16 @@
-package com.zc.sys.core.xc.entity;
+﻿package com.zc.sys.core.xc.entity;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
+import com.zc.sys.core.user.entity.UserInfo;
 /**
  * 栏目
  * @author zp
@@ -20,7 +27,7 @@ public class Site extends LongPKEntity {
 	/** 标识 **/
 	private String nid;
 	/** 父id **/
-	private Long pid;
+	private BigInteger pid;
 	/** 状态，-1：禁用，1：启用 **/
 	private int state;
 	/** 类型  **/
@@ -31,6 +38,19 @@ public class Site extends LongPKEntity {
 	private int sort;
 	/** 简介 **/
 	private String introduction;
+	/** 内容 **/
+	private String content;
+	/** 图片地址 **/
+	private String picPath;
+	/** 最后修改时间 **/
+	private Timestamp updateTime;
+	/** 最后修改ip**/
+	private String updateIp;
+	/** 最后操作管理员 **/
+	private String operateUser;
+	/** 关联Article对象*/
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "site")
+	private Article article;
 	
 	public String getName() {
 		return name;
@@ -44,10 +64,10 @@ public class Site extends LongPKEntity {
 	public void setNid(String nid) {
 		this.nid = nid;
 	}
-	public Long getPid() {
+	public BigInteger getPid() {
 		return pid;
 	}
-	public void setPid(Long pid) {
+	public void setPid(BigInteger pid) {
 		this.pid = pid;
 	}
 	public int getState() {
@@ -80,10 +100,40 @@ public class Site extends LongPKEntity {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getContent() {
+		return content;
 	}
-
-	
-
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getPicPath() {
+		return picPath;
+	}
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
+	}
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+	public String getUpdateIp() {
+		return updateIp;
+	}
+	public void setUpdateIp(String updateIp) {
+		this.updateIp = updateIp;
+	}
+	public String getOperateUser() {
+		return operateUser;
+	}
+	public void setOperateUser(String operateUser) {
+		this.operateUser = operateUser;
+	}
+	public Article getArticle() {
+		return article;
+	}
+	public void setArticle(Article article) {
+		this.article = article;
+	}	
 }
