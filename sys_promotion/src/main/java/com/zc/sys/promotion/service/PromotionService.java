@@ -1,7 +1,6 @@
 package com.zc.sys.promotion.service;
-import com.zc.sys.promotion.model.PromotionModel;
 import com.zc.sys.common.form.Result;
-import com.zc.sys.core.common.model.PromotionHandleModel;
+import com.zc.sys.promotion.model.PromotionModel;
 /**
  * 活动推广
  * @author zp

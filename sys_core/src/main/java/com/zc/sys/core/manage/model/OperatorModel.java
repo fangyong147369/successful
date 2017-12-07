@@ -2,7 +2,6 @@ package com.zc.sys.core.manage.model;
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.exception.BusinessException;
-import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.manage.entity.Operator;
