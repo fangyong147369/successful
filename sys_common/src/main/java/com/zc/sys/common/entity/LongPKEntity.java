@@ -21,9 +21,13 @@ public abstract class LongPKEntity extends BaseEntity {
 	public long getId() {
 		return id;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	
 }
