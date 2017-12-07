@@ -28,3 +28,10 @@
 /sys_core/src/test
 /sys_promotion/src/test
 /sys_quartz/src/test
+/sys_api_zc/.project
+/sys_cashloan/.project
+/sys_common/.project
+/sys_core/.project
+/sys_promotion/.project
+/sys_quartz/.project
+/sys_queue/.project
