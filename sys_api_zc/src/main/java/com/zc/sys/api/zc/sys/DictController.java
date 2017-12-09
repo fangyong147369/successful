@@ -30,7 +30,7 @@ public class DictController extends BaseController<DictModel> {
  	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	@ResponseBody
-	public Object list(DictModel model) throws BusinessException {
+	public Object list(DictModel model) throws BusinessException {	
 		return dictService.list(model);
 	}
 

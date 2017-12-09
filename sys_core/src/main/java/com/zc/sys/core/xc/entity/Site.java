@@ -1,13 +1,11 @@
 ﻿package com.zc.sys.core.xc.entity;
-import java.math.BigInteger;
-import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
@@ -27,7 +25,7 @@ public class Site extends LongPKEntity {
 	/** 标识 **/
 	private String nid;
 	/** 父id **/
-	private BigInteger pid;
+	private long pid;
 	/** 状态，-1：禁用，1：启用 **/
 	private int state;
 	/** 类型  **/
@@ -43,13 +41,30 @@ public class Site extends LongPKEntity {
 	/** 图片地址 **/
 	private String picPath;
 	/** 最后修改时间 **/
-	private Timestamp updateTime;
+	private Date updateTime;
 	/** 最后修改ip**/
 	private String updateIp;
 	/** 最后操作管理员 **/
 	private String operateUser;
 	/** 关联Article对象*/
-	@OneToMany(mappedBy = "site", fetch = FetchType.LAZY)
+
+	/**
+	 * 构造方法
+	 */
+	public Site() {
+		super();
+	}
+	
+	/**
+	 * 构造方法
+	 * 
+	 * @param id 主键
+	 */
+	public Site(long id) {
+		super();
+		this.setId(id);
+	}
+	@OneToMany(mappedBy = "site", fetch =FetchType.EAGER)
 	private List<Article> articles;
 	
 	public String getName() {
@@ -64,10 +79,10 @@ public class Site extends LongPKEntity {
 	public void setNid(String nid) {
 		this.nid = nid;
 	}
-	public BigInteger getPid() {
+	public long getPid() {
 		return pid;
 	}
-	public void setPid(BigInteger pid) {
+	public void setPid(long pid) {
 		this.pid = pid;
 	}
 	public int getState() {
@@ -112,11 +127,11 @@ public class Site extends LongPKEntity {
 	public void setPicPath(String picPath) {
 		this.picPath = picPath;
 	}
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
+	public void setUpdateTime(Date updateTime) {	        
+	            this.updateTime = updateTime;  	                
 	}
 	public String getUpdateIp() {
 		return updateIp;

@@ -41,7 +41,7 @@ public class SiteController extends BaseController<SiteModel> {
  	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
-	public Object add(SiteModel model) throws BusinessException {
+	public Object add(SiteModel model) throws BusinessException {	
 		return siteService.add(model);
 	}
 

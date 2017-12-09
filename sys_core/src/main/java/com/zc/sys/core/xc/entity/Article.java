@@ -1,18 +1,13 @@
 package com.zc.sys.core.xc.entity;
-import java.math.BigInteger;
-import java.sql.Timestamp;
-
-import javax.persistence.CascadeType;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
-import com.zc.sys.core.user.entity.User;
 /**
  * 文章
  * @author zp
@@ -44,7 +39,7 @@ public class Article extends LongPKEntity {
 	/** 图片地址 **/
 	private String picPath;
 	/** 最后修改时间 **/
-	private Timestamp updateTime;
+	private Date updateTime;
 	/** 最后修改ip**/
 	private String updateIp;
 	/** 最后操作管理员 **/
@@ -100,10 +95,10 @@ public class Article extends LongPKEntity {
 	public void setPicPath(String picPath) {
 		this.picPath = picPath;
 	}
-	public Timestamp getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
-	public void setUpdateTime(Timestamp updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 	public String getUpdateIp() {
@@ -123,7 +118,5 @@ public class Article extends LongPKEntity {
 	}
 	public void setState(int state) {
 		this.state = state;
-	}
-
-		
+	}	
 }

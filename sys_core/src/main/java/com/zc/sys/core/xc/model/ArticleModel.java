@@ -19,7 +19,6 @@ public class ArticleModel extends Article {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
-
 	/**
 	 * 实体转换model
 	 */
@@ -67,5 +66,6 @@ public class ArticleModel extends Article {
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
 	}
+
 
 }

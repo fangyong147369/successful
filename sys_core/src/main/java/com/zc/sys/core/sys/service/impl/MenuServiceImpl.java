@@ -13,6 +13,8 @@ import com.zc.sys.core.sys.dao.MenuDao;
 import com.zc.sys.core.sys.entity.Menu;
 import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.sys.service.MenuService;
+import com.zc.sys.core.xc.entity.Site;
+import com.zc.sys.core.xc.model.SiteModel;
 
 /**
  * 菜单

@@ -53,10 +53,12 @@ public class RoleServiceImpl implements RoleService {
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (Role role : pageDataList.getList()) {
 				RoleModel model_ = RoleModel.instance(role);
-				list.add(model_);
+				list.add(model_);			
 			}
 		}
+	
 		pageDataList_.setList(list);
+		
 		return Result.success().setData(pageDataList_);
 	}
 
