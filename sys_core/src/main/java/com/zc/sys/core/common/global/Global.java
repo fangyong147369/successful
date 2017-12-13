@@ -71,7 +71,7 @@ public class Global {
 	
 	//系统状态dev-测试环境;prod-生产环境
 	public static boolean sysState(){
-		if(StringUtil.isNull(Global.getValue("sys_state")).equals("prod")){
+		if(StringUtil.isNull(Global.getValue("sysState")).equals("prod")){
 			return true;
 		}
 		return false;

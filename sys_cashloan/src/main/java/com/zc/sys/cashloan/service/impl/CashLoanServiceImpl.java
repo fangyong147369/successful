@@ -20,6 +20,7 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
 import com.zc.sys.core.common.global.BeanUtil;
+import com.zc.sys.core.common.global.Global;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.manage.entity.OrderTask;
@@ -115,19 +116,20 @@ public class CashLoanServiceImpl implements CashLoanService {
 		CashLoan cashLoan = model.prototype();
 		cashLoanDao.save(cashLoan);
 		model.setId(cashLoan.getId());
-
+		
+		String orderNo = StringUtil.getSerialNumber();//请求流水
+		
 		//是否自动审核贷款
-		/*if(Global.getInt("isCashLoanAutoAudit") == 1){
-			
-		}*/
-		//发送队列
-		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTaskService orderTaskService = BeanUtil.getBean(OrderTaskService.class);
-		OrderTask orderTask = orderTaskService.add(model.getUser(), "cashLoanAudit", StringUtil.getSerialNumber(), "");
-		model.setOrderTask(orderTask);
-		model.setRemark("自动审核通过");
-		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), model));
-		return Result.success("借款处理中...请稍后！").setData(orderTask.getOrderNo());
+		if(Global.getInt("isCashLoanAutoAudit") == 1){
+			//发送队列
+			QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
+			OrderTaskService orderTaskService = BeanUtil.getBean(OrderTaskService.class);
+			OrderTask orderTask = orderTaskService.add(model.getUser(), "cashLoanAudit", orderNo, "");
+			model.setOrderTask(orderTask);
+			model.setRemark("自动审核通过");
+			queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTask), model));
+		}
+		return Result.success("借款处理中...请稍后！").setData(orderNo);
 	}
 	
 	/**
