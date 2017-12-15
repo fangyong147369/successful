@@ -14,13 +14,11 @@
        http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
        http://www.springframework.org/schema/mvc   
        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-
 	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource"
-		destroy-method="close">		
-		     <property name="jdbcUrl" value="jdbc:mysql://121.196.224.90:3309/zc_sys_2.0?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false" />
+		destroy-method="close">
+		<property name="jdbcUrl" value="jdbc:mysql://121.196.224.90:3309/zc_sys_2.0?characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false" />
 		<property name="username" value="root" />
 		<property name="password" value="shcf8750219" />
-				<!-- 检查数据库连接池中空闲连接的间隔时间 -->
 		<property name="idleConnectionTestPeriod" value="4" />
 		<!-- 连接池中未使用的链接最大存活时间 -->
 		<property name="idleMaxAge" value="240" />
