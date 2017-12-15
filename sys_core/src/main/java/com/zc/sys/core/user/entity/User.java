@@ -1,13 +1,11 @@
 package com.zc.sys.core.user.entity;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.account.entity.Account;
@@ -17,7 +15,6 @@ import com.zc.sys.core.account.entity.BankCard;
 import com.zc.sys.core.account.entity.Recharge;
 import com.zc.sys.core.account.entity.WithdrawCash;
 import com.zc.sys.core.common.constant.BaseConstant;
-import com.zc.sys.core.xc.entity.Article;
 /**
  * 用户
  * @author zp

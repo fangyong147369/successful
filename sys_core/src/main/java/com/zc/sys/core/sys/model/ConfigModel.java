@@ -1,11 +1,8 @@
 package com.zc.sys.core.sys.model;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.BeanUtils;
-
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.validate.StringUtil;

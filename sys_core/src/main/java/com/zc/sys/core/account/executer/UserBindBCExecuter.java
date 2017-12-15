@@ -1,9 +1,6 @@
 package com.zc.sys.core.account.executer;
-
 import org.springframework.stereotype.Component;
-
 import com.zc.sys.core.common.executer.BaseExecuter;
-
 /**
  * 用户绑定银行卡任务
  * @author zp

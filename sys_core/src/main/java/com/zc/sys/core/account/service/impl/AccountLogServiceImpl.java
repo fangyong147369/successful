@@ -1,21 +1,14 @@
 package com.zc.sys.core.account.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.account.dao.AccountLogDao;
-import com.zc.sys.core.account.entity.Account;
-import com.zc.sys.core.account.entity.AccountDeduct;
 import com.zc.sys.core.account.entity.AccountLog;
-import com.zc.sys.core.account.model.AccountDeductModel;
 import com.zc.sys.core.account.model.AccountLogModel;
-import com.zc.sys.core.account.model.AccountModel;
 import com.zc.sys.core.account.service.AccountLogService;
 import com.zc.sys.core.user.model.UserModel;
 /**
@@ -39,7 +32,7 @@ public class AccountLogServiceImpl implements AccountLogService {
 		PageDataList<AccountLog> pageDataList =accountLogDao.list(model);
 		PageDataList<AccountLogModel> pageDataList_ = new PageDataList<AccountLogModel>();
 		pageDataList_.setPage(pageDataList.getPage());
-		List list = new ArrayList();
+		List<AccountLogModel> list = new ArrayList<AccountLogModel>();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (AccountLog article : pageDataList.getList()) {
 				AccountLogModel  model_=AccountLogModel.instance(article);

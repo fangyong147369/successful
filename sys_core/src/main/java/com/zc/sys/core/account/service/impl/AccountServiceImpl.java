@@ -1,22 +1,15 @@
 package com.zc.sys.core.account.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.account.dao.AccountDao;
 import com.zc.sys.core.account.entity.Account;
-import com.zc.sys.core.account.entity.WithdrawCash;
 import com.zc.sys.core.account.model.AccountModel;
-import com.zc.sys.core.account.model.WithdrawCashModel;
 import com.zc.sys.core.account.service.AccountService;
-import com.zc.sys.core.user.entity.UserInfo;
-import com.zc.sys.core.user.model.UserInfoModel;
 import com.zc.sys.core.user.model.UserModel;
 /**
  * 资金账户
@@ -39,7 +32,7 @@ public class AccountServiceImpl implements AccountService {
 		PageDataList<Account> pageDataList =accountDao.list(model);
 		PageDataList<AccountModel> pageDataList_ = new PageDataList<AccountModel>();
 		pageDataList_.setPage(pageDataList.getPage());
-		List list = new ArrayList();
+		List<AccountModel> list = new ArrayList<AccountModel> ();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (Account article : pageDataList.getList()) {
 				AccountModel  model_=AccountModel.instance(article);

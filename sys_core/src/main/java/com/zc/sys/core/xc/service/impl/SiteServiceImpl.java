@@ -8,17 +8,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
-import com.zc.sys.common.util.validate.StringUtil;
-import com.zc.sys.core.manage.entity.Role;
-import com.zc.sys.core.manage.entity.RoleMenu;
-import com.zc.sys.core.manage.model.RoleMenuModel;
-import com.zc.sys.core.sys.entity.Menu;
-import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.xc.dao.ArticleDao;
 import com.zc.sys.core.xc.dao.SiteDao;
-import com.zc.sys.core.xc.entity.Article;
 import com.zc.sys.core.xc.entity.Site;
-import com.zc.sys.core.xc.model.ArticleModel;
 import com.zc.sys.core.xc.model.SiteModel;
 import com.zc.sys.core.xc.service.SiteService;
 

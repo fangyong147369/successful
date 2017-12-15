@@ -1,22 +1,13 @@
 package com.zc.sys.core.user.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
-import com.zc.sys.core.manage.entity.RoleMenu;
-import com.zc.sys.core.manage.model.RoleMenuModel;
-import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.user.dao.UserInfoDao;
-import com.zc.sys.core.user.entity.User;
-import com.zc.sys.core.user.entity.UserIdentify;
 import com.zc.sys.core.user.entity.UserInfo;
-import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.core.user.model.UserInfoModel;
 import com.zc.sys.core.user.model.UserModel;
 import com.zc.sys.core.user.service.UserInfoService;
@@ -41,7 +32,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		PageDataList<UserInfo> pageDataList = userInfoDao.list(model);
 		PageDataList<UserInfoModel> pageDataList_ = new PageDataList<UserInfoModel>();
 		pageDataList_.setPage(pageDataList.getPage());
-		List list = new ArrayList();
+		List<UserInfoModel> list = new ArrayList<UserInfoModel>();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (UserInfo article : pageDataList.getList()) {
 				UserInfoModel  model_=UserInfoModel.instance(article);

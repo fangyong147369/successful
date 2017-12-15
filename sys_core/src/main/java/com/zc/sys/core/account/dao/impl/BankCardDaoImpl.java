@@ -1,6 +1,5 @@
 package com.zc.sys.core.account.dao.impl;
 import org.springframework.stereotype.Repository;
-
 import com.zc.sys.common.dao.jpa.BaseDaoImpl;
 import com.zc.sys.common.model.jpa.OrderFilter.OrderType;
 import com.zc.sys.common.model.jpa.PageDataList;

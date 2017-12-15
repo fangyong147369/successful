@@ -1,6 +1,5 @@
 package com.zc.sys.core.manage.model;
 import org.springframework.beans.BeanUtils;
-
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.core.manage.entity.Role;
 /**

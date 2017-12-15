@@ -1,12 +1,9 @@
 package com.zc.sys.core.user.service.impl;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.util.date.DateUtil;
@@ -48,7 +45,7 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		PageDataList<UserIdentify> pageDataList = userIdentifyDao.list(model);
 		PageDataList<UserIdentifyModel> pageDataList_ = new PageDataList<UserIdentifyModel>();
 		pageDataList_.setPage(pageDataList.getPage());
-		List list = new ArrayList();
+		List<UserIdentifyModel> list = new ArrayList<UserIdentifyModel>();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (UserIdentify article : pageDataList.getList()) {
 				UserIdentifyModel  model_ = UserIdentifyModel.instance(article);
@@ -59,7 +56,6 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 		pageDataList_.setList(list);
 		return Result.success().setData(pageDataList_);
 	}
-
 	/**
  	 * 添加
  	 * @param model

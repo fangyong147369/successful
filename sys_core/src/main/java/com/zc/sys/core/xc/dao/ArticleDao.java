@@ -1,8 +1,6 @@
 package com.zc.sys.core.xc.dao;
 import com.zc.sys.common.dao.BaseDao;
 import com.zc.sys.common.model.jpa.PageDataList;
-import com.zc.sys.core.sys.entity.Dict;
-import com.zc.sys.core.sys.model.DictModel;
 import com.zc.sys.core.xc.entity.Article;
 import com.zc.sys.core.xc.model.ArticleModel;
 /**

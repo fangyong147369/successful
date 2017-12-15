@@ -1,22 +1,14 @@
 package com.zc.sys.core.account.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.account.dao.RechargeDao;
-import com.zc.sys.core.account.entity.AccountDeduct;
 import com.zc.sys.core.account.entity.Recharge;
-import com.zc.sys.core.account.entity.WithdrawCash;
-import com.zc.sys.core.account.model.AccountDeductModel;
-import com.zc.sys.core.account.model.AccountLogModel;
 import com.zc.sys.core.account.model.RechargeModel;
-import com.zc.sys.core.account.model.WithdrawCashModel;
 import com.zc.sys.core.account.service.RechargeService;
 import com.zc.sys.core.user.model.UserModel;
 /**
@@ -40,7 +32,7 @@ public class RechargeServiceImpl implements RechargeService {
 		PageDataList<Recharge> pageDataList =rechargeDao.list(model);
 		PageDataList<RechargeModel> pageDataList_ = new PageDataList<RechargeModel>();
 		pageDataList_.setPage(pageDataList.getPage());
-		List list = new ArrayList();
+		List<RechargeModel> list = new ArrayList<RechargeModel>();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (Recharge article : pageDataList.getList()) {
 				RechargeModel  model_=RechargeModel.instance(article);

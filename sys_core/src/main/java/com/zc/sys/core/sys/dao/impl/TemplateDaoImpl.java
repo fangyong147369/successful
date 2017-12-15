@@ -1,6 +1,5 @@
 package com.zc.sys.core.sys.dao.impl;
 import org.springframework.stereotype.Repository;
-
 import com.zc.sys.common.dao.jpa.BaseDaoImpl;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.model.jpa.QueryParam;

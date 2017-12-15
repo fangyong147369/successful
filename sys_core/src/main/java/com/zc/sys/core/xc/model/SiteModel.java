@@ -1,11 +1,6 @@
 package com.zc.sys.core.xc.model;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.beans.BeanUtils;
-
 import com.zc.sys.common.model.jpa.Page;
-import com.zc.sys.core.sys.entity.Menu;
 import com.zc.sys.core.xc.entity.Site;
 /**
  * 栏目

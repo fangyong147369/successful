@@ -1,6 +1,5 @@
 package com.zc.sys.core.user.model;
 import org.springframework.beans.BeanUtils;
-
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.common.util.date.DateUtil;
@@ -14,7 +13,6 @@ import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
-import com.zc.sys.core.xc.entity.Site;
 /**
  * 用户
  * @author zp

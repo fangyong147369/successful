@@ -1,7 +1,6 @@
 package com.zc.sys.core.sys.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
 /**

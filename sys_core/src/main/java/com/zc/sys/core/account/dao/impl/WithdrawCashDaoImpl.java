@@ -1,6 +1,4 @@
 package com.zc.sys.core.account.dao.impl;
-import java.util.ArrayList;
-
 import org.springframework.stereotype.Repository;
 import com.zc.sys.common.dao.jpa.BaseDaoImpl;
 import com.zc.sys.common.model.jpa.PageDataList;

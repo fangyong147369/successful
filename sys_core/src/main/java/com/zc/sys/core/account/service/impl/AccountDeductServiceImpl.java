@@ -1,19 +1,14 @@
 package com.zc.sys.core.account.service.impl;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.account.dao.AccountDeductDao;
 import com.zc.sys.core.account.entity.AccountDeduct;
-import com.zc.sys.core.account.entity.AccountLog;
 import com.zc.sys.core.account.model.AccountDeductModel;
-import com.zc.sys.core.account.model.AccountLogModel;
 import com.zc.sys.core.account.service.AccountDeductService;
 import com.zc.sys.core.user.model.UserModel;
 /**
@@ -37,7 +32,7 @@ public class AccountDeductServiceImpl implements AccountDeductService {
 		PageDataList<AccountDeduct> pageDataList =accountDeductDao.list(model);
 		PageDataList<AccountDeductModel> pageDataList_ = new PageDataList<AccountDeductModel>();
 		pageDataList_.setPage(pageDataList.getPage());
-		List list = new ArrayList();
+		List<AccountDeductModel> list = new ArrayList<AccountDeductModel>();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (AccountDeduct article : pageDataList.getList()) {
 				AccountDeductModel  model_=AccountDeductModel.instance(article);

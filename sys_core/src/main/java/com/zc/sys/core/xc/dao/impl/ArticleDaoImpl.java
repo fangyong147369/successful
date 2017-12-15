@@ -9,7 +9,6 @@ import com.zc.sys.common.model.jpa.SearchFilter.Operators;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.xc.entity.Article;
 import com.zc.sys.core.xc.model.ArticleModel;
-import com.zc.sys.core.sys.model.DictModel;
 import com.zc.sys.core.xc.dao.ArticleDao;
 /**
  * 文章

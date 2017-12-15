@@ -8,14 +8,12 @@ import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
-import com.zc.sys.core.sys.entity.Menu;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.dao.UserInfoDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
 import com.zc.sys.core.user.entity.UserInfo;
 import com.zc.sys.core.user.service.UserIdentifyService;
-import com.zc.sys.core.xc.model.SiteModel;
 /**
  * 用户认证
  * @author zp

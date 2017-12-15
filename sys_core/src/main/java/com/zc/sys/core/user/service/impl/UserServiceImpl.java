@@ -1,12 +1,9 @@
 package com.zc.sys.core.user.service.impl;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.model.jpa.QueryParam;
@@ -39,10 +36,6 @@ import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.core.user.model.UserInfoModel;
 import com.zc.sys.core.user.model.UserModel;
 import com.zc.sys.core.user.service.UserService;
-import com.zc.sys.core.xc.entity.Article;
-import com.zc.sys.core.xc.entity.Site;
-import com.zc.sys.core.xc.model.ArticleModel;
-import com.zc.sys.core.xc.model.SiteModel;
 /**
  * 用户
  * @author zp

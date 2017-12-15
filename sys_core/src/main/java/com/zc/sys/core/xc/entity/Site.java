@@ -1,8 +1,5 @@
 ﻿package com.zc.sys.core.xc.entity;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -48,7 +45,7 @@ public class Site extends LongPKEntity {
 	private String operateUser;
 	/** 关联Article对象*/
 	@OneToMany(mappedBy = "site", fetch =FetchType.EAGER)
-	private List<Article> articles;
+	private Article articles;
 	/**
 	 * 构造方法
 	 */
@@ -144,10 +141,10 @@ public class Site extends LongPKEntity {
 	public void setOperateUser(String operateUser) {
 		this.operateUser = operateUser;
 	}
-	public List<Article> getArticle() {
+	public Article getArticle() {
 		return articles;
 	}
-	public void setArticle(List<Article> article) {
+	public void setArticle(Article article) {
 		this.articles = article;
 	}
 

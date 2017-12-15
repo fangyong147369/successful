@@ -1,5 +1,4 @@
 package com.zc.sys.core.sys.dao;
-
 import com.zc.sys.common.dao.BaseDao;
 import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.sys.entity.Dict;

@@ -1,8 +1,6 @@
 package com.zc.sys.core.sys.service;
-
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.sys.model.DictModel;
-
 /**
  * 字典
  * 

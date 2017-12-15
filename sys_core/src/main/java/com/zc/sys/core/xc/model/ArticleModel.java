@@ -1,12 +1,7 @@
 package com.zc.sys.core.xc.model;
-import java.util.Date;
-
 import org.springframework.beans.BeanUtils;
-
 import com.zc.sys.common.model.jpa.Page;
-import com.zc.sys.core.manage.model.RoleModel;
 import com.zc.sys.core.xc.entity.Article;
-import com.zc.sys.core.xc.entity.Site;
 /**
  * 文章
  * @author zp
