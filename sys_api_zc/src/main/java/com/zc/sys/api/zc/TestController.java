@@ -1,18 +1,14 @@
 package com.zc.sys.api.zc;
-
 import javax.annotation.Resource;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.form.Result;
 import com.zc.sys.core.common.queue.pojo.QueueModel;
 import com.zc.sys.core.common.queue.service.QueueProducerService;
 import com.zc.sys.core.common.web.BaseController;
 import com.zc.sys.core.manage.model.OperatorModel;
-
 /**
  * 测试
  * @author zp
