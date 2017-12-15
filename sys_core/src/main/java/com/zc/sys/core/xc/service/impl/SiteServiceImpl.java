@@ -57,6 +57,7 @@ public class SiteServiceImpl implements SiteService {
 	@Override
 	@Transactional
 	public Result add(SiteModel model){	
+		model.validParam();//校验参数
 		Site site = model.prototype();
 		siteDao.save(site);
 		return Result.success().setData(site);
@@ -70,6 +71,7 @@ public class SiteServiceImpl implements SiteService {
 	@Override
 	@Transactional
 	public Result update(SiteModel model){
+		model.validParam();//校验参数
 		Site site = siteDao.find(model.getId());
 		model.setUpdateParam(site);//设置修改基本参数
 		siteDao.update(site);	

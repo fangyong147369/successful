@@ -1,6 +1,9 @@
 package com.zc.sys.core.xc.model;
 import org.springframework.beans.BeanUtils;
+
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.xc.entity.Article;
 /**
  * 文章
@@ -33,7 +36,26 @@ public class ArticleModel extends Article {
 		BeanUtils.copyProperties(article, articleModel);
 		return articleModel;
 	}
-	
+	/**
+	 * 参数校验
+	 */
+	public void validParam() {
+		if (StringUtil.isBlank(this.getTitle())) {
+			throw new BusinessException("模版标题不能为空！");
+		}
+		if (StringUtil.isBlank(this.getSite().getId())) {
+			throw new BusinessException("所属栏目不能为空！");
+		}
+		if (StringUtil.isBlank(this.getContent())) {
+			throw new BusinessException("内容不能为空！");
+		}
+		if (StringUtil.isBlank(this.getIntroduction())) {
+			throw new BusinessException("介绍不能为空！");
+		}
+		if (StringUtil.isBlank(this.getPicPath())) {
+			throw new BusinessException("图片地址不能为空！");
+		}
+	}
 	/**
 	 * 设置修改基本参数
 	 * @param menu
@@ -41,7 +63,6 @@ public class ArticleModel extends Article {
 	public void setUpdateParam(Article article) {
 		article.setContent(this.getContent());
 		article.setIntroduction(this.getIntroduction());
-		article.setOperateUser(this.getOperateUser());
 		article.setPicPath(this.getPicPath());
 		article.setSort(this.getSort());
 		article.setState(this.getState());			
@@ -49,9 +70,6 @@ public class ArticleModel extends Article {
 		article.setTitle(this.getTitle());
 		article.setIsHot(this.getIsHot());
 		article.setSite(this.getSite());
-		article.setUpdateIp(this.getUpdateIp());
-		article.setUpdateTime(this.getUpdateTime());
-	
 	}
 	/**
 	 * model转换实体

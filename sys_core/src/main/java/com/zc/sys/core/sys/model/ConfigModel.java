@@ -58,7 +58,6 @@ public class ConfigModel extends Config{
 			return null;
 		return c.getValue();
 	}
-	
 	/**
 	 * 实体转换model
 	 * 

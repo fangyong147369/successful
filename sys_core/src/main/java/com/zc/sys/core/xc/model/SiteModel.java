@@ -1,6 +1,9 @@
 package com.zc.sys.core.xc.model;
 import org.springframework.beans.BeanUtils;
+
+import com.zc.sys.common.exception.BusinessException;
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.xc.entity.Site;
 /**
  * 栏目
@@ -47,7 +50,29 @@ public class SiteModel extends Site {
 //		site.setUpdateTime(this.getUpdateTime());		
 		site.setNid(this.getNid());
 	}
-
+	/**
+	 * 参数校验
+	 */
+	public void validParam() {
+		if (StringUtil.isBlank(this.getName())) {
+			throw new BusinessException("栏目名称不能为空！");
+		}
+		if (StringUtil.isBlank(this.getNid())) {
+			throw new BusinessException("标识不能为空！");
+		}
+		if (this.getType() <= 0) {
+			throw new BusinessException("请选择类型！");
+		}
+		if (StringUtil.isBlank(this.getContent())) {
+			throw new BusinessException("模版内容不能为空！");
+		}
+		if (StringUtil.isBlank(this.getIntroduction())) {
+			throw new BusinessException("介绍不能为空！");
+		}
+		if (StringUtil.isBlank(this.getPicPath())) {
+			throw new BusinessException("图片地址不能为空！");
+		}
+	}
 	/**
 	 * model转换实体
 	 */

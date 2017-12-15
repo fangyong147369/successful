@@ -43,8 +43,6 @@ public class ArticleServiceImpl implements ArticleService {
 		pageDataList_.setList(list);
 		return Result.success().setData(pageDataList_);
 	}
-	
-	
 	/**
 	 * 添加
 	 * @param model
@@ -53,9 +51,11 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	@Transactional
 	public Result add(ArticleModel model){
+		model.validParam();//校验参数
 		Article article = model.prototype();
-		ArticleModel model_=ArticleModel.instance(article);
+		model.setUpdateParam(article);//设置修改基本参数	
 		articleDao.save(article);
+		articleDao.clear();
 		return Result.success().setData(article);
 	}
 	/**
@@ -64,12 +64,12 @@ public class ArticleServiceImpl implements ArticleService {
  	 * @return
  	 */
 	@Override
+	@Transactional
 	public Result update(ArticleModel model){
-      Article article = articleDao.find(model.getId());
-		ArticleModel model_=ArticleModel.instance(article);
-	    model_.setSiteModel(SiteModel.instance(article.getSite()));
-	    article.setSite(model_.getSite());
-		//model.setUpdateParam(article);//设置修改基本参数	
+		model.validParam();//校验参数
+        Article article = articleDao.find(model.getId());
+	    model.setUpdateParam(article);//设置修改基本参数	
+	    articleDao.clear();
 		articleDao.update(article);	
 		return Result.success();
 	}
