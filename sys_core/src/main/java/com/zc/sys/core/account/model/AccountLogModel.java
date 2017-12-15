@@ -3,6 +3,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.core.account.entity.AccountLog;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 资金日志
  * @author zp
@@ -19,6 +20,22 @@ public class AccountLogModel extends AccountLog {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	/**
+	 * User model实体
+	 */
+	private UserModel userModel;
+	/**
+	 * User model实体
+	 */
+	private UserModel toUserModel;
+	
+	public UserModel getToUserModel() {
+		return toUserModel;
+	}
+
+	public void setToUserModel(UserModel toUserModel) {
+		this.toUserModel = toUserModel;
+	}
 
 	/**
 	 * 实体转换model
@@ -66,6 +83,14 @@ public class AccountLogModel extends AccountLog {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
 	}
 
 }

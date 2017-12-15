@@ -16,6 +16,7 @@ import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 银行卡
  * @author zp
@@ -40,7 +41,10 @@ public class BankCardModel extends BankCard {
 	private OrderTask orderTask;
 	/** 重复标识 **/
 	private String token;
-
+	/**
+	 * User model实体
+	 */
+	private UserModel userModel;
 	/**
 	 * 实体转换model
 	 */
@@ -167,6 +171,14 @@ public class BankCardModel extends BankCard {
 	/** 设置【重复标识】 **/
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
 	}
 
 }

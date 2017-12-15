@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
 /**
@@ -21,10 +22,12 @@ public class UserInfo extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	/** 用户 */
+	@JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user_id")
 	private User user;
 	/** 邀请用户 */
+	@JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "invite_user_id")
 	private User inviteUser;

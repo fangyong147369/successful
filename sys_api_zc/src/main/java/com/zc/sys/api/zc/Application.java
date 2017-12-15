@@ -16,12 +16,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableScheduling
 @ImportResource("classpath:applicationConfig.xml")
-public class Application extends SpringBootServletInitializer {
-	
+public class Application extends SpringBootServletInitializer {	
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
+ 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(new Class[]{Application.class});

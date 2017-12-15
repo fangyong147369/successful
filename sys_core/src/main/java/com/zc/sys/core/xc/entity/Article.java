@@ -46,7 +46,6 @@ public class Article extends LongPKEntity {
 	private String operateUser;
 	/** 状态，-1：禁用，1：启用 **/
 	private int state;
-	
 	public Site getSite() {
 		return site;
 	}
@@ -118,5 +117,5 @@ public class Article extends LongPKEntity {
 	}
 	public void setState(int state) {
 		this.state = state;
-	}	
+	}
 }

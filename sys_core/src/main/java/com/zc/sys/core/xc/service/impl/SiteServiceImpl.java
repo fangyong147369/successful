@@ -48,7 +48,7 @@ public class SiteServiceImpl implements SiteService {
 		List<SiteModel> list = new ArrayList<SiteModel>();
 		if (pageDataList != null && pageDataList.getList().size() > 0) {
 			for (Site site : pageDataList.getList()) {
-				SiteModel model_ = SiteModel.instance(site);
+				SiteModel model_ = SiteModel.instance(site);	
 				list.add(model_);
 			}
 		}

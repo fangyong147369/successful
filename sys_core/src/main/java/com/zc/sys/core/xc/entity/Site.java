@@ -47,7 +47,8 @@ public class Site extends LongPKEntity {
 	/** 最后操作管理员 **/
 	private String operateUser;
 	/** 关联Article对象*/
-
+	@OneToMany(mappedBy = "site", fetch =FetchType.EAGER)
+	private List<Article> articles;
 	/**
 	 * 构造方法
 	 */
@@ -64,8 +65,6 @@ public class Site extends LongPKEntity {
 		super();
 		this.setId(id);
 	}
-	@OneToMany(mappedBy = "site", fetch =FetchType.EAGER)
-	private List<Article> articles;
 	
 	public String getName() {
 		return name;
@@ -150,5 +149,6 @@ public class Site extends LongPKEntity {
 	}
 	public void setArticle(List<Article> article) {
 		this.articles = article;
-	}	
+	}
+
 }

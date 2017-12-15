@@ -2,12 +2,22 @@ package com.zc.sys.core.account.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.account.dao.AccountLogDao;
+import com.zc.sys.core.account.entity.Account;
+import com.zc.sys.core.account.entity.AccountDeduct;
+import com.zc.sys.core.account.entity.AccountLog;
+import com.zc.sys.core.account.model.AccountDeductModel;
 import com.zc.sys.core.account.model.AccountLogModel;
+import com.zc.sys.core.account.model.AccountModel;
 import com.zc.sys.core.account.service.AccountLogService;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 资金日志
  * @author zp
@@ -26,8 +36,20 @@ public class AccountLogServiceImpl implements AccountLogService {
  	 */
 	@Override
 	public Result list(AccountLogModel model){
-
-		return null;
+		PageDataList<AccountLog> pageDataList =accountLogDao.list(model);
+		PageDataList<AccountLogModel> pageDataList_ = new PageDataList<AccountLogModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List list = new ArrayList();
+		if (pageDataList != null && pageDataList.getList().size() > 0) {
+			for (AccountLog article : pageDataList.getList()) {
+				AccountLogModel  model_=AccountLogModel.instance(article);
+				model_.setUserModel(UserModel.instance(article.getUser()));
+		        model_.setToUserModel(UserModel.instance(article.getUser()));
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -61,8 +83,14 @@ public class AccountLogServiceImpl implements AccountLogService {
  	 */
 	@Override
 	public Result getById(AccountLogModel model){
-
-		return null;
+		if(model.getId() <= 0){
+			return Result.error("参数错误！");
+		}
+		AccountLog account =accountLogDao.find(model.getId());
+		AccountLogModel  model_=AccountLogModel.instance(account);
+		 model_.setUserModel(UserModel.instance(account.getUser()));
+		// model_=UserModel.instance(UserInfoModel.instance(user.getUserInfo()).getUser());
+		return Result.success().setData(model_);
 	}
 
 }

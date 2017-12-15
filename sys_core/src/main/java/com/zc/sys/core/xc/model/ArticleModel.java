@@ -1,8 +1,12 @@
 package com.zc.sys.core.xc.model;
+import java.util.Date;
+
 import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
+import com.zc.sys.core.manage.model.RoleModel;
 import com.zc.sys.core.xc.entity.Article;
+import com.zc.sys.core.xc.entity.Site;
 /**
  * 文章
  * @author zp
@@ -12,22 +16,48 @@ import com.zc.sys.core.xc.entity.Article;
 public class ArticleModel extends Article {
 	/** 序列号 **/
 	private static final long serialVersionUID = 1L;
-
+    
 	/** 当前页码 **/
 	private int pageNo;
 	/** 每页数据条数 **/
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
+	/**siteModel/
+	 * 
+	 */
+	private SiteModel siteModel;
+	
 	/**
 	 * 实体转换model
+	 *
 	 */
 	public static ArticleModel instance(Article article) {
+		
 		ArticleModel articleModel = new ArticleModel();
 		BeanUtils.copyProperties(article, articleModel);
 		return articleModel;
 	}
-
+	
+	/**
+	 * 设置修改基本参数
+	 * @param menu
+	 */
+	public void setUpdateParam(Article article) {
+		article.setContent(this.getContent());
+		article.setIntroduction(this.getIntroduction());
+		article.setOperateUser(this.getOperateUser());
+		article.setPicPath(this.getPicPath());
+		article.setSort(this.getSort());
+		article.setState(this.getState());			
+		article.setClicks(this.getClicks());
+		article.setTitle(this.getTitle());
+		article.setIsHot(this.getIsHot());
+		article.setSite(this.getSite());
+		article.setUpdateIp(this.getUpdateIp());
+		article.setUpdateTime(this.getUpdateTime());
+	
+	}
 	/**
 	 * model转换实体
 	 */
@@ -36,7 +66,11 @@ public class ArticleModel extends Article {
 		BeanUtils.copyProperties(this, article);
 		return article;
 	}
-
+	/**
+	 * model转换实体
+	 * 
+	 * 
+	 */
 	/** 获取【当前页码】 **/
 	public int getPageNo() {
 		return pageNo;
@@ -66,6 +100,11 @@ public class ArticleModel extends Article {
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
 	}
-
+	public SiteModel getSiteModel() {
+		return siteModel;
+	}
+	public void setSiteModel(SiteModel siteModel) {
+		this.siteModel = siteModel;
+	}
 
 }

@@ -1,10 +1,14 @@
 package com.zc.sys.core.user.service.impl;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.constant.BaseConstant;
@@ -19,6 +23,7 @@ import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.UserIdentify;
 import com.zc.sys.core.user.executer.UserRealNameExecuter;
 import com.zc.sys.core.user.model.UserIdentifyModel;
+import com.zc.sys.core.user.model.UserModel;
 import com.zc.sys.core.user.service.UserIdentifyService;
 /**
  * 用户认证
@@ -40,8 +45,19 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
  	 */
 	@Override
 	public Result list(UserIdentifyModel model){
-
-		return null;
+		PageDataList<UserIdentify> pageDataList = userIdentifyDao.list(model);
+		PageDataList<UserIdentifyModel> pageDataList_ = new PageDataList<UserIdentifyModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List list = new ArrayList();
+		if (pageDataList != null && pageDataList.getList().size() > 0) {
+			for (UserIdentify article : pageDataList.getList()) {
+				UserIdentifyModel  model_ = UserIdentifyModel.instance(article);
+				model_.setUserModel(UserModel.instance(article.getUser()));
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -52,8 +68,9 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	@Override
 	@Transactional
 	public Result add(UserIdentifyModel model){
-
-		return null;
+		UserIdentify userIdentify = model.prototype();
+		userIdentifyDao.save(userIdentify);
+		return Result.success().setData(userIdentify);
 	}
 
 	/**
@@ -65,7 +82,10 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
 	@Transactional
 	public Result update(UserIdentifyModel model){
 
-		return null;
+		UserIdentify userIdentify = userIdentifyDao.find(model.getId());
+		model.setUpdateParam(userIdentify);//设置修改基本参数
+		userIdentifyDao.update(userIdentify);	
+		return Result.success();
 	}
 
 	/**
@@ -75,8 +95,11 @@ public class UserIdentifyServiceImpl implements UserIdentifyService {
  	 */
 	@Override
 	public Result getById(UserIdentifyModel model){
-
-		return null;
+		if(model.getId() <= 0){
+			return Result.error("参数错误！");
+		}
+		UserIdentify userIdentify =userIdentifyDao.find(model.getId());
+		return Result.success().setData(userIdentify);
 	}
 	
 

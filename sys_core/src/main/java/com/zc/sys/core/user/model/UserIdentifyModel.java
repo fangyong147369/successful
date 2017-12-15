@@ -8,12 +8,14 @@ import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.common.service.CommonService;
 import com.zc.sys.core.manage.entity.OrderTask;
+import com.zc.sys.core.sys.entity.Menu;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.dao.UserInfoDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
 import com.zc.sys.core.user.entity.UserInfo;
 import com.zc.sys.core.user.service.UserIdentifyService;
+import com.zc.sys.core.xc.model.SiteModel;
 /**
  * 用户认证
  * @author zp
@@ -44,6 +46,8 @@ public class UserIdentifyModel extends UserIdentify {
 	private OrderTask orderTask;
 	/** 重复标识 **/
 	private String token;
+	/** UserModel **/
+	private UserModel userModel;
 
 	public UserIdentifyModel() {
 		super();
@@ -69,6 +73,23 @@ public class UserIdentifyModel extends UserIdentify {
 		UserIdentify userIdentify = new UserIdentify();
 		BeanUtils.copyProperties(this, userIdentify);
 		return userIdentify;
+	}
+	/**
+	 * 设置修改基本参数
+	 * @param menu
+	 */
+	public void setUpdateParam(UserIdentify userIdentify) {
+		userIdentify.setEmailState(this.getEmailState());
+		userIdentify.setCardImgState(this.getCardImgState());
+		userIdentify.seteSignState(this.geteSignState());
+		userIdentify.setMobileState(this.getMobileState());
+		userIdentify.setRealNameState(this.getRealNameState());
+		userIdentify.setState(this.getState());
+		userIdentify.setLoginFailCount(this.getLoginFailCount());
+		userIdentify.setOctopusState(this.getOctopusState());
+		userIdentify.setRealNameCount(this.getRealNameCount());
+		userIdentify.setBindCardNum(this.getBindCardNum());
+		userIdentify.setUser(this.getUser());
 	}
 
 	/**
@@ -256,6 +277,14 @@ public class UserIdentifyModel extends UserIdentify {
 	/** 设置【重复标识】 **/
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
 	}
 
 }

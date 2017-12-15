@@ -3,6 +3,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.core.account.entity.Recharge;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 充值
  * @author zp
@@ -19,7 +20,10 @@ public class RechargeModel extends Recharge {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
-
+	/**
+	 * User model实体
+	 */
+	private UserModel userModel;
 	/**
 	 * 实体转换model
 	 */
@@ -66,6 +70,14 @@ public class RechargeModel extends Recharge {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
 	}
 
 }

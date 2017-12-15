@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.user.entity.User;
@@ -23,6 +24,7 @@ public class AccountLog extends LongPKEntity {
 	private static final long serialVersionUID = 1L;
 
 	/** 用户 */
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -39,13 +41,14 @@ public class AccountLog extends LongPKEntity {
 	/** 冻结金额 **/
 	private double freezeAmount;
 	/** 交易方用户 **/
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "to_user")
+	@JoinColumn(name = "to_user_id")
 	private User toUser;
 	/** 内容 **/
 	private String content;
 	/** 收支方式 **/
-	private int paymentsType;
+	private int payemntsType;
 	/** 关联订单 **/
 	private String orderNo;
 	/** 备注 **/
@@ -127,12 +130,12 @@ public class AccountLog extends LongPKEntity {
 		this.content = content;
 	}
 	/** 获取【收支方式】 **/
-	public int getPaymentsType() {
-		return paymentsType;
+	public int getPayemntsType() {
+		return payemntsType;
 	}
 	/** 设置【收支方式】 **/
-	public void setPaymentsType(int paymentsType) {
-		this.paymentsType = paymentsType;
+	public void setPayemntsType(int payemntsType) {
+		this.payemntsType = payemntsType;
 	}
 	/** 获取【关联订单】 **/
 	public String getOrderNo() {

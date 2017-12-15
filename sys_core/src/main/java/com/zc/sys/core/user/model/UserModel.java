@@ -14,6 +14,7 @@ import com.zc.sys.core.manage.entity.OrderTask;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
+import com.zc.sys.core.xc.entity.Site;
 /**
  * 用户
  * @author zp
@@ -51,7 +52,6 @@ public class UserModel extends User {
 	private String channel;
 	/** 用户基本信息 **/
 	private UserInfoModel infoModel;
-	
 	/** 手机号认证状态 **/
 	private int mobileState;
 	/** 认证状态 **/
@@ -65,7 +65,6 @@ public class UserModel extends User {
 	private OrderTask orderTask;
 	/** 重复标识 **/
 	private String token;
-
 	public UserModel() {
 		super();
 	}
@@ -86,6 +85,20 @@ public class UserModel extends User {
 		User user = new User();
 		BeanUtils.copyProperties(this, user);
 		return user;
+	}
+	/**
+	 * 设置修改基本参数
+	 * @param menu
+	 */
+	public void setUpdateParam(User user) {
+	user.setAccount(this.getAccount());
+	user.setUserName(this.getUserName());
+	user.setCardNo(this.getCardNo());
+	user.setEmail(this.getEmail());
+	user.setMobile(this.getMobile());
+	user.setPayPwd(this.getPayPwd());
+	user.setPwd(this.getPwd());
+	user.setRealName(this.getRealName());
 	}
 	
 	/**

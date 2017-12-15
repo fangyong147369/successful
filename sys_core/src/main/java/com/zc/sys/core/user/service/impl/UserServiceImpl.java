@@ -1,4 +1,5 @@
 package com.zc.sys.core.user.service.impl;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.common.model.jpa.QueryParam;
 import com.zc.sys.common.model.jpa.SearchFilter;
 import com.zc.sys.common.model.jpa.SearchFilter.Operators;
@@ -37,6 +39,10 @@ import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.core.user.model.UserInfoModel;
 import com.zc.sys.core.user.model.UserModel;
 import com.zc.sys.core.user.service.UserService;
+import com.zc.sys.core.xc.entity.Article;
+import com.zc.sys.core.xc.entity.Site;
+import com.zc.sys.core.xc.model.ArticleModel;
+import com.zc.sys.core.xc.model.SiteModel;
 /**
  * 用户
  * @author zp
@@ -67,8 +73,18 @@ public class UserServiceImpl implements UserService {
  	 */
 	@Override
 	public Result list(UserModel model){
-
-		return null;
+		PageDataList<User> pageDataList = userDao.list(model);
+		PageDataList<UserModel> pageDataList_ = new PageDataList<UserModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List<UserModel> list = new ArrayList<UserModel>();
+		if (pageDataList != null && pageDataList.getList().size() > 0) {
+			for (User user : pageDataList.getList()) {
+				UserModel model_ = UserModel.instance(user);				
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);	
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -79,8 +95,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public Result add(UserModel model){
-
-		return null;
+		User user = model.prototype();
+		userDao.save(user);
+		return Result.success().setData(user);
 	}
 
 	/**
@@ -91,10 +108,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public Result update(UserModel model){
-
-		return null;
+      User user = userDao.find(model.getId());
+		model.setUpdateParam(user);//设置修改基本参数
+		userDao.update(user);	
+		return Result.success();
 	}
-
 	/**
  	 * 获取
  	 * @param model
@@ -102,8 +120,14 @@ public class UserServiceImpl implements UserService {
  	 */
 	@Override
 	public Result getById(UserModel model){
-		
-		return null;
+		if(model.getId() <= 0){
+			return Result.error("参数错误！");
+		}
+		User user =userDao.find(model.getId());
+		UserModel  model_=UserModel.instance(user);
+		 model_.setInfoModel(UserInfoModel.instance(user.getUserInfo()));
+		// model_=UserModel.instance(UserInfoModel.instance(user.getUserInfo()).getUser());
+		return Result.success().setData(model_);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package com.zc.sys.core.user.dao;
 import com.zc.sys.common.dao.BaseDao;
+import com.zc.sys.common.model.jpa.PageDataList;
 import com.zc.sys.core.user.entity.UserIdentify;
 import com.zc.sys.core.user.model.UserIdentifyModel;
 /**
@@ -16,5 +17,11 @@ public interface UserIdentifyDao extends BaseDao<UserIdentify> {
 	 * @return
 	 */
 	int countByModel(UserIdentifyModel model);
+	/**
+	 * 列表
+	 * @param model
+	 * @return
+	 */
+	PageDataList<UserIdentify> list(UserIdentifyModel model);
 	
 }

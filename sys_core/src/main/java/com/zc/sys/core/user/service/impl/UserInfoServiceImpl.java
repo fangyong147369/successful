@@ -2,11 +2,23 @@ package com.zc.sys.core.user.service.impl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.zc.sys.common.form.Result;
+import com.zc.sys.common.model.jpa.PageDataList;
+import com.zc.sys.core.manage.entity.RoleMenu;
+import com.zc.sys.core.manage.model.RoleMenuModel;
+import com.zc.sys.core.sys.model.MenuModel;
 import com.zc.sys.core.user.dao.UserInfoDao;
+import com.zc.sys.core.user.entity.User;
+import com.zc.sys.core.user.entity.UserIdentify;
+import com.zc.sys.core.user.entity.UserInfo;
+import com.zc.sys.core.user.model.UserIdentifyModel;
 import com.zc.sys.core.user.model.UserInfoModel;
+import com.zc.sys.core.user.model.UserModel;
 import com.zc.sys.core.user.service.UserInfoService;
 /**
  * 用户信息
@@ -26,8 +38,20 @@ public class UserInfoServiceImpl implements UserInfoService {
  	 */
 	@Override
 	public Result list(UserInfoModel model){
-
-		return null;
+		PageDataList<UserInfo> pageDataList = userInfoDao.list(model);
+		PageDataList<UserInfoModel> pageDataList_ = new PageDataList<UserInfoModel>();
+		pageDataList_.setPage(pageDataList.getPage());
+		List list = new ArrayList();
+		if (pageDataList != null && pageDataList.getList().size() > 0) {
+			for (UserInfo article : pageDataList.getList()) {
+				UserInfoModel  model_=UserInfoModel.instance(article);
+				model_.setUserModel(UserModel.instance(article.getUser()));
+				model_.setInviteUserModel(UserModel.instance(article.getUser()));
+				list.add(model_);
+			}
+		}
+		pageDataList_.setList(list);
+		return Result.success().setData(pageDataList_);
 	}
 
 	/**
@@ -38,8 +62,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	@Transactional
 	public Result add(UserInfoModel model){
-
-		return null;
+		UserInfo userIdentify = model.prototype();
+		userInfoDao.save(userIdentify);
+		return Result.success().setData(userIdentify);
 	}
 
 	/**
@@ -50,10 +75,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	@Transactional
 	public Result update(UserInfoModel model){
-
-		return null;
+		UserInfo userIdentify = userInfoDao.find(model.getId());
+		model.setUpdateParam(userIdentify);//设置修改基本参数
+		userInfoDao.update(userIdentify);	
+		return Result.success();
 	}
-
 	/**
  	 * 获取
  	 * @param model
@@ -61,8 +87,11 @@ public class UserInfoServiceImpl implements UserInfoService {
  	 */
 	@Override
 	public Result getById(UserInfoModel model){
-
-		return null;
+		if(model.getId() <= 0){
+			return Result.error("参数错误！");
+		}
+		UserInfo userIdentify =userInfoDao.find(model.getId());		
+		return Result.success().setData(userIdentify);
 	}
 
 }

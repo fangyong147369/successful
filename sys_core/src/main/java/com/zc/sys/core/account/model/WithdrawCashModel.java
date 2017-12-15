@@ -3,6 +3,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.zc.sys.common.model.jpa.Page;
 import com.zc.sys.core.account.entity.WithdrawCash;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 提现
  * @author zp
@@ -19,7 +20,10 @@ public class WithdrawCashModel extends WithdrawCash {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
-
+	/**
+	 * User model实体
+	 */
+	private UserModel userModel;
 	/**
 	 * 实体转换model
 	 */
@@ -68,4 +72,11 @@ public class WithdrawCashModel extends WithdrawCash {
 		this.searchName = searchName;
 	}
 
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
+	}
 }

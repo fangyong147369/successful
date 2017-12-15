@@ -48,8 +48,8 @@ public class SiteModel extends Site {
 		site.setPicPath(this.getPicPath());
 		site.setSort(this.getSort());
 		site.setState(this.getState());
-		site.setUpdateIp(this.getUpdateIp());	
-		site.setUpdateTime(this.getUpdateTime());
+//		site.setUpdateIp(this.getUpdateIp());	
+//		site.setUpdateTime(this.getUpdateTime());
 		site.setArticle(this.getArticle());		
 		site.setNid(this.getNid());
 	}

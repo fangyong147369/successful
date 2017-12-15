@@ -1,15 +1,23 @@
 package com.zc.sys.core.user.entity;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.account.entity.Account;
+import com.zc.sys.core.account.entity.AccountDeduct;
+import com.zc.sys.core.account.entity.AccountLog;
+import com.zc.sys.core.account.entity.BankCard;
+import com.zc.sys.core.account.entity.Recharge;
+import com.zc.sys.core.account.entity.WithdrawCash;
 import com.zc.sys.core.common.constant.BaseConstant;
+import com.zc.sys.core.xc.entity.Article;
 /**
  * 用户
  * @author zp
@@ -53,7 +61,26 @@ public class User extends LongPKEntity {
 	@JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
 	private Account account;
-	
+	/** 关联 WithdrawCash对象*/
+	@JsonBackReference
+	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+	private List<WithdrawCash> withdrawCash;
+	/** 关联 Recharge对象*/
+	@JsonBackReference
+	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+	private List<Recharge> recharge;
+	/** 关联BankCard对象*/
+	@JsonBackReference
+	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+	private List<BankCard> bankCard;
+	/** 关联 AccountDeduct对象*/
+	@JsonBackReference
+	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+	private List<AccountDeduct> accountDeduct;
+	/** 关联AccountLog对象*/
+	@JsonBackReference
+	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+	private List<AccountLog> accountLog;
 	/** 获取【用户名】 **/
 	public String getUserName() {
 		return userName;
@@ -141,6 +168,37 @@ public class User extends LongPKEntity {
 	/** 设置【关联Account对象】 **/
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+	/** 获取【关联WithdrawCash对象】 **/
+	public List<WithdrawCash> getWithdrawCash() {
+		return withdrawCash;
+	}	/** 设置【关联WithdrawCash对象】 **/
+	public void setWithdrawCash(List<WithdrawCash> withdrawCash) {
+		this.withdrawCash = withdrawCash;
+	}/** 获取【关联Recharge对象】 **/
+	public List<Recharge> getRecharge() {
+		return recharge;
+	}/** 设置【关联Recharge对象】 **/
+	public void setRecharge(List<Recharge> recharge) {
+		this.recharge = recharge;
+	}/** 获取【关联BankCard对象】 **/
+	public List<BankCard> getBankCard() {
+		return bankCard;
+	}/** 设置【关联BankCard对象】 **/
+	public void setBankCard(List<BankCard> bankCard) {
+		this.bankCard = bankCard;
+	}/** 获取【关联AccountDeduct对象】 **/
+	public List<AccountDeduct> getAccountDeduct() {
+		return accountDeduct;
+	}/** 设置【关联AccountDeduct对象】 **/
+	public void setAccountDeduct(List<AccountDeduct> accountDeduct) {
+		this.accountDeduct = accountDeduct;
+	}/** 获取【关联AccountLog对象】 **/
+	public List<AccountLog> getAccountLog() {
+		return accountLog;
+	}/** 设置【关联AccountLog对象】 **/
+	public void setAccountLog(List<AccountLog> accountLog) {
+		this.accountLog = accountLog;
 	}
 	
 }

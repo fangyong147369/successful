@@ -13,8 +13,10 @@ import com.zc.sys.common.util.date.DateUtil;
 import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.account.dao.BankCardDao;
 import com.zc.sys.core.account.entity.BankCard;
+import com.zc.sys.core.account.entity.Recharge;
 import com.zc.sys.core.account.executer.UserBindBCExecuter;
 import com.zc.sys.core.account.model.BankCardModel;
+import com.zc.sys.core.account.model.RechargeModel;
 import com.zc.sys.core.account.service.BankCardService;
 import com.zc.sys.core.common.constant.BaseConstant;
 import com.zc.sys.core.common.executer.Executer;
@@ -27,6 +29,7 @@ import com.zc.sys.core.manage.model.OrderTaskModel;
 import com.zc.sys.core.user.dao.UserIdentifyDao;
 import com.zc.sys.core.user.entity.User;
 import com.zc.sys.core.user.entity.UserIdentify;
+import com.zc.sys.core.user.model.UserModel;
 /**
  * 银行卡
  * @author zp
@@ -56,6 +59,7 @@ public class BankCardServiceImpl implements BankCardService {
 		if(pageDataList != null && pageDataList.getList().size() > 0){
 			for (BankCard bankCard : pageDataList.getList()) {
 				BankCardModel model_ = BankCardModel.instance(bankCard);
+				model_.setUserModel(UserModel.instance(bankCard.getUser()));
 				list.add(model_);
 			}
 		}
@@ -94,8 +98,14 @@ public class BankCardServiceImpl implements BankCardService {
  	 */
 	@Override
 	public Result getById(BankCardModel model){
-
-		return null;
+		if(model.getId() <= 0){
+			return Result.error("参数错误！");
+		}
+		BankCard bankCard =bankCardDao.find(model.getId());
+		BankCardModel  model_=BankCardModel.instance(bankCard);
+		 model_.setUserModel(UserModel.instance(bankCard.getUser()));
+		// model_=UserModel.instance(UserInfoModel.instance(user.getUserInfo()).getUser());
+		return Result.success().setData(model_);
 	}
 
 	/**

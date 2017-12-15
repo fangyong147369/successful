@@ -7,6 +7,7 @@ import com.zc.sys.common.util.validate.StringUtil;
 import com.zc.sys.core.common.global.BeanUtil;
 import com.zc.sys.core.user.dao.UserDao;
 import com.zc.sys.core.user.entity.User;
+import com.zc.sys.core.user.entity.UserIdentify;
 import com.zc.sys.core.user.entity.UserInfo;
 /**
  * 用户信息
@@ -24,7 +25,17 @@ public class UserInfoModel extends UserInfo {
 	private int pageSize = Page.ROWS;
 	/** 条件查询 **/
 	private String searchName;
-
+	/** UserModel **/
+	/**
+	 * User model实体
+	 */
+	private UserModel userModel;
+	
+	/**
+	 * inviteUser model实体
+	 */
+	private UserModel inviteUserModel;
+	
 	/**
 	 * 实体转换model
 	 */
@@ -42,7 +53,42 @@ public class UserInfoModel extends UserInfo {
 		BeanUtils.copyProperties(this, userInfo);
 		return userInfo;
 	}
-	
+	/**
+	 * 设置修改基本参数
+	 * @param menu
+	 */
+	public void setUpdateParam(UserInfo userIdentify) {
+		userIdentify.setAddIp(this.getAddIp());
+		userIdentify.setAddress(this.getAddress());
+		userIdentify.setAdIdentifier(this.getAdIdentifier());
+		userIdentify.setArea(this.getAdIdentifier());
+		userIdentify.setCardBg(this.getCardBg());
+		userIdentify.setCardFg(this.getCardFg());
+		userIdentify.setCardType(this.getCardType());
+		userIdentify.setChannel(this.getChannel());
+		userIdentify.setCity(this.getCity());
+		userIdentify.setCompanyCardNo(this.getCompanyCardNo());
+		userIdentify.setCompanyDes(this.getCompanyDes());
+		userIdentify.setCompanyName(this.getCompanyName());
+		userIdentify.setCompanyType(this.getCompanyType());
+		userIdentify.setElecAcct(this.getElecAcct());
+		userIdentify.seteSignAccountId(this.geteSignAccountId());
+		userIdentify.setHeadImg(this.getHeadImg());
+		userIdentify.setZmxyOpenId(this.getZmxyOpenId());
+		userIdentify.setUserNature(this.getUserNature());
+		userIdentify.setUser(this.getUser());
+		userIdentify.setType(this.getType());
+		userIdentify.setSex(this.getSex());
+		userIdentify.setRoute(this.getRoute());
+		userIdentify.setProvince(this.getProvince());
+		userIdentify.setInviteCode(this.getInviteCode());
+		userIdentify.setInviteUser(this.getInviteUser());
+		userIdentify.setLegalCardNo(this.getLegalCardNo());
+		userIdentify.setLegalName(this.getLegalName());
+		userIdentify.setLoginLockRemark(this.getLoginLockRemark());	
+		userIdentify.seteSignSealData(this.geteSignSealData());
+		userIdentify.setElecAcct(this.getElecAcct());
+	}
 	/**
 	 * 初始化注册用户基本信息
 	 * @param model
@@ -105,6 +151,22 @@ public class UserInfoModel extends UserInfo {
 	/** 设置【条件查询】 **/
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+    /** 获取User【model】 **/
+	public UserModel getUserModel() {
+		return userModel;
+	}
+	/** 设置User【model】 **/            
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
+	}
+	  /** 获取inviteUser【model】 **/
+	public UserModel getInviteUserModel() {
+		return inviteUserModel;
+	}
+	/** 设置inviteUser【model】 **/       
+	public void setInviteUserModel(UserModel inviteUserModel) {
+		this.inviteUserModel = inviteUserModel;
 	}
 
 }
