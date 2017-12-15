@@ -54,6 +54,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Transactional
 	public Result add(ArticleModel model){
 		Article article = model.prototype();
+		ArticleModel model_=ArticleModel.instance(article);
 		articleDao.save(article);
 		return Result.success().setData(article);
 	}
@@ -65,7 +66,10 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Result update(ArticleModel model){
       Article article = articleDao.find(model.getId());
-		model.setUpdateParam(article);//设置修改基本参数
+		ArticleModel model_=ArticleModel.instance(article);
+	    model_.setSiteModel(SiteModel.instance(article.getSite()));
+	    article.setSite(model_.getSite());
+		//model.setUpdateParam(article);//设置修改基本参数	
 		articleDao.update(article);	
 		return Result.success();
 	}
@@ -81,9 +85,10 @@ public class ArticleServiceImpl implements ArticleService {
            {
         	   return Result.error("参数错误！"); 
            }
-         
-           Article article=articleDao.find(model.getId());
-		return Result.success().setData(article);
+        Article article=articleDao.find(model.getId());
+        ArticleModel model_=ArticleModel.instance(article);
+        model_.setSiteModel(SiteModel.instance(article.getSite()));
+		return Result.success().setData(model_);
 	}
 
 }

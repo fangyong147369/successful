@@ -1,8 +1,6 @@
 ﻿package com.zc.sys.core.xc.entity;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.zc.sys.common.entity.LongPKEntity;
 import com.zc.sys.core.common.constant.BaseConstant;
@@ -43,9 +41,6 @@ public class Site extends LongPKEntity {
 	private String updateIp;
 	/** 最后操作管理员 **/
 	private String operateUser;
-	/** 关联Article对象*/
-	@OneToMany(mappedBy = "site", fetch =FetchType.EAGER)
-	private Article articles;
 	/**
 	 * 构造方法
 	 */
@@ -141,11 +136,4 @@ public class Site extends LongPKEntity {
 	public void setOperateUser(String operateUser) {
 		this.operateUser = operateUser;
 	}
-	public Article getArticle() {
-		return articles;
-	}
-	public void setArticle(Article article) {
-		this.articles = article;
-	}
-
 }
