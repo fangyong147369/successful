@@ -170,15 +170,14 @@ public class CashLoanServiceImpl implements CashLoanService {
 		orderTaskService.update(model.getOrderTask(), BaseConstant.BUSINESS_STATE_YES, "现金贷款审核成功");
 		
 		//放款--是否自动放款
-		/*if(Global.getInt("isCashLoanAutoLoan") == 1){
-		
-		}*/
-		//发送队列
-		QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
-		OrderTask orderTaskLoan =orderTaskService.add(cashLoan.getUser(), "cashLoanLoan", StringUtil.getSerialNumber(), "");
-		CashLoanModel modelLoan = CashLoanModel.instance(cashLoan);
-		modelLoan.setOrderTask(orderTaskLoan);
-		queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTaskLoan), modelLoan));
+		if(Global.getInt("isCashLoanAutoLoan") == 1){
+			//发送队列
+			QueueProducerService queueService = BeanUtil.getBean(QueueProducerService.class);
+			OrderTask orderTaskLoan =orderTaskService.add(cashLoan.getUser(), "cashLoanLoan", StringUtil.getSerialNumber(), "");
+			CashLoanModel modelLoan = CashLoanModel.instance(cashLoan);
+			modelLoan.setOrderTask(orderTaskLoan);
+			queueService.send(new QueueModel("cashLoan", OrderTaskModel.instance(orderTaskLoan), modelLoan));
+		}
 		return Result.success();
 	}
 	
