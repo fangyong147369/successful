@@ -20,24 +20,23 @@
 		<module>../sys_promotion</module>
 	</modules>
 
-
 	<repositories>
-		<repository>
-			<id>private_jar</id>
-			<url>http://121.196.224.90:18081/nexus/content/repositories/public_jar</url>
-			<layout>default</layout>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+        <repository>
+            <id>private_jar</id>
+            <url>http://121.196.224.90:18081/nexus/content/repositories/public_jar</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
 	</repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<junit.version>3.8.1</junit.version>
 		<spring.version>4.2.6.RELEASE</spring.version>
 		<hibernate.version>4.3.11.Final</hibernate.version>
